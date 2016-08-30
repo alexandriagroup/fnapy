@@ -37,7 +37,6 @@ response = manager.update_offers(offers_data)
 
 The `offers_update` service returns the `batch_id` which will be useful to know the
 status of this operation. 
-The last batch_id is accessible with `manager.batch_id`.
 
 * Get the batch status
 
@@ -45,7 +44,3 @@ The last batch_id is accessible with `manager.batch_id`.
 batch_id = response.['offers_update_response']['batch_id']
 batch_status = manager.get_batch_status(batch_id)
 ```
-
-
-
-
