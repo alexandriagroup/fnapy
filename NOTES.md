@@ -152,7 +152,7 @@ Compare price between all marketplace shop and fnac for a specific product.
     A valid authentification token is needed.
     The partner calls service with a list of product reference
     The service returns for each product reference a list of the lowest prices
-    suggested by Fnac Marketplace sellers.
+    suggested by FNAC Marketplace sellers.
 
 The number of product references to request is limited to 10.
 

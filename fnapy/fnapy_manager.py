@@ -18,7 +18,7 @@ from utils import *
 from config import *
 
 
-class FnacManager(object):
+class FnapyManager(object):
     """A class to manage your offers"""
     def __init__(self, connection):
         """Initialize the """
@@ -149,7 +149,7 @@ class FnacManager(object):
     def get_batch_status(self, batch_id=None, token=None):
         """Return the status for the given batch id
 
-        :param conn: The FnacConnection instance
+        :param conn: The FnapyConnection instance
         :param batch_id: the batch id
         :rtype: OrderedDict
         :returns: batch status response
@@ -276,7 +276,7 @@ class FnacManager(object):
         return response_obj
 
     def query_carriers(self):
-        """Return the available carriers managed on Fnac Marketplace platform
+        """Return the available carriers managed on FNAC Marketplace platform
         
         Usage:
         >>> response = manager.query_carriers()
@@ -378,7 +378,7 @@ class FnacManager(object):
         >>> response_obj = manager.update_incidents(order_id, incident_update_action, reasons)
 
         :type order_id: str
-        :param order_id: the unique Fnac identified for an order
+        :param order_id: the unique FNAC identified for an order
 
         :type incident_update_action: str
         :param incident_update_action: the action to perform 

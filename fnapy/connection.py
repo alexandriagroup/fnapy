@@ -11,7 +11,7 @@ The class storing all the information for the connection to the FNAC API
 """
 
 
-class FnacConnection(object):
+class FnapyConnection(object):
     def __init__(self, partner_id, shop_id, key):
         self.partner_id = partner_id
         self.shop_id = shop_id

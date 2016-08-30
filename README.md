@@ -8,13 +8,13 @@ A client to connect to the FNAC Marketplace
 * Create a connection to the FNAC API
 
 ```python
-conn = FnacConnection(pattern_id, shop_id, key)
+conn = FnapyConnection(pattern_id, shop_id, key)
 ```
 
 * Create the manager for the FNAC API
 
 ```python
-manager = FnacManager(conn)
+manager = FnapyManager(conn)
 ```
 
 Now you should be able to access the different web services

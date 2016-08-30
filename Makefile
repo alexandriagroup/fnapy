@@ -4,7 +4,7 @@
 #
 
 test:
-	pytest -v test_client.py
+	pytest -v fnapy/test_client.py
 
 
 clean:
