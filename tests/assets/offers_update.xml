@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<offers_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <offer>
+    <product_reference type="Ean">0711719247159</product_reference>
+    <offer_reference type="SellerSku"><![CDATA[B76A-CD5-153]]></offer_reference>
+    <price>15</price>
+    <product_state>11</product_state>
+    <quantity>10</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+  </offer>
+  <offer>
+    <product_reference type="Ean">5030917077418</product_reference>
+    <offer_reference type="SellerSku"><![CDATA[B067-F0D-75E]]></offer_reference>
+    <price>20</price>
+    <product_state>11</product_state>
+    <quantity>16</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+  </offer>
+  <offer>
+    <product_reference type="Ean">5051889022091</product_reference>
+    <offer_reference type="SellerSku"><![CDATA[561C-385-9BE]]></offer_reference>
+    <price>10.55</price>
+    <product_state>11</product_state>
+    <quantity>16</quantity>
+    <description><![CDATA[New product - Blu-ray disc - 2-3 days shipping, from France]]></description>
+  </offer>
+</offers_update>
