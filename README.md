@@ -44,3 +44,32 @@ status of this operation.
 batch_id = response.['offers_update_response']['batch_id']
 batch_status = manager.get_batch_status(batch_id)
 ```
+
+* Query the offers
+
+When you're satisfised with your offers you may want to know if they were
+actually created and retrieve information about them.
+
+Let's say you want to know the offers created between 2016-08-25 and 2016-08-31:
+
+```python
+dmin = datetime(2016, 8, 25, 0, 0, 0).replace(tzinfo=pytz.utc)
+dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
+date = {'@type': 'Created',
+        'min': {'#text': dmin.isoformat()},
+        'max': {'#text': dmax.isoformat()}
+        }
+response = manager.query_offers(date=date)
+```
+
+* Query your orders
+
+Once customers placed an order on your items in your catalog, you can query
+these orders.
+
+Let's suppose you want to retrieve the first 10 created orders:
+
+```python
+response = manager.query_orders(results_count=10, paging=1)
+```
+
