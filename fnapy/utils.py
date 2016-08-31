@@ -20,6 +20,27 @@ import itertools
 
 # CLASSES
 
+class Response(object):
+    """A handy class to handle the response"""
+
+    def __init__(self, text):
+        self.dict = xml2dict(text)
+
+        # Raw XML
+        self.xml = text
+
+        # etree._Element
+        self.element = etree.fromstring(self.xml.encode('utf-8'))
+        
+        self.tag = re.sub(pattern='{[^}]+}', repl='', string=self.element.tag, flags=0)
+
+    def __repr__(self):
+        return '<Response: {}>'.format(self.tag)
+
+    def __str__(self):
+        return self.xml
+
+
 # TODO Implement a check for the attributes
 class Message(object):
     ACTIONS = (
