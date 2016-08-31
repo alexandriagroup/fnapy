@@ -4,3 +4,4 @@ tags
 client.py
 test_client.py
 .pyc
+.konchrc
