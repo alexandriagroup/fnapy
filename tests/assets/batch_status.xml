@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<batch_status xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <batch_id>5D239E08-F6C1-8965-F2FA-7EFCC9E7BAD1</batch_id>
+</batch_status>

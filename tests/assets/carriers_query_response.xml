@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carriers_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+  <carrier code="CHRONOPOST" global="1">
+    <name><![CDATA[Chronopost]]></name>
+  </carrier>
+  <carrier code="DHL" global="1">
+    <name><![CDATA[DHL]]></name>
+  </carrier>
+  <carrier code="FEDEX" global="1">
+    <name><![CDATA[Fedex]]></name>
+  </carrier>
+  <carrier code="GLS" global="1">
+    <name><![CDATA[GLS]]></name>
+  </carrier>
+  <carrier code="LAPOSTE" global="1">
+    <name><![CDATA[La Poste]]></name>
+  </carrier>
+  <carrier code="SOCOLISSIMO" global="1">
+    <name><![CDATA[SoColissimo]]></name>
+  </carrier>
+  <carrier code="TAT" global="1">
+    <name><![CDATA[TAT Express]]></name>
+  </carrier>
+  <carrier code="TNT" global="1">
+    <name><![CDATA[TNT]]></name>
+  </carrier>
+  <carrier code="UPS" global="1">
+    <name><![CDATA[UPS]]></name>
+  </carrier>
+</carriers_query_response>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><incidents_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+
+  <page>1</page>
+  <total_paging>1</total_paging>
+  <nb_total_per_page>100</nb_total_per_page>
+  <nb_total_result>1</nb_total_result>
+
+  
+
+          <incident id="7525927C-6FDC-CD2C-2DBA-6E669C5045AF">
+    <header>
+        <status>OPENED</status>
+        <waiting_for_seller_answer>FALSE</waiting_for_seller_answer>
+        <message><![CDATA[Une réclamation a été ouverte sur cette commande concernant le(s) article(s) suivant(s) :
+Motif de la réclamation :  - 
+Article : Call of Duty : Modern Warfare 2 [Jeux Vidéo]
+Motif de la réclamation :  - 
+Article : Call of Duty : Modern Warfare 2 [Jeux Vidéo]
+
+Description du problèmeIncident test message]]></message>
+        <opened_by>client</opened_by>
+                <created_at>2016-08-29T17:53:51+02:00</created_at>
+        <updated_at>2016-08-29T17:53:51+02:00</updated_at>
+        	      <order_id>57BEAFDA828A8</order_id>
+    </header>
+    <order_details_incident>
+            <order_detail_incident>
+            <order_detail_id>2</order_detail_id>
+            <type>8</type>
+            <status>OPENED</status>
+            <created_at>2016-08-29T17:53:51+02:00</created_at>
+            <updated_at>2016-08-29T17:53:51+02:00</updated_at>
+            	</order_detail_incident>
+            <order_detail_incident>
+            <order_detail_id>1</order_detail_id>
+            <type>8</type>
+            <status>OPENED</status>
+            <created_at>2016-08-29T17:53:51+02:00</created_at>
+            <updated_at>2016-08-29T17:53:51+02:00</updated_at>
+            	</order_detail_incident>
+        </order_details_incident>
+</incident>
+  
+</incidents_query_response>
