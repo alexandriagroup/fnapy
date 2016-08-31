@@ -291,7 +291,7 @@ def create_xml_element(connection, token, name):
 
 def get_order_ids(orders_query_response):
     """Returns the order_ids in orders_query_response"""
-    orders = orders_query_response['orders_query_response'].get('order', None)
+    orders = orders_query_response.dict['orders_query_response'].get('order', None)
     order_ids = []
     if orders:
         if isinstance(orders, (list, tuple)):
