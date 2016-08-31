@@ -15,7 +15,6 @@ from lxml import etree
 from config import *
 import re
 import xmltodict
-import itertools
 
 
 # CLASSES
@@ -156,21 +155,7 @@ type       : {self.type}
         return message
 
 
-
 # FUNCTIONS
-def extract_text_from_tag(root, name):
-    """Returns the text in the tag name
-
-    If the tag is not found and empty string is returned
-    """
-    tag = root.find(name)
-    if tag:
-        text = tag.text
-    else:
-        text = u''
-    return text
-
-
 def dict2xml(_dict):
     """Returns a XML string from the input dictionary"""
     xml = xmltodict.unparse(_dict, pretty=True)
@@ -183,6 +168,7 @@ def remove_namespace(xml):
     xmlepured = re.sub(pattern=' xmlns="[^"]+"', repl='', string=xml, flags=0)
     xmlepured = xmlepured.encode('utf-8')
     return xmlepured
+
 
 # TODO Use process_namespaces
 def xml2dict(xml):
@@ -209,46 +195,6 @@ def parse_xml(response, tag_name):
     """
     return BeautifulSoup(response.content, 'lxml').find(tag_name).text
 
-
-def parse_offer(offer_tag):
-    """Parse the XML returned by the offer tag
-    
-    :type offer_tag: bs4.element.Tag
-    :param offer_tag: The offer tag generated
-
-    :rtype: FnacOffer
-    :returns: the corresponding FnacOffer instance
-    """
-    fnac_offer = FnacOffer()
-    for attr in fnac_offer.__dict__:
-        setattr(fnac_offer, attr, extract_text_from_tag(offer_tag, attr))
-    return fnac_offer
-
-
-# TODO Refactor to read the attributes from the object
-def parse_offers_query_response(response):
-    """Parse the response sent by offers_query
-
-    :type response: requests.Response
-    :param response: the response sent by the offers_query request
-
-    :rtype: FnacOffersQueryResponse
-    :returns: response
-    """
-    offers_query_response = FnacOffersQueryResponse()
-    soup = BeautifulSoup(response.content, 'lxml')
-    offers_query_response.page = soup.find('page').text
-    offers_query_response.total_paging = soup.find('total_paging').text
-    offers_query_response.nb_total_per_page = soup.find('nb_total_per_page').text
-    offers_query_response.nb_total_result = soup.find('nb_total_result').text
-
-    offer_tags = soup.find_all('offer')
-    for offer_tag in offer_tags:
-        offers_query_response.offers.append(parse_offer(offer_tag))
-
-    offers_query_response.response = response
-    return offers_query_response
-    
 
 def create_offer_element(product_reference, offer_reference, price, product_state, quantity, description=None):
     """Create an offer element
@@ -300,10 +246,3 @@ def get_order_ids(orders_query_response):
         elif isinstance(orders, dict):
             order_ids.append(orders.get('order_id', ''))
     return order_ids
-
-
-def dmap(fn, collection):
-    values = (fn(v) for k, v in record.items())
-    return dict(itertools.zip(record, values))
-
-
