@@ -46,6 +46,8 @@ class FnapyManager(object):
         :type xml: str
         :param xml: the XML string sent in the request
 
+        :rtype: Response
+        :returns: response
         """
         service = element.tag
         response = requests.post(URL + service, xml, headers=HEADERS)
@@ -80,7 +82,7 @@ class FnapyManager(object):
         :param offers_data: the list of data to create the offers
         :param token: the token returned by the server
 
-        :rtype: OrderedDict
+        :rtype: Response
         :returns response: the offers_update_response dictionary
 
         """
@@ -150,7 +152,7 @@ class FnapyManager(object):
 
         :param conn: The FnapyConnection instance
         :param batch_id: the batch id
-        :rtype: OrderedDict
+        :rtype: Response
         :returns: batch status response
 
         """
@@ -190,7 +192,7 @@ class FnapyManager(object):
 
         :param token: the token returned by the server (optional)
 
-        :rtype: OrderedDict
+        :rtype: Response
         :returns: the response
 
         """
@@ -250,6 +252,9 @@ class FnapyManager(object):
         Usage:
         >>> response = manager.query_pricing(ean, sellers=sellers)
 
+        :rtype: Response
+        :returns: response
+
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
         pricing_query.attrib['sellers'] = sellers
@@ -265,6 +270,9 @@ class FnapyManager(object):
         Usage:
         >>> response = manager.query_batch()
 
+        :rtype: Response
+        :returns: response
+
         """
         batch_query = create_xml_element(self.connection, self.token, 'batch_query')
         self.batch_query_xml = etree.tostring(batch_query, **XML_OPTIONS)
@@ -275,6 +283,9 @@ class FnapyManager(object):
         
         Usage:
         >>> response = manager.query_carriers()
+
+        :rtype: Response
+        :returns: response
 
         """
         carriers_query = create_xml_element(self.connection, self.token, 'carriers_query')
@@ -289,6 +300,7 @@ class FnapyManager(object):
         >>> response = manager.query_client_order_comments(results_count=results_count,\
                                                         token=token, **elements)
 
+        :rtype: Response
         :returns: response
 
         """
@@ -299,6 +311,9 @@ class FnapyManager(object):
 
         Usage
         >>> response = manager.update_client_order_comments(comment)
+
+        :rtype: Response
+        :returns: response
 
         """
         client_order_comments_update = create_xml_element(self.connection, self.token,
@@ -316,6 +331,7 @@ class FnapyManager(object):
         >>> response = manager.query_messages(results_count=results_count,
         token=token, **elements)
 
+        :rtype: Response
         :returns: response
 
         """
@@ -330,7 +346,7 @@ class FnapyManager(object):
         :type messages: Message
         :param messages: the specified messages we want to update
 
-        :rtype: OrderedDict
+        :rtype: Response
         :returns: response
 
         Example
@@ -357,7 +373,7 @@ class FnapyManager(object):
         >>> response = manager.query_incidents(results_count=results_count,
         token=token, **elements)
 
-        :rtype: OrderedDict
+        :rtype: Response
         :returns: response
 
         """
@@ -383,6 +399,9 @@ class FnapyManager(object):
         >>> reason = {"order_detail_id": 1, "refund_reason": 'no_stock'}
         >>> response = manager.update_incidents('07LWQ6278YJUI', 'refund', [reason])
 
+        :rtype: Response
+        :returns: response
+
         """
         incidents_update = create_xml_element(self.connection, self.token, 'incidents_update')
         order = etree.Element('order', order_id=order_id,
@@ -405,7 +424,7 @@ class FnapyManager(object):
         >>> response = manager.query_shop_invoices(results_count=results_count,
         token=token, **elements)
 
-        :rtype: OrderedDict
+        :rtype: Response
         :returns: response
 
         """
