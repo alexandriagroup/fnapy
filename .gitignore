@@ -5,3 +5,6 @@ client.py
 test_client.py
 .pyc
 .konchrc
+.tox
+*.egg-info
+.eggs
