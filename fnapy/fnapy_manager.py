@@ -75,6 +75,8 @@ class FnapyManager(object):
         self.token = parse_xml(response, 'token')
         return self.token
 
+    # TODO Allow update_offers to delete an offer
+    # TODO Create a dictionary for the product_state
     def update_offers(self, offers_data, token=None):
         """Post the update offers and return the response
 
@@ -82,6 +84,15 @@ class FnapyManager(object):
         >>> response = manager.update_offers(offers_data, token=token)
         
         :param offers_data: the list of data to create the offers
+                            where data is dictionary with the keys:
+        * offer_reference  : the SKU (mandatory) 
+        * product_reference: the EAN
+        * price            : the price of the offer
+        * product_state    : an integer representing the state of the product
+                             (documentation needed)
+        * quantity         : the quantity
+        * description      : (optional) a description of the offer
+
         :param token: the token returned by the server
 
         :rtype: Response
@@ -209,6 +220,7 @@ class FnapyManager(object):
         else:
             raise ValueError("The query_type must be in {}".format(valid_query_types))
 
+        # TODO Refactor: Use a dictionary to prevent code duplication
         # Check the queried elements
         if query_type == 'offers_query':
             self._check_elements(OFFERS_QUERY_ELEMENTS, elements.keys())
@@ -312,7 +324,7 @@ class FnapyManager(object):
         """Reply to client order comments
 
         Usage
-        >>> response = manager.update_client_order_comments(comment)
+        >>> response = manager.update_client_order_comments(comment, offer_fnac_id)
 
         :rtype: Response
         :returns: response
