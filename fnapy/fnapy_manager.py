@@ -23,6 +23,7 @@ class FnapyManager(object):
     def __init__(self, connection):
         """Initialize the """
         self.connection = connection
+        self.auth_request = None
         self.offers_update_request = None
         self.offers_query_request = None
         self.orders_update_request = None
@@ -69,8 +70,8 @@ class FnapyManager(object):
         etree.SubElement(auth, 'partner_id').text = self.connection.partner_id
         etree.SubElement(auth, 'shop_id').text = self.connection.shop_id
         etree.SubElement(auth, 'key').text = self.connection.key
-        auth_request = etree.tostring(auth, **XML_OPTIONS)
-        response = requests.post(URL + 'auth', auth_request, headers=HEADERS)
+        self.auth_request = etree.tostring(auth, **XML_OPTIONS)
+        response = requests.post(URL + 'auth', self.auth_request, headers=HEADERS)
         self.token = parse_xml(response, 'token')
         return self.token
 
