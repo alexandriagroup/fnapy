@@ -1,10 +1,11 @@
-test:
-	pytest -v tests/test_client.py
+online_test:
+	pytest -v tests/online/test_fnapy_manager.py
 
 
 clean:
 	rm -f fnapy/*.pyc
 	rm -f tests/*.pyc
+	rm -f tests/online/*.pyc
 
 
 .PHONY: clean

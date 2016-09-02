@@ -64,15 +64,19 @@ know the processing status of the request.
 Presents the status of the last operation. More details are available in the
 sub levels presenting errors
 
-* Restriction
-    - Extends: xs:string
-    - Enumeration:
-        – RUNNING: Process is still running
-        – OK: Process finished without any error or warning
-        – WARNING: Process finished with at least a warning and no error
-        – ERROR: Process finished with at least an error, but no blocking error was encountered
-        – FATAL: A fatal error occured while processing, the process was not
-          done completely or even completely aborted
+The status has 3 main states:
+
+- ACTIVE: the batch is queued and ready to be processed
+– RUNNING: Process is still running
+– OK: Process finished without any error or warning
+
+If something went wrong and the final status is not 'OK', the state will be:
+
+– WARNING: Process finished with at least a warning and no error
+– ERROR: Process finished with at least an error, but no blocking error was encountered
+– FATAL: A fatal error occured while processing, the process was not
+  done completely or even completely aborted
+
 
 
 ## offers_query

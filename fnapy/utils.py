@@ -196,6 +196,7 @@ def parse_xml(response, tag_name):
     return BeautifulSoup(response.content, 'lxml').find(tag_name).text
 
 
+# TODO Reimplement create_offer_element with kwargs
 def create_offer_element(product_reference, offer_reference, price, product_state, quantity, description=None):
     """Create an offer element
 

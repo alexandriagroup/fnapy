@@ -41,7 +41,7 @@ status of this operation.
 * Get the batch status
 
 ```python
-batch_id = response.['offers_update_response']['batch_id']
+batch_id = response.dict['offers_update_response']['batch_id']
 batch_status = manager.get_batch_status(batch_id)
 ```
 
