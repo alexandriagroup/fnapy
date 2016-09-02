@@ -245,8 +245,10 @@ class FnapyManager(object):
 
         # Create the XML from the queried elements 
         if len(elements):
-            queried_elements = etree.XML(dict2xml(elements))
-            query.append(queried_elements)
+            for key, value in elements.iteritems():
+                d = {key: value}
+                queried_elements = etree.XML(dict2xml(d))
+                query.append(queried_elements)
 
         setattr(self, query_type + '_request', etree.tostring(query, **XML_OPTIONS))
         query_xml = getattr(self, query_type + '_request')
