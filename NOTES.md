@@ -1,4 +1,4 @@
-# Cookbook
+# Notes
 
 
 ## Process
@@ -17,7 +17,7 @@ In order to update the orders (accept, refuse or ship it) you have to use the
 `orders_update` service with the `order_id` and the selected action.
 
 
-## Offers update
+### Offers update
 
 * Description 
 
@@ -54,7 +54,7 @@ and 3 optional parameters:
 * an internal comment visible only by yourself in the seller account
 
 
-## batch_status
+### batch_status
 
 The status of the request is accessed with a batch id. You can use this id to
 know the processing status of the request.
@@ -79,7 +79,7 @@ If something went wrong and the final status is not 'OK', the state will be:
 
 
 
-## offers_query
+### offers_query
 
 * Description
 
@@ -98,9 +98,9 @@ Query is limited to 10 000 offers per call. Above this limit, an error will be
 thrown in the response.
 
 
-## orders_query
+### orders_query
 
-## orders_update
+### orders_update
 
 * Description
 
@@ -128,7 +128,7 @@ Orders statuses follow this workflow:
 5. Received
 
 
-## order_update_action
+### order_update_action
 
 * Description
 
@@ -145,7 +145,7 @@ Enumerate:
     - update_all: The action for the order is to update tracking information for all order_details
 
 
-## pricing_query
+### pricing_query
 
 * Description
 
@@ -160,4 +160,42 @@ Compare price between all marketplace shop and fnac for a specific product.
 
 The number of product references to request is limited to 10.
 
+
+## How we test fnapy
+
+We do 2 kinds of test: online and offline tests.
+
+## Online tests
+
+They allow us to make sure a given XML request gives us the response
+containting the information we need. 
+
+Here is the procedure we use for these tests:
+
+- we create the XML request in a file called <action>_request.xml, 
+- read it
+- send this XML with `requests`.
+- we test the content the of the response
+- store the response in a XML file called <action>_response.xml
+
+
+# Offline tests
+
+They allow us to make sure our library will always send the request that will
+produce the response we expect. In particular, these tests will be used as
+regression tests as we refactor the code.
+
+Testing our library in the online tests would be a hassle as some responses can
+take a long time. In order to avoid depending on the speed of the server, we
+mock it by monkey-patching `requests` so that the response returned is the the
+one we previously saved in the online tests (<action>_response.xml). As we know
+this response is correct, we just need to test that the XML request sent by our
+library corresponds to the XML request we used in the online tests
+(<action>_request.xml)
+
+Here is the corresponding procedure:
+
+- we monkey-patch `requests`,
+- run the function of our library generating the request we want
+- then we test the request generated has the same information as <action>_request.xml
 
