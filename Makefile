@@ -1,9 +1,11 @@
-online_test:
+online_tests:
 	pytest -v tests/online/test_fnapy_manager.py
 
 
-offline_test:
+offline_tests:
 	pytest -v tests/offline/test_offers.py
+	pytest -v tests/offline/test_orders.py
+
 
 
 clean:

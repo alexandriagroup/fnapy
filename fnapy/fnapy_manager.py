@@ -138,10 +138,11 @@ class FnapyManager(object):
         * update_all         : The action for the order is to update tracking
                                information for all order_details
 
-        Example: Accept the first item and refuse the second
+        Example: For this order (whose order_id is 'LDJEDEAS123'), we have 2
+        items. We decide to accept the first item and refuse the second:
         >>> action1 = {"order_detail_id": 1, "action": "Accepted"}
         >>> action2 = {"order_detail_id": 2, "action": "Refused"}
-        >>> response = update_orders("LDJEDEAS123", [action1, action2])
+        >>> response = manager.update_orders('LDJEDEAS123', 'accept_order', [action1, action2])
 
         """
         order_id = str(order_id)
