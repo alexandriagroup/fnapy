@@ -50,6 +50,15 @@ offer_data4 = {'product_reference':'5051889562672',
 offers_data = [offer_data1, offer_data2, offer_data3, offer_data4]
 
 
+def save_xml_response(response, filename):
+    """Save the response in a file """
+    output_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(output_dir, '../offline/assets', filename), 'w') as f:
+        f.write(response.encode('utf-8'))
+        print('Saved the response in {}'.format(filename))    
+
+
+# TODO Use mock instead of sending request to the server
 @pytest.fixture
 def setup():
     partner_id = os.environ.get('FNAC_PARTNER_ID')
@@ -152,11 +161,12 @@ def test_query_offers_with_a_single_parameter(setup):
     # with the corresponding criteria
     for i in range(offer_count_expected):
          offers[i].get('offer_seller_id', 'FAILED') == offers_data[i]['offer_reference']
+    save_xml_response(offers_query_response.xml, 'query_offers_with_single_element.xml')
 
 
 # @pytest.mark.skip(reason='No waste of time')
-def test_query_offers_with_multiple_parameters(setup):
-    """query_offers should accept queries on multiple parameters"""
+def test_query_offers_with_multiple_elements(manager):
+    """query_offers should accept queries on multiple elements"""
     offer_count_expected = 2
     dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc)
     dmax = datetime(2016, 9, 2, 0, 0, 0).replace(tzinfo=pytz.utc)
@@ -176,6 +186,7 @@ def test_query_offers_with_multiple_parameters(setup):
     # with the corresponding criteria
     for i in range(offer_count_expected):
          offers[i].get('offer_seller_id', 'FAILED') == offers_data[i]['offer_reference']
+    save_xml_response(offers_query_response.xml, 'query_offers_with_multiple_elements.xml')
 
 
 @pytest.mark.skip(reason='Waiting')
