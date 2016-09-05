@@ -45,7 +45,7 @@ offers_data = [offer_data1, offer_data2, offer_data3, offer_data4]
 def save_xml_response(response, filename):
     """Save the response in a file """
     output_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(output_dir, '../offline/assets', filename), 'w') as f:
+    with open(os.path.join(output_dir, 'offline/assets', filename), 'w') as f:
         f.write(response.encode('utf-8'))
         print('Saved the response in {}'.format(filename))    
 

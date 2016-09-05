@@ -46,3 +46,10 @@ INCIDENTS_QUERY_ELEMENTS = (
 SHOP_INVOICES_QUERY_ELEMENTS = (
     'paging', 'date'
 )
+
+ORDER_ELEMENTS = (
+    'shop_id', 'client_id', 'client_firstname', 'client_lastname',
+    'client_email', 'adherent_number', 'order_id', 'order_culture', 'state',
+    'created_at', 'fees', 'nb_messages', 'vat_rate', 'delivery_note',
+    'shipping_address', 'billing_address', 'order_detail'
+)
