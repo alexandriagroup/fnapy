@@ -15,7 +15,7 @@
     <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
     <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
     <nb_messages>0</nb_messages>
-    <showcase>1</showcase>
+    <showcase></showcase>
   </offer>
   <offer>
     <product_name><![CDATA[Call of Duty : Modern Warfare 2 ( Jeux Vidéo  ) - ]]></product_name>
@@ -32,6 +32,6 @@
     <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=2698944&ref=Fnac.com]]></product_url>
     <image><![CDATA[http://multimedia.fnac.com/multimedia/images_produits/Grandes/6/7/9/5030917070976.gif]]></image>
     <nb_messages>0</nb_messages>
-    <showcase>2</showcase>
+    <showcase></showcase>
   </offer>
 </offers_query_response>
