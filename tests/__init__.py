@@ -3,16 +3,19 @@
 # Python
 from __future__ import unicode_literals, print_function
 import os
+import re
 from codecs import open
 from contextlib import contextmanager
 
 # Third-party
-from requests import Response
+import requests
 import pytest
 
 # Project
 from fnapy.fnapy_manager import FnapyManager
 from fnapy.connection import FnapyConnection
+from fnapy.config import URL, HEADERS
+from fnapy.utils import *
 
 
 # DATA
@@ -42,14 +45,6 @@ offers_data = [offer_data1, offer_data2, offer_data3, offer_data4]
 
 
 # FUNCTIONS
-def save_xml_response(response, filename):
-    """Save the response in a file """
-    output_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(output_dir, 'offline/assets', filename), 'w') as f:
-        f.write(response.encode('utf-8'))
-        print('Saved the response in {}'.format(filename))    
-
-
 # TODO Use mock instead of sending request to the server
 @pytest.fixture
 def setup():
@@ -79,7 +74,7 @@ def fake_manager(monkeypatch):
 
 def make_requests_get_mock(filename):
     def mockreturn(*args, **kwargs):
-        response = Response()
+        response = requests.Response()
         with open(os.path.join(os.path.dirname(__file__), 'offline/assets', filename), 'r', 'utf-8') as fd:
             response._content = fd.read().encode('utf-8')
         return response
@@ -101,3 +96,21 @@ def assert_raises(exception_class, msg=None):
     if msg is not None:
         message = '%s' % exception
         assert msg.lower() in message.lower()
+
+def xml_is_valid(xml_dict, xml_valid_keys):
+    """Return True if all the keys in the XML dictionary are valid """
+    if len(xml_dict) == 0:
+        return False
+    keys = [tag for tag in xml_dict.keys() if not tag.startswith('@')]
+    return len(set(keys).difference(xml_valid_keys)) == 0
+
+
+def create_test(action, service):
+    request = load_xml_request(action) 
+    request = set_credentials(request)
+    response = post(service, request).text
+    xml_dict = xml2dict(response).get(service + '_response', {})
+    assert xml_is_valid(xml_dict, RESPONSE_ELEMENTS[service])
+    save_xml_response(response, action)
+
+
