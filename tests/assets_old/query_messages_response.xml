@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+  <page>1</page>
+  <total_paging>1</total_paging>
+  <nb_total_per_page>100</nb_total_per_page>
+  <nb_total_result>1</nb_total_result>
+  <message state="READ" archived="FALSE">
+    <message_id><![CDATA[6F9EF013-6387-F433-C3F5-4AAEF32AA317]]></message_id>
+    <message_referer type="ORDER"><![CDATA[57BEAFDA828A8]]></message_referer>
+    <message_from type="CLIENT"><![CDATA[test T.]]></message_from>
+    <message_subject><![CDATA[Nouvelle réclamation]]></message_subject>
+    <message_description><![CDATA[Une réclamation a été ouverte sur cette commande concernant le(s) article(s) suivant(s) :
+Motif de la réclamation :  - 
+Article : Call of Duty : Modern Warfare 2 [Jeux Vidéo]
+Motif de la réclamation :  - 
+Article : Call of Duty : Modern Warfare 2 [Jeux Vidéo]
+
+Description du problèmeIncident test message]]></message_description>
+    <created_at><![CDATA[2016-08-29T17:53:51+02:00]]></created_at>
+    <updated_at><![CDATA[2016-08-30T13:57:01+02:00]]></updated_at>
+  </message>
+</messages_query_response>

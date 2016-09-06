@@ -145,6 +145,7 @@ def test_query_offers_with_multiple_elements(manager):
     save_xml_response(offers_query_response.xml, 'query_offers_with_multiple_elements.xml')
 
 
+# TODO Fix test_update_orders
 # @pytest.mark.skip(reason='Waiting')
 def test_update_orders(setup):
     # There are 3 orders:

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shop_invoices_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+  <page>1</page>
+  <total_paging>0</total_paging>
+  <nb_total_per_page>100</nb_total_per_page>
+  <nb_total_result>0</nb_total_result>
+</shop_invoices_query_response>

@@ -97,20 +97,33 @@ def assert_raises(exception_class, msg=None):
         message = '%s' % exception
         assert msg.lower() in message.lower()
 
+
 def xml_is_valid(xml_dict, xml_valid_keys):
     """Return True if all the keys in the XML dictionary are valid """
     if len(xml_dict) == 0:
-        return False
+        return False, 'The XML dictionary is empty.'
     keys = [tag for tag in xml_dict.keys() if not tag.startswith('@')]
-    return len(set(keys).difference(xml_valid_keys)) == 0
+    if len(keys) == 0:
+        return False, 'The XML dictionary contains no valid keys.'
+    invalid_keys = set(keys).difference(xml_valid_keys)
+    result = len(invalid_keys) == 0
+    if result:
+        return True, ''
+    else:
+        msg = 'The XML has the following invalid keys {}'.format(invalid_keys)
+        if len(invalid_keys) == 1 and 'error' in invalid_keys:
+            print(xml_dict['error'])
+        return False, msg
 
 
-def create_test(action, service):
+def response_is_valid(action, service):
     request = load_xml_request(action) 
     request = set_credentials(request)
     response = post(service, request).text
     xml_dict = xml2dict(response).get(service + '_response', {})
-    assert xml_is_valid(xml_dict, RESPONSE_ELEMENTS[service])
-    save_xml_response(response, action)
-
-
+    result, error = xml_is_valid(xml_dict, RESPONSE_ELEMENTS[service])
+    if result:
+        save_xml_response(response, action)
+    elif result is False:
+        pytest.fail(error)
+    return result

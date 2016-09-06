@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<offers_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+  <offer>
+    <product_name><![CDATA[MotorStorm Pacific Rift - Gamme Essentials ( Jeux Vidéo  ) - ]]></product_name>
+    <product_fnac_id>20005761</product_fnac_id>
+    <offer_fnac_id>32C1E9FC-8011-0C1B-F0F3-EC3414BCBBD0</offer_fnac_id>
+    <offer_seller_id><![CDATA[B76A-CD5-153]]></offer_seller_id>
+    <product_state>11</product_state>
+    <price>15</price>
+    <fee_excluding_taxes>2.14</fee_excluding_taxes>
+    <fee_including_all_taxes>2.14</fee_including_all_taxes>
+    <quantity>10</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+    <internal_comment><![CDATA[]]></internal_comment>
+    <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
+    <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
+    <nb_messages>0</nb_messages>
+    <showcase></showcase>
+  </offer>
+  <offer>
+    <product_name><![CDATA[Call of Duty : Modern Warfare 2 ( Jeux Vidéo  ) - ]]></product_name>
+    <product_fnac_id>2703768</product_fnac_id>
+    <offer_fnac_id>8D7472DB-7EAF-CE05-A960-FC12B812FA14</offer_fnac_id>
+    <offer_seller_id><![CDATA[B067-F0D-75E]]></offer_seller_id>
+    <product_state>11</product_state>
+    <price>20</price>
+    <fee_excluding_taxes>2.74</fee_excluding_taxes>
+    <fee_including_all_taxes>2.74</fee_including_all_taxes>
+    <quantity>16</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+    <internal_comment><![CDATA[]]></internal_comment>
+    <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=2698944&ref=Fnac.com]]></product_url>
+    <image><![CDATA[http://multimedia.fnac.com/multimedia/images_produits/Grandes/6/7/9/5030917070976.gif]]></image>
+    <nb_messages>0</nb_messages>
+    <showcase></showcase>
+  </offer>
+</offers_query_response>

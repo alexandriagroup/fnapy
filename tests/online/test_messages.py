@@ -15,10 +15,10 @@ from fnapy.config import *
 from tests import response_is_valid
 
 
-def test_update_orders():
-    response_is_valid('update_orders', 'orders_update')
+def test_update_messages():
+    response_is_valid('update_messages', 'messages_update')
 
 
-def test_query_orders():
-    response_is_valid('query_orders', 'orders_query')
+def test_query_messages():
+    response_is_valid('query_messages', 'messages_query')
 
