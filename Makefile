@@ -1,5 +1,5 @@
 online_tests:
-	pytest -v tests/online/test_fnapy_manager.py
+	pytest -v tests/online/test_*.py
 
 
 offline_tests:

@@ -165,7 +165,7 @@ The number of product references to request is limited to 10.
 
 We do 2 kinds of test: online and offline tests.
 
-## Online tests
+### Online tests
 
 They allow us to make sure a given XML request gives us the response
 containting the information we need. 
@@ -179,7 +179,7 @@ Here is the procedure we use for these tests:
 - store the response in a XML file called <action>_response.xml
 
 
-# Offline tests
+### Offline tests
 
 They allow us to make sure our library will always send the request that will
 produce the response we expect. In particular, these tests will be used as
