@@ -10,11 +10,19 @@
 Useful functions
 """
 
+# Python modules
+import os
+import re
+from codecs import open
+
+# Third-party modules
 from bs4 import BeautifulSoup
 from lxml import etree
-from config import *
-import re
 import xmltodict
+import requests
+
+# Project modules
+from config import *
 
 
 # CLASSES
@@ -247,3 +255,51 @@ def get_order_ids(orders_query_response):
         elif isinstance(orders, dict):
             order_ids.append(orders.get('order_id', ''))
     return order_ids
+
+
+def get_token():
+    partner_id = os.getenv('FNAC_PARTNER_ID')
+    shop_id = os.getenv('FNAC_SHOP_ID')
+    key = os.getenv('FNAC_KEY')
+    xml = """<?xml version="1.0" encoding="utf-8"?>
+<auth xmlns='http://www.fnac.com/schemas/mp-dialog.xsd'>
+  <partner_id>{partner_id}</partner_id>
+  <shop_id>{shop_id}</shop_id>
+  <key>{key}</key>
+</auth>
+    """.format(partner_id=partner_id, shop_id=shop_id, key=key)
+    response = post('auth', xml)
+    return parse_xml(response, 'token')
+
+
+def set_credentials(xml):
+    """Set the credentials in the given raw XML """
+    credentials = {'shop_id': os.getenv('FNAC_SHOP_ID'),
+                   'partner_id': os.getenv('FNAC_PARTNER_ID'),
+                   'token': get_token()}
+    for credential, value in credentials.items():
+        xml = re.sub(pattern='{0}="[^"]+"'.format(credential),
+                     repl='{0}="{1}"'.format(credential, value), string=xml, flags=0)
+    return xml
+
+
+def post(service, request):
+    return requests.post(URL + service, request, headers=HEADERS)
+
+
+def save_xml_response(response, action):
+    """Save the response in a file """
+    output_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = action + '_response.xml'
+    with open(os.path.join(output_dir, '../tests/assets', filename), 'w') as f:
+        f.write(response.encode('utf-8'))
+        print('Saved the response in {}'.format(filename))    
+
+
+def load_xml_request(action):
+    input_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = action + '_request.xml'
+    print filename
+    with open(os.path.join(input_dir, '../tests/assets', filename), 'r', 'utf-8') as f:
+        request = f.read()
+    return request
