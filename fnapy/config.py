@@ -53,3 +53,15 @@ ORDER_ELEMENTS = (
     'created_at', 'fees', 'nb_messages', 'vat_rate', 'delivery_note',
     'shipping_address', 'billing_address', 'order_detail'
 )
+
+# The elements for the responses
+OFFERS_UPDATE_RESPONSE_ELEMENTS = (
+    'batch_id',
+)
+
+RESPONSE_ELEMENTS = {}
+RESPONSE_ELEMENTS['offers_update'] = ('batch_id', )
+RESPONSE_ELEMENTS['offers_query'] = (
+    'page', 'total_paging', 'nb_total_per_page', 'nb_total_result',
+    'offer'
+)
