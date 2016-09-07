@@ -29,19 +29,24 @@ offer_data2 = {'product_reference':'5030917077418',
         'price':20, 'product_state':11, 'quantity':16, 
         'description': 'New product - 2-3 days shipping, from France'}
 
-# SICP
-offer_data3 = {'product_reference':'9780262510875',
-        'offer_reference':'B76A-CD5-444',
-        'price':80, 'product_state':11, 'quantity':10, 
-        'description': 'New product - 2-3 days shipping, from France'}
+offer_data3 = {'product_reference': '5051889022091',
+               'offer_reference': '561C-385-9BE',
+               'price': 10.55, 'product_state': 11, 'quantity': 16,
+               'description': 'New product - Blu-ray disc - 2-3 days shipping, from France'}
 
-# Batman V Superman L'aube de la justice 
-offer_data4 = {'product_reference':'5051889562672',
-        'offer_reference':'B067-F0D-444',
-        'price':20, 'product_state':11, 'quantity':16, 
-        'description': 'New product - 2-3 days shipping, from France'}
+# # SICP
+# offer_data3 = {'product_reference':'9780262510875',
+#         'offer_reference':'B76A-CD5-444',
+#         'price':80, 'product_state':11, 'quantity':10, 
+#         'description': 'New product - 2-3 days shipping, from France'}
 
-offers_data = [offer_data1, offer_data2, offer_data3, offer_data4]
+# # Batman V Superman L'aube de la justice 
+# offer_data4 = {'product_reference':'5051889562672',
+#         'offer_reference':'B067-F0D-444',
+#         'price':20, 'product_state':11, 'quantity':16, 
+#         'description': 'New product - 2-3 days shipping, from France'}
+
+offers_data = [offer_data1, offer_data2, offer_data3]
 
 
 # FUNCTIONS
@@ -62,7 +67,7 @@ def setup():
 
 @pytest.fixture
 def fake_manager(monkeypatch):
-    monkeypatch.setattr('requests.post', make_requests_get_mock('authenticate.xml'))
+    monkeypatch.setattr('requests.post', make_requests_get_mock('auth_response.xml'))
     partner_id = os.environ.get('FNAC_PARTNER_ID')
     shop_id    = os.environ.get('FNAC_SHOP_ID')
     key        = os.environ.get('FNAC_KEY')
@@ -75,7 +80,7 @@ def fake_manager(monkeypatch):
 def make_requests_get_mock(filename):
     def mockreturn(*args, **kwargs):
         response = requests.Response()
-        with open(os.path.join(os.path.dirname(__file__), 'offline/assets', filename), 'r', 'utf-8') as fd:
+        with open(os.path.join(os.path.dirname(__file__), 'assets', filename), 'r', 'utf-8') as fd:
             response._content = fd.read().encode('utf-8')
         return response
     return mockreturn
@@ -83,7 +88,7 @@ def make_requests_get_mock(filename):
 
 def make_simple_text_mock(filename):
     def mockreturn(*args, **kwargs):
-        with open(os.path.join(os.path.dirname(__file__), 'offline/assets', filename), 'r', 'utf-8') as fd:
+        with open(os.path.join(os.path.dirname(__file__), 'assets', filename), 'r', 'utf-8') as fd:
             return fd.read()
     return mockreturn
 
@@ -99,13 +104,14 @@ def assert_raises(exception_class, msg=None):
 
 
 def xml_is_valid(xml_dict, xml_valid_keys):
-    """Return True if all the keys in the XML dictionary are valid """
+    """Return True if all the keys in the XML dictionary are valid"""
     if len(xml_dict) == 0:
         return False, 'The XML dictionary is empty.'
     keys = [tag for tag in xml_dict.keys() if not tag.startswith('@')]
     if len(keys) == 0:
         return False, 'The XML dictionary contains no valid keys.'
     invalid_keys = set(keys).difference(xml_valid_keys)
+    # pytest.fail(xml_valid_keys)
     result = len(invalid_keys) == 0
     if result:
         return True, ''
@@ -117,6 +123,7 @@ def xml_is_valid(xml_dict, xml_valid_keys):
 
 
 def response_is_valid(action, service):
+    """The response is valid if it contains the elements defined in the API"""
     request = load_xml_request(action) 
     request = set_credentials(request)
     response = post(service, request).text
@@ -127,3 +134,18 @@ def response_is_valid(action, service):
     elif result is False:
         pytest.fail(error)
     return result
+
+
+def request_is_valid(request, action, service):
+    """The request is valid if it contains the same information as in the valid XML request file"""
+    expected = load_xml_request(action)
+    expected_dict = xml2dict(expected).get(service, {})
+    request_dict = request.dict[service]
+    credentials = ('@partner_id', '@shop_id', '@token')
+    result = all(request_dict.get(k, None) == v for k, v in expected_dict.items() if k not in credentials)
+
+    if not result:
+        pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request, expected))
+    else:
+        return result
+        

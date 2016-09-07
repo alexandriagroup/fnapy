@@ -16,9 +16,9 @@ from tests import response_is_valid
 
 
 def test_update_messages():
-    response_is_valid('update_messages', 'messages_update')
+    assert response_is_valid('update_messages', 'messages_update')
 
 
 def test_query_messages():
-    response_is_valid('query_messages', 'messages_query')
+    assert response_is_valid('query_messages', 'messages_query')
 

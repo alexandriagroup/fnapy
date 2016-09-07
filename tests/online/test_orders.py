@@ -16,9 +16,9 @@ from tests import response_is_valid
 
 
 def test_update_orders():
-    response_is_valid('update_orders', 'orders_update')
+    assert response_is_valid('update_orders', 'orders_update')
 
 
 def test_query_orders():
-    response_is_valid('query_orders', 'orders_query')
+    assert response_is_valid('query_orders', 'orders_query')
 

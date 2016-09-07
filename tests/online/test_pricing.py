@@ -16,5 +16,5 @@ from tests import response_is_valid
 
 
 def test_query_pricing():
-    response_is_valid('query_pricing', 'pricing_query')
+    assert response_is_valid('query_pricing', 'pricing_query')
 

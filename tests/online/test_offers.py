@@ -16,14 +16,14 @@ from tests import response_is_valid
 
 
 def test_update_offers():
-    response_is_valid('update_offers', 'offers_update')
+    assert response_is_valid('update_offers', 'offers_update')
 
 
 def test_query_offers():
-    response_is_valid('query_offers', 'offers_query')
+    assert response_is_valid('query_offers', 'offers_query')
 
 
 def test_get_batch_status():
-    response_is_valid('get_batch_status', 'batch_status')
+    assert response_is_valid('get_batch_status', 'batch_status')
 
 

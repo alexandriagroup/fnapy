@@ -80,10 +80,10 @@ RESPONSE_ELEMENTS['messages_query'] = (
 )
 RESPONSE_ELEMENTS['messages_update'] = ('message',)
 RESPONSE_ELEMENTS['pricing_query'] = ('pricing_product', )
-RESPONSE_ELEMENTS['client_order_comments_query'] = ('comment',)
-RESPONSE_ELEMENTS['client_order_comments_update'] = (
-    'page', 'total_paging', 'nb_total_result', 'client_order_comment',
+RESPONSE_ELEMENTS['client_order_comments_query'] = (
+    'page', 'total_paging', 'nb_total_per_page', 'nb_total_result', 'client_order_comment',
 )
+RESPONSE_ELEMENTS['client_order_comments_update'] = ('comment',)
 RESPONSE_ELEMENTS['shop_invoices_query'] = (
     'page', 'total_paging', 'nb_total_per_page', 'nb_total_result', 'shop_invoice',
 )

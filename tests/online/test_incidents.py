@@ -21,6 +21,4 @@ from tests import response_is_valid
 
 
 def test_query_incidents():
-    action, service = 'query_incidents', 'incidents_query'
-    result = response_is_valid(action, service)
-    assert result
+    assert response_is_valid('query_incidents', 'incidents_query')

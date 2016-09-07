@@ -16,5 +16,5 @@ from tests import response_is_valid
 
 
 def test_query_carriers():
-    response_is_valid('query_carriers', 'carriers_query')
+    assert response_is_valid('query_carriers', 'carriers_query')
 
