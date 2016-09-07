@@ -74,6 +74,7 @@ RESPONSE_ELEMENTS['incidents_query'] = (
     'page', 'total_paging',
     'nb_total_per_page', 'nb_total_result', 'incident'
 )
+RESPONSE_ELEMENTS['incidents_update'] = ('order',)
 RESPONSE_ELEMENTS['messages_query'] = (
     'page', 'total_paging',
     'nb_total_per_page', 'nb_total_result', 'message'

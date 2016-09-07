@@ -16,9 +16,10 @@ from fnapy.config import *
 from tests import response_is_valid
 
 
-# def test_update_incidents():
-#     create_test('update_incidents', 'incidents_update')
-
-
 def test_query_incidents():
     assert response_is_valid('query_incidents', 'incidents_query')
+
+
+
+def test_update_incidents():
+    assert response_is_valid('update_incidents', 'incidents_update')

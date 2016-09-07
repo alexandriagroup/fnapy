@@ -3,8 +3,7 @@ online_tests:
 
 
 offline_tests:
-	pytest -v tests/offline/test_offers.py
-	pytest -v tests/offline/test_orders.py
+	pytest -v tests/offline/test_*.py
 
 
 
@@ -14,5 +13,8 @@ clean:
 	rm -f tests/online/*.pyc
 	rm -f tests/offline/*.pyc
 
+tags:
+	ctags -R **/*.py
 
-.PHONY: clean
+
+.PHONY: clean tags
