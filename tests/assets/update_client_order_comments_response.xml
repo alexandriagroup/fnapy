@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><client_order_comments_update_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="ERROR"><comment status="ERROR" id="8D7472DB-7EAF-CE05-A960-FC12B812FA14"><error severity="ERROR" code="ERR_128">[ClientOrderComment Update] Comment not found</error></comment></client_order_comments_update_response>
