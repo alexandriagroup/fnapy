@@ -27,25 +27,35 @@ from config import *
 
 # CLASSES
 
-class Response(object):
-    """A handy class to handle the response"""
-
+class HttpMessage(object):
     def __init__(self, text):
         self.dict = xml2dict(text)
 
         # Raw XML
-        self.xml = text
+        self.xml = text.encode('utf-8')
 
         # etree._Element
-        self.element = etree.fromstring(self.xml.encode('utf-8'))
+        self.element = etree.fromstring(self.xml)
         
         self.tag = re.sub(pattern='{[^}]+}', repl='', string=self.element.tag, flags=0)
 
     def __repr__(self):
-        return '<Response: {}>'.format(self.tag)
+        return '<{0}: {1}>'.format(self.__class__.__name__, self.tag)
 
     def __str__(self):
         return self.xml
+
+
+class Request(HttpMessage):
+    """A handy class to handle the request"""
+    def __init__(self, text):
+        super(Request, self).__init__(text)
+
+
+class Response(HttpMessage):
+    """A handy class to handle the response"""
+    def __init__(self, text):
+        super(Response, self).__init__(text)
 
 
 # TODO Implement a check for the attributes
@@ -299,7 +309,6 @@ def save_xml_response(response, action):
 def load_xml_request(action):
     input_dir = os.path.dirname(os.path.abspath(__file__))
     filename = action + '_request.xml'
-    print filename
     with open(os.path.join(input_dir, '../tests/assets', filename), 'r', 'utf-8') as f:
         request = f.read()
     return request

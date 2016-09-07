@@ -58,9 +58,12 @@ class FnapyManager(object):
             print 'The token expired. Reauthenticating...'
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
-            setattr(self, service + '_request', etree.tostring(element, **XML_OPTIONS)) 
+            setattr(self, service + '_request',
+                    Request(etree.tostring(element, **XML_OPTIONS))) 
             # Resend the updated request
-            response = requests.post(URL + service, getattr(self, service + '_request'), headers=HEADERS)
+            response = requests.post(URL + service,
+                                     getattr(self, service + '_request').xml,
+                                     headers=HEADERS)
             response = Response(response.text)
         return response
 
@@ -70,8 +73,9 @@ class FnapyManager(object):
         etree.SubElement(auth, 'partner_id').text = self.connection.partner_id
         etree.SubElement(auth, 'shop_id').text = self.connection.shop_id
         etree.SubElement(auth, 'key').text = self.connection.key
-        self.auth_request = etree.tostring(auth, **XML_OPTIONS)
-        response = requests.post(URL + 'auth', self.auth_request, headers=HEADERS)
+        self.auth_request = Request(etree.tostring(auth, **XML_OPTIONS))
+        response = requests.post(URL + 'auth', self.auth_request.xml,
+                                 headers=HEADERS)
         self.token = parse_xml(response, 'token')
         return self.token
 
@@ -106,10 +110,10 @@ class FnapyManager(object):
         for offer_data in offers_data:
             offer = create_offer_element(**offer_data)
             offers_update.append(offer)
-        self.offers_update_request = etree.tostring(offers_update, **XML_OPTIONS)
+        self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
 
         # the response contains the element batch_id
-        response = self._get_response(offers_update, self.offers_update_request)
+        response = self._get_response(offers_update, self.offers_update_request.xml)
         self.batch_id = response.dict['offers_update_response']['batch_id']
         return response
 
@@ -157,8 +161,8 @@ class FnapyManager(object):
             order.append(order_detail)
 
         orders_update.append(order)
-        self.orders_update_request = etree.tostring(orders_update, **XML_OPTIONS)
-        return self._get_response(orders_update, self.orders_update_request)
+        self.orders_update_request = Request(etree.tostring(orders_update, **XML_OPTIONS))
+        return self._get_response(orders_update, self.orders_update_request.xml)
 
     # FIXME The batch_status_response doesn't contain the attributes (status)
     def get_batch_status(self, batch_id=None, token=None):
@@ -178,8 +182,8 @@ class FnapyManager(object):
 
         batch_status = create_xml_element(self.connection, self.token, 'batch_status')
         etree.SubElement(batch_status, 'batch_id').text = self.batch_id
-        self.batch_status_request = etree.tostring(batch_status, **XML_OPTIONS)
-        return self._get_response(batch_status, self.batch_status_request)
+        self.batch_status_request = Request(etree.tostring(batch_status, **XML_OPTIONS))
+        return self._get_response(batch_status, self.batch_status_request.xml)
 
     # TODO Implement this method that should handle any arguments to create
     # the xml properly
@@ -251,8 +255,8 @@ class FnapyManager(object):
                 queried_elements = etree.XML(dict2xml(d))
                 query.append(queried_elements)
 
-        setattr(self, query_type + '_request', etree.tostring(query, **XML_OPTIONS))
-        query_xml = getattr(self, query_type + '_request')
+        setattr(self, query_type + '_request', Request(etree.tostring(query, **XML_OPTIONS)))
+        query_xml = getattr(self, query_type + '_request').xml
         return self._get_response(query, query_xml)
 
     # TODO generator for the paging
@@ -278,8 +282,8 @@ class FnapyManager(object):
         product_reference = etree.Element("product_reference", type="Ean")
         product_reference.text = str(ean)
         pricing_query.append(product_reference)
-        self.pricing_query_request = etree.tostring(pricing_query, **XML_OPTIONS)
-        return self._get_response(pricing_query, self.pricing_query_request)
+        self.pricing_query_request = Request(etree.tostring(pricing_query, **XML_OPTIONS))
+        return self._get_response(pricing_query, self.pricing_query_request.xml)
 
     def query_batch(self):
         """Return information about your currently processing import batches
@@ -292,8 +296,8 @@ class FnapyManager(object):
 
         """
         batch_query = create_xml_element(self.connection, self.token, 'batch_query')
-        self.batch_query_request = etree.tostring(batch_query, **XML_OPTIONS)
-        return self._get_response(batch_query, self.batch_query_request)
+        self.batch_query_request = Request(etree.tostring(batch_query, **XML_OPTIONS))
+        return self._get_response(batch_query, self.batch_query_request.xml)
 
     def query_carriers(self):
         """Return the available carriers managed on FNAC Marketplace platform
@@ -307,8 +311,8 @@ class FnapyManager(object):
         """
         carriers_query = create_xml_element(self.connection, self.token, 'carriers_query')
         etree.SubElement(carriers_query, "query").text = etree.CDATA("all")
-        self.carriers_query_request = etree.tostring(carriers_query, **XML_OPTIONS)
-        return self._get_response(carriers_query, self.carriers_query_request)
+        self.carriers_query_request = Request(etree.tostring(carriers_query, **XML_OPTIONS))
+        return self._get_response(carriers_query, self.carriers_query_request.xml)
 
     def query_client_order_comments(self, results_count='100', token=None, **elements):
         """Retrieves customers comments and ratings about your orders.
@@ -338,9 +342,9 @@ class FnapyManager(object):
         comment = etree.Element('comment', id=offer_fnac_id)
         etree.SubElement(comment, 'comment_reply').text = etree.CDATA(seller_comment)
         client_order_comments_update.append(comment)
-        self.client_order_comments_update_request = etree.tostring(client_order_comments_update, **XML_OPTIONS)
+        self.client_order_comments_update_request = Request(etree.tostring(client_order_comments_update, **XML_OPTIONS))
         return self._get_response(client_order_comments_update,
-                self.client_order_comments_update_request)
+                self.client_order_comments_update_request.xml)
 
     def query_messages(self, results_count='100', token=None, **elements):
         """Return the messages related to your orders or offers
@@ -381,8 +385,8 @@ class FnapyManager(object):
             message = etree.XML(dict2xml(m.to_dict()))
             messages_update.append(message)
 
-        self.messages_update_request = etree.tostring(messages_update, **XML_OPTIONS)
-        return self._get_response(messages_update, self.messages_update_request)
+        self.messages_update_request = Request(etree.tostring(messages_update, **XML_OPTIONS))
+        return self._get_response(messages_update, self.messages_update_request.xml)
 
     def query_incidents(self, results_count='100', token=None, **elements):
         """Return the incidents related to your orders
@@ -432,9 +436,9 @@ class FnapyManager(object):
             order.append(order_detail)
 
         incidents_update.append(order)
-        self.incidents_update_request = etree.tostring(incidents_update, **XML_OPTIONS)
+        self.incidents_update_request = Request(etree.tostring(incidents_update, **XML_OPTIONS))
         return self._get_response(incidents_update,
-                self.incidents_update_request)
+                self.incidents_update_request.xml)
 
     def query_shop_invoices(self, results_count='100', token=None, **elements):
         """Return the download links to the shop's invoices
