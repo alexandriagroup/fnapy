@@ -24,17 +24,21 @@ class FnapyManager(object):
         """Initialize the """
         self.connection = connection
         self.auth_request = None
-        self.offers_update_request = None
         self.offers_query_request = None
-        self.orders_update_request = None
-        self.pricing_query_request = None
-        self.carriers_query_request = None
+        self.offers_update_request = None
+        self.orders_query_request = None
+        self.batch_query_request = None
         self.batch_status_request = None
+        self.orders_update_request = None
+        self.carriers_query_request = None
+        self.client_order_comments_query_request = None
+        self.client_order_comments_update_request = None
         self.messages_query_request = None
         self.messages_update_request = None
-        self.shop_invoices_query_request = None
         self.incidents_query_request = None
         self.incidents_update_request = None
+        self.pricing_query_request = None
+        self.shop_invoices_query_request = None
 
         # The batch_id updated every time an offer is updated
         self.batch_id = None
