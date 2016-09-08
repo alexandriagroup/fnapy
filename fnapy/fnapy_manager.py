@@ -43,6 +43,9 @@ class FnapyManager(object):
         # The batch_id updated every time an offer is updated
         self.batch_id = None
 
+        # Authenticate when the manager is instanciated
+        self.authenticate()
+
     def _get_response(self, element, xml):
         """Send the request and return the response as a dictionary
 
@@ -85,11 +88,11 @@ class FnapyManager(object):
 
     # TODO Allow update_offers to delete an offer
     # TODO Create a dictionary for the product_state
-    def update_offers(self, offers_data, token=None):
+    def update_offers(self, offers_data):
         """Post the update offers and return the response
 
         Usage:
-        >>> response = manager.update_offers(offers_data, token=token)
+        >>> response = manager.update_offers(offers_data)
         
         :param offers_data: the list of data to create the offers
                             where data is dictionary with the keys:
@@ -107,9 +110,6 @@ class FnapyManager(object):
         :returns response: the offers_update_response dictionary
 
         """
-        if token is not None:
-            self.token = token
-
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
         for offer_data in offers_data:
             offer = create_offer_element(**offer_data)
@@ -169,7 +169,7 @@ class FnapyManager(object):
         return self._get_response(orders_update, self.orders_update_request.xml)
 
     # FIXME The batch_status_response doesn't contain the attributes (status)
-    def get_batch_status(self, batch_id=None, token=None):
+    def get_batch_status(self, batch_id=None):
         """Return the status for the given batch id
 
         :param conn: The FnapyConnection instance
@@ -178,9 +178,6 @@ class FnapyManager(object):
         :returns: batch status response
 
         """
-        if token is not None:
-            self.token = token
-
         if batch_id is not None:
             self.batch_id = batch_id
 
@@ -196,11 +193,11 @@ class FnapyManager(object):
             if element not in valid_elements:
                 raise ValueError('{} is not a valid element.'.format(element))
 
-    def _query(self, query_type, results_count='', token=None, **elements):
+    def _query(self, query_type, results_count='', **elements):
         """Query your catalog and return the {query_type} on the selected page between 2 datetimes
 
         Usage:
-        >>> response = manager.query_offers(results_count=results_count, token=token)
+        >>> response = manager.query_offers(results_count=results_count)
 
         Example:
         Find the {query_type} created between 2 dates
@@ -219,9 +216,6 @@ class FnapyManager(object):
 
         """
         print 'Querying {}...'.format(query_type)
-        if token is not None:
-            self.token = token
-
         valid_query_types = ('offers', 'orders', 'client_order_comments',
                              'messages', 'incidents', 'shop_invoices')
         if query_type in valid_query_types:
@@ -266,11 +260,11 @@ class FnapyManager(object):
 
     # TODO generator for the paging
     # TODO Allow to specify the type of date ('Created', 'Modified'...)
-    def query_offers(self, results_count='', token=None, **elements):
-        return self._query('offers', results_count, token=token, **elements)
+    def query_offers(self, results_count='', **elements):
+        return self._query('offers', results_count, **elements)
 
-    def query_orders(self, results_count='', token=None, **elements):
-        return self._query('orders', results_count, token=token, **elements)
+    def query_orders(self, results_count='', **elements):
+        return self._query('orders', results_count, **elements)
 
     def query_pricing(self, ean, sellers="all"):
         """Compare price between all marketplace shop and fnac for a specific product (designated by its ean)
@@ -319,17 +313,17 @@ class FnapyManager(object):
         self.carriers_query_request = Request(etree.tostring(carriers_query, **XML_OPTIONS))
         return self._get_response(carriers_query, self.carriers_query_request.xml)
 
-    def query_client_order_comments(self, results_count='', token=None, **elements):
+    def query_client_order_comments(self, results_count='', **elements):
         """Retrieves customers comments and ratings about your orders.
 
         Usage
-                                                        token=token, **elements)
+        >>> response = manager.query_client_order_comments(results_count=results_count, **elements)
 
         :rtype: Response
         :returns: response
 
         """
-        return self._query('client_order_comments', token=token, **elements)
+        return self._query('client_order_comments', **elements)
 
     def update_client_order_comments(self, seller_comment, offer_fnac_id):
         """Reply to client order comments
@@ -350,18 +344,17 @@ class FnapyManager(object):
         return self._get_response(client_order_comments_update,
                 self.client_order_comments_update_request.xml)
 
-    def query_messages(self, results_count='', token=None, **elements):
+    def query_messages(self, results_count='', **elements):
         """Return the messages related to your orders or offers
 
         Usage
-        >>> response = manager.query_messages(results_count=results_count,
-        token=token, **elements)
+        >>> response = manager.query_messages(results_count=results_count, **elements)
 
         :rtype: Response
         :returns: response
 
         """
-        return self._query('messages', results_count, token=token, **elements)
+        return self._query('messages', results_count, **elements)
 
     def update_messages(self, messages):
         """Update message sent on your offers or orders : reply, set as read, ...
@@ -392,18 +385,17 @@ class FnapyManager(object):
         self.messages_update_request = Request(etree.tostring(messages_update, **XML_OPTIONS))
         return self._get_response(messages_update, self.messages_update_request.xml)
 
-    def query_incidents(self, results_count='', token=None, **elements):
+    def query_incidents(self, results_count='', **elements):
         """Return the incidents related to your orders
 
         Usage
-        >>> response = manager.query_incidents(results_count=results_count,
-        token=token, **elements)
+        >>> response = manager.query_incidents(results_count=results_count, **elements)
 
         :rtype: Response
         :returns: response
 
         """
-        return self._query('incidents', results_count, token=token, **elements)
+        return self._query('incidents', results_count, **elements)
 
     def update_incidents(self, order_id, incident_update_action, reasons):
         """Handle incidents created on orders
@@ -444,15 +436,14 @@ class FnapyManager(object):
         return self._get_response(incidents_update,
                 self.incidents_update_request.xml)
 
-    def query_shop_invoices(self, results_count='', token=None, **elements):
+    def query_shop_invoices(self, results_count='', **elements):
         """Return the download links to the shop's invoices
 
         Usage
-        >>> response = manager.query_shop_invoices(results_count=results_count,
-        token=token, **elements)
+        >>> response = manager.query_shop_invoices(results_count=results_count, **elements)
 
         :rtype: Response
         :returns: response
 
         """
-        return self._query('shop_invoices', results_count, token=token, **elements)
+        return self._query('shop_invoices', results_count, **elements)
