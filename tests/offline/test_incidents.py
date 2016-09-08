@@ -18,7 +18,7 @@ from tests.offline import ContextualTest
 def test_query_incidents(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_incidents', 'incidents_query')
     with closing(context):
-        fake_manager.query_incidents(paging=1)
+        fake_manager.query_incidents(paging=1, results_count=100)
 
 
 def test_update_incidents(monkeypatch, fake_manager):

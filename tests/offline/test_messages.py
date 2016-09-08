@@ -19,7 +19,7 @@ from tests.offline import ContextualTest
 def test_query_messages(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_messages', 'messages_query')
     with closing(context):
-        fake_manager.query_messages(paging=1)
+        fake_manager.query_messages(paging=1, results_count=100)
 
 
 def test_update_messages(monkeypatch, fake_manager):

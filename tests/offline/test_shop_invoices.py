@@ -18,6 +18,6 @@ from tests.offline import ContextualTest
 def test_query_shop_invoices(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_shop_invoices', 'shop_invoices_query')
     with closing(context):
-        fake_manager.query_shop_invoices(paging=1)
+        fake_manager.query_shop_invoices(paging=1, results_count=100)
 
 
