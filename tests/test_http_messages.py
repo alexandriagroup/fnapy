@@ -13,18 +13,10 @@ Test the Request and Response classes
 from fnapy.utils import Response, Request
 from lxml import etree
 from fnapy.utils import xml2dict, remove_namespace
+from tests import elements_are_equal
 
 
 BATCH_ID = "BFACA5F5-67FD-C037-6209-F287800FBB17"
-
-
-def elements_are_equal(e1, e2):
-    if e1.tag != e2.tag: return False
-    if e1.text != e2.text: return False
-    if e1.tail != e2.tail: return False
-    if e1.attrib != e2.attrib: return False
-    if len(e1) != len(e2): return False
-    return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
 
 
 def test_request():

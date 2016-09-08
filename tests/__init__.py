@@ -103,6 +103,26 @@ def assert_raises(exception_class, msg=None):
         assert msg.lower() in message.lower()
 
 
+def elements_are_equal(e1, e2, excluded_attrs=None):
+    if e1.tag != e2.tag:
+        return False
+    if e1.text is not None and e2.text is not None and\
+       e1.text.strip() != e2.text.strip():
+            return False
+    if e1.tail != e2.tail:
+        return False
+    if excluded_attrs:
+        if {a for a in e1.attrib if a not in excluded_attrs} !=\
+           {a for a in e2.attrib if a not in excluded_attrs}:
+            return False
+    else:
+        if e1.attrib != e2.attrib:
+            return False
+    if len(e1) != len(e2):
+            return False
+    return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
+
+
 def xml_is_valid(xml_dict, xml_valid_keys):
     """Return True if all the keys in the XML dictionary are valid"""
     if len(xml_dict) == 0:
@@ -139,13 +159,11 @@ def response_is_valid(action, service):
 def request_is_valid(request, action, service):
     """The request is valid if it contains the same information as in the valid XML request file"""
     expected = load_xml_request(action)
-    expected_dict = xml2dict(expected).get(service, {})
-    request_dict = request.dict[service]
+    expected_element = etree.XML(expected.encode('utf-8'))
+    request_element = request.element
     credentials = ('@partner_id', '@shop_id', '@token')
-    result = all(request_dict.get(k, None) == v for k, v in expected_dict.items() if k not in credentials)
-
+    result = elements_are_equal(request_element, expected_element, credentials)
     if not result:
-        pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request, expected))
-    else:
-        return result
-        
+        pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))
+
+    return result
