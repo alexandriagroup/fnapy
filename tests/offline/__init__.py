@@ -30,8 +30,12 @@ class ContextualTest(object):
         self.service = service
         monkeypatch.setattr('requests.post', make_requests_get_mock(self.action + '_response.xml'))
 
-    def close(self):
-        request = getattr(self.manager, self.service + '_request')
-        assert request_is_valid(request, self.action, self.service)
+    def __enter__(self):
+        return self
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        request = getattr(self.manager, self.service + '_request')
+        print('%s, %s, %s' % (exc_type, exc_val, exc_tb))
+        assert request_is_valid(request, self.action, self.service)
+        return True
 

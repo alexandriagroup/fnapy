@@ -8,7 +8,6 @@
 
 # Python modules
 from __future__ import unicode_literals
-from contextlib import closing
 
 # Project modules
 from tests import make_requests_get_mock, fake_manager
@@ -17,13 +16,13 @@ from tests.offline import ContextualTest
 
 def test_query_incidents(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_incidents', 'incidents_query')
-    with closing(context):
+    with context:
         fake_manager.query_incidents(paging=1, results_count=100)
 
 
 def test_update_incidents(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'update_incidents', 'incidents_update')
-    with closing(context):
+    with context:
         reasons =  [{"order_detail_id": 2, "refund_reason": 'no_stock'}]
         fake_manager.update_incidents(order_id='57BEAFDA828A8',
                                       incident_update_action='refund',

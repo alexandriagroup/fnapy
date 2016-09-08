@@ -8,7 +8,9 @@
 
 # Python modules
 from __future__ import unicode_literals
-from contextlib import closing
+
+# Third-party modules
+import pytest
 
 # Project modules
 from fnapy.utils import Message
@@ -18,13 +20,13 @@ from tests.offline import ContextualTest
 
 def test_query_messages(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_messages', 'messages_query')
-    with closing(context):
+    with context:
         fake_manager.query_messages(paging=1, results_count=100)
 
 
 def test_update_messages(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'update_messages', 'messages_update')
-    with closing(context):
+    with context:
         message1 = Message(action='mark_as_read', id=u'6F9EF013-6387-F433-C3F5-4AAEF32AA317')
         message1.subject = 'order_information'
         fake_manager.update_messages([message1])

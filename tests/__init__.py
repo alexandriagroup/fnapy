@@ -103,24 +103,39 @@ def assert_raises(exception_class, msg=None):
         assert msg.lower() in message.lower()
 
 
-def elements_are_equal(e1, e2, excluded_attrs=None):
+def sorted_elements(root):
+    new_root = etree.Element(root.tag, attrib=root.attrib)
+    for e in sorted(root.getiterator(), key=lambda x: x.tag):
+        new_root.append(etree.Element(e.tag, attrib=e.attrib))
+    return new_root
+
+
+def elements_are_equal(e1, e2, excluded_attrs=[]):
     if e1.tag != e2.tag:
         return False
+
     if e1.text is not None and e2.text is not None and\
        e1.text.strip() != e2.text.strip():
-            return False
+        return False
+
     if e1.tail != e2.tail:
         return False
+
     if excluded_attrs:
-        if {a for a in e1.attrib if a not in excluded_attrs} !=\
-           {a for a in e2.attrib if a not in excluded_attrs}:
+        if {v for k, v in e1.attrib.items() if k not in excluded_attrs} !=\
+           {v for k, v in e2.attrib.items() if k not in excluded_attrs}:
             return False
     else:
         if e1.attrib != e2.attrib:
             return False
+
     if len(e1) != len(e2):
-            return False
+        return False
+
+    # TODO For this more accurate solution we need the order to be respected in
+    # the 2 elements (sometimes fails in tox)
     return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
+
 
 
 def xml_is_valid(xml_dict, xml_valid_keys):
@@ -131,7 +146,6 @@ def xml_is_valid(xml_dict, xml_valid_keys):
     if len(keys) == 0:
         return False, 'The XML dictionary contains no valid keys.'
     invalid_keys = set(keys).difference(xml_valid_keys)
-    # pytest.fail(xml_valid_keys)
     result = len(invalid_keys) == 0
     if result:
         return True, ''
@@ -161,7 +175,7 @@ def request_is_valid(request, action, service):
     expected = load_xml_request(action)
     expected_element = etree.XML(expected.encode('utf-8'))
     request_element = request.element
-    credentials = ('@partner_id', '@shop_id', '@token')
+    credentials = ('partner_id', 'shop_id', 'token')
     result = elements_are_equal(request_element, expected_element, credentials)
     if not result:
         pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))

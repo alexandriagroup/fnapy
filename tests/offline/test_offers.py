@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import os
 from datetime import datetime
-from contextlib import closing
 
 # Third-party modules
 import pytest
@@ -17,7 +16,7 @@ from tests.offline import ContextualTest
 
 def test_query_offers(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_offers', 'offers_query')
-    with closing(context):
+    with context:
         dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc)
         dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
         date = {'@type': 'Created',
@@ -29,13 +28,13 @@ def test_query_offers(monkeypatch, fake_manager):
 
 def test_update_offers(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'update_offers', 'offers_update')
-    with closing(context):
+    with context:
         fake_manager.update_offers(offers_data)
 
 
 def test_get_batch_status(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'get_batch_status', 'batch_status')
-    with closing(context):
+    with context:
         fake_manager.get_batch_status('5D239E08-F6C1-8965-F2FA-7EFCC9E7BAD1')
 
 
