@@ -192,7 +192,7 @@ class FnapyManager(object):
             if element not in valid_elements:
                 raise ValueError('{} is not a valid element.'.format(element))
 
-    def _query(self, query_type, results_count='100', token=None, **elements):
+    def _query(self, query_type, results_count='', token=None, **elements):
         """Query your catalog and return the {query_type} on the selected page between 2 datetimes
 
         Usage:
@@ -246,7 +246,8 @@ class FnapyManager(object):
 
         # Create the XML element
         query = create_xml_element(self.connection, self.token, query_type)
-        query.attrib['results_count'] = results_count
+        if results_count:
+            query.attrib['results_count'] = results_count
 
         # Create the XML from the queried elements 
         if len(elements):
@@ -261,10 +262,10 @@ class FnapyManager(object):
 
     # TODO generator for the paging
     # TODO Allow to specify the type of date ('Created', 'Modified'...)
-    def query_offers(self, results_count='100', token=None, **elements):
+    def query_offers(self, results_count='', token=None, **elements):
         return self._query('offers', results_count, token=token, **elements)
 
-    def query_orders(self, results_count='100', token=None, **elements):
+    def query_orders(self, results_count='', token=None, **elements):
         return self._query('orders', results_count, token=token, **elements)
 
     def query_pricing(self, ean, sellers="all"):
@@ -314,18 +315,17 @@ class FnapyManager(object):
         self.carriers_query_request = Request(etree.tostring(carriers_query, **XML_OPTIONS))
         return self._get_response(carriers_query, self.carriers_query_request.xml)
 
-    def query_client_order_comments(self, results_count='100', token=None, **elements):
+    def query_client_order_comments(self, results_count='', token=None, **elements):
         """Retrieves customers comments and ratings about your orders.
 
         Usage
-        >>> response = manager.query_client_order_comments(results_count=results_count,\
                                                         token=token, **elements)
 
         :rtype: Response
         :returns: response
 
         """
-        return self._query('client_order_comments', results_count, token=token, **elements)
+        return self._query('client_order_comments', token=token, **elements)
 
     def update_client_order_comments(self, seller_comment, offer_fnac_id):
         """Reply to client order comments
@@ -346,7 +346,7 @@ class FnapyManager(object):
         return self._get_response(client_order_comments_update,
                 self.client_order_comments_update_request.xml)
 
-    def query_messages(self, results_count='100', token=None, **elements):
+    def query_messages(self, results_count='', token=None, **elements):
         """Return the messages related to your orders or offers
 
         Usage
@@ -388,7 +388,7 @@ class FnapyManager(object):
         self.messages_update_request = Request(etree.tostring(messages_update, **XML_OPTIONS))
         return self._get_response(messages_update, self.messages_update_request.xml)
 
-    def query_incidents(self, results_count='100', token=None, **elements):
+    def query_incidents(self, results_count='', token=None, **elements):
         """Return the incidents related to your orders
 
         Usage
@@ -440,7 +440,7 @@ class FnapyManager(object):
         return self._get_response(incidents_update,
                 self.incidents_update_request.xml)
 
-    def query_shop_invoices(self, results_count='100', token=None, **elements):
+    def query_shop_invoices(self, results_count='', token=None, **elements):
         """Return the download links to the shop's invoices
 
         Usage
