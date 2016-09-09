@@ -26,7 +26,7 @@ def test_update_client_order_comments(monkeypatch, fake_manager):
                              'update_client_order_comments', 'client_order_comments_update')
     with context:
         fake_manager.update_client_order_comments(seller_comment='Hello',
-                                                  offer_fnac_id='8D7472DB-7EAF-CE05-A960-FC12B812FA14')
+                                                  order_fnac_id='8D7472DB-7EAF-CE05-A960-FC12B812FA14')
 
 
 
