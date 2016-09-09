@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
-    <link rel="prev" title="Welcome to fnapy’s documentation!" href="index.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
    
   
   <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
@@ -42,7 +42,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to fnapy’s documentation!"
+          <a href="quickstart.html" title="Quickstart"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">fnapy 0.1 documentation</a> &#187;</li> 
       </ul>
@@ -57,8 +57,8 @@
 <span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="module-fnapy_manager">
-<span id="fnapymanager"></span><h2>FnapyManager<a class="headerlink" href="#module-fnapy_manager" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-fnapy_manager"></span><div class="section" id="fnapymanager">
+<h2>FnapyManager<a class="headerlink" href="#fnapymanager" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fnapy_manager.FnapyManager">
 <em class="property">class </em><code class="descclassname">fnapy_manager.</code><code class="descname">FnapyManager</code><span class="sig-paren">(</span><em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager" title="Permalink to this definition">¶</a></dt>
@@ -146,9 +146,22 @@
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_client_order_comments">
 <code class="descname">query_client_order_comments</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_client_order_comments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves customers comments and ratings about your orders.</p>
+<dd><p>Query your catalog and return the client_order_comments response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples: 
+Find the client_order_comments created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -164,9 +177,22 @@
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_incidents">
 <code class="descname">query_incidents</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_incidents" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the incidents related to your orders</p>
+<dd><p>Query your catalog and return the incidents response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples: 
+Find the incidents created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -182,9 +208,84 @@
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_messages">
 <code class="descname">query_messages</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_messages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the messages related to your orders or offers</p>
+<dd><p>Query your catalog and return the messages response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples: 
+Find the messages created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_offers">
+<code class="descname">query_offers</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query your catalog and return the offers response</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples: 
+Find the offers created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_orders">
+<code class="descname">query_orders</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query your catalog and return the orders response</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples: 
+Find the orders created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -200,7 +301,8 @@
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_pricing">
 <code class="descname">query_pricing</code><span class="sig-paren">(</span><em>ean</em>, <em>sellers='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_pricing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compare price between all marketplace shop and fnac for a specific product (designated by its ean)</p>
+<dd><p>Compare price between all marketplace shop and fnac for a specific
+product (designated by its ean)</p>
 <p>Usage:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">ean</span><span class="p">,</span> <span class="n">sellers</span><span class="o">=</span><span class="n">sellers</span><span class="p">)</span>
 </pre></div>
@@ -238,7 +340,8 @@
 <code class="descname">update_client_order_comments</code><span class="sig-paren">(</span><em>seller_comment</em>, <em>order_fnac_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_client_order_comments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reply to client order comments</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_client_order_comments</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">,</span> <span class="n">order_fnac_id</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_client_order_comments</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">,</span>
+                                                <span class="n">order_fnac_id</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -263,7 +366,9 @@
 <code class="descname">update_incidents</code><span class="sig-paren">(</span><em>order_id</em>, <em>incident_update_action</em>, <em>reasons</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_incidents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle incidents created on orders</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">incident_update_action</span><span class="p">,</span> <span class="n">reasons</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> 
+                                    <span class="n">incident_update_action</span><span class="p">,</span>
+                                    <span class="n">reasons</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -272,18 +377,11 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>order_id</strong> (<em>str</em>) &#8211; the unique FNAC identified for an order</li>
-<li><strong>incident_update_action</strong> (<em>str</em>) &#8211; the action to perform</li>
+<li><strong>incident_update_action</strong> (<em>str</em>) &#8211; the action to perform (<cite>&#8216;refund&#8217;</cite> is the
+only available action for the moment)</li>
+<li><strong>reasons</strong> (<em>list</em>) &#8211; the reasons of the incident for this order</li>
 </ul>
 </td>
-</tr>
-</tbody>
-</table>
-<p>(<cite>&#8216;refund&#8217;</cite> is the only available action for the moment)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reasons</strong> (<em>list</em>) &#8211; the reasons of the incident for this order</td>
 </tr>
 </tbody>
 </table>
@@ -452,9 +550,9 @@ items. We decide to accept the first item and refuse the second:</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-connection">
-<span id="fnapyconnection"></span><h2>FnapyConnection<a class="headerlink" href="#module-connection" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-connection"></span></div>
+<div class="section" id="fnapyconnection">
+<h2>FnapyConnection<a class="headerlink" href="#fnapyconnection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="connection.FnapyConnection">
 <em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>partner_id</em>, <em>shop_id</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connection.html#FnapyConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
@@ -504,8 +602,8 @@ items. We decide to accept the first item and refuse the second:</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">API</a><ul>
-<li><a class="reference internal" href="#module-fnapy_manager">FnapyManager</a></li>
-<li><a class="reference internal" href="#module-connection">FnapyConnection</a></li>
+<li><a class="reference internal" href="#fnapymanager">FnapyManager</a></li>
+<li><a class="reference internal" href="#fnapyconnection">FnapyConnection</a></li>
 <li><a class="reference internal" href="#request">Request</a></li>
 <li><a class="reference internal" href="#reponse">Reponse</a></li>
 <li><a class="reference internal" href="#message">Message</a></li>
@@ -515,7 +613,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to fnapy&#8217;s documentation!</a></li>
+      <li>Previous: <a href="quickstart.html" title="previous chapter">Quickstart</a></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">

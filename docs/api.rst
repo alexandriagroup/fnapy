@@ -4,30 +4,31 @@ API
 ===
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+
+
+.. module:: fnapy_manager
 
 FnapyManager
 ------------
-
-.. module:: fnapy_manager
 
 .. autoclass:: FnapyManager
    :members:
    :inherited-members:
 
 
+.. module:: connection
+
 FnapyConnection
 ---------------
-
-.. module:: connection
 
 .. autoclass:: FnapyConnection
    :members:
    :inherited-members:
 
 
-.. module:: utils
 
+.. module:: utils
 
 Request
 -------
