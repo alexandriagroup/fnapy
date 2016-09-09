@@ -7,7 +7,11 @@
 # Distributed under terms of the MIT license.
 
 """
-Manage the WebServices provided by the FNAC marketplace
+
+**fnapy** is a Python library using the FnacMarketPlace API to connect to your
+own sales application to your FnacMarketplace seller account.  It uses the REST
+WebService protocol to exchange data.
+
 """
 
 # Python modules

@@ -59,6 +59,79 @@
             
   <div class="section" id="quickstart">
 <span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This page gives a good introduction in how to get started with fnapy.</p>
+<p>Before starting, make sure you have your credentials to connect to the FNAC
+API.</p>
+<ul>
+<li><p class="first">Create a connection to the FNAC Marketplace API with your credentials:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.fnapy_manager</span> <span class="k">import</span> <span class="n">FnapyManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">pattern_id</span><span class="p">,</span> <span class="n">shop_id</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the manager:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.connection</span> <span class="k">import</span> <span class="n">FnapyConnection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">FnapyManager</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Now you should be able to access the different web services.</p>
+<p>Let&#8217;s create some offers in our catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">offer_data1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;product_reference&#39;</span><span class="p">:</span><span class="s1">&#39;0711719247159&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;offer_reference&#39;</span><span class="p">:</span><span class="s1">&#39;B76A-CD5-153&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;product_state&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;New product - 2-3 days shipping, from France&#39;</span><span class="p">}</span>
+<span class="n">offer_data2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;product_reference&#39;</span><span class="p">:</span><span class="s1">&#39;5030917077418&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;offer_reference&#39;</span><span class="p">:</span><span class="s1">&#39;B067-F0D-75E&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;product_state&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;New product - 2-3 days shipping, from France&#39;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">([</span><span class="n">offers_data1</span><span class="p">,</span> <span class="n">offer_data2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Behind the scene, the manager sent an XML request to the <cite>offers_update</cite> service. We can
+have a look at this request with the attribute <cite>offers_update_request</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">offers_update_request</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">request</span><span class="o">.</span><span class="n">xml</span>
+<span class="go">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;</span>
+<span class="go">&lt;offers_update xmlns=&quot;http://www.fnac.com/schemas/mp-dialog.xsd&quot; partner_id=&quot;XXX&quot; shop_id=&quot;XXX&quot; token=&quot;XXX&quot;&gt;</span>
+<span class="go">  &lt;offer&gt;</span>
+<span class="go">    &lt;product_reference type=&quot;Ean&quot;&gt;0711719247159&lt;/product_reference&gt;</span>
+<span class="go">    &lt;offer_reference type=&quot;SellerSku&quot;&gt;&lt;![CDATA[B76A-CD5-153]]&gt;&lt;/offer_reference&gt;</span>
+<span class="go">    &lt;price&gt;15&lt;/price&gt;</span>
+<span class="go">    &lt;product_state&gt;11&lt;/product_state&gt;</span>
+<span class="go">    &lt;quantity&gt;10&lt;/quantity&gt;</span>
+<span class="go">    &lt;description&gt;&lt;![CDATA[New product - 2-3 days shipping, from France]]&gt;&lt;/description&gt;</span>
+<span class="go">  &lt;/offer&gt;</span>
+<span class="go">  &lt;offer&gt;</span>
+<span class="go">    &lt;product_reference type=&quot;Ean&quot;&gt;5030917077418&lt;/product_reference&gt;</span>
+<span class="go">    &lt;offer_reference type=&quot;SellerSku&quot;&gt;&lt;![CDATA[B067-F0D-75E]]&gt;&lt;/offer_reference&gt;</span>
+<span class="go">    &lt;price&gt;20&lt;/price&gt;</span>
+<span class="go">    &lt;product_state&gt;11&lt;/product_state&gt;</span>
+<span class="go">    &lt;quantity&gt;16&lt;/quantity&gt;</span>
+<span class="go">    &lt;description&gt;&lt;![CDATA[New product - 2-3 days shipping, from France]]&gt;&lt;/description&gt;</span>
+<span class="go">  &lt;/offer&gt;</span>
+<span class="go">&lt;/offers_update&gt;</span>
+</pre></div>
+</div>
+<p>Actually this request is an instance of the <code class="xref py py-class docutils literal"><span class="pre">Request</span></code> class.
+We&#8217;ll talk about it later. For now, let&#8217;s see what we&#8217;ve got in our response:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">response</span><span class="o">.</span><span class="n">xml</span>
+<span class="go">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="go">&lt;offers_update_response status=&quot;OK&quot; xmlns=&quot;http://www.fnac.com/schemas/mp-dialog.xsd&quot;&gt;</span>
+<span class="go">    &lt;batch_id&gt;88BD9517-A73C-78E0-04DB-AC5ADE1D63F6&lt;/batch_id&gt;</span>
+<span class="go">&lt;/offers_update_response&gt;</span>
+</pre></div>
+</div>
+<p>The response sent by the server is just an instance of the <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> class. We can see that the status of the response is OK and the
+batch_id is 88BD9517-A73C-78E0-04DB-AC5ADE1D63F6. This is basically the id
+you&#8217;ll have to use to get information about the status of your offers.</p>
+</div>
+<div class="section" id="request-and-response">
+<h1>Request and Response<a class="headerlink" href="#request-and-response" title="Permalink to this headline">¶</a></h1>
+<p>Both <code class="xref py py-class docutils literal"><span class="pre">Request</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> share the same
+interface.</p>
 </div>
 
 
@@ -66,7 +139,13 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quickstart</a></li>
+<li><a class="reference internal" href="#request-and-response">Request and Response</a></li>
+</ul>
+<h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to fnapy&#8217;s documentation!</a></li>

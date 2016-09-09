@@ -61,7 +61,11 @@
 <span class="c1"># Distributed under terms of the MIT license.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Manage the WebServices provided by the FNAC marketplace</span>
+
+<span class="sd">**fnapy** is a Python library using the FnacMarketPlace API to connect to your</span>
+<span class="sd">own sales application to your FnacMarketplace seller account.  It uses the REST</span>
+<span class="sd">WebService protocol to exchange data.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># Python modules</span>
@@ -76,8 +80,7 @@
 
 
 <span class="k">def</span> <span class="nf">_create_docstring</span><span class="p">(</span><span class="n">query_type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create the docstring for a given query method </span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Create the docstring for a given query method&quot;&quot;&quot;</span>
     <span class="n">_query_docstring</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">FnapyManager</span><span class="o">.</span><span class="n">_query</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
     <span class="n">service</span> <span class="o">=</span> <span class="n">query_type</span> <span class="o">+</span> <span class="s1">&#39;_query&#39;</span>
     <span class="n">param_fmt</span> <span class="o">=</span> <span class="s1">&#39;:param </span><span class="si">{param.name}</span><span class="s1">: </span><span class="si">{param.desc}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>

@@ -81,7 +81,7 @@
 
 <span class="c1"># CLASSES</span>
 
-<div class="viewcode-block" id="HttpMessage"><a class="viewcode-back" href="../api.html#utils.HttpMessage">[docs]</a><span class="k">class</span> <span class="nc">HttpMessage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HttpMessage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="n">xml2dict</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
@@ -97,7 +97,7 @@
         <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml</span>
 
 
 <div class="viewcode-block" id="Request"><a class="viewcode-back" href="../api.html#utils.Request">[docs]</a><span class="k">class</span> <span class="nc">Request</span><span class="p">(</span><span class="n">HttpMessage</span><span class="p">):</span>

@@ -2,5 +2,81 @@
 
 
 Quickstart
-=========
+==========
 
+This page gives a good introduction in how to get started with fnapy.
+
+Before starting, make sure you have your credentials to connect to the FNAC
+API.
+
+
+* Create a connection to the FNAC Marketplace API with your credentials::
+
+    >>> from fnapy.fnapy_manager import FnapyManager
+    >>> connection = FnapyConnection(pattern_id, shop_id, key)
+
+* Create the manager::
+
+    >>> from fnapy.connection import FnapyConnection
+    >>> manager = FnapyManager(connection)
+
+Now you should be able to access the different web services.
+
+Let's create some offers in our catalog::
+
+    offer_data1 = {'product_reference':'0711719247159',
+            'offer_reference':'B76A-CD5-153',
+            'price':15, 'product_state':11, 'quantity':10, 
+            'description': 'New product - 2-3 days shipping, from France'}
+    offer_data2 = {'product_reference':'5030917077418',
+            'offer_reference':'B067-F0D-75E',
+            'price':20, 'product_state':11, 'quantity':16, 
+            'description': 'New product - 2-3 days shipping, from France'}
+
+    response = manager.update_offers([offers_data1, offer_data2])
+
+Behind the scene, the manager sent an XML request to the `offers_update` service. We can
+have a look at this request with the attribute `offers_update_request`::
+
+    >>> request = manager.offers_update_request
+    >>> print request.xml
+    <?xml version='1.0' encoding='utf-8'?>
+    <offers_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXX" shop_id="XXX" token="XXX">
+      <offer>
+        <product_reference type="Ean">0711719247159</product_reference>
+        <offer_reference type="SellerSku"><![CDATA[B76A-CD5-153]]></offer_reference>
+        <price>15</price>
+        <product_state>11</product_state>
+        <quantity>10</quantity>
+        <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      </offer>
+      <offer>
+        <product_reference type="Ean">5030917077418</product_reference>
+        <offer_reference type="SellerSku"><![CDATA[B067-F0D-75E]]></offer_reference>
+        <price>20</price>
+        <product_state>11</product_state>
+        <quantity>16</quantity>
+        <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      </offer>
+    </offers_update>
+
+Actually this request is an instance of the :class:`Request <Request>` class.
+We'll talk about it later. For now, let's see what we've got in our response::
+
+    >>> print response.xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <offers_update_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+        <batch_id>88BD9517-A73C-78E0-04DB-AC5ADE1D63F6</batch_id>                  
+    </offers_update_response>
+
+The response sent by the server is just an instance of the :class:`Response
+<Response>` class. We can see that the status of the response is OK and the
+batch_id is 88BD9517-A73C-78E0-04DB-AC5ADE1D63F6. This is basically the id
+you'll have to use to get information about the status of your offers.
+
+
+Request and Response
+====================
+
+Both :class:`Request <Request>` and :class:`Response <Response>` share the same
+interface.

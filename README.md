@@ -1,6 +1,8 @@
 # Description
 
-A client to connect to the FNAC Marketplace
+**fnapy** is a Python library using the FnacMarketPlace API to connect to your
+own sales application to your FnacMarketplace seller account.  It uses the REST
+WebService protocol to exchange data.
 
 
 # Usage
