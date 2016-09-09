@@ -69,6 +69,9 @@ RESPONSE_ELEMENTS['orders_query'] = (
     'page', 'total_paging', 'nb_total_per_page', 'nb_total_result', 'order'
 )
 RESPONSE_ELEMENTS['batch_status'] = ('batch_id', 'offer')
+RESPONSE_ELEMENTS['batch_query'] = (
+    'batch', 'nb_batch_running', 'nb_batch_active'
+)
 RESPONSE_ELEMENTS['carriers_query'] = ('carrier',)
 RESPONSE_ELEMENTS['incidents_query'] = (
     'page', 'total_paging',

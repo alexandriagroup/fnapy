@@ -15,11 +15,13 @@ from fnapy.config import *
 from tests import response_is_valid
 
 
-def test_update_offers():
-    assert response_is_valid('update_offers', 'offers_update')
+def test_get_batch_status():
+    assert response_is_valid('get_batch_status', 'batch_status')
 
 
-def test_query_offers():
-    assert response_is_valid('query_offers', 'offers_query')
+def test_query_batch():
+    assert response_is_valid('query_batch', 'batch_query')
+
+
 
 
