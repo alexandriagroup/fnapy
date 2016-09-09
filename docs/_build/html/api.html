@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &#8212; fnapy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to fnapy’s documentation!" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to fnapy’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">fnapy 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="module-fnapy_manager">
+<span id="fnapymanager"></span><h2>FnapyManager<a class="headerlink" href="#module-fnapy_manager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fnapy_manager.FnapyManager">
+<em class="property">class </em><code class="descclassname">fnapy_manager.</code><code class="descname">FnapyManager</code><span class="sig-paren">(</span><em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to manage the different services provided by the FNAC API</p>
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.authenticate">
+<code class="descname">authenticate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate to the FNAC API and return a token</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">authenticate</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">token</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.get_batch_status">
+<code class="descname">get_batch_status</code><span class="sig-paren">(</span><em>batch_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.get_batch_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.get_batch_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the status for the given batch id</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="o">=</span><span class="n">batch_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>..note:: <a class="reference internal" href="#fnapy_manager.FnapyManager" title="fnapy_manager.FnapyManager"><code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code></a> stores the last <cite>batch_id</cite></dt>
+<dd>but you can provide a new one if needed.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>batch_id</strong> &#8211; the batch id (optional)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_batch">
+<code class="descname">query_batch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about your currently processing import batches</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_batch</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_carriers">
+<code class="descname">query_carriers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_carriers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_carriers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the available carriers managed on FNAC Marketplace platform</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_carriers</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_client_order_comments">
+<code class="descname">query_client_order_comments</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_client_order_comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves customers comments and ratings about your orders.</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_incidents">
+<code class="descname">query_incidents</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_incidents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the incidents related to your orders</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_messages">
+<code class="descname">query_messages</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the messages related to your orders or offers</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_pricing">
+<code class="descname">query_pricing</code><span class="sig-paren">(</span><em>ean</em>, <em>sellers='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_pricing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare price between all marketplace shop and fnac for a specific product (designated by its ean)</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">ean</span><span class="p">,</span> <span class="n">sellers</span><span class="o">=</span><span class="n">sellers</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.query_shop_invoices">
+<code class="descname">query_shop_invoices</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_shop_invoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_shop_invoices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the download links to the shop&#8217;s invoices</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.update_client_order_comments">
+<code class="descname">update_client_order_comments</code><span class="sig-paren">(</span><em>seller_comment</em>, <em>order_fnac_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_client_order_comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reply to client order comments</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_client_order_comments</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">,</span> <span class="n">order_fnac_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>seller_comment</strong> (<em>str</em>) &#8211; The seller comment</li>
+<li><strong>order_fnac_id</strong> (<em>str</em>) &#8211; Order unique identifier filter from FNAC</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.update_incidents">
+<code class="descname">update_incidents</code><span class="sig-paren">(</span><em>order_id</em>, <em>incident_update_action</em>, <em>reasons</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_incidents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle incidents created on orders</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">incident_update_action</span><span class="p">,</span> <span class="n">reasons</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>order_id</strong> (<em>str</em>) &#8211; the unique FNAC identified for an order</li>
+<li><strong>incident_update_action</strong> (<em>str</em>) &#8211; the action to perform</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>(<cite>&#8216;refund&#8217;</cite> is the only available action for the moment)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reasons</strong> (<em>list</em>) &#8211; the reasons of the incident for this order</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">reason</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;refund_reason&quot;</span><span class="p">:</span> <span class="s1">&#39;no_stock&#39;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="s1">&#39;07LWQ6278YJUI&#39;</span><span class="p">,</span> <span class="s1">&#39;refund&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">reason</span><span class="p">])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.update_messages">
+<code class="descname">update_messages</code><span class="sig-paren">(</span><em>messages</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update message sent on your offers or orders : reply, set as read, ...</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>messages</strong> (<a class="reference internal" href="#utils.Message" title="utils.Message"><em>Message</em></a>) &#8211; the specified messages we want to update</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;mark_as_read&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Your order has been shipped&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;order_information&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;ORDER&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_messages</span><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.update_offers">
+<code class="descname">update_offers</code><span class="sig-paren">(</span><em>offers_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Post the update offers and return the response</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">(</span><span class="n">offers_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offers_data</strong> (<em>list</em>) &#8211; the list of data to create the offers
+where data is dictionary with the keys:</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p class="first">offer_reference  : the SKU (mandatory)</p>
+</li>
+<li><p class="first">product_reference: the EAN</p>
+</li>
+<li><p class="first">price            : the price of the offer</p>
+</li>
+<li><dl class="first docutils">
+<dt>product_state</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">an integer representing the state of the product</span><dd><p class="first last">(documentation needed)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">quantity         : the quantity</p>
+</li>
+<li><p class="first">description      : (optional) a description of the offer</p>
+</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.update_orders">
+<code class="descname">update_orders</code><span class="sig-paren">(</span><em>order_id</em>, <em>order_update_action</em>, <em>actions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the selected order with an order_update_action</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">order_update_action</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>order_id</strong> (<em>str</em>) &#8211; Order unique identifier from FNAC</li>
+<li><strong>order_update_action</strong> (<em>str</em>) &#8211; Group action type for order detail action</li>
+<li><strong>actions</strong> (<em>list</em>) &#8211; a list of dictionaries with 2 keys:</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><cite>&#8216;order_detail_id&#8217;</cite> and <cite>&#8216;action&#8217;</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+</tr>
+</tbody>
+</table>
+<p>Available order_update_action:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>accept_order</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting orders by the</span><dd><p class="first last">seller</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confirm_to_send</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is confirming sending</span><dd><p class="first last">orders by the seller</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">update             : The action for the order is updating orders by the seller</p>
+</li>
+<li><dl class="first docutils">
+<dt>accept_all_orders</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting or refusing</span><dd><p class="first last">all order_details of the order by the seller</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>confirm_all_to_send: The action for the order is confirming sending</dt>
+<dd><p class="first last">all order_details by the seller</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>update_all</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is to update tracking</span><dd><p class="first last">information for all order_details</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example: For this order (whose <cite>order_id</cite> is <cite>&#8216;LDJEDEAS123&#8217;</cite>), we have 2
+items. We decide to accept the first item and refuse the second:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
+<span class="n">action2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Refused&quot;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="s1">&#39;LDJEDEAS123&#39;</span><span class="p">,</span> <span class="s1">&#39;accept_order&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">action1</span><span class="p">,</span> <span class="n">action2</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-connection">
+<span id="fnapyconnection"></span><h2>FnapyConnection<a class="headerlink" href="#module-connection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="connection.FnapyConnection">
+<em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>partner_id</em>, <em>shop_id</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connection.html#FnapyConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-utils"></span></div>
+<div class="section" id="request">
+<h2>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utils.Request">
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Request" title="Permalink to this definition">¶</a></dt>
+<dd><p>A handy class to handle the request</p>
+</dd></dl>
+
+</div>
+<div class="section" id="reponse">
+<h2>Reponse<a class="headerlink" href="#reponse" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utils.Response">
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>A handy class to handle the response</p>
+</dd></dl>
+
+</div>
+<div class="section" id="message">
+<h2>Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utils.Message">
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>action</em>, <em>id</em>, <em>to='ALL'</em>, <em>description=''</em>, <em>subject=''</em>, <em>type='ORDER'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Message" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="utils.Message.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Message.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Message.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the a dictionary in the xmltodict format</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#module-fnapy_manager">FnapyManager</a></li>
+<li><a class="reference internal" href="#module-connection">FnapyConnection</a></li>
+<li><a class="reference internal" href="#request">Request</a></li>
+<li><a class="reference internal" href="#reponse">Reponse</a></li>
+<li><a class="reference internal" href="#message">Message</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to fnapy&#8217;s documentation!</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2016, Alexandria.
+    </div>
+  </body>
+</html>
