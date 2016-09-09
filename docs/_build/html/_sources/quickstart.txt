@@ -76,7 +76,7 @@ you'll have to use to get information about the status of your offers.
 
 
 Request and Response
-====================
+--------------------
 
 Both :class:`Request <Request>` and :class:`Response <Response>` share the same
 interface.
