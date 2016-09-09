@@ -23,3 +23,7 @@ def test_query_offers():
     assert response_is_valid('query_offers', 'offers_query')
 
 
+def test_query_offers_with_multiple_parameters():
+    assert response_is_valid('query_offers_with_multiple_parameters', 'offers_query')
+
+
