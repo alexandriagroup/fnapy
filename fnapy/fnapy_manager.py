@@ -10,6 +10,9 @@
 Manage the WebServices provided by the FNAC marketplace
 """
 
+# Python modules
+from string import Template
+
 # Third-party modules
 import requests
 
@@ -218,23 +221,25 @@ class FnapyManager(object):
                 raise ValueError('{} is not a valid element.'.format(element))
 
     def _query(self, query_type, results_count='', **elements):
-        """Query your catalog and return the {query_type} on the selected page between 2 datetimes
+        """Query your catalog and return the ${query_type} response
 
         Usage::
 
-            response = manager.query_offers(results_count=results_count)
+            response = manager.query_${query_type}(results_count=results_count,
+                                            **elements)
 
         Examples: 
-        Find the {query_type} created between 2 dates::
+        Find the ${query_type} created between 2 dates::
 
-            response = manager.query_offers(date={'@type': 'Modified',
-                    'min': {'#text': "2016-08-23T17:00:00+00:00"},
-                    'max': {'#text': "2016-08-26T17:00:00+00:00"}}
-                    )
+            >>> date = {'@type': 'Modified',
+            'min': {'#text': "2016-08-23T17:00:00+00:00"},
+            'max': {'#text': "2016-08-26T17:00:00+00:00"}
+            }
+            >>> response = manager.query_${query_type}(date=date)
 
         Find the 2 first items  of the catalog::
 
-            response = manager.query_offers(results_count=2)
+            response = manager.query_${query_type}(results_count=2, paging=1)
 
         :returns: :class:`Response <Response>` object
 
@@ -291,7 +296,8 @@ class FnapyManager(object):
         return self._query('orders', results_count, **elements)
 
     def query_pricing(self, ean, sellers="all"):
-        """Compare price between all marketplace shop and fnac for a specific product (designated by its ean)
+        """Compare price between all marketplace shop and fnac for a specific
+        product (designated by its ean)
 
         Usage::
 
@@ -338,15 +344,6 @@ class FnapyManager(object):
         return self._get_response(carriers_query, self.carriers_query_request.xml)
 
     def query_client_order_comments(self, results_count='', **elements):
-        """Retrieves customers comments and ratings about your orders.
-
-        Usage::
-
-            response = manager.query_client_order_comments(results_count=results_count, **elements)
-
-        :returns: :class:`Response <Response>` object
-
-        """
         return self._query('client_order_comments', **elements)
 
     def update_client_order_comments(self, seller_comment, order_fnac_id):
@@ -354,7 +351,8 @@ class FnapyManager(object):
 
         Usage::
 
-            response = manager.update_client_order_comments(seller_comment, order_fnac_id)
+            response = manager.update_client_order_comments(seller_comment,
+                                                            order_fnac_id)
 
         :type seller_comment: str
         :param seller_comment: The seller comment
@@ -370,20 +368,12 @@ class FnapyManager(object):
         comment = etree.Element('comment', id=order_fnac_id)
         etree.SubElement(comment, 'comment_reply').text = etree.CDATA(seller_comment)
         client_order_comments_update.append(comment)
-        self.client_order_comments_update_request = Request(etree.tostring(client_order_comments_update, **XML_OPTIONS))
+        self.client_order_comments_update_request = \
+            Request(etree.tostring(client_order_comments_update, **XML_OPTIONS))
         return self._get_response(client_order_comments_update,
                 self.client_order_comments_update_request.xml)
 
     def query_messages(self, results_count='', **elements):
-        """Return the messages related to your orders or offers
-
-        Usage::
-
-            response = manager.query_messages(results_count=results_count, **elements)
-
-        :returns: :class:`Response <Response>` object
-
-        """
         return self._query('messages', results_count, **elements)
 
     def update_messages(self, messages):
@@ -417,15 +407,6 @@ class FnapyManager(object):
         return self._get_response(messages_update, self.messages_update_request.xml)
 
     def query_incidents(self, results_count='', **elements):
-        """Return the incidents related to your orders
-
-        Usage::
-
-            response = manager.query_incidents(results_count=results_count, **elements)
-
-        :returns: :class:`Response <Response>` object
-
-        """
         return self._query('incidents', results_count, **elements)
 
     def update_incidents(self, order_id, incident_update_action, reasons):
@@ -433,14 +414,16 @@ class FnapyManager(object):
 
         Usage::
 
-            response = manager.update_incidents(order_id, incident_update_action, reasons)
+            response = manager.update_incidents(order_id, 
+                                                incident_update_action,
+                                                reasons)
 
         :type order_id: str
         :param order_id: the unique FNAC identified for an order
 
         :type incident_update_action: str
-        :param incident_update_action: the action to perform 
-        (`'refund'` is the only available action for the moment) 
+        :param incident_update_action: the action to perform (`'refund'` is the
+                                       only available action for the moment) 
 
         :type reasons: list
         :param reasons: the reasons of the incident for this order
@@ -464,7 +447,8 @@ class FnapyManager(object):
             order.append(order_detail)
 
         incidents_update.append(order)
-        self.incidents_update_request = Request(etree.tostring(incidents_update, **XML_OPTIONS))
+        self.incidents_update_request = \
+            Request(etree.tostring(incidents_update, **XML_OPTIONS))
         return self._get_response(incidents_update,
                 self.incidents_update_request.xml)
 
@@ -479,3 +463,17 @@ class FnapyManager(object):
 
         """
         return self._query('shop_invoices', results_count, **elements)
+
+
+_query_docstring = Template(FnapyManager._query.__doc__)
+
+FnapyManager.query_offers.__func__.__doc__ = \
+    _query_docstring.substitute(query_type='offers')
+FnapyManager.query_orders.__func__.__doc__ = \
+    _query_docstring.substitute(query_type='orders')
+FnapyManager.query_incidents.__func__.__doc__ = \
+    _query_docstring.substitute(query_type='incidents')
+FnapyManager.query_messages.__func__.__doc__ = \
+    _query_docstring.substitute(query_type='messages')
+FnapyManager.query_client_order_comments.__func__.__doc__ = \
+    _query_docstring.substitute(query_type='client_order_comments')
