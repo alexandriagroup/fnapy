@@ -152,26 +152,38 @@
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>rate</strong> &#8211; Order rate filter</li>
+<li><strong>client_order_comment_id</strong> &#8211; Order unique identifier filter from fnac</li>
+<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples: 
 Find the client_order_comments created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
-        <span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the 2 first items  of the catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -183,26 +195,49 @@ Find the client_order_comments created between 2 dates:</p>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>status</strong> &#8211; Status of the incident</li>
+<li><strong>type</strong> &#8211; Incident order detail opening reason</li>
+<li><strong>types</strong> &#8211; Define the opening reasons of the incidents to be retrieved.</li>
+<li><strong>incident_id</strong> &#8211; A unique incident id</li>
+<li><strong>incidents_id</strong> &#8211; Can contain multiple incident_id node (up to 50 max)</li>
+<li><strong>closed_statuses</strong> &#8211; Can contain multiple closed_status node (up to 50 max)</li>
+<li><strong>closed_status</strong> &#8211; Incident closing reason</li>
+<li><strong>waiting_for_seller_answer</strong> &#8211; Fnac customer service can ask the seller
+to deal specifically with an incident.</li>
+<li><strong>opened_by</strong> &#8211; Who opened the incident</li>
+<li><strong>closed_by</strong> &#8211; Who closed the incident</li>
+<li><strong>sort_by</strong> &#8211; Quantity filter</li>
+<li><strong>order</strong> &#8211; A unique order id</li>
+<li><strong>orders</strong> &#8211; Can contains multiple order node (up to 50 max)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples: 
 Find the incidents created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
-        <span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the 2 first items  of the catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -214,26 +249,44 @@ Find the incidents created between 2 dates:</p>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>message_type</strong> &#8211; Message type filter</li>
+<li><strong>message_archived</strong> &#8211; Message is archived or not filter</li>
+<li><strong>message_state</strong> &#8211; Message state</li>
+<li><strong>message_id</strong> &#8211; Message unique identifier from fnac filter</li>
+<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
+<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
+<li><strong>sort_by</strong> &#8211; Quantity filter</li>
+<li><strong>message_from_types</strong> &#8211; Messages author filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples: 
 Find the messages created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
-        <span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the 2 first items  of the catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -245,26 +298,39 @@ Find the messages created between 2 dates:</p>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>quantity</strong> &#8211; Quantity filter</li>
+<li><strong>product_fnac_id</strong> &#8211; Product&#8217;s unique identifier from fnac</li>
+<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples: 
 Find the offers created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
-        <span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the 2 first items  of the catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -276,26 +342,43 @@ Find the offers created between 2 dates:</p>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>sort_by</strong> &#8211; Quantity filter</li>
+<li><strong>product_fnac_id</strong> &#8211; Product&#8217;s unique identifier from fnac</li>
+<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
+<li><strong>state</strong> &#8211; Order state filter</li>
+<li><strong>states</strong> &#8211; Multiple order state filter</li>
+<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
+<li><strong>orders_fnac_id</strong> &#8211; Multiple order unique identifier filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Examples: 
 Find the orders created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="s2">&quot;2016-08-26T17:00:00+00:00&quot;</span><span class="p">}}</span>
-        <span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the 2 first items  of the catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -320,19 +403,41 @@ product (designated by its ean)</p>
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_shop_invoices">
 <code class="descname">query_shop_invoices</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_shop_invoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_shop_invoices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the download links to the shop&#8217;s invoices</p>
+<dd><p>Query your catalog and return the shop_invoices response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available XML elements are the following parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>paging</strong> &#8211; Page number to fetch</li>
+<li><strong>date</strong> &#8211; Date filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
 </tr>
 </tbody>
 </table>
+<p>Examples: 
+Find the shop_invoices created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
+<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
+<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">

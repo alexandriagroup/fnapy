@@ -18,11 +18,24 @@ import requests
 
 # Project modules
 from utils import *
-from config import *
+from config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+
+
+def _create_docstring(query_type):
+    """Create the docstring for a given query method"""
+    _query_docstring = Template(FnapyManager._query.__doc__)
+    service = query_type + '_query'
+    param_fmt = ':param {param.name}: {param.desc}'.format
+    parameters = "\n\t".join(param_fmt(param=param) for param in REQUEST_ELEMENTS[service])
+    return _query_docstring.substitute(query_type=query_type,
+                                       parameters=parameters)
 
 
 class FnapyManager(object):
     """A class to manage the different services provided by the FNAC API"""
+
+    VALID_QUERY_TYPES = ('offers', 'orders', 'client_order_comments',
+                         'messages', 'incidents', 'shop_invoices')
 
     def __init__(self, connection):
         """Initialize the manager"""
@@ -217,7 +230,7 @@ class FnapyManager(object):
     # the xml properly
     def _check_elements(self, valid_elements, selected_elements):
         for element in selected_elements:
-            if element not in valid_elements:
+            if element not in (x.name for x in valid_elements):
                 raise ValueError('{} is not a valid element.'.format(element))
 
     def _query(self, query_type, results_count='', **elements):
@@ -227,6 +240,12 @@ class FnapyManager(object):
 
             response = manager.query_${query_type}(results_count=results_count,
                                             **elements)
+
+        The available XML elements are the following parameters:
+
+        ${parameters}
+
+        :returns: :class:`Response <Response>` object
 
         Examples: 
         Find the ${query_type} created between 2 dates::
@@ -241,16 +260,12 @@ class FnapyManager(object):
 
             response = manager.query_${query_type}(results_count=2, paging=1)
 
-        :returns: :class:`Response <Response>` object
-
         """
         print 'Querying {}...'.format(query_type)
-        valid_query_types = ('offers', 'orders', 'client_order_comments',
-                             'messages', 'incidents', 'shop_invoices')
-        if query_type in valid_query_types:
+        if query_type in FnapyManager.VALID_QUERY_TYPES:
             query_type += "_query"
         else:
-            raise ValueError("The query_type must be in {}".format(valid_query_types))
+            raise ValueError("The query_type must be in {}".format(FnapyManager.VALID_QUERY_TYPES))
 
         # TODO Refactor: Use a dictionary to prevent code duplication
         # Check the queried elements
@@ -442,27 +457,10 @@ class FnapyManager(object):
                 self.incidents_update_request.xml)
 
     def query_shop_invoices(self, results_count='', **elements):
-        """Return the download links to the shop's invoices
-
-        Usage::
-
-            response = manager.query_shop_invoices(results_count=results_count, **elements)
-
-        :returns: :class:`Response <Response>` object
-
-        """
         return self._query('shop_invoices', results_count, **elements)
 
 
-_query_docstring = Template(FnapyManager._query.__doc__)
-
-FnapyManager.query_offers.__func__.__doc__ = \
-    _query_docstring.substitute(query_type='offers')
-FnapyManager.query_orders.__func__.__doc__ = \
-    _query_docstring.substitute(query_type='orders')
-FnapyManager.query_incidents.__func__.__doc__ = \
-    _query_docstring.substitute(query_type='incidents')
-FnapyManager.query_messages.__func__.__doc__ = \
-    _query_docstring.substitute(query_type='messages')
-FnapyManager.query_client_order_comments.__func__.__doc__ = \
-    _query_docstring.substitute(query_type='client_order_comments')
+# Dynamically set the docstrings for some query methods
+for query_type in FnapyManager.VALID_QUERY_TYPES:
+    method = getattr(FnapyManager, 'query_' + query_type)
+    method.__func__.__doc__ = _create_docstring(query_type)
