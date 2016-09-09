@@ -10,43 +10,20 @@
 Useful constants and configs.
 """
 
+from collections import namedtuple
+
+
 URL        = "https://marketplace.ws.fd-recette.net/api.php/"
 XHTML_NAMESPACE = "http://www.fnac.com/schemas/mp-dialog.xsd"
 HEADERS = {'Content-Type': 'text/xml'}
 XML_OPTIONS = {'pretty_print': True, 'xml_declaration': True, 'encoding': 'utf-8'}
 
 
-# The elements for the requests
-OFFERS_QUERY_ELEMENTS = (
-    'paging', 'date', 'quantity', 'product_fnac_id', 'offer_fnac_id',
-    'offer_seller_id'
-)
+# Argument = namedtuple('Argument', 'name', 'description')
+# paging = Argument('paging', 'Page number to fetch')
+# date = Argument('date', 'Date filter')
 
-ORDERS_QUERY_ELEMENTS = (
-    'paging', 'date', 'sort_by', 'product_fnac_id', 'offer_fnac_id',
-    'offer_seller_id', 'state', 'states', 'order_fnac_id', 'orders_fnac_id'
-)
-
-CLIENT_ORDER_COMMENTS_QUERY_ELEMENTS = (
-    'paging', 'date', 'rate', 'client_order_comment_id', 'order_fnac_id'
-)
-
-MESSAGES_QUERY_ELEMENTS = (
-    'paging', 'date', 'message_type', 'message_archived', 'message_state',
-    'message_id', 'order_fnac_id', 'offer_fnac_id', 'offer_seller_id',
-    'sort_by', 'message_from_types'
-)
-
-INCIDENTS_QUERY_ELEMENTS = (
-    'paging', 'date', 'status', 'type', 'types', 'incident_id', 'incidents_id',
-    'closed_statuses', 'closed_status', 'waiting_for_seller_answer',
-    'opened_by', 'closed_by', 'sort_by', 'order', 'orders'
-)
-
-SHOP_INVOICES_QUERY_ELEMENTS = (
-    'paging', 'date'
-)
-
+# The sub elements in the order element
 ORDER_ELEMENTS = (
     'shop_id', 'client_id', 'client_firstname', 'client_lastname',
     'client_email', 'adherent_number', 'order_id', 'order_culture', 'state',
@@ -54,11 +31,34 @@ ORDER_ELEMENTS = (
     'shipping_address', 'billing_address', 'order_detail'
 )
 
-# The elements for the responses
-OFFERS_UPDATE_RESPONSE_ELEMENTS = (
-    'batch_id',
+# The elements for the requests
+REQUEST_ELEMENTS = {}
+REQUEST_ELEMENTS['offers_query'] = (
+    'paging', 'date', 'quantity', 'product_fnac_id', 'offer_fnac_id',
+    'offer_seller_id'
+)
+REQUEST_ELEMENTS['orders_query'] = (
+    'paging', 'date', 'sort_by', 'product_fnac_id', 'offer_fnac_id',
+    'offer_seller_id', 'state', 'states', 'order_fnac_id', 'orders_fnac_id'
+)
+REQUEST_ELEMENTS['client_order_comments_query'] = (
+    'paging', 'date', 'rate', 'client_order_comment_id', 'order_fnac_id'
+)
+REQUEST_ELEMENTS['messages_query'] = (
+    'paging', 'date', 'message_type', 'message_archived', 'message_state',
+    'message_id', 'order_fnac_id', 'offer_fnac_id', 'offer_seller_id',
+    'sort_by', 'message_from_types'
+)
+REQUEST_ELEMENTS['incidents_query'] = (
+    'paging', 'date', 'status', 'type', 'types', 'incident_id', 'incidents_id',
+    'closed_statuses', 'closed_status', 'waiting_for_seller_answer',
+    'opened_by', 'closed_by', 'sort_by', 'order', 'orders'
+)
+REQUEST_ELEMENTS['shop_invoices_query'] = (
+    'paging', 'date'
 )
 
+# The elements for the responses
 RESPONSE_ELEMENTS = {}
 RESPONSE_ELEMENTS['offers_update'] = ('batch_id', )
 RESPONSE_ELEMENTS['offers_query'] = (

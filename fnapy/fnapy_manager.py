@@ -254,18 +254,7 @@ class FnapyManager(object):
 
         # TODO Refactor: Use a dictionary to prevent code duplication
         # Check the queried elements
-        if query_type == 'offers_query':
-            self._check_elements(OFFERS_QUERY_ELEMENTS, elements.keys())
-        elif query_type == 'orders_query':
-            self._check_elements(ORDERS_QUERY_ELEMENTS, elements.keys())
-        elif query_type == 'client_order_comments_query':
-            self._check_elements(CLIENT_ORDER_COMMENTS_QUERY_ELEMENTS, elements.keys())
-        elif query_type == 'messages_query':
-            self._check_elements(MESSAGES_QUERY_ELEMENTS, elements.keys())
-        elif query_type == 'incidents_query':
-            self._check_elements(INCIDENTS_QUERY_ELEMENTS, elements.keys())
-        elif query_type == 'shop_invoices_query':
-            self._check_elements(SHOP_INVOICES_QUERY_ELEMENTS, elements.keys())
+        self._check_elements(REQUEST_ELEMENTS[query_type], elements.keys())
 
         # Make sure we have unicode
         # paging = str(paging).decode('utf-8')
