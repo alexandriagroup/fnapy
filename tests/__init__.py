@@ -179,7 +179,5 @@ def request_is_valid(request, action, service):
     credentials = ('partner_id', 'shop_id', 'token')
     result = elements_are_equal(request_element, expected_element, credentials)
     if not result:
-        import pdb; pdb.set_trace()
         pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))
-
     return result
