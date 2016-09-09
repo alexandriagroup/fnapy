@@ -7,7 +7,7 @@
 # Distributed under terms of the MIT license.
 
 """
-Manage your offers on the FNAC marketplace
+Manage the WebServices provided by the FNAC marketplace
 """
 
 # Third-party modules
@@ -19,9 +19,10 @@ from config import *
 
 
 class FnapyManager(object):
-    """A class to manage your offers"""
+    """A class to manage the different services provided by the FNAC API"""
+
     def __init__(self, connection):
-        """Initialize the """
+        """Initialize the manager"""
         self.connection = connection
         self.auth_request = None
         self.offers_query_request = None
@@ -55,8 +56,7 @@ class FnapyManager(object):
         :type xml: str
         :param xml: the XML string sent in the request
 
-        :rtype: Response
-        :returns: response
+        :returns: :class:`Response <Response>` object
         """
         service = element.tag
         response = requests.post(URL + service, xml, headers=HEADERS)
@@ -75,7 +75,16 @@ class FnapyManager(object):
         return response
 
     def authenticate(self):
-        """Authenticate to the FNAC API and return a token"""
+        """Authenticate to the FNAC API and return a token
+        
+        Usage::
+        
+            token = manager.authenticate()
+
+        :returns: token
+        :rtype: str
+        
+        """
         auth = etree.Element('auth', nsmap={None: XHTML_NAMESPACE})
         etree.SubElement(auth, 'partner_id').text = self.connection.partner_id
         etree.SubElement(auth, 'shop_id').text = self.connection.shop_id
@@ -91,11 +100,14 @@ class FnapyManager(object):
     def update_offers(self, offers_data):
         """Post the update offers and return the response
 
-        Usage:
-        >>> response = manager.update_offers(offers_data)
+        Usage::
+
+            response = manager.update_offers(offers_data)
         
+        :type offers_data: list
         :param offers_data: the list of data to create the offers
                             where data is dictionary with the keys:
+
         * offer_reference  : the SKU (mandatory) 
         * product_reference: the EAN
         * price            : the price of the offer
@@ -104,10 +116,7 @@ class FnapyManager(object):
         * quantity         : the quantity
         * description      : (optional) a description of the offer
 
-        :param token: the token returned by the server
-
-        :rtype: Response
-        :returns response: the offers_update_response dictionary
+        :returns: :class:`Response <Response>` object
 
         """
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
@@ -125,15 +134,24 @@ class FnapyManager(object):
     def update_orders(self, order_id, order_update_action, actions):
         """Update the selected order with an order_update_action
 
-        Usage:
-        >>> response = manager.update_orders(order_id, order_update_action, actions)
+        Usage::
 
-        where `order_update_action` is a list of dictionaries with 2 keys
-        'order_detail_id' and 'action'.
-        order_detail_id designates the id of an item in a given order
-        (designated itself by order_id).
+            response = manager.update_orders(order_id, order_update_action, actions)
+
+        :type order_id: str
+        :param order_id: Order unique identifier from FNAC
+
+        :type order_update_action: str
+        :param order_update_action: Group action type for order detail action
+
+        :type actions: list
+        :param actions: a list of dictionaries with 2 keys:
+        `'order_detail_id'` and `'action'`
+
+        :returns: :class:`Response <Response>` object
 
         Available order_update_action:
+
         * accept_order       : The action for the order is accepting orders by the
                                seller
         * confirm_to_send    : The action for the order is confirming sending
@@ -146,11 +164,12 @@ class FnapyManager(object):
         * update_all         : The action for the order is to update tracking
                                information for all order_details
 
-        Example: For this order (whose order_id is 'LDJEDEAS123'), we have 2
-        items. We decide to accept the first item and refuse the second:
-        >>> action1 = {"order_detail_id": 1, "action": "Accepted"}
-        >>> action2 = {"order_detail_id": 2, "action": "Refused"}
-        >>> response = manager.update_orders('LDJEDEAS123', 'accept_order', [action1, action2])
+        Example: For this order (whose `order_id` is `'LDJEDEAS123'`), we have 2
+        items. We decide to accept the first item and refuse the second::
+
+            action1 = {"order_detail_id": 1, "action": "Accepted"}
+            action2 = {"order_detail_id": 2, "action": "Refused"}
+            response = manager.update_orders('LDJEDEAS123', 'accept_order', [action1, action2])
 
         """
         order_id = str(order_id)
@@ -172,10 +191,15 @@ class FnapyManager(object):
     def get_batch_status(self, batch_id=None):
         """Return the status for the given batch id
 
-        :param conn: The FnapyConnection instance
-        :param batch_id: the batch id
-        :rtype: Response
-        :returns: batch status response
+        Usage::
+
+            response = manager.get_batch_status(batch_id=batch_id)
+
+        ..note:: :class:`FnapyManager <FnapyManager>` stores the last `batch_id`
+                 but you can provide a new one if needed.
+
+        :param batch_id: the batch id (optional)
+        :returns: :class:`Response <Response>` object
 
         """
         if batch_id is not None:
@@ -196,23 +220,23 @@ class FnapyManager(object):
     def _query(self, query_type, results_count='', **elements):
         """Query your catalog and return the {query_type} on the selected page between 2 datetimes
 
-        Usage:
-        >>> response = manager.query_offers(results_count=results_count)
+        Usage::
 
-        Example:
-        Find the {query_type} created between 2 dates
-        >>> response = manager.query_offers(date={'@type': 'Modified',
-                'min': {'#text': "2016-08-23T17:00:00+00:00"},
-                'max': {'#text': "2016-08-26T17:00:00+00:00"}}
-                )
+            response = manager.query_offers(results_count=results_count)
 
-        Find the 2 first items  of the catalog
-        >>> response = manager.query_offers(results_count=2)
+        Examples: 
+        Find the {query_type} created between 2 dates::
 
-        :param token: the token returned by the server (optional)
+            response = manager.query_offers(date={'@type': 'Modified',
+                    'min': {'#text': "2016-08-23T17:00:00+00:00"},
+                    'max': {'#text': "2016-08-26T17:00:00+00:00"}}
+                    )
 
-        :rtype: Response
-        :returns: the response
+        Find the 2 first items  of the catalog::
+
+            response = manager.query_offers(results_count=2)
+
+        :returns: :class:`Response <Response>` object
 
         """
         print 'Querying {}...'.format(query_type)
@@ -269,10 +293,10 @@ class FnapyManager(object):
     def query_pricing(self, ean, sellers="all"):
         """Compare price between all marketplace shop and fnac for a specific product (designated by its ean)
 
-        Usage:
-        >>> response = manager.query_pricing(ean, sellers=sellers)
+        Usage::
 
-        :rtype: Response
+            response = manager.query_pricing(ean, sellers=sellers)
+
         :returns: response
 
         """
@@ -287,11 +311,11 @@ class FnapyManager(object):
     def query_batch(self):
         """Return information about your currently processing import batches
 
-        Usage:
-        >>> response = manager.query_batch()
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_batch()
+
+        :returns: :class:`Response <Response>` object
 
         """
         batch_query = create_xml_element(self.connection, self.token, 'batch_query')
@@ -301,11 +325,11 @@ class FnapyManager(object):
     def query_carriers(self):
         """Return the available carriers managed on FNAC Marketplace platform
         
-        Usage:
-        >>> response = manager.query_carriers()
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_carriers()
+
+        :returns: :class:`Response <Response>` object
 
         """
         carriers_query = create_xml_element(self.connection, self.token, 'carriers_query')
@@ -316,28 +340,34 @@ class FnapyManager(object):
     def query_client_order_comments(self, results_count='', **elements):
         """Retrieves customers comments and ratings about your orders.
 
-        Usage
-        >>> response = manager.query_client_order_comments(results_count=results_count, **elements)
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_client_order_comments(results_count=results_count, **elements)
+
+        :returns: :class:`Response <Response>` object
 
         """
         return self._query('client_order_comments', **elements)
 
-    def update_client_order_comments(self, seller_comment, offer_fnac_id):
+    def update_client_order_comments(self, seller_comment, order_fnac_id):
         """Reply to client order comments
 
-        Usage
-        >>> response = manager.update_client_order_comments(comment, offer_fnac_id)
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.update_client_order_comments(seller_comment, order_fnac_id)
+
+        :type seller_comment: str
+        :param seller_comment: The seller comment
+
+        :type order_fnac_id: str
+        :param order_fnac_id: Order unique identifier filter from FNAC
+
+        :returns: :class:`Response <Response>` object
 
         """
         client_order_comments_update = create_xml_element(self.connection, self.token,
                                                           'client_order_comments_update')
-        comment = etree.Element('comment', id=offer_fnac_id)
+        comment = etree.Element('comment', id=order_fnac_id)
         etree.SubElement(comment, 'comment_reply').text = etree.CDATA(seller_comment)
         client_order_comments_update.append(comment)
         self.client_order_comments_update_request = Request(etree.tostring(client_order_comments_update, **XML_OPTIONS))
@@ -347,11 +377,11 @@ class FnapyManager(object):
     def query_messages(self, results_count='', **elements):
         """Return the messages related to your orders or offers
 
-        Usage
-        >>> response = manager.query_messages(results_count=results_count, **elements)
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_messages(results_count=results_count, **elements)
+
+        :returns: :class:`Response <Response>` object
 
         """
         return self._query('messages', results_count, **elements)
@@ -359,22 +389,23 @@ class FnapyManager(object):
     def update_messages(self, messages):
         """Update message sent on your offers or orders : reply, set as read, ...
 
-        Usage
-        >>> response = manager.update_messages(messages)
+        Usage::
+
+            response = manager.update_messages(messages)
 
         :type messages: Message
         :param messages: the specified messages we want to update
 
-        :rtype: Response
-        :returns: response
+        :returns: :class:`Response <Response>` object
 
-        Example
-        >>> m1 = Message(action='mark_as_read', id='12345')
-        >>> m2 = Message(action='reply', id='12345')
-        >>> m2.description = 'Your order has been shipped'
-        >>> m2.subject = 'order_information'
-        >>> m2.type = 'ORDER'
-        >>> response = manager.update_messages([m1, m2])
+        Example::
+
+            >>> m1 = Message(action='mark_as_read', id='12345')
+            >>> m2 = Message(action='reply', id='12345')
+            >>> m2.description = 'Your order has been shipped'
+            >>> m2.subject = 'order_information'
+            >>> m2.type = 'ORDER'
+            >>> response = manager.update_messages([m1, m2])
 
         """
         messages_update = create_xml_element(self.connection, self.token, 'messages_update')
@@ -388,11 +419,11 @@ class FnapyManager(object):
     def query_incidents(self, results_count='', **elements):
         """Return the incidents related to your orders
 
-        Usage
-        >>> response = manager.query_incidents(results_count=results_count, **elements)
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_incidents(results_count=results_count, **elements)
+
+        :returns: :class:`Response <Response>` object
 
         """
         return self._query('incidents', results_count, **elements)
@@ -400,25 +431,26 @@ class FnapyManager(object):
     def update_incidents(self, order_id, incident_update_action, reasons):
         """Handle incidents created on orders
 
-        Usage
-        >>> response = manager.update_incidents(order_id, incident_update_action, reasons)
+        Usage::
+
+            response = manager.update_incidents(order_id, incident_update_action, reasons)
 
         :type order_id: str
         :param order_id: the unique FNAC identified for an order
 
         :type incident_update_action: str
         :param incident_update_action: the action to perform 
-        ('refund' is the only available action for the moment) 
+        (`'refund'` is the only available action for the moment) 
 
-        :type reasons: dict
-        :param reasons: 
+        :type reasons: list
+        :param reasons: the reasons of the incident for this order
 
-        Example: 
-        >>> reason = {"order_detail_id": 1, "refund_reason": 'no_stock'}
-        >>> response = manager.update_incidents('07LWQ6278YJUI', 'refund', [reason])
+        Example::
 
-        :rtype: Response
-        :returns: response
+            reason = {"order_detail_id": 1, "refund_reason": 'no_stock'}
+            response = manager.update_incidents('07LWQ6278YJUI', 'refund', [reason])
+
+        :returns: :class:`Response <Response>` object
 
         """
         incidents_update = create_xml_element(self.connection, self.token, 'incidents_update')
@@ -439,11 +471,11 @@ class FnapyManager(object):
     def query_shop_invoices(self, results_count='', **elements):
         """Return the download links to the shop's invoices
 
-        Usage
-        >>> response = manager.query_shop_invoices(results_count=results_count, **elements)
+        Usage::
 
-        :rtype: Response
-        :returns: response
+            response = manager.query_shop_invoices(results_count=results_count, **elements)
+
+        :returns: :class:`Response <Response>` object
 
         """
         return self._query('shop_invoices', results_count, **elements)
