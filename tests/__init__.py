@@ -105,12 +105,15 @@ def assert_raises(exception_class, msg=None):
 
 def sorted_elements(root):
     new_root = etree.Element(root.tag, attrib=root.attrib)
-    for e in sorted(root.getiterator(), key=lambda x: x.tag):
+    for e in sorted(root.getchildren(), key=lambda x: x.tag):
         new_root.append(etree.Element(e.tag, attrib=e.attrib))
     return new_root
 
 
 def elements_are_equal(e1, e2, excluded_attrs=[]):
+    e1 = sorted_elements(e1)
+    e2 = sorted_elements(e2)
+
     if e1.tag != e2.tag:
         return False
 
@@ -132,8 +135,6 @@ def elements_are_equal(e1, e2, excluded_attrs=[]):
     if len(e1) != len(e2):
         return False
 
-    # TODO For this more accurate solution we need the order to be respected in
-    # the 2 elements (sometimes fails in tox)
     return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
 
 
@@ -178,6 +179,7 @@ def request_is_valid(request, action, service):
     credentials = ('partner_id', 'shop_id', 'token')
     result = elements_are_equal(request_element, expected_element, credentials)
     if not result:
+        import pdb; pdb.set_trace()
         pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))
 
     return result
