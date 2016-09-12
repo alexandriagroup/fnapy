@@ -14,6 +14,7 @@ Useful functions
 import os
 import re
 from codecs import open
+from collections import OrderedDict
 
 # Third-party modules
 from bs4 import BeautifulSoup
@@ -26,6 +27,45 @@ from config import *
 
 
 # CLASSES
+
+class Query(object):
+    """A simple class to create queries"""
+    def __init__(self, name, tags={}, **kwargs):
+        self._dict = OrderedDict()
+        self.name = name
+        self.attrib = kwargs
+
+        for k, v in kwargs.items():
+            if not k.startswith('@'):
+                self._dict['@'+k] = v
+
+        for k, v in tags.items():
+            self._dict[k] = v
+
+    def between(self, min, max):
+        new_dict = OrderedDict()
+        for k, v in self._dict.items():
+            if k.startswith('@'):
+                new_dict[k] = v
+        new_dict['min'] = {'#text': min}
+        new_dict['max'] = {'#text': max}
+        return Query(self.name, tags=new_dict)
+
+    @property
+    def dict(self):
+        """Return the OrderedDict"""
+        return self._dict
+
+    @property
+    def xml(self):
+        """Return the XML"""
+        return dict2xml({self.name: self.dict})
+
+    def __str__(self):
+        return "<{0}: {1}>".format(self.__class__.__name__, self.name)
+
+    __repr__ = __str__
+
 
 class HttpMessage(object):
     def __init__(self, text):
