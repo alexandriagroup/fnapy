@@ -2,6 +2,10 @@
 FNAPY
 =====
 
+.. image:: https://travis-ci.org/alexandriagroup/fnapy.svg?branch=master
+    :target: https://travis-ci.org/alexandriagroup/fnapy
+
+
 Description
 ===========
 
