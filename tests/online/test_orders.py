@@ -22,3 +22,7 @@ def test_update_orders():
 def test_query_orders():
     assert response_is_valid('query_orders', 'orders_query')
 
+
+def test_query_orders_created_between_dates():
+    assert response_is_valid('query_orders_created_between_dates', 'orders_query')
+

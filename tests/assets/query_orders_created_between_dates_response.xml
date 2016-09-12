@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?><orders_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+  
+  <page>1</page>
+  <total_paging>1</total_paging>
+  <nb_total_per_page>10</nb_total_per_page>
+  <nb_total_result>3</nb_total_result>
+            
+  <order>
+    <shop_id>8B6C803C-F166-4F7D-B9FB-869156BBA9B1</shop_id>
+    <client_id>5b4f233e-00c0-4b21-8219-7683a91b6d02</client_id>
+    <client_firstname><![CDATA[]]></client_firstname>
+    <client_lastname><![CDATA[]]></client_lastname>
+    <order_id>57BEAFDA828A8</order_id>
+    <state>Shipped</state>
+    <created_at>2016-08-25T10:44:25+02:00</created_at>
+    <fees>33.12</fees>
+    <vat_rate>0</vat_rate>
+    <nb_messages>1</nb_messages>
+
+      <shipping_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </shipping_address>
+    <billing_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </billing_address>
+    <order_detail>
+
+      <product_name><![CDATA[Call of Duty : Modern Warfare 2 ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>2</order_detail_id>
+      <state>Refused</state>
+      <quantity>13</quantity>
+      <price>20</price>
+      <fees>0</fees>
+      <product_fnac_id>2703768</product_fnac_id>
+      <offer_fnac_id>8D7472DB-7EAF-CE05-A960-FC12B812FA14</offer_fnac_id>
+      <offer_seller_id><![CDATA[B067-F0D-75E]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>13</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-25T10:44:27+02:00</created_at>
+      <received_at></received_at>
+      <refused_at>2016-08-25T16:59:31+02:00</refused_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=2698944&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://multimedia.fnac.com/multimedia/images_produits/Grandes/6/7/9/5030917070976.gif]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+    <order_detail>
+
+      <product_name><![CDATA[Call of Duty : Modern Warfare 2 ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>1</order_detail_id>
+      <state>Shipped</state>
+      <quantity>13</quantity>
+      <price>20</price>
+      <fees>33.12</fees>
+      <product_fnac_id>2703768</product_fnac_id>
+      <offer_fnac_id>8D7472DB-7EAF-CE05-A960-FC12B812FA14</offer_fnac_id>
+      <offer_seller_id><![CDATA[B067-F0D-75E]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>16</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-25T10:44:27+02:00</created_at>
+      <debited_at>2016-08-29T11:41:12+02:00</debited_at>
+      <received_at></received_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=2698944&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://multimedia.fnac.com/multimedia/images_produits/Grandes/6/7/9/5030917070976.gif]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+  </order>
+        
+  <order>
+    <shop_id>8B6C803C-F166-4F7D-B9FB-869156BBA9B1</shop_id>
+    <client_id>5b4f233e-00c0-4b21-8219-7683a91b6d02</client_id>
+    <client_firstname><![CDATA[]]></client_firstname>
+    <client_lastname><![CDATA[]]></client_lastname>
+    <order_id>57BEB008B27C6</order_id>
+    <state>Received</state>
+    <created_at>2016-08-25T10:45:09+02:00</created_at>
+    <fees>40.68</fees>
+    <vat_rate>0</vat_rate>
+    <nb_messages>0</nb_messages>
+
+      <shipping_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </shipping_address>
+    <billing_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </billing_address>
+    <order_detail>
+
+      <product_name><![CDATA[MotorStorm Pacific Rift - Gamme Essentials ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>2</order_detail_id>
+      <state>Received</state>
+      <quantity>7</quantity>
+      <price>15</price>
+      <fees>13.8</fees>
+      <product_fnac_id>20005761</product_fnac_id>
+      <offer_fnac_id>32C1E9FC-8011-0C1B-F0F3-EC3414BCBBD0</offer_fnac_id>
+      <offer_seller_id><![CDATA[B76A-CD5-153]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>10</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-25T10:45:09+02:00</created_at>
+      <debited_at>2016-08-29T17:49:00+02:00</debited_at>
+      <received_at>2016-08-30T14:37:57+02:00</received_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+    <order_detail>
+
+      <product_name><![CDATA[MotorStorm Pacific Rift - Gamme Essentials ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>3</order_detail_id>
+      <state>Received</state>
+      <quantity>7</quantity>
+      <price>15</price>
+      <fees>13.44</fees>
+      <product_fnac_id>20005761</product_fnac_id>
+      <offer_fnac_id>32C1E9FC-8011-0C1B-F0F3-EC3414BCBBD0</offer_fnac_id>
+      <offer_seller_id><![CDATA[B76A-CD5-153]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>7</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-25T10:45:09+02:00</created_at>
+      <debited_at>2016-08-29T17:49:00+02:00</debited_at>
+      <received_at>2016-08-30T14:37:57+02:00</received_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+    <order_detail>
+
+      <product_name><![CDATA[MotorStorm Pacific Rift - Gamme Essentials ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>1</order_detail_id>
+      <state>Received</state>
+      <quantity>7</quantity>
+      <price>15</price>
+      <fees>13.44</fees>
+      <product_fnac_id>20005761</product_fnac_id>
+      <offer_fnac_id>32C1E9FC-8011-0C1B-F0F3-EC3414BCBBD0</offer_fnac_id>
+      <offer_seller_id><![CDATA[B76A-CD5-153]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>7</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-25T10:45:09+02:00</created_at>
+      <debited_at>2016-08-29T17:49:00+02:00</debited_at>
+      <received_at>2016-08-30T14:37:57+02:00</received_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+  </order>
+        
+  <order>
+    <shop_id>8B6C803C-F166-4F7D-B9FB-869156BBA9B1</shop_id>
+    <client_id>5b4f233e-00c0-4b21-8219-7683a91b6d02</client_id>
+    <client_firstname><![CDATA[]]></client_firstname>
+    <client_lastname><![CDATA[]]></client_lastname>
+    <order_id>57C4583C791C1</order_id>
+    <state>ToShip</state>
+    <created_at>2016-08-29T17:44:06+02:00</created_at>
+    <fees>2.28</fees>
+    <vat_rate>0</vat_rate>
+    <nb_messages>0</nb_messages>
+
+      <shipping_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </shipping_address>
+    <billing_address>
+      <firstname><![CDATA[Laurent]]></firstname>
+      <lastname><![CDATA[SIQUIER]]></lastname>
+      <company><![CDATA[FNAC.COM]]></company>
+      <address1><![CDATA[52 ROUTE DU PAVE DES GARDES]]></address1>
+      <address2><![CDATA[]]></address2>
+      <address3><![CDATA[]]></address3>
+      <zipcode><![CDATA[92310]]></zipcode>
+      <city><![CDATA[SEVRES]]></city>
+      <country><![CDATA[FRA]]></country>
+    </billing_address>
+    <order_detail>
+
+      <product_name><![CDATA[MotorStorm Pacific Rift - Gamme Essentials ( Jeux Vidéo  ) - ]]></product_name>
+      <order_detail_id>1</order_detail_id>
+      <state>ToShip</state>
+      <quantity>1</quantity>
+      <price>15</price>
+      <fees>2.28</fees>
+      <product_fnac_id>20005761</product_fnac_id>
+      <offer_fnac_id>32C1E9FC-8011-0C1B-F0F3-EC3414BCBBD0</offer_fnac_id>
+      <offer_seller_id><![CDATA[B76A-CD5-153]]></offer_seller_id>
+      <product_state>11</product_state>
+      <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      <internal_comment><![CDATA[]]></internal_comment>
+
+      <shipping_price>4</shipping_price>
+      <shipping_method>20</shipping_method>
+      <created_at>2016-08-29T17:44:07+02:00</created_at>
+      <debited_at>2016-09-05T15:45:45+02:00</debited_at>
+      <received_at></received_at>
+              <product_url><![CDATA[http://www4.rec7.fnac.dev/marketplace/articleoffers.aspx?prid=5024283&ref=Fnac.com]]></product_url>
+        <image><![CDATA[http://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Grandes/9/5/1/0711719247159.jpg]]></image>
+           <tracking_number><![CDATA[]]></tracking_number>
+    </order_detail>
+  </order>
+</orders_query_response>
