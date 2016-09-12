@@ -68,9 +68,9 @@ def setup():
 @pytest.fixture
 def fake_manager(monkeypatch):
     monkeypatch.setattr('requests.post', make_requests_get_mock('auth_response.xml'))
-    partner_id = os.environ.get('FNAC_PARTNER_ID')
-    shop_id    = os.environ.get('FNAC_SHOP_ID')
-    key        = os.environ.get('FNAC_KEY')
+    partner_id = 'FNAC_PARTNER_ID'
+    shop_id    = 'FNAC_SHOP_ID'
+    key        = 'FNAC_KEY'
     connection = FnapyConnection(partner_id, shop_id, key)
     manager = FnapyManager(connection)
     manager.authenticate()
