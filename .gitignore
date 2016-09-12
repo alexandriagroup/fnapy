@@ -8,3 +8,5 @@ test_client.py
 .tox
 *.egg-info
 .eggs
+build/
+dist/
