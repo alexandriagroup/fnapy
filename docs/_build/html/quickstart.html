@@ -77,6 +77,8 @@ API.</p>
 </li>
 </ul>
 <p>Now you should be able to access the different web services.</p>
+<div class="section" id="update-your-offers">
+<h2>Update your offers<a class="headerlink" href="#update-your-offers" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s create some offers in our catalog:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">offer_data1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;product_reference&#39;</span><span class="p">:</span><span class="s1">&#39;0711719247159&#39;</span><span class="p">,</span>
         <span class="s1">&#39;offer_reference&#39;</span><span class="p">:</span><span class="s1">&#39;B76A-CD5-153&#39;</span><span class="p">,</span>
@@ -127,6 +129,38 @@ We&#8217;ll talk about it later. For now, let&#8217;s see what we&#8217;ve got i
 <p>The response sent by the server is just an instance of the <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> class. We can see that the status of the response is OK and the
 batch_id is 88BD9517-A73C-78E0-04DB-AC5ADE1D63F6. This is basically the id
 you&#8217;ll have to use to get information about the status of your offers.</p>
+</div>
+<div class="section" id="get-the-batch-status">
+<h2>Get the batch status<a class="headerlink" href="#get-the-batch-status" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">batch_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="s1">&#39;offers_update_response&#39;</span><span class="p">][</span><span class="s1">&#39;batch_id&#39;</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-the-offers">
+<h2>Query the offers<a class="headerlink" href="#query-the-offers" title="Permalink to this headline">¶</a></h2>
+<p>When you&#8217;re satisfised with your offers you may want to know if they were
+actually created and retrieve information about them.</p>
+<p>Let&#8217;s say you want to know the offers created between 2016-08-25 and 2016-08-31:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dmin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="n">dmax</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Created&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="n">dmin</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()},</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="n">dmax</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()}</span>
+        <span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-your-orders">
+<h2>Query your orders<a class="headerlink" href="#query-your-orders" title="Permalink to this headline">¶</a></h2>
+<p>Once customers placed an order on your items in your catalog, you can query
+these orders.</p>
+<p>If you want to retrieve the first 10 created orders, you&#8217;ll have to sent this request with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="request-and-response">
 <h2>Request and Response<a class="headerlink" href="#request-and-response" title="Permalink to this headline">¶</a></h2>
 <p>Both <code class="xref py py-class docutils literal"><span class="pre">Request</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> share the same
@@ -143,6 +177,10 @@ interface.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#update-your-offers">Update your offers</a></li>
+<li><a class="reference internal" href="#get-the-batch-status">Get the batch status</a></li>
+<li><a class="reference internal" href="#query-the-offers">Query the offers</a></li>
+<li><a class="reference internal" href="#query-your-orders">Query your orders</a></li>
 <li><a class="reference internal" href="#request-and-response">Request and Response</a></li>
 </ul>
 </li>

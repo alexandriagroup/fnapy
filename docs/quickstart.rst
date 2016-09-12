@@ -22,6 +22,10 @@ API.
 
 Now you should be able to access the different web services.
 
+
+Update your offers
+------------------
+
 Let's create some offers in our catalog::
 
     offer_data1 = {'product_reference':'0711719247159',
@@ -75,8 +79,73 @@ batch_id is 88BD9517-A73C-78E0-04DB-AC5ADE1D63F6. This is basically the id
 you'll have to use to get information about the status of your offers.
 
 
+Get the batch status
+--------------------
+
+::
+
+    batch_id = response.dict['offers_update_response']['batch_id']
+    response = manager.get_batch_status(batch_id)
+
+Note that :class:`FnapyManager <FnapyManager>` stores the last `batch_id` so if you want the latest `batch_status` you can do::
+
+    response = manager.get_batch_status()
+
+
+Query the offers
+----------------
+
+When you're satisfised with your offers you may want to know if they were
+actually created and retrieve information about them.
+
+Let's say you want to know the offers created between 2016-08-25 and 2016-08-31::
+
+    dmin = datetime(2016, 8, 25, 0, 0, 0).replace(tzinfo=pytz.utc)
+    dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
+    date = {'@type': 'Created',
+            'min': {'#text': dmin.isoformat()},
+            'max': {'#text': dmax.isoformat()}
+            }
+    response = manager.query_offers(date=date)
+
+
+Query the orders
+----------------
+
+Once customers placed an order on your items in your catalog, you can query
+these orders.
+
+If you want to retrieve the first 10 created orders, you'll have to sent this request with::
+
+    response = manager.query_orders(results_count=10, paging=1)
+
+
+Update the orders
+-----------------
+
+Orders statuses are following this workflow:
+
+Created > Accepted > ToShip > Shipped > Received
+
+The seller acts only at acceptation and shipping steps.
+
+This is the how we accept the first and refuse the second order for the order_id 003ECCA1YVFBW::
+
+    action1 = {"order_detail_id": 1, "action": "Accepted"}
+    action2 = {"order_detail_id": 2, "action": "Refused"}
+    actions = [action1, action2]
+    response = manager.update_orders('003ECCA1YVFBW', "accept_order", actions)
+
+.. todo:: Add example for "accept_all_orders"
+
+.. todo:: Add the section using query_orders to check the order was created
+          successfully
+
 Request and Response
 --------------------
 
 Both :class:`Request <Request>` and :class:`Response <Response>` share the same
 interface.
+
+
+
