@@ -1,6 +1,14 @@
 CHANGES
 =======
 
+* Simplify the tests in tox
+* Add AUTHORS and ChangeLog
+* Use pbr in the setup
+
+0.2
+---
+
+* Ignore directories for Python packaging
 * Add test_http_messages and test_query in tox
 * Update requirements-dev.txt
 * Rename README.md to README.rst
