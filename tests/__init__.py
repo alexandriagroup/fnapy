@@ -146,7 +146,7 @@ def xml_is_valid(xml_dict, xml_valid_keys):
     keys = [tag for tag in xml_dict.keys() if not tag.startswith('@')]
     if len(keys) == 0:
         return False, 'The XML dictionary contains no valid keys.'
-    invalid_keys = set(keys).difference(xml_valid_keys)
+    invalid_keys = set(keys).difference((x.name for x in xml_valid_keys))
     result = len(invalid_keys) == 0
     if result:
         return True, ''
