@@ -1,0 +1,14 @@
+# Config file for automatic testing at travis-ci.org
+
+sudo: false
+language: python
+
+matrix:
+  include:
+    - python: 2.7
+      env: TOX_ENV=py27
+
+install:
+  - pip install requirements.txt
+
+script: tox -e $TOX_ENV
