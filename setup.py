@@ -9,7 +9,7 @@
 
 from setuptools import setup, find_packages
 
-requirements = [
+install_requirements = [
     'requests',
     'xmltodict',
     'lxml',
@@ -28,7 +28,9 @@ setup(
     description='A Python API for FNAC WebServices',
     keywords=['api', 'fnac', 'python', 'webservices'],
     packages=find_packages(),
-    install_requires=requirements,
+    install_requires=install_requirements,
+    setup_requires=setup_requirements,
+    pbr=True,
     zip_safe=True,
     license='MIT',
     classifiers = [
