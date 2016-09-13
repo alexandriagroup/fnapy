@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<orders_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" results_count="10">
+  <paging>1</paging>
+</orders_query>

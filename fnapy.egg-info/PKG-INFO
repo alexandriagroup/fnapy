@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: fnapy
+Version: 0.1.0
+Summary: A Python API for FNAC WebServices
+Home-page: UNKNOWN
+Author: Taurus Olson
+Author-email: taurusolson@gmail.com
+License: MIT
+Description: UNKNOWN
+Keywords: api,fnac,python,webservices
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT LicenseProgramming Language :: Python :: 2
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

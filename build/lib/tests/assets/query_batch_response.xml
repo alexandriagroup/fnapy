@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<batch_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+  <nb_batch_running>0</nb_batch_running>
+  <nb_batch_active>0</nb_batch_active>
+</batch_query_response>

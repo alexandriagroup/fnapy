@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<incidents_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <order action="refund" order_id="57BEAFDA828A8">
+    <order_detail>
+      <order_detail_id>2</order_detail_id>
+      <refund_reason>no_stock</refund_reason>
+    </order_detail>
+  </order>
+</incidents_update>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<orders_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <order action="accept_order" order_id="57BEAFDA828A8">
+    <order_detail>
+      <order_detail_id>1</order_detail_id>
+      <action>Accepted</action>
+    </order_detail>
+    <order_detail>
+      <order_detail_id>2</order_detail_id>
+      <action>Refused</action>
+    </order_detail>
+  </order>
+</orders_update>

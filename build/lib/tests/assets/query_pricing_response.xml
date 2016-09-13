@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+    
+              
+      
+      
+        <pricing_product>
+            <product_reference type="Ean">0886971942323</product_reference>
+                            <ean>0886971942323</ean>
+                <product_url><![CDATA[http://www4.rec7.fnac.dev/a2066124]]></product_url>
+                
+                <new_price>5.29</new_price>
+                <new_shipping>0.00</new_shipping>
+                <refurbished_price></refurbished_price>
+                <refurbished_shipping></refurbished_shipping>
+                <used_price>0.90</used_price>
+                <used_shipping>2.39</used_shipping>
+                <new_adherent_price></new_adherent_price>
+                <new_adherent_shipping></new_adherent_shipping>
+                <refurbished_adherent_price></refurbished_adherent_price>
+                <refurbished_adherent_shipping></refurbished_adherent_shipping>
+                <used_adherent_price></used_adherent_price>
+                <used_adherent_shipping></used_adherent_shipping>
+
+            
+      </pricing_product>
+    
+    
+
+  </pricing_query_response>

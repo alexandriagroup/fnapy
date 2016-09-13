@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<messages_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <message id="6F9EF013-6387-F433-C3F5-4AAEF32AA317" action="mark_as_read">
+	<message_to>ALL</message_to>
+	<message_subject>order_information</message_subject>
+	<message_description/>
+	<message_type>ORDER</message_type>
+</message>
+</messages_update>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<offers_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" results_count="100">
+  <date type="Created">
+	<min>2016-08-23T00:00:00+00:00</min>
+        <max>2016-08-31T00:00:00+00:00</max>
+</date>
+</offers_query>

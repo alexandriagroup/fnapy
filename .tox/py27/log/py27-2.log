@@ -1,0 +1,77 @@
+actionid: py27
+msg: installpkg
+cmdargs: [local('/Users/damien/Dropbox/Projects/fnapy/.tox/py27/bin/pip'), 'install', '/Users/damien/Dropbox/Projects/fnapy/.tox/dist/fnapy-0.0.1.dev82.zip']
+env: {'GOPATH': '/Users/damien/Programming/go/projects', 'DL': '/Users/damien/Downloads', 'GITHUB_USER_EMAIL': 'taurusolson@gmail.com', 'WHEEL_DIR': '/Users/damien/Programming/Python/wheels', 'VIRTUALENV_DISTRIBUTE': 'true', 'PROJECT_HOME': '/Users/damien/Dropbox/Projects', 'CODEX': '/Users/damien/Dropbox/Documents/Codex', 'DOC': '/Users/damien/Documents', 'DE': '/Users/damien/Desktop', 'PYTHONHASHSEED': '1826998596', 'TERM_PROGRAM_VERSION': '343.7', 'TMPDIR': '/var/folders/cx/438txp316qq47n_jvm8pm31r0000gn/T/', 'PGDATA': '/usr/local/var/postgres', 'LOGNAME': 'damien', 'USER': 'damien', 'HOME': '/Users/damien', 'PATH': '/Users/damien/Dropbox/Projects/fnapy/.tox/py27/bin:/Users/damien/.virtualenvs/fnac/bin:/Users/damien/Programming/go/projects/bin:/Users/damien/.rbenv/shims:/Users/damien/.pythonz/bin:/Users/damien/bin:/Users/damien/.rbenv/bin:/Users/damien/Library/Haskell/bin:/usr/local/bin:/bin:/usr/bin:/usr/sbin:/usr/local/git/bin:/usr/texbin:/Users/damien/.bin:/usr/X11/bin:/Users/damien/Library/Python/2.7/bin:/usr/local/sbin:/sbin:/Applications/Racket/bin:/Users/damien/anaconda/bin:/Users/damien/.cask/bin:/Users/damien/.dotfiles/bin:/Users/damien/.fzf/bin', 'VIRTUALENVWRAPPER_SCRIPT': '/usr/local/bin/virtualenvwrapper.sh', 'ZSH': '/Users/damien/.dotfiles', 'DISPLAY': '/private/tmp/com.apple.launchd.GzCuNVgkL4/org.macosforge.xquartz:0', 'PROJECTS': '/Users/damien/Dropbox/Projects', 'TERM_PROGRAM': 'Apple_Terminal', 'LANG': 'fr_FR.UTF-8', '__CF_USER_TEXT_ENCODING': '0x1F5:0x0:0x1', 'TERM': 'xterm-new', 'Apple_PubSub_Socket_Render': '/private/tmp/com.apple.launchd.gqN0ULiQUV/Render', 'DWARF': '/Users/damien/Documents/Games/DwarfFortress', 'SHLVL': '1', 'DATA': '/Users/damien/Data', 'LESS_TERMCAP_me': '\x1b[0m', 'LESS_TERMCAP_md': '\x1b[01;31m', 'SECURITYSESSIONID': '186a6', 'LESS_TERMCAP_mb': '\x1b[01;31m', 'XPC_FLAGS': '0x0', 'ADMIN': '/Users/damien/Documents/Admin', 'RBENV_SHELL': 'zsh', 'DBOX': '/Users/damien/Dropbox', 'EDITOR': '/usr/local/bin/vim', 'MANPATH': ':/usr/X11/share/man:/Users/damien/bin/man:/Users/damien/.fzf/man', '_VIRTUALENVWRAPPER_API': ' mkvirtualenv rmvirtualenv lsvirtualenv showvirtualenv workon add2virtualenv cdsitepackages cdvirtualenv lssitepackages toggleglobalsitepackages cpvirtualenv setvirtualenvproject mkproject cdproject mktmpenv', 'TM': '/Users/damien/Dropbox/Projects/time-machine', 'NATURE_OF_CODE': '/Users/damien/Dropbox/The-Nature-of-Code', 'FNAC_KEY': '444C7382-E325-89AB-BD5D-7FAB962667F0', 'WORKON_HOME': '/Users/damien/.virtualenvs', 'TERM_SESSION_ID': '3D734DBA-7E80-46AA-A2AF-635543483DD1', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.7bNmICc8D5/Listeners', 'PROMPT': '$(directory_name) $(git_dirty)$(need_push)\n%{$fg[red]%}$%{$reset_color%} ', 'FNAC_PARTNER_ID': 'CE68D416-E93D-6980-46F5-E57185750D47', 'ST_PKG': '/Users/damien/Library/Application Support/Sublime Text 3/Packages', 'PYTHONPATH': '/:/usr/local/Cellar/wxpython/3.0.2.0/lib/python2.7/site-packages:/usr/local/Cellar/wxpython/3.0.2.0/lib/python2.7/site-packages/wx-3.0-osx_cocoa', 'XPC_SERVICE_NAME': '0', 'VIRTUAL_ENV': '/Users/damien/Dropbox/Projects/fnapy/.tox/py27', 'ST_USER': '/Users/damien/Library/Application Support/Sublime Text 3/Packages/User', 'TAG_CMD_FMT_STRING': 'mvim --servername VIM {{.Filename}} +{{.LineNumber}}', 'SHELL': '/bin/zsh', 'PS1': '(fnac) $(directory_name) $(git_dirty)$(need_push)\n%{$fg[red]%}$%{$reset_color%} ', 'GITHUB_USER_NAME': 'Taurus Olson', 'MAD_PATH': '/Users/damien/Dropbox/Documents/Codex/content/**', 'LC_ALL': 'fr_FR.UTF-8', 'KEYTIMEOUT': '1', '_': '/Users/damien/.virtualenvs/fnac/bin/tox', 'VIRTUALENVWRAPPER_PROJECT_FILENAME': '.project', 'LESS_TERMCAP_ue': '\x1b[0m', 'LSCOLORS': 'gxfxcxdxbxegedabagacad', 'VIRTUALENVWRAPPER_HOOK_DIR': '/Users/damien/.virtualenvs', 'ARCHFLAGS': '-Wno-error=unused-command-line-argument-hard-error-in-future', 'OLDPWD': '/Users/damien/.virtualenvs/fnac/lib/python2.7/site-packages/pbr', 'HOMEBREW_GITHUB_API_TOKEN': 'c87fc5b381f27b492225d4392a6954009d169ba2', 'CLICOLOR': 'true', 'LESS_TERMCAP_se': '\x1b[0m', 'HELPDIR': '/usr/local/share/zsh/help', 'PWD': '/Users/damien/Dropbox/Projects/fnapy', 'LESS_TERMCAP_us': '\x1b[01;32m', 'PROG': '/Users/damien/Programming', 'GAMES': '/Users/damien/Documents/Games', 'LESS_TERMCAP_so': '\x1b[01;44;33m', 'OS': '/Users/damien/Dropbox/Documents/learning_is_fun_and_easy/statistics/os', 'VIRTUALENVWRAPPER_WORKON_CD': '1', 'FNAC_SHOP_ID': '8B6C803C-F166-4F7D-B9FB-869156BBA9B1'}
+
+Processing ./.tox/dist/fnapy-0.0.1.dev82.zip
+Collecting alabaster==0.7.9 (from fnapy==0.0.1.dev82)
+  Using cached alabaster-0.7.9-py2.py3-none-any.whl
+Collecting args==0.1.0 (from fnapy==0.0.1.dev82)
+Collecting backports.shutil-get-terminal-size==1.0.0 (from fnapy==0.0.1.dev82)
+  Using cached backports.shutil_get_terminal_size-1.0.0-py2.py3-none-any.whl
+Collecting beautifulsoup4==4.5.1 (from fnapy==0.0.1.dev82)
+  Using cached beautifulsoup4-4.5.1-py2-none-any.whl
+Collecting clint==0.5.1 (from fnapy==0.0.1.dev82)
+Collecting decorator==4.0.10 (from fnapy==0.0.1.dev82)
+  Using cached decorator-4.0.10-py2.py3-none-any.whl
+Collecting docutils==0.12 (from fnapy==0.0.1.dev82)
+Collecting imagesize==0.7.1 (from fnapy==0.0.1.dev82)
+  Using cached imagesize-0.7.1-py2.py3-none-any.whl
+Collecting Jinja2==2.8 (from fnapy==0.0.1.dev82)
+  Using cached Jinja2-2.8-py2.py3-none-any.whl
+Collecting lxml==3.6.4 (from fnapy==0.0.1.dev82)
+Collecting MarkupSafe==0.23 (from fnapy==0.0.1.dev82)
+Collecting pathlib2==2.1.0 (from fnapy==0.0.1.dev82)
+  Using cached pathlib2-2.1.0-py2.py3-none-any.whl
+Collecting pexpect==4.2.1 (from fnapy==0.0.1.dev82)
+  Using cached pexpect-4.2.1-py2.py3-none-any.whl
+Collecting pickleshare==0.7.4 (from fnapy==0.0.1.dev82)
+  Using cached pickleshare-0.7.4-py2.py3-none-any.whl
+Collecting pkginfo==1.3.2 (from fnapy==0.0.1.dev82)
+  Using cached pkginfo-1.3.2-py2.py3-none-any.whl
+Collecting pluggy==0.3.1 (from fnapy==0.0.1.dev82)
+  Using cached pluggy-0.3.1-py2.py3-none-any.whl
+Collecting prompt-toolkit==1.0.7 (from fnapy==0.0.1.dev82)
+  Using cached prompt_toolkit-1.0.7-py2-none-any.whl
+Collecting ptyprocess==0.5.1 (from fnapy==0.0.1.dev82)
+  Using cached ptyprocess-0.5.1-py2.py3-none-any.whl
+Requirement already satisfied (use --upgrade to upgrade): py==1.4.31 in ./.tox/py27/lib/python2.7/site-packages (from fnapy==0.0.1.dev82)
+Collecting Pygments==2.1.3 (from fnapy==0.0.1.dev82)
+  Using cached Pygments-2.1.3-py2.py3-none-any.whl
+Collecting pytest==3.0.0 (from fnapy==0.0.1.dev82)
+  Using cached pytest-3.0.0-py2.py3-none-any.whl
+Collecting python-dateutil==2.5.3 (from fnapy==0.0.1.dev82)
+  Using cached python_dateutil-2.5.3-py2.py3-none-any.whl
+Requirement already satisfied (use --upgrade to upgrade): pytz==2016.6.1 in ./.tox/py27/lib/python2.7/site-packages (from fnapy==0.0.1.dev82)
+Collecting requests==2.11.1 (from fnapy==0.0.1.dev82)
+  Using cached requests-2.11.1-py2.py3-none-any.whl
+Collecting requests-mock==1.0.0 (from fnapy==0.0.1.dev82)
+  Using cached requests_mock-1.0.0-py2.py3-none-any.whl
+Collecting requests-toolbelt==0.7.0 (from fnapy==0.0.1.dev82)
+  Using cached requests_toolbelt-0.7.0-py2.py3-none-any.whl
+Collecting simplegeneric==0.8.1 (from fnapy==0.0.1.dev82)
+Collecting six==1.10.0 (from fnapy==0.0.1.dev82)
+  Using cached six-1.10.0-py2.py3-none-any.whl
+Collecting snowballstemmer==1.2.1 (from fnapy==0.0.1.dev82)
+  Using cached snowballstemmer-1.2.1-py2.py3-none-any.whl
+Collecting tox==2.3.1 (from fnapy==0.0.1.dev82)
+  Using cached tox-2.3.1-py2.py3-none-any.whl
+Collecting traitlets==4.2.2 (from fnapy==0.0.1.dev82)
+  Using cached traitlets-4.2.2-py2.py3-none-any.whl
+Collecting virtualenv==15.0.3 (from fnapy==0.0.1.dev82)
+  Using cached virtualenv-15.0.3-py2.py3-none-any.whl
+Collecting wcwidth==0.1.7 (from fnapy==0.0.1.dev82)
+  Using cached wcwidth-0.1.7-py2.py3-none-any.whl
+Collecting xmltodict==0.10.2 (from fnapy==0.0.1.dev82)
+Collecting ipython-genutils (from traitlets==4.2.2->fnapy==0.0.1.dev82)
+  Using cached ipython_genutils-0.1.0-py2.py3-none-any.whl
+Building wheels for collected packages: fnapy
+  Running setup.py bdist_wheel for fnapy: started
+  Running setup.py bdist_wheel for fnapy: finished with status 'done'
+  Stored in directory: /Users/damien/Library/Caches/pip/wheels/c8/7a/a5/58f714539c72d1fbd9461894da8da292dbd739e341b2c89aff
+Successfully built fnapy
+Installing collected packages: alabaster, args, backports.shutil-get-terminal-size, beautifulsoup4, clint, decorator, docutils, imagesize, MarkupSafe, Jinja2, lxml, six, pathlib2, ptyprocess, pexpect, pickleshare, pkginfo, pluggy, wcwidth, prompt-toolkit, Pygments, pytest, python-dateutil, requests, requests-mock, requests-toolbelt, simplegeneric, snowballstemmer, virtualenv, tox, ipython-genutils, traitlets, xmltodict, fnapy
+  Found existing installation: pytest 3.0.2
+    Uninstalling pytest-3.0.2:
+      Successfully uninstalled pytest-3.0.2
+Successfully installed Jinja2-2.8 MarkupSafe-0.23 Pygments-2.1.3 alabaster-0.7.9 args-0.1.0 backports.shutil-get-terminal-size-1.0.0 beautifulsoup4-4.5.1 clint-0.5.1 decorator-4.0.10 docutils-0.12 fnapy-0.0.1.dev82 imagesize-0.7.1 ipython-genutils-0.1.0 lxml-3.6.4 pathlib2-2.1.0 pexpect-4.2.1 pickleshare-0.7.4 pkginfo-1.3.2 pluggy-0.3.1 prompt-toolkit-1.0.7 ptyprocess-0.5.1 pytest-3.0.0 python-dateutil-2.5.3 requests-2.11.1 requests-mock-1.0.0 requests-toolbelt-0.7.0 simplegeneric-0.8.1 six-1.10.0 snowballstemmer-1.2.1 tox-2.3.1 traitlets-4.2.2 virtualenv-15.0.3 wcwidth-0.1.7 xmltodict-0.10.2

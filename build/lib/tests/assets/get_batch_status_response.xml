@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<batch_status_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+        <batch_id>5D239E08-F6C1-8965-F2FA-7EFCC9E7BAD1</batch_id>
+    </batch_status_response>

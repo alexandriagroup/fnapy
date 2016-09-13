@@ -1,0 +1,332 @@
+actionid: tox
+msg: packaging
+cmdargs: ['/Users/damien/.virtualenvs/fnac/bin/python2.7', local('/Users/damien/Dropbox/Projects/fnapy/setup.py'), 'sdist', '--formats=zip', '--dist-dir', local('/Users/damien/Dropbox/Projects/fnapy/.tox/dist')]
+env: None
+
+running sdist
+running egg_info
+writing requirements to fnapy.egg-info/requires.txt
+writing fnapy.egg-info/PKG-INFO
+writing top-level names to fnapy.egg-info/top_level.txt
+writing dependency_links to fnapy.egg-info/dependency_links.txt
+reading manifest file 'fnapy.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no previously-included files matching '__pycache__' found under directory '*'
+writing manifest file 'fnapy.egg-info/SOURCES.txt'
+running check
+warning: check: missing required meta-data: url
+
+creating fnapy-0.1.0
+creating fnapy-0.1.0/docs
+creating fnapy-0.1.0/docs/_build
+creating fnapy-0.1.0/docs/_build/doctrees
+creating fnapy-0.1.0/docs/_build/doctrees/_themes
+creating fnapy-0.1.0/docs/_build/doctrees/_themes/kr-sphinx-themes
+creating fnapy-0.1.0/docs/_build/html
+creating fnapy-0.1.0/docs/_build/html/_modules
+creating fnapy-0.1.0/docs/_build/html/_sources
+creating fnapy-0.1.0/docs/_build/html/_sources/_themes
+creating fnapy-0.1.0/docs/_build/html/_sources/_themes/kr-sphinx-themes
+creating fnapy-0.1.0/docs/_build/html/_static
+creating fnapy-0.1.0/docs/_build/html/_themes
+creating fnapy-0.1.0/docs/_build/html/_themes/kr-sphinx-themes
+creating fnapy-0.1.0/docs/_themes
+creating fnapy-0.1.0/docs/_themes/kr
+creating fnapy-0.1.0/docs/_themes/kr/static
+creating fnapy-0.1.0/fnapy
+creating fnapy-0.1.0/fnapy.egg-info
+creating fnapy-0.1.0/tests
+creating fnapy-0.1.0/tests/assets
+creating fnapy-0.1.0/tests/offline
+creating fnapy-0.1.0/tests/online
+copying files to fnapy-0.1.0...
+copying .travis.yml -> fnapy-0.1.0
+copying AUTHORS.rst -> fnapy-0.1.0
+copying CHANGELOG.rst -> fnapy-0.1.0
+copying LICENSE.txt -> fnapy-0.1.0
+copying MANIFEST.in -> fnapy-0.1.0
+copying Makefile -> fnapy-0.1.0
+copying NOTES.md -> fnapy-0.1.0
+copying README.rst -> fnapy-0.1.0
+copying requirements-dev.txt -> fnapy-0.1.0
+copying requirements.txt -> fnapy-0.1.0
+copying setup.cfg -> fnapy-0.1.0
+copying setup.py -> fnapy-0.1.0
+copying tox.ini -> fnapy-0.1.0
+copying docs/Makefile -> fnapy-0.1.0/docs
+copying docs/api.rst -> fnapy-0.1.0/docs
+copying docs/conf.py -> fnapy-0.1.0/docs
+copying docs/index.rst -> fnapy-0.1.0/docs
+copying docs/make.bat -> fnapy-0.1.0/docs
+copying docs/quickstart.rst -> fnapy-0.1.0/docs
+copying docs/_build/doctrees/api.doctree -> fnapy-0.1.0/docs/_build/doctrees
+copying docs/_build/doctrees/environment.pickle -> fnapy-0.1.0/docs/_build/doctrees
+copying docs/_build/doctrees/index.doctree -> fnapy-0.1.0/docs/_build/doctrees
+copying docs/_build/doctrees/quickstart.doctree -> fnapy-0.1.0/docs/_build/doctrees
+copying docs/_build/doctrees/_themes/kr-sphinx-themes/README.doctree -> fnapy-0.1.0/docs/_build/doctrees/_themes/kr-sphinx-themes
+copying docs/_build/html/.buildinfo -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/api.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/genindex.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/index.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/objects.inv -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/py-modindex.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/quickstart.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/search.html -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/searchindex.js -> fnapy-0.1.0/docs/_build/html
+copying docs/_build/html/_modules/connection.html -> fnapy-0.1.0/docs/_build/html/_modules
+copying docs/_build/html/_modules/fnapy_manager.html -> fnapy-0.1.0/docs/_build/html/_modules
+copying docs/_build/html/_modules/index.html -> fnapy-0.1.0/docs/_build/html/_modules
+copying docs/_build/html/_modules/utils.html -> fnapy-0.1.0/docs/_build/html/_modules
+copying docs/_build/html/_sources/api.txt -> fnapy-0.1.0/docs/_build/html/_sources
+copying docs/_build/html/_sources/index.txt -> fnapy-0.1.0/docs/_build/html/_sources
+copying docs/_build/html/_sources/quickstart.txt -> fnapy-0.1.0/docs/_build/html/_sources
+copying docs/_build/html/_sources/_themes/kr-sphinx-themes/README.txt -> fnapy-0.1.0/docs/_build/html/_sources/_themes/kr-sphinx-themes
+copying docs/_build/html/_static/ajax-loader.gif -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/basic.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/classic.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/comment-bright.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/comment-close.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/comment.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/default.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/doctools.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/down-pressed.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/down.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/file.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/flasky.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/jquery-1.11.1.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/jquery.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/minus.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/plus.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/pygments.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/searchtools.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/sidebar.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/small_flask.css -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/underscore-1.3.1.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/underscore.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/up-pressed.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/up.png -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_static/websupport.js -> fnapy-0.1.0/docs/_build/html/_static
+copying docs/_build/html/_themes/kr-sphinx-themes/README.html -> fnapy-0.1.0/docs/_build/html/_themes/kr-sphinx-themes
+copying docs/_themes/kr/layout.html -> fnapy-0.1.0/docs/_themes/kr
+copying docs/_themes/kr/relations.html -> fnapy-0.1.0/docs/_themes/kr
+copying docs/_themes/kr/theme.conf -> fnapy-0.1.0/docs/_themes/kr
+copying docs/_themes/kr/static/flasky.css_t -> fnapy-0.1.0/docs/_themes/kr/static
+copying docs/_themes/kr/static/small_flask.css -> fnapy-0.1.0/docs/_themes/kr/static
+copying fnapy/__init__.py -> fnapy-0.1.0/fnapy
+copying fnapy/config.py -> fnapy-0.1.0/fnapy
+copying fnapy/connection.py -> fnapy-0.1.0/fnapy
+copying fnapy/fnapy_manager.py -> fnapy-0.1.0/fnapy
+copying fnapy/utils.py -> fnapy-0.1.0/fnapy
+copying fnapy.egg-info/PKG-INFO -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/SOURCES.txt -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/dependency_links.txt -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/pbr.json -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/requires.txt -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/top_level.txt -> fnapy-0.1.0/fnapy.egg-info
+copying fnapy.egg-info/zip-safe -> fnapy-0.1.0/fnapy.egg-info
+copying tests/__init__.py -> fnapy-0.1.0/tests
+copying tests/test_http_messages.py -> fnapy-0.1.0/tests
+copying tests/test_query.py -> fnapy-0.1.0/tests
+copying tests/assets/auth_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/get_batch_status_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/get_batch_status_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_batch_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_batch_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_carriers_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_carriers_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_client_order_comments_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_client_order_comments_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_incidents_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_incidents_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_messages_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_messages_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_offers_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_offers_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_offers_with_multiple_parameters_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_offers_with_multiple_parameters_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_orders_created_between_dates_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_orders_created_between_dates_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_orders_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_orders_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_pricing_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_pricing_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_shop_invoices_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/query_shop_invoices_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_client_order_comments_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_client_order_comments_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_incidents_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_incidents_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_messages_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_messages_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_offers_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_offers_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_orders_request.xml -> fnapy-0.1.0/tests/assets
+copying tests/assets/update_orders_response.xml -> fnapy-0.1.0/tests/assets
+copying tests/offline/__init__.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_batch.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_carriers.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_client_order_comments.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_incidents.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_messages.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_offers.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_orders.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_pricing.py -> fnapy-0.1.0/tests/offline
+copying tests/offline/test_shop_invoices.py -> fnapy-0.1.0/tests/offline
+copying tests/online/__init__.py -> fnapy-0.1.0/tests/online
+copying tests/online/old_test_fnapy_manager.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_batch.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_carriers.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_client_order_comments.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_incidents.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_messages.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_offers.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_orders.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_pricing.py -> fnapy-0.1.0/tests/online
+copying tests/online/test_shop_invoices.py -> fnapy-0.1.0/tests/online
+Writing fnapy-0.1.0/setup.cfg
+creating '.tox/dist/fnapy-0.1.0.zip' and adding 'fnapy-0.1.0' to it
+adding 'fnapy-0.1.0/.travis.yml'
+adding 'fnapy-0.1.0/AUTHORS.rst'
+adding 'fnapy-0.1.0/CHANGELOG.rst'
+adding 'fnapy-0.1.0/LICENSE.txt'
+adding 'fnapy-0.1.0/Makefile'
+adding 'fnapy-0.1.0/MANIFEST.in'
+adding 'fnapy-0.1.0/NOTES.md'
+adding 'fnapy-0.1.0/PKG-INFO'
+adding 'fnapy-0.1.0/README.rst'
+adding 'fnapy-0.1.0/requirements-dev.txt'
+adding 'fnapy-0.1.0/requirements.txt'
+adding 'fnapy-0.1.0/setup.cfg'
+adding 'fnapy-0.1.0/setup.py'
+adding 'fnapy-0.1.0/tox.ini'
+adding 'fnapy-0.1.0/docs/api.rst'
+adding 'fnapy-0.1.0/docs/conf.py'
+adding 'fnapy-0.1.0/docs/index.rst'
+adding 'fnapy-0.1.0/docs/make.bat'
+adding 'fnapy-0.1.0/docs/Makefile'
+adding 'fnapy-0.1.0/docs/quickstart.rst'
+adding 'fnapy-0.1.0/docs/_build/doctrees/api.doctree'
+adding 'fnapy-0.1.0/docs/_build/doctrees/environment.pickle'
+adding 'fnapy-0.1.0/docs/_build/doctrees/index.doctree'
+adding 'fnapy-0.1.0/docs/_build/doctrees/quickstart.doctree'
+adding 'fnapy-0.1.0/docs/_build/doctrees/_themes/kr-sphinx-themes/README.doctree'
+adding 'fnapy-0.1.0/docs/_build/html/.buildinfo'
+adding 'fnapy-0.1.0/docs/_build/html/api.html'
+adding 'fnapy-0.1.0/docs/_build/html/genindex.html'
+adding 'fnapy-0.1.0/docs/_build/html/index.html'
+adding 'fnapy-0.1.0/docs/_build/html/objects.inv'
+adding 'fnapy-0.1.0/docs/_build/html/py-modindex.html'
+adding 'fnapy-0.1.0/docs/_build/html/quickstart.html'
+adding 'fnapy-0.1.0/docs/_build/html/search.html'
+adding 'fnapy-0.1.0/docs/_build/html/searchindex.js'
+adding 'fnapy-0.1.0/docs/_build/html/_modules/connection.html'
+adding 'fnapy-0.1.0/docs/_build/html/_modules/fnapy_manager.html'
+adding 'fnapy-0.1.0/docs/_build/html/_modules/index.html'
+adding 'fnapy-0.1.0/docs/_build/html/_modules/utils.html'
+adding 'fnapy-0.1.0/docs/_build/html/_sources/api.txt'
+adding 'fnapy-0.1.0/docs/_build/html/_sources/index.txt'
+adding 'fnapy-0.1.0/docs/_build/html/_sources/quickstart.txt'
+adding 'fnapy-0.1.0/docs/_build/html/_sources/_themes/kr-sphinx-themes/README.txt'
+adding 'fnapy-0.1.0/docs/_build/html/_static/ajax-loader.gif'
+adding 'fnapy-0.1.0/docs/_build/html/_static/basic.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/classic.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/comment-bright.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/comment-close.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/comment.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/default.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/doctools.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/down-pressed.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/down.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/file.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/flasky.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/jquery-1.11.1.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/jquery.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/minus.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/plus.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/pygments.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/searchtools.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/sidebar.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/small_flask.css'
+adding 'fnapy-0.1.0/docs/_build/html/_static/underscore-1.3.1.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/underscore.js'
+adding 'fnapy-0.1.0/docs/_build/html/_static/up-pressed.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/up.png'
+adding 'fnapy-0.1.0/docs/_build/html/_static/websupport.js'
+adding 'fnapy-0.1.0/docs/_build/html/_themes/kr-sphinx-themes/README.html'
+adding 'fnapy-0.1.0/docs/_themes/kr/layout.html'
+adding 'fnapy-0.1.0/docs/_themes/kr/relations.html'
+adding 'fnapy-0.1.0/docs/_themes/kr/theme.conf'
+adding 'fnapy-0.1.0/docs/_themes/kr/static/flasky.css_t'
+adding 'fnapy-0.1.0/docs/_themes/kr/static/small_flask.css'
+adding 'fnapy-0.1.0/fnapy/__init__.py'
+adding 'fnapy-0.1.0/fnapy/config.py'
+adding 'fnapy-0.1.0/fnapy/connection.py'
+adding 'fnapy-0.1.0/fnapy/fnapy_manager.py'
+adding 'fnapy-0.1.0/fnapy/utils.py'
+adding 'fnapy-0.1.0/fnapy.egg-info/dependency_links.txt'
+adding 'fnapy-0.1.0/fnapy.egg-info/pbr.json'
+adding 'fnapy-0.1.0/fnapy.egg-info/PKG-INFO'
+adding 'fnapy-0.1.0/fnapy.egg-info/requires.txt'
+adding 'fnapy-0.1.0/fnapy.egg-info/SOURCES.txt'
+adding 'fnapy-0.1.0/fnapy.egg-info/top_level.txt'
+adding 'fnapy-0.1.0/fnapy.egg-info/zip-safe'
+adding 'fnapy-0.1.0/tests/__init__.py'
+adding 'fnapy-0.1.0/tests/test_http_messages.py'
+adding 'fnapy-0.1.0/tests/test_query.py'
+adding 'fnapy-0.1.0/tests/assets/auth_response.xml'
+adding 'fnapy-0.1.0/tests/assets/get_batch_status_request.xml'
+adding 'fnapy-0.1.0/tests/assets/get_batch_status_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_batch_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_batch_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_carriers_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_carriers_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_client_order_comments_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_client_order_comments_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_incidents_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_incidents_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_messages_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_messages_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_offers_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_offers_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_offers_with_multiple_parameters_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_offers_with_multiple_parameters_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_orders_created_between_dates_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_orders_created_between_dates_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_orders_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_orders_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_pricing_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_pricing_response.xml'
+adding 'fnapy-0.1.0/tests/assets/query_shop_invoices_request.xml'
+adding 'fnapy-0.1.0/tests/assets/query_shop_invoices_response.xml'
+adding 'fnapy-0.1.0/tests/assets/update_client_order_comments_request.xml'
+adding 'fnapy-0.1.0/tests/assets/update_client_order_comments_response.xml'
+adding 'fnapy-0.1.0/tests/assets/update_incidents_request.xml'
+adding 'fnapy-0.1.0/tests/assets/update_incidents_response.xml'
+adding 'fnapy-0.1.0/tests/assets/update_messages_request.xml'
+adding 'fnapy-0.1.0/tests/assets/update_messages_response.xml'
+adding 'fnapy-0.1.0/tests/assets/update_offers_request.xml'
+adding 'fnapy-0.1.0/tests/assets/update_offers_response.xml'
+adding 'fnapy-0.1.0/tests/assets/update_orders_request.xml'
+adding 'fnapy-0.1.0/tests/assets/update_orders_response.xml'
+adding 'fnapy-0.1.0/tests/offline/__init__.py'
+adding 'fnapy-0.1.0/tests/offline/test_batch.py'
+adding 'fnapy-0.1.0/tests/offline/test_carriers.py'
+adding 'fnapy-0.1.0/tests/offline/test_client_order_comments.py'
+adding 'fnapy-0.1.0/tests/offline/test_incidents.py'
+adding 'fnapy-0.1.0/tests/offline/test_messages.py'
+adding 'fnapy-0.1.0/tests/offline/test_offers.py'
+adding 'fnapy-0.1.0/tests/offline/test_orders.py'
+adding 'fnapy-0.1.0/tests/offline/test_pricing.py'
+adding 'fnapy-0.1.0/tests/offline/test_shop_invoices.py'
+adding 'fnapy-0.1.0/tests/online/__init__.py'
+adding 'fnapy-0.1.0/tests/online/old_test_fnapy_manager.py'
+adding 'fnapy-0.1.0/tests/online/test_batch.py'
+adding 'fnapy-0.1.0/tests/online/test_carriers.py'
+adding 'fnapy-0.1.0/tests/online/test_client_order_comments.py'
+adding 'fnapy-0.1.0/tests/online/test_incidents.py'
+adding 'fnapy-0.1.0/tests/online/test_messages.py'
+adding 'fnapy-0.1.0/tests/online/test_offers.py'
+adding 'fnapy-0.1.0/tests/online/test_orders.py'
+adding 'fnapy-0.1.0/tests/online/test_pricing.py'
+adding 'fnapy-0.1.0/tests/online/test_shop_invoices.py'
+removing 'fnapy-0.1.0' (and everything under it)
