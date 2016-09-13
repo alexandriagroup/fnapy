@@ -20,6 +20,7 @@ install_requirements = [
 setup_requirements = [
     'pbr>=1.9', 'setuptools>=17.1'
 ]
+setup_requirements.extend(install_requirements)
 
 def is_not_in_travis():
     return not os.getcwd().startswith('/home/travis')
