@@ -16,10 +16,6 @@ install_requirements = [
     'bs4'
 ]
 
-setup_requirements = [
-    'pbr>=1.9', 'setuptools>=17.1'
-]
-
 setup(
     name='fnapy',
     author='Taurus Olson',
@@ -29,8 +25,6 @@ setup(
     keywords=['api', 'fnac', 'python', 'webservices'],
     packages=find_packages(),
     install_requires=install_requirements,
-    setup_requires=setup_requirements,
-    pbr=True,
     zip_safe=True,
     license='MIT',
     classifiers = [
