@@ -1,13 +1,24 @@
+.. changelog::
+
 CHANGES
 =======
 
+* Give up on pbr in the package
+* Try to fix pbr issue with build in travis
+* Retry pbr in setup
+* Update doc with the new Query class
+* Remove sudo in .travis.yml
+* * Fix minor thing in XML request file
+* Allow complex queries with Query
+* Add the tests for test_http_messages and test_query
+* Remove pbr in setup
+* Show log after failure in travis
+* Simplity .travis.yml
+* Update ChangeLog
+* Add MANIFEST.in
 * Simplify the tests in tox
 * Add AUTHORS and ChangeLog
 * Use pbr in the setup
-
-0.2
----
-
 * Ignore directories for Python packaging
 * Add test_http_messages and test_query in tox
 * Update requirements-dev.txt
@@ -22,10 +33,6 @@ CHANGES
 * Fix .travis.yml
 * Add continuous integration with TravisCI
 * Update quickstart
-
-0.1
----
-
 * Fix heading in quickstart
 * Update the quickstart section of the documentation
 * Improve query method docstrings
