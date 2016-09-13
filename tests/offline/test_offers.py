@@ -12,17 +12,15 @@ from fnapy.fnapy_manager import FnapyManager
 from tests import make_requests_get_mock, fake_manager, offers_data,\
 request_is_valid
 from tests.offline import ContextualTest
+from fnapy.utils import Query
 
+dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
+dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
 
 def test_query_offers(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager, 'query_offers', 'offers_query')
     with context:
-        dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc)
-        dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
-        date = {'@type': 'Created',
-                'min': { "#text": dmin.isoformat() },
-                'max': { "#text": dmax.isoformat() }
-                }
+        date = Query('date', type='Created').between(min=dmin, max=dmax)
         fake_manager.query_offers(results_count=100, date=date)
 
 
@@ -42,12 +40,7 @@ def test_query_offers_with_multiple_parameters(monkeypatch, fake_manager):
     context = ContextualTest(monkeypatch, fake_manager,
                              'query_offers_with_multiple_parameters', 'offers_query')
     with context:
-        dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc)
-        dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
-        date = {'@type': 'Created',
-                'min': { "#text": dmin.isoformat() },
-                'max': { "#text": dmax.isoformat() }
-                }
-        quantity = {'@mode': 'Equals', '@value': 10}
+        date = Query('date', type='Created').between(min=dmin, max=dmax)
+        quantity = Query('quantity').eq(10)
         fake_manager.query_offers(results_count=100, date=date,
                                   quantity=quantity)

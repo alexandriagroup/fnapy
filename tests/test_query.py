@@ -27,7 +27,14 @@ def test_query_between():
     dmax = datetime(2016, 9, 2, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
     date = Query('date', type='CreatedAt')
     _dict = date.between(min=dmin, max=dmax).dict
+
+    # Assert the number of keys is correct
     assert len(_dict) == 3
+
+    # Assert the keys are correct
     assert _dict.get('@type') == 'CreatedAt'
     assert _dict.get('min', {}).get('#text') == dmin
     assert _dict.get('max', {}).get('#text') == dmax
+
+    # Assert the order of the keys is preserverd
+    assert _dict.keys() == ['@type', 'min', 'max']

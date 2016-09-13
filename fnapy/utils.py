@@ -42,14 +42,42 @@ class Query(object):
         for k, v in tags.items():
             self._dict[k] = v
 
-    def between(self, min, max):
+    def _create_new_dict(self):
         new_dict = OrderedDict()
         for k, v in self._dict.items():
             if k.startswith('@'):
                 new_dict[k] = v
+        return new_dict
+
+    def between(self, min, max):
+        new_dict = self._create_new_dict()
         new_dict['min'] = {'#text': min}
         new_dict['max'] = {'#text': max}
         return Query(self.name, tags=new_dict)
+
+    def _operator(self, op, value):
+        op_to_mode = {'eq': 'Equals',
+                      'ge': 'GreaterThanOrEquals', 'gt': 'GreaterThan',
+                      'le': 'LessThanOrEquals', 'lt': 'LessThan'} 
+        new_dict = self._create_new_dict()
+        new_dict['@mode'] = op_to_mode[op]
+        new_dict['@value'] = value
+        return Query(self.name, tags=new_dict)
+
+    def eq(self, value):
+        return self._operator('eq', value)
+
+    def ge(self, value):
+        return self._operator('ge', value)
+
+    def gt(self, value):
+        return self._operator('gt', value)
+
+    def le(self, value):
+        return self._operator('le', value)
+
+    def lt(self, value):
+        return self._operator('lt', value)
 
     @property
     def dict(self):

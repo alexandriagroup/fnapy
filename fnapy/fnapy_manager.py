@@ -252,17 +252,17 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
 
         Examples: 
-        Find the ${query_type} created between 2 dates::
-
-            >>> date = {'@type': 'Modified',
-            'min': {'#text': "2016-08-23T17:00:00+00:00"},
-            'max': {'#text': "2016-08-26T17:00:00+00:00"}
-            }
-            >>> response = manager.query_${query_type}(date=date)
-
         Find the 2 first items  of the catalog::
 
             response = manager.query_${query_type}(results_count=2, paging=1)
+
+        Find the ${query_type} created between 2 dates::
+
+            >>> from fnapy.utils import Query
+            >>> date = Query('date', type='Modified')\
+                .between(min="2016-08-23T17:00:00+00:00",
+                         max="2016-08-26T17:00:00+00:00")
+            >>> response = manager.query_${query_type}(date=date)
 
         """
         print 'Querying {}...'.format(query_type)
@@ -287,6 +287,9 @@ class FnapyManager(object):
         # Create the XML from the queried elements 
         if len(elements):
             for key, value in elements.iteritems():
+                # Handle cases where Query is used
+                if isinstance(value, Query):
+                    value = value.dict
                 d = {key: value}
                 queried_elements = etree.XML(dict2xml(d))
                 query.append(queried_elements)
