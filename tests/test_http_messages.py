@@ -30,7 +30,7 @@ def test_request():
     etree.SubElement(element, 'batch_id').text = BATCH_ID
     
     assert request.dict == xml2dict(xml_request)
-    assert request.xml == xml_request.encode('utf-8')
+    assert request.xml == xml_request
     assert request.tag == 'batch_status'
     assert elements_are_equal(request.element, element)
 
@@ -46,7 +46,7 @@ def test_response():
     etree.SubElement(element, 'batch_id').text = BATCH_ID
     
     assert response.dict == xml2dict(xml_response)
-    assert response.xml == xml_response.encode('utf-8')
+    assert response.xml == xml_response
     assert response.tag == 'offers_update_response'
     assert elements_are_equal(response.element, element)
 

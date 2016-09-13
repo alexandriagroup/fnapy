@@ -37,4 +37,4 @@ def test_query_between():
     assert _dict.get('max', {}).get('#text') == dmax
 
     # Assert the order of the keys is preserverd
-    assert _dict.keys() == ['@type', 'min', 'max']
+    assert list(_dict) == ['@type', 'min', 'max']

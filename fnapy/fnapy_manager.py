@@ -21,8 +21,9 @@ from string import Template
 import requests
 
 # Project modules
-from utils import *
-from config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from .utils import *
+from .config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from .compat import is_py3
 
 
 def _create_docstring(query_type):
@@ -82,7 +83,6 @@ class FnapyManager(object):
         response = requests.post(URL + service, xml, headers=HEADERS)
         response = Response(response.text)
         if response.dict.get(service + '_response', {}).get('error'):
-            print 'The token expired. Reauthenticating...'
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
             setattr(self, service + '_request',
@@ -259,13 +259,12 @@ class FnapyManager(object):
         Find the ${query_type} created between 2 dates::
 
             >>> from fnapy.utils import Query
-            >>> date = Query('date', type='Modified')\
+            >>> date = Query('date', type='Modified')
                 .between(min="2016-08-23T17:00:00+00:00",
                          max="2016-08-26T17:00:00+00:00")
             >>> response = manager.query_${query_type}(date=date)
 
         """
-        print 'Querying {}...'.format(query_type)
         if query_type in FnapyManager.VALID_QUERY_TYPES:
             query_type += "_query"
         else:
@@ -277,7 +276,7 @@ class FnapyManager(object):
 
         # Make sure we have unicode
         # paging = str(paging).decode('utf-8')
-        results_count = str(results_count).decode('utf-8')
+        results_count = str(results_count)#.decode('utf-8')
 
         # Create the XML element
         query = create_xml_element(self.connection, self.token, query_type)
@@ -286,7 +285,7 @@ class FnapyManager(object):
 
         # Create the XML from the queried elements 
         if len(elements):
-            for key, value in elements.iteritems():
+            for key, value in elements.items():
                 # Handle cases where Query is used
                 if isinstance(value, Query):
                     value = value.dict
@@ -470,4 +469,8 @@ class FnapyManager(object):
 # Dynamically set the docstrings for some query methods
 for query_type in FnapyManager.VALID_QUERY_TYPES:
     method = getattr(FnapyManager, 'query_' + query_type)
-    method.__func__.__doc__ = _create_docstring(query_type)
+    if is_py3:
+        method.__doc__ = _create_docstring(query_type)
+    else:
+        method.__func__.__doc__ = _create_docstring(query_type)
+

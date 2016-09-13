@@ -23,7 +23,8 @@ import xmltodict
 import requests
 
 # Project modules
-from config import *
+from fnapy.config import *
+from fnapy.compat import to_unicode
 
 
 # CLASSES
@@ -100,7 +101,7 @@ class HttpMessage(object):
         self.dict = xml2dict(text)
 
         # Raw XML
-        self.xml = text.encode('utf-8')
+        self.xml = text
 
         # etree._Element
         self.element = etree.fromstring(self.xml)
@@ -266,7 +267,7 @@ def xml2dict(xml):
     :rtype: dict
     :returns: the dictionary correspoding to the input XML
     """
-    xmlepured = remove_namespace(xml)
+    xmlepured = remove_namespace(to_unicode(xml))
     return xmltodict.parse(xmlepured)
 
 
@@ -362,6 +363,7 @@ def set_credentials(xml):
 
 
 def post(service, request):
+    request = to_unicode(request).encode('utf-8')
     return requests.post(URL + service, request, headers=HEADERS)
 
 
