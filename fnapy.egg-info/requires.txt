@@ -1,4 +1,0 @@
-requests
-xmltodict
-lxml
-bs4
