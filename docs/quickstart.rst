@@ -100,12 +100,10 @@ actually created and retrieve information about them.
 
 Let's say you want to know the offers created between 2016-08-25 and 2016-08-31::
 
-    dmin = datetime(2016, 8, 25, 0, 0, 0).replace(tzinfo=pytz.utc)
-    dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc)
-    date = {'@type': 'Created',
-            'min': {'#text': dmin.isoformat()},
-            'max': {'#text': dmax.isoformat()}
-            }
+    from fnapy.utils import Query
+    dmin = datetime(2016, 8, 25, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
+    dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
+    date Query('date', type='Created').between(min=dmin, max=dmax)
     response = manager.query_offers(date=date)
 
 

@@ -136,28 +136,43 @@ you&#8217;ll have to use to get information about the status of your offers.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Note that <code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code> stores the last <cite>batch_id</cite> so if you want the latest <cite>batch_status</cite> you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="query-the-offers">
 <h2>Query the offers<a class="headerlink" href="#query-the-offers" title="Permalink to this headline">¶</a></h2>
 <p>When you&#8217;re satisfised with your offers you may want to know if they were
 actually created and retrieve information about them.</p>
 <p>Let&#8217;s say you want to know the offers created between 2016-08-25 and 2016-08-31:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dmin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
-<span class="n">dmax</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
-<span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Created&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="n">dmin</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()},</span>
-        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="n">dmax</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()}</span>
-        <span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="n">dmin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="n">dmax</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="n">date</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Created&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="n">dmin</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">dmax</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="query-your-orders">
-<h2>Query your orders<a class="headerlink" href="#query-your-orders" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="query-the-orders">
+<h2>Query the orders<a class="headerlink" href="#query-the-orders" title="Permalink to this headline">¶</a></h2>
 <p>Once customers placed an order on your items in your catalog, you can query
 these orders.</p>
 <p>If you want to retrieve the first 10 created orders, you&#8217;ll have to sent this request with:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-the-orders">
+<h2>Update the orders<a class="headerlink" href="#update-the-orders" title="Permalink to this headline">¶</a></h2>
+<p>Orders statuses are following this workflow:</p>
+<p>Created &gt; Accepted &gt; ToShip &gt; Shipped &gt; Received</p>
+<p>The seller acts only at acceptation and shipping steps.</p>
+<p>This is the how we accept the first and refuse the second order for the order_id 003ECCA1YVFBW:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
+<span class="n">action2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Refused&quot;</span><span class="p">}</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">action1</span><span class="p">,</span> <span class="n">action2</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="s1">&#39;003ECCA1YVFBW&#39;</span><span class="p">,</span> <span class="s2">&quot;accept_order&quot;</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -180,7 +195,8 @@ interface.</p>
 <li><a class="reference internal" href="#update-your-offers">Update your offers</a></li>
 <li><a class="reference internal" href="#get-the-batch-status">Get the batch status</a></li>
 <li><a class="reference internal" href="#query-the-offers">Query the offers</a></li>
-<li><a class="reference internal" href="#query-your-orders">Query your orders</a></li>
+<li><a class="reference internal" href="#query-the-orders">Query the orders</a></li>
+<li><a class="reference internal" href="#update-the-orders">Update the orders</a></li>
 <li><a class="reference internal" href="#request-and-response">Request and Response</a></li>
 </ul>
 </li>

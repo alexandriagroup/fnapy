@@ -172,16 +172,15 @@
 </tbody>
 </table>
 <p>Examples: 
-Find the client_order_comments created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the client_order_comments created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -226,16 +225,15 @@ to deal specifically with an incident.</li>
 </tbody>
 </table>
 <p>Examples: 
-Find the incidents created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the incidents created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -275,16 +273,15 @@ Find the incidents created between 2 dates:</p>
 </tbody>
 </table>
 <p>Examples: 
-Find the messages created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the messages created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -319,16 +316,15 @@ Find the messages created between 2 dates:</p>
 </tbody>
 </table>
 <p>Examples: 
-Find the offers created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the offers created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -367,16 +363,15 @@ Find the offers created between 2 dates:</p>
 </tbody>
 </table>
 <p>Examples: 
-Find the orders created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the orders created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -426,16 +421,15 @@ product (designated by its ean)</p>
 </tbody>
 </table>
 <p>Examples: 
-Find the shop_invoices created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;Modified&#39;</span><span class="p">,</span>
-<span class="go">&#39;min&#39;: {&#39;#text&#39;: &quot;2016-08-23T17:00:00+00:00&quot;},</span>
-<span class="go">&#39;max&#39;: {&#39;#text&#39;: &quot;2016-08-26T17:00:00+00:00&quot;}</span>
-<span class="go">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+Find the 2 first items  of the catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<p>Find the shop_invoices created between 2 dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
