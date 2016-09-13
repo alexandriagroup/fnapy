@@ -7,7 +7,6 @@
 # Distributed under terms of the MIT license.
 
 
-import os
 from setuptools import setup, find_packages
 
 install_requirements = [
@@ -17,25 +16,15 @@ install_requirements = [
     'bs4'
 ]
 
-setup_requirements = [
-    'pbr>=1.9', 'setuptools>=17.1'
-]
-setup_requirements.extend(install_requirements)
-
-def is_not_in_travis():
-    return not os.getcwd().startswith('/home/travis')
-
-
 setup(
     name='fnapy',
     author='Taurus Olson',
     author_email='taurusolson@gmail.com',
+    version='0.1',
     description='A Python API for FNAC WebServices',
     keywords=['api', 'fnac', 'python', 'webservices'],
     packages=find_packages(),
     install_requires=install_requirements,
-    setup_requires=setup_requirements,
-    pbr=is_not_in_travis(),
     zip_safe=True,
     license='MIT',
     classifiers = [
