@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quickstart &#8212; fnapy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Welcome to fnapy’s documentation!" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to fnapy’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">fnapy 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="quickstart">
+<span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This page gives a good introduction in how to get started with fnapy.</p>
+<p>Before starting, make sure you have your credentials to connect to the FNAC
+API.</p>
+<ul>
+<li><p class="first">Create a connection to the FNAC Marketplace API with your credentials:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.fnapy_manager</span> <span class="k">import</span> <span class="n">FnapyManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">pattern_id</span><span class="p">,</span> <span class="n">shop_id</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the manager:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.connection</span> <span class="k">import</span> <span class="n">FnapyConnection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">FnapyManager</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Now you should be able to access the different web services.</p>
+<div class="section" id="update-your-offers">
+<h2>Update your offers<a class="headerlink" href="#update-your-offers" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s create some offers in our catalog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">offer_data1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;product_reference&#39;</span><span class="p">:</span><span class="s1">&#39;0711719247159&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;offer_reference&#39;</span><span class="p">:</span><span class="s1">&#39;B76A-CD5-153&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;product_state&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;New product - 2-3 days shipping, from France&#39;</span><span class="p">}</span>
+<span class="n">offer_data2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;product_reference&#39;</span><span class="p">:</span><span class="s1">&#39;5030917077418&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;offer_reference&#39;</span><span class="p">:</span><span class="s1">&#39;B067-F0D-75E&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;product_state&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;New product - 2-3 days shipping, from France&#39;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">([</span><span class="n">offers_data1</span><span class="p">,</span> <span class="n">offer_data2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Behind the scene, the manager sent an XML request to the <cite>offers_update</cite> service. We can
+have a look at this request with the attribute <cite>offers_update_request</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">offers_update_request</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">request</span><span class="o">.</span><span class="n">xml</span>
+<span class="go">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;</span>
+<span class="go">&lt;offers_update xmlns=&quot;http://www.fnac.com/schemas/mp-dialog.xsd&quot; partner_id=&quot;XXX&quot; shop_id=&quot;XXX&quot; token=&quot;XXX&quot;&gt;</span>
+<span class="go">  &lt;offer&gt;</span>
+<span class="go">    &lt;product_reference type=&quot;Ean&quot;&gt;0711719247159&lt;/product_reference&gt;</span>
+<span class="go">    &lt;offer_reference type=&quot;SellerSku&quot;&gt;&lt;![CDATA[B76A-CD5-153]]&gt;&lt;/offer_reference&gt;</span>
+<span class="go">    &lt;price&gt;15&lt;/price&gt;</span>
+<span class="go">    &lt;product_state&gt;11&lt;/product_state&gt;</span>
+<span class="go">    &lt;quantity&gt;10&lt;/quantity&gt;</span>
+<span class="go">    &lt;description&gt;&lt;![CDATA[New product - 2-3 days shipping, from France]]&gt;&lt;/description&gt;</span>
+<span class="go">  &lt;/offer&gt;</span>
+<span class="go">  &lt;offer&gt;</span>
+<span class="go">    &lt;product_reference type=&quot;Ean&quot;&gt;5030917077418&lt;/product_reference&gt;</span>
+<span class="go">    &lt;offer_reference type=&quot;SellerSku&quot;&gt;&lt;![CDATA[B067-F0D-75E]]&gt;&lt;/offer_reference&gt;</span>
+<span class="go">    &lt;price&gt;20&lt;/price&gt;</span>
+<span class="go">    &lt;product_state&gt;11&lt;/product_state&gt;</span>
+<span class="go">    &lt;quantity&gt;16&lt;/quantity&gt;</span>
+<span class="go">    &lt;description&gt;&lt;![CDATA[New product - 2-3 days shipping, from France]]&gt;&lt;/description&gt;</span>
+<span class="go">  &lt;/offer&gt;</span>
+<span class="go">&lt;/offers_update&gt;</span>
+</pre></div>
+</div>
+<p>Actually this request is an instance of the <code class="xref py py-class docutils literal"><span class="pre">Request</span></code> class.
+We&#8217;ll talk about it later. For now, let&#8217;s see what we&#8217;ve got in our response:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">response</span><span class="o">.</span><span class="n">xml</span>
+<span class="go">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="go">&lt;offers_update_response status=&quot;OK&quot; xmlns=&quot;http://www.fnac.com/schemas/mp-dialog.xsd&quot;&gt;</span>
+<span class="go">    &lt;batch_id&gt;88BD9517-A73C-78E0-04DB-AC5ADE1D63F6&lt;/batch_id&gt;</span>
+<span class="go">&lt;/offers_update_response&gt;</span>
+</pre></div>
+</div>
+<p>The response sent by the server is just an instance of the <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> class. We can see that the status of the response is OK and the
+batch_id is 88BD9517-A73C-78E0-04DB-AC5ADE1D63F6. This is basically the id
+you&#8217;ll have to use to get information about the status of your offers.</p>
+</div>
+<div class="section" id="get-the-batch-status">
+<h2>Get the batch status<a class="headerlink" href="#get-the-batch-status" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">batch_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="s1">&#39;offers_update_response&#39;</span><span class="p">][</span><span class="s1">&#39;batch_id&#39;</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that <code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code> stores the last <cite>batch_id</cite> so if you want the latest <cite>batch_status</cite> you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-the-offers">
+<h2>Query the offers<a class="headerlink" href="#query-the-offers" title="Permalink to this headline">¶</a></h2>
+<p>When you&#8217;re satisfised with your offers you may want to know if they were
+actually created and retrieve information about them.</p>
+<p>Let&#8217;s say you want to know the offers created between 2016-08-25 and 2016-08-31:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<span class="n">dmin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="n">dmax</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="n">date</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Created&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="n">dmin</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">dmax</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-the-orders">
+<h2>Query the orders<a class="headerlink" href="#query-the-orders" title="Permalink to this headline">¶</a></h2>
+<p>Once customers placed an order on your items in your catalog, you can query
+these orders.</p>
+<p>If you want to retrieve the first 10 created orders, you&#8217;ll have to sent this request with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-the-orders">
+<h2>Update the orders<a class="headerlink" href="#update-the-orders" title="Permalink to this headline">¶</a></h2>
+<p>Orders statuses are following this workflow:</p>
+<p>Created &gt; Accepted &gt; ToShip &gt; Shipped &gt; Received</p>
+<p>The seller acts only at acceptation and shipping steps.</p>
+<p>This is the how we accept the first and refuse the second order for the order_id 003ECCA1YVFBW:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
+<span class="n">action2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Refused&quot;</span><span class="p">}</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">action1</span><span class="p">,</span> <span class="n">action2</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="s1">&#39;003ECCA1YVFBW&#39;</span><span class="p">,</span> <span class="s2">&quot;accept_order&quot;</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="request-and-response">
+<h2>Request and Response<a class="headerlink" href="#request-and-response" title="Permalink to this headline">¶</a></h2>
+<p>Both <code class="xref py py-class docutils literal"><span class="pre">Request</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Response</span></code> share the same
+interface.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#update-your-offers">Update your offers</a></li>
+<li><a class="reference internal" href="#get-the-batch-status">Get the batch status</a></li>
+<li><a class="reference internal" href="#query-the-offers">Query the offers</a></li>
+<li><a class="reference internal" href="#query-the-orders">Query the orders</a></li>
+<li><a class="reference internal" href="#update-the-orders">Update the orders</a></li>
+<li><a class="reference internal" href="#request-and-response">Request and Response</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to fnapy&#8217;s documentation!</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API</a></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quickstart.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2016, Alexandria.
+    </div>
+  </body>
+</html>
