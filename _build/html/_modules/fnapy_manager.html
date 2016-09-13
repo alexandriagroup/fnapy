@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fnapy_manager &#8212; fnapy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fnapy 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="../_static/small_flask.css" type= "text/css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">fnapy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fnapy_manager</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># vim:fenc=utf-8</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright © 2016  &lt;&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under terms of the MIT license.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">**fnapy** is a Python library using the FnacMarketPlace API to connect to your</span>
+<span class="sd">own sales application to your FnacMarketplace seller account.  It uses the REST</span>
+<span class="sd">WebService protocol to exchange data.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Python modules</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="k">import</span> <span class="n">Template</span>
+
+<span class="c1"># Third-party modules</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Project modules</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="k">import</span> <span class="n">REQUEST_ELEMENTS</span><span class="p">,</span> <span class="n">URL</span><span class="p">,</span> <span class="n">XHTML_NAMESPACE</span><span class="p">,</span> <span class="n">HEADERS</span><span class="p">,</span> <span class="n">XML_OPTIONS</span>
+
+
+<span class="k">def</span> <span class="nf">_create_docstring</span><span class="p">(</span><span class="n">query_type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create the docstring for a given query method&quot;&quot;&quot;</span>
+    <span class="n">_query_docstring</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">FnapyManager</span><span class="o">.</span><span class="n">_query</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="n">query_type</span> <span class="o">+</span> <span class="s1">&#39;_query&#39;</span>
+    <span class="n">param_fmt</span> <span class="o">=</span> <span class="s1">&#39;:param </span><span class="si">{param.name}</span><span class="s1">: </span><span class="si">{param.desc}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">param_fmt</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="n">param</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">REQUEST_ELEMENTS</span><span class="p">[</span><span class="n">service</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">_query_docstring</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">query_type</span><span class="o">=</span><span class="n">query_type</span><span class="p">,</span>
+                                       <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FnapyManager"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager">[docs]</a><span class="k">class</span> <span class="nc">FnapyManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class to manage the different services provided by the FNAC API&quot;&quot;&quot;</span>
+
+    <span class="n">VALID_QUERY_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;offers&#39;</span><span class="p">,</span> <span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="s1">&#39;client_order_comments&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;messages&#39;</span><span class="p">,</span> <span class="s1">&#39;incidents&#39;</span><span class="p">,</span> <span class="s1">&#39;shop_invoices&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the manager&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offers_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offers_update_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_status_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders_update_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carriers_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_order_comments_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_order_comments_update_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages_update_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incidents_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incidents_update_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pricing_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shop_invoices_query_request</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The batch_id updated every time an offer is updated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Authenticate when the manager is instanciated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">authenticate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">xml</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send the request and return the response as a dictionary</span>
+
+<span class="sd">        :type element: lxml.etree.Element</span>
+<span class="sd">        :param element: the XML element</span>
+<span class="sd">        </span>
+<span class="sd">        :type xml: str</span>
+<span class="sd">        :param xml: the XML string sent in the request</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">service</span><span class="p">,</span> <span class="n">xml</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">service</span> <span class="o">+</span> <span class="s1">&#39;_response&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="s1">&#39;The token expired. Reauthenticating...&#39;</span>
+            <span class="c1"># Reauthenticate and update the element</span>
+            <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate</span><span class="p">()</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span> <span class="o">+</span> <span class="s1">&#39;_request&#39;</span><span class="p">,</span>
+                    <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">)))</span> 
+            <span class="c1"># Resend the updated request</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">service</span><span class="p">,</span>
+                                     <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span> <span class="o">+</span> <span class="s1">&#39;_request&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">xml</span><span class="p">,</span>
+                                     <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+<div class="viewcode-block" id="FnapyManager.authenticate"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.authenticate">[docs]</a>    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Authenticate to the FNAC API and return a token</span>
+<span class="sd">        </span>
+<span class="sd">        Usage::</span>
+<span class="sd">        </span>
+<span class="sd">            token = manager.authenticate()</span>
+
+<span class="sd">        :returns: token</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auth</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="kc">None</span><span class="p">:</span> <span class="n">XHTML_NAMESPACE</span><span class="p">})</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="s1">&#39;partner_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">partner_id</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="s1">&#39;shop_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">shop_id</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span> <span class="o">+</span> <span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_request</span><span class="o">.</span><span class="n">xml</span><span class="p">,</span>
+                                 <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">parse_xml</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;token&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span></div>
+
+    <span class="c1"># TODO Allow update_offers to delete an offer</span>
+    <span class="c1"># TODO Create a dictionary for the product_state</span>
+<div class="viewcode-block" id="FnapyManager.update_offers"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.update_offers">[docs]</a>    <span class="k">def</span> <span class="nf">update_offers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offers_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Post the update offers and return the response</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.update_offers(offers_data)</span>
+<span class="sd">        </span>
+<span class="sd">        :type offers_data: list</span>
+<span class="sd">        :param offers_data: the list of data to create the offers</span>
+<span class="sd">                            where data is dictionary with the keys:</span>
+
+<span class="sd">        * offer_reference  : the SKU (mandatory) </span>
+<span class="sd">        * product_reference: the EAN</span>
+<span class="sd">        * price            : the price of the offer</span>
+<span class="sd">        * product_state    : an integer representing the state of the product</span>
+<span class="sd">                             (documentation needed)</span>
+<span class="sd">        * quantity         : the quantity</span>
+<span class="sd">        * description      : (optional) a description of the offer</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">offers_update</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;offers_update&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">offer_data</span> <span class="ow">in</span> <span class="n">offers_data</span><span class="p">:</span>
+            <span class="n">offer</span> <span class="o">=</span> <span class="n">create_offer_element</span><span class="p">(</span><span class="o">**</span><span class="n">offer_data</span><span class="p">)</span>
+            <span class="n">offers_update</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offers_update_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">offers_update</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+
+        <span class="c1"># the response contains the element batch_id</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">offers_update</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">offers_update_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="s1">&#39;offers_update_response&#39;</span><span class="p">][</span><span class="s1">&#39;batch_id&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+    <span class="c1"># TODO Improve the documentation</span>
+<div class="viewcode-block" id="FnapyManager.update_orders"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.update_orders">[docs]</a>    <span class="k">def</span> <span class="nf">update_orders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">,</span> <span class="n">order_update_action</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the selected order with an order_update_action</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.update_orders(order_id, order_update_action, actions)</span>
+
+<span class="sd">        :type order_id: str</span>
+<span class="sd">        :param order_id: Order unique identifier from FNAC</span>
+
+<span class="sd">        :type order_update_action: str</span>
+<span class="sd">        :param order_update_action: Group action type for order detail action</span>
+
+<span class="sd">        :type actions: list</span>
+<span class="sd">        :param actions: a list of dictionaries with 2 keys:</span>
+<span class="sd">        `&#39;order_detail_id&#39;` and `&#39;action&#39;`</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        Available order_update_action:</span>
+
+<span class="sd">        * accept_order       : The action for the order is accepting orders by the</span>
+<span class="sd">                               seller</span>
+<span class="sd">        * confirm_to_send    : The action for the order is confirming sending</span>
+<span class="sd">                               orders by the seller</span>
+<span class="sd">        * update             : The action for the order is updating orders by the seller</span>
+<span class="sd">        * accept_all_orders  : The action for the order is accepting or refusing</span>
+<span class="sd">                               all order_details of the order by the seller</span>
+<span class="sd">        * confirm_all_to_send: The action for the order is confirming sending</span>
+<span class="sd">                               all order_details by the seller</span>
+<span class="sd">        * update_all         : The action for the order is to update tracking</span>
+<span class="sd">                               information for all order_details</span>
+
+<span class="sd">        Example: For this order (whose `order_id` is `&#39;LDJEDEAS123&#39;`), we have 2</span>
+<span class="sd">        items. We decide to accept the first item and refuse the second::</span>
+
+<span class="sd">            action1 = {&quot;order_detail_id&quot;: 1, &quot;action&quot;: &quot;Accepted&quot;}</span>
+<span class="sd">            action2 = {&quot;order_detail_id&quot;: 2, &quot;action&quot;: &quot;Refused&quot;}</span>
+<span class="sd">            response = manager.update_orders(&#39;LDJEDEAS123&#39;, &#39;accept_order&#39;, [action1, action2])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">order_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+        <span class="n">orders_update</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;orders_update&#39;</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="n">order_id</span><span class="o">=</span><span class="n">order_id</span><span class="p">,</span>
+                <span class="n">action</span><span class="o">=</span><span class="n">order_update_action</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">order_detail</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;order_detail&quot;</span><span class="p">)</span>
+            <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">order_detail</span><span class="p">,</span> <span class="s1">&#39;order_detail_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;order_detail_id&#39;</span><span class="p">])</span>
+            <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">order_detail</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span>
+            <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order_detail</span><span class="p">)</span>
+
+        <span class="n">orders_update</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders_update_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">orders_update</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">orders_update</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">orders_update_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+    <span class="c1"># FIXME The batch_status_response doesn&#39;t contain the attributes (status)</span>
+<div class="viewcode-block" id="FnapyManager.get_batch_status"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.get_batch_status">[docs]</a>    <span class="k">def</span> <span class="nf">get_batch_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the status for the given batch id</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.get_batch_status(batch_id=batch_id)</span>
+
+<span class="sd">        ..note:: :class:`FnapyManager &lt;FnapyManager&gt;` stores the last `batch_id`</span>
+<span class="sd">                 but you can provide a new one if needed.</span>
+
+<span class="sd">        :param batch_id: the batch id (optional)</span>
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">batch_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span> <span class="o">=</span> <span class="n">batch_id</span>
+
+        <span class="n">batch_status</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;batch_status&#39;</span><span class="p">)</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">batch_status</span><span class="p">,</span> <span class="s1">&#39;batch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_status_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">batch_status</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">batch_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_status_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+    <span class="c1"># TODO Implement this method that should handle any arguments to create</span>
+    <span class="c1"># the xml properly</span>
+    <span class="k">def</span> <span class="nf">_check_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valid_elements</span><span class="p">,</span> <span class="n">selected_elements</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">selected_elements</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">valid_elements</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not a valid element.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_type</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query your catalog and return the ${query_type} response</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.query_${query_type}(results_count=results_count,</span>
+<span class="sd">                                            **elements)</span>
+
+<span class="sd">        The available XML elements are the following parameters:</span>
+
+<span class="sd">        ${parameters}</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        Examples: </span>
+<span class="sd">        Find the 2 first items  of the catalog::</span>
+
+<span class="sd">            response = manager.query_${query_type}(results_count=2, paging=1)</span>
+
+<span class="sd">        Find the ${query_type} created between 2 dates::</span>
+
+<span class="sd">            &gt;&gt;&gt; from fnapy.utils import Query</span>
+<span class="sd">            &gt;&gt;&gt; date = Query(&#39;date&#39;, type=&#39;Modified&#39;)\</span>
+<span class="sd">                .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
+<span class="sd">                         max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; response = manager.query_${query_type}(date=date)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span> <span class="s1">&#39;Querying </span><span class="si">{}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">query_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">query_type</span> <span class="ow">in</span> <span class="n">FnapyManager</span><span class="o">.</span><span class="n">VALID_QUERY_TYPES</span><span class="p">:</span>
+            <span class="n">query_type</span> <span class="o">+=</span> <span class="s2">&quot;_query&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The query_type must be in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">FnapyManager</span><span class="o">.</span><span class="n">VALID_QUERY_TYPES</span><span class="p">))</span>
+
+        <span class="c1"># TODO Refactor: Use a dictionary to prevent code duplication</span>
+        <span class="c1"># Check the queried elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_elements</span><span class="p">(</span><span class="n">REQUEST_ELEMENTS</span><span class="p">[</span><span class="n">query_type</span><span class="p">],</span> <span class="n">elements</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Make sure we have unicode</span>
+        <span class="c1"># paging = str(paging).decode(&#39;utf-8&#39;)</span>
+        <span class="n">results_count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results_count</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Create the XML element</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">query_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">results_count</span><span class="p">:</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;results_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_count</span>
+
+        <span class="c1"># Create the XML from the queried elements </span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">elements</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="c1"># Handle cases where Query is used</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Query</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">dict</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+                <span class="n">queried_elements</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">dict2xml</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+                <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">queried_elements</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_type</span> <span class="o">+</span> <span class="s1">&#39;_request&#39;</span><span class="p">,</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">)))</span>
+        <span class="n">query_xml</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_type</span> <span class="o">+</span> <span class="s1">&#39;_request&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">xml</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">query_xml</span><span class="p">)</span>
+
+    <span class="c1"># TODO generator for the paging</span>
+    <span class="c1"># TODO Allow to specify the type of date (&#39;Created&#39;, &#39;Modified&#39;...)</span>
+<div class="viewcode-block" id="FnapyManager.query_offers"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_offers">[docs]</a>    <span class="k">def</span> <span class="nf">query_offers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;offers&#39;</span><span class="p">,</span> <span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_orders"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_orders">[docs]</a>    <span class="k">def</span> <span class="nf">query_orders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_pricing"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_pricing">[docs]</a>    <span class="k">def</span> <span class="nf">query_pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ean</span><span class="p">,</span> <span class="n">sellers</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compare price between all marketplace shop and fnac for a specific</span>
+<span class="sd">        product (designated by its ean)</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.query_pricing(ean, sellers=sellers)</span>
+
+<span class="sd">        :returns: response</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pricing_query</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;pricing_query&#39;</span><span class="p">)</span>
+        <span class="n">pricing_query</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;sellers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sellers</span>
+        <span class="n">product_reference</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;product_reference&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Ean&quot;</span><span class="p">)</span>
+        <span class="n">product_reference</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ean</span><span class="p">)</span>
+        <span class="n">pricing_query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product_reference</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pricing_query_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">pricing_query</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">pricing_query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pricing_query_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_batch"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_batch">[docs]</a>    <span class="k">def</span> <span class="nf">query_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return information about your currently processing import batches</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.query_batch()</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">batch_query</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;batch_query&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_query_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">batch_query</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">batch_query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_query_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_carriers"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_carriers">[docs]</a>    <span class="k">def</span> <span class="nf">query_carriers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the available carriers managed on FNAC Marketplace platform</span>
+<span class="sd">        </span>
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.query_carriers()</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">carriers_query</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;carriers_query&#39;</span><span class="p">)</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">carriers_query</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">CDATA</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carriers_query_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">carriers_query</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">carriers_query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">carriers_query_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_client_order_comments"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_client_order_comments">[docs]</a>    <span class="k">def</span> <span class="nf">query_client_order_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;client_order_comments&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.update_client_order_comments"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.update_client_order_comments">[docs]</a>    <span class="k">def</span> <span class="nf">update_client_order_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seller_comment</span><span class="p">,</span> <span class="n">order_fnac_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reply to client order comments</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.update_client_order_comments(seller_comment,</span>
+<span class="sd">                                                            order_fnac_id)</span>
+
+<span class="sd">        :type seller_comment: str</span>
+<span class="sd">        :param seller_comment: The seller comment</span>
+
+<span class="sd">        :type order_fnac_id: str</span>
+<span class="sd">        :param order_fnac_id: Order unique identifier filter from FNAC</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">client_order_comments_update</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
+                                                          <span class="s1">&#39;client_order_comments_update&#39;</span><span class="p">)</span>
+        <span class="n">comment</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">order_fnac_id</span><span class="p">)</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">comment</span><span class="p">,</span> <span class="s1">&#39;comment_reply&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">CDATA</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">)</span>
+        <span class="n">client_order_comments_update</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_order_comments_update_request</span> <span class="o">=</span> \
+            <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">client_order_comments_update</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">client_order_comments_update</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">client_order_comments_update_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_messages"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_messages">[docs]</a>    <span class="k">def</span> <span class="nf">query_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;messages&#39;</span><span class="p">,</span> <span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.update_messages"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.update_messages">[docs]</a>    <span class="k">def</span> <span class="nf">update_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update message sent on your offers or orders : reply, set as read, ...</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.update_messages(messages)</span>
+
+<span class="sd">        :type messages: Message</span>
+<span class="sd">        :param messages: the specified messages we want to update</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            &gt;&gt;&gt; m1 = Message(action=&#39;mark_as_read&#39;, id=&#39;12345&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; m2 = Message(action=&#39;reply&#39;, id=&#39;12345&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; m2.description = &#39;Your order has been shipped&#39;</span>
+<span class="sd">            &gt;&gt;&gt; m2.subject = &#39;order_information&#39;</span>
+<span class="sd">            &gt;&gt;&gt; m2.type = &#39;ORDER&#39;</span>
+<span class="sd">            &gt;&gt;&gt; response = manager.update_messages([m1, m2])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">messages_update</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;messages_update&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">dict2xml</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()))</span>
+            <span class="n">messages_update</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages_update_request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">messages_update</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">messages_update</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">messages_update_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_incidents"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_incidents">[docs]</a>    <span class="k">def</span> <span class="nf">query_incidents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;incidents&#39;</span><span class="p">,</span> <span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.update_incidents"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.update_incidents">[docs]</a>    <span class="k">def</span> <span class="nf">update_incidents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">,</span> <span class="n">incident_update_action</span><span class="p">,</span> <span class="n">reasons</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle incidents created on orders</span>
+
+<span class="sd">        Usage::</span>
+
+<span class="sd">            response = manager.update_incidents(order_id, </span>
+<span class="sd">                                                incident_update_action,</span>
+<span class="sd">                                                reasons)</span>
+
+<span class="sd">        :type order_id: str</span>
+<span class="sd">        :param order_id: the unique FNAC identified for an order</span>
+
+<span class="sd">        :type incident_update_action: str</span>
+<span class="sd">        :param incident_update_action: the action to perform (`&#39;refund&#39;` is the</span>
+<span class="sd">                                       only available action for the moment) </span>
+
+<span class="sd">        :type reasons: list</span>
+<span class="sd">        :param reasons: the reasons of the incident for this order</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            reason = {&quot;order_detail_id&quot;: 1, &quot;refund_reason&quot;: &#39;no_stock&#39;}</span>
+<span class="sd">            response = manager.update_incidents(&#39;07LWQ6278YJUI&#39;, &#39;refund&#39;, [reason])</span>
+
+<span class="sd">        :returns: :class:`Response &lt;Response&gt;` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">incidents_update</span> <span class="o">=</span> <span class="n">create_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;incidents_update&#39;</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="n">order_id</span><span class="o">=</span><span class="n">order_id</span><span class="p">,</span>
+                              <span class="n">action</span><span class="o">=</span><span class="n">incident_update_action</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">reason</span> <span class="ow">in</span> <span class="n">reasons</span><span class="p">:</span>
+            <span class="n">order_detail</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;order_detail&quot;</span><span class="p">)</span>
+            <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">order_detail</span><span class="p">,</span> <span class="s1">&#39;order_detail_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reason</span><span class="p">[</span><span class="s1">&#39;order_detail_id&#39;</span><span class="p">])</span>
+            <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">order_detail</span><span class="p">,</span> <span class="s1">&#39;refund_reason&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reason</span><span class="p">[</span><span class="s1">&#39;refund_reason&#39;</span><span class="p">])</span>
+            <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order_detail</span><span class="p">)</span>
+
+        <span class="n">incidents_update</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incidents_update_request</span> <span class="o">=</span> \
+            <span class="n">Request</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">incidents_update</span><span class="p">,</span> <span class="o">**</span><span class="n">XML_OPTIONS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">(</span><span class="n">incidents_update</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">incidents_update_request</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FnapyManager.query_shop_invoices"><a class="viewcode-back" href="../api.html#fnapy_manager.FnapyManager.query_shop_invoices">[docs]</a>    <span class="k">def</span> <span class="nf">query_shop_invoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_count</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s1">&#39;shop_invoices&#39;</span><span class="p">,</span> <span class="n">results_count</span><span class="p">,</span> <span class="o">**</span><span class="n">elements</span><span class="p">)</span></div></div>
+
+
+<span class="c1"># Dynamically set the docstrings for some query methods</span>
+<span class="k">for</span> <span class="n">query_type</span> <span class="ow">in</span> <span class="n">FnapyManager</span><span class="o">.</span><span class="n">VALID_QUERY_TYPES</span><span class="p">:</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FnapyManager</span><span class="p">,</span> <span class="s1">&#39;query_&#39;</span> <span class="o">+</span> <span class="n">query_type</span><span class="p">)</span>
+    <span class="n">method</span><span class="o">.</span><span class="n">__func__</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">_create_docstring</span><span class="p">(</span><span class="n">query_type</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2016, Alexandria.
+    </div>
+  </body>
+</html>
