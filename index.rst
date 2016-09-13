@@ -15,6 +15,7 @@ Welcome to fnapy's documentation!
    api
 
 
+
 Indices and tables
 ==================
 

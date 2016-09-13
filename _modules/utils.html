@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils &#8212; fnapy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fnapy 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="../_static/small_flask.css" type= "text/css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">fnapy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for utils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># vim:fenc=utf-8</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright © 2016  &lt;&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under terms of the MIT license.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Useful functions</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Python modules</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">codecs</span> <span class="k">import</span> <span class="nb">open</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+
+<span class="c1"># Third-party modules</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
+<span class="kn">import</span> <span class="nn">xmltodict</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Project modules</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<span class="c1"># CLASSES</span>
+
+<span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A simple class to create queries&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrib</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">[</span><span class="s1">&#39;@&#39;</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">def</span> <span class="nf">_create_new_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">):</span>
+                <span class="n">new_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">new_dict</span>
+
+    <span class="k">def</span> <span class="nf">between</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_new_dict</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">}</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">new_dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">op_to_mode</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;eq&#39;</span><span class="p">:</span> <span class="s1">&#39;Equals&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;ge&#39;</span><span class="p">:</span> <span class="s1">&#39;GreaterThanOrEquals&#39;</span><span class="p">,</span> <span class="s1">&#39;gt&#39;</span><span class="p">:</span> <span class="s1">&#39;GreaterThan&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;le&#39;</span><span class="p">:</span> <span class="s1">&#39;LessThanOrEquals&#39;</span><span class="p">,</span> <span class="s1">&#39;lt&#39;</span><span class="p">:</span> <span class="s1">&#39;LessThan&#39;</span><span class="p">}</span> 
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_new_dict</span><span class="p">()</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;@mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">op_to_mode</span><span class="p">[</span><span class="n">op</span><span class="p">]</span>
+        <span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;@value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">new_dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="p">(</span><span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="p">(</span><span class="s1">&#39;ge&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="p">(</span><span class="s1">&#39;gt&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">le</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="p">(</span><span class="s1">&#39;le&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">lt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operator</span><span class="p">(</span><span class="s1">&#39;lt&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the OrderedDict&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the XML&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dict2xml</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span>
+
+
+<span class="k">class</span> <span class="nc">HttpMessage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="n">xml2dict</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="c1"># Raw XML</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xml</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="c1"># etree._Element</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;{[^}]+}&#39;</span><span class="p">,</span> <span class="n">repl</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml</span>
+
+
+<div class="viewcode-block" id="Request"><a class="viewcode-back" href="../api.html#utils.Request">[docs]</a><span class="k">class</span> <span class="nc">Request</span><span class="p">(</span><span class="n">HttpMessage</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A handy class to handle the request&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Request</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Response"><a class="viewcode-back" href="../api.html#utils.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">HttpMessage</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A handy class to handle the response&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Response</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<span class="c1"># TODO Implement a check for the attributes</span>
+<div class="viewcode-block" id="Message"><a class="viewcode-back" href="../api.html#utils.Message">[docs]</a><span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">ACTIONS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;mark_as_read&#39;</span><span class="p">,</span> <span class="s1">&#39;mark_as_unread&#39;</span><span class="p">,</span> <span class="s1">&#39;archive&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mark_as_read_and_archive&#39;</span><span class="p">,</span> <span class="s1">&#39;unarchive&#39;</span><span class="p">,</span> <span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">TO</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;CALLCENTER&#39;</span><span class="p">,</span> <span class="s1">&#39;CLIENT&#39;</span><span class="p">,</span> <span class="s1">&#39;ALL&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">SUBJECTS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;product_information&#39;</span><span class="p">,</span> <span class="s1">&#39;shipping_information&#39;</span><span class="p">,</span> <span class="s1">&#39;order_information&#39;</span><span class="p">,</span> 
+        <span class="s1">&#39;offer_problem&#39;</span><span class="p">,</span> <span class="s1">&#39;offer_not_received&#39;</span><span class="p">,</span> <span class="s1">&#39;other_question&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ORDER&#39;</span><span class="p">,</span> <span class="s1">&#39;OFFER&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ORDER&#39;</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_action</span> <span class="o">=</span> <span class="n">action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_to</span> <span class="o">=</span> <span class="n">to</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subject</span> <span class="o">=</span> <span class="n">subject</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_action</span>
+
+    <span class="nd">@action</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Message</span><span class="o">.</span><span class="n">ACTIONS</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Invalid action. Choose between </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">ACTIONS</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_action</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span>
+
+    <span class="nd">@id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to</span>
+
+    <span class="nd">@to</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Message</span><span class="o">.</span><span class="n">TO</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Invalid recipient. Choose between </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">TO</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_to</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_description</span>
+
+    <span class="nd">@description</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">subject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subject</span>
+
+    <span class="nd">@subject</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">subject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Message</span><span class="o">.</span><span class="n">SUBJECTS</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Invalid subject. Choose between </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">SUBJECTS</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subject</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
+
+    <span class="nd">@type</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Message</span><span class="o">.</span><span class="n">TYPES</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Invalid type. Choose between </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">TYPES</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">new_value</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s1">&#39;&lt;Message: action=</span><span class="si">{self.action}</span><span class="s1">, id=</span><span class="si">{self.id}</span><span class="s1">, to=</span><span class="si">{self.to}</span><span class="s1">, &#39;</span>
+        <span class="n">r</span> <span class="o">+=</span> <span class="s1">&#39;description=</span><span class="si">{self.description}</span><span class="s1">, subject=</span><span class="si">{self.subject}</span><span class="s1">, &#39;</span>
+        <span class="n">r</span> <span class="o">+=</span> <span class="s1">&#39;type=</span><span class="si">{self.type}</span><span class="s1">&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;Message</span>
+<span class="s2">action     : </span><span class="si">{self.action}</span><span class="s2"></span>
+<span class="s2">id         : </span><span class="si">{self.id}</span><span class="s2"></span>
+<span class="s2">to         : </span><span class="si">{self.to}</span><span class="s2"></span>
+<span class="s2">description: </span><span class="si">{self.description}</span><span class="s2"></span>
+<span class="s2">subject    : </span><span class="si">{self.subject}</span><span class="s2"></span>
+<span class="s2">type       : </span><span class="si">{self.type}</span><span class="s2"></span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Message.to_dict"><a class="viewcode-back" href="../api.html#utils.Message.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the a dictionary in the xmltodict format&quot;&quot;&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;@action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span>
+            <span class="s1">&#39;@id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;message_to&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">to</span><span class="p">},</span>
+            <span class="s1">&#39;message_subject&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">},</span>
+            <span class="s1">&#39;message_description&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">},</span>
+            <span class="s1">&#39;message_type&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;#text&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">},</span>
+        <span class="p">}}</span>
+        <span class="k">return</span> <span class="n">message</span></div></div>
+
+
+<span class="c1"># FUNCTIONS</span>
+<span class="k">def</span> <span class="nf">dict2xml</span><span class="p">(</span><span class="n">_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a XML string from the input dictionary&quot;&quot;&quot;</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="n">xmltodict</span><span class="o">.</span><span class="n">unparse</span><span class="p">(</span><span class="n">_dict</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">xmlepured</span> <span class="o">=</span> <span class="n">remove_namespace</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xmlepured</span>
+
+
+<span class="k">def</span> <span class="nf">remove_namespace</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove the namespace from the XML string&quot;&quot;&quot;</span>
+    <span class="n">xmlepured</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39; xmlns=&quot;[^&quot;]+&quot;&#39;</span><span class="p">,</span> <span class="n">repl</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">xml</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">xmlepured</span> <span class="o">=</span> <span class="n">xmlepured</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xmlepured</span>
+
+
+<span class="c1"># TODO Use process_namespaces</span>
+<span class="k">def</span> <span class="nf">xml2dict</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary from the input XML</span>
+<span class="sd">    </span>
+<span class="sd">    :type xml: unicode</span>
+<span class="sd">    :param xml: The XML</span>
+
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    :returns: the dictionary correspoding to the input XML</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xmlepured</span> <span class="o">=</span> <span class="n">remove_namespace</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xmltodict</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xmlepured</span><span class="p">)</span>
+
+
+<span class="c1"># TODO Parse the token with lxml instead of BeautifulSoup</span>
+<span class="k">def</span> <span class="nf">parse_xml</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">tag_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the text contained in the tag of the response</span>
+
+<span class="sd">    :param response: the Response</span>
+<span class="sd">    :param tag_name: the name of the tag</span>
+<span class="sd">    :returns: the text enclosed in the tag</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tag_name</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+
+<span class="c1"># TODO Reimplement create_offer_element with kwargs</span>
+<span class="k">def</span> <span class="nf">create_offer_element</span><span class="p">(</span><span class="n">product_reference</span><span class="p">,</span> <span class="n">offer_reference</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">product_state</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an offer element</span>
+
+<span class="sd">    An offer needs 5 mandatory parameters:</span>
+<span class="sd">    :param product_reference: a product reference (such as EAN)</span>
+<span class="sd">    :param offer_reference: a seller offer reference (such as SKU)</span>
+<span class="sd">    :param product_state: a product state</span>
+<span class="sd">    :param price: a price</span>
+<span class="sd">    :param quantity: a quantity</span>
+
+<span class="sd">    You may add an optional parameter:</span>
+<span class="sd">    :param description: a description of the product</span>
+
+<span class="sd">    :returns: offer (etree.Element)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">offer</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;offer&#39;</span><span class="p">)</span>
+    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;product_reference&quot;</span> <span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Ean&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">product_reference</span><span class="p">)</span>
+    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;offer_reference&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;SellerSku&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">CDATA</span><span class="p">(</span><span class="n">offer_reference</span><span class="p">)</span>
+    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;product_state&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">product_state</span><span class="p">)</span>
+    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;quantity&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">description</span><span class="p">:</span>
+        <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">offer</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">CDATA</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">offer</span>
+
+
+<span class="k">def</span> <span class="nf">create_xml_element</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A helper function creating an etree.Element with the necessary</span>
+<span class="sd">    attributes</span>
+
+<span class="sd">    :param name: The name of the element</span>
+<span class="sd">    :returns: etree.Element</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="kc">None</span><span class="p">:</span> <span class="n">XHTML_NAMESPACE</span><span class="p">},</span>
+            <span class="n">shop_id</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">shop_id</span><span class="p">,</span> <span class="n">partner_id</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">partner_id</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_order_ids</span><span class="p">(</span><span class="n">orders_query_response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the order_ids in orders_query_response&quot;&quot;&quot;</span>
+    <span class="n">orders</span> <span class="o">=</span> <span class="n">orders_query_response</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="s1">&#39;orders_query_response&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">order_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">orders</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">orders</span><span class="p">:</span>
+                <span class="n">order_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">order_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">orders</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">order_ids</span>
+
+
+<span class="k">def</span> <span class="nf">get_token</span><span class="p">():</span>
+    <span class="n">partner_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;FNAC_PARTNER_ID&#39;</span><span class="p">)</span>
+    <span class="n">shop_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;FNAC_SHOP_ID&#39;</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;FNAC_KEY&#39;</span><span class="p">)</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="s2">&lt;auth xmlns=&#39;http://www.fnac.com/schemas/mp-dialog.xsd&#39;&gt;</span>
+<span class="s2">  &lt;partner_id&gt;</span><span class="si">{partner_id}</span><span class="s2">&lt;/partner_id&gt;</span>
+<span class="s2">  &lt;shop_id&gt;</span><span class="si">{shop_id}</span><span class="s2">&lt;/shop_id&gt;</span>
+<span class="s2">  &lt;key&gt;</span><span class="si">{key}</span><span class="s2">&lt;/key&gt;</span>
+<span class="s2">&lt;/auth&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">partner_id</span><span class="o">=</span><span class="n">partner_id</span><span class="p">,</span> <span class="n">shop_id</span><span class="o">=</span><span class="n">shop_id</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">post</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="n">xml</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parse_xml</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;token&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">set_credentials</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the credentials in the given raw XML &quot;&quot;&quot;</span>
+    <span class="n">credentials</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shop_id&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;FNAC_SHOP_ID&#39;</span><span class="p">),</span>
+                   <span class="s1">&#39;partner_id&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;FNAC_PARTNER_ID&#39;</span><span class="p">),</span>
+                   <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">get_token</span><span class="p">()}</span>
+    <span class="k">for</span> <span class="n">credential</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">credentials</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">xml</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=&quot;[^&quot;]+&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">credential</span><span class="p">),</span>
+                     <span class="n">repl</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">credential</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="n">string</span><span class="o">=</span><span class="n">xml</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xml</span>
+
+
+<span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">service</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">save_xml_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save the response in a file &quot;&quot;&quot;</span>
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">action</span> <span class="o">+</span> <span class="s1">&#39;_response.xml&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;../tests/assets&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved the response in </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>    
+
+
+<span class="k">def</span> <span class="nf">load_xml_request</span><span class="p">(</span><span class="n">action</span><span class="p">):</span>
+    <span class="n">input_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">action</span> <span class="o">+</span> <span class="s1">&#39;_request.xml&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="s1">&#39;../tests/assets&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">request</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2016, Alexandria.
+    </div>
+  </body>
+</html>
