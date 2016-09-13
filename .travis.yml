@@ -3,12 +3,13 @@
 sudo: false
 language: python
 
-matrix:
-  include:
-    - python: 2.7
-      env: TOX_ENV=py27
+python:
+  - "2.7"
+
+env:
+  - TOX_ENV=py27
 
 install:
   - pip install -r requirements.txt
 
-script: tox
+script: tox 
