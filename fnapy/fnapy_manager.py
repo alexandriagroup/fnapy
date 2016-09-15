@@ -25,6 +25,7 @@ from .utils import *
 from .config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from .compat import is_py3
 from .connection import FnapyConnection
+from .exceptions import FnapyPricingError
 
 
 def _create_docstring(query_type):
@@ -319,13 +320,23 @@ class FnapyManager(object):
 
         :returns: response
 
+        .. note: If no price is found for a product, a :class:`FnapyPricingError <FnapyPricingError>`
+        is raised.
+
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
         product_reference = etree.Element("product_reference", type="Ean")
         product_reference.text = str(ean)
         pricing_query.append(product_reference)
         self.pricing_query_request = Request(etree.tostring(pricing_query, **XML_OPTIONS))
-        return self._get_response(pricing_query, self.pricing_query_request.xml)
+        response = self._get_response(pricing_query, self.pricing_query_request.xml)
+
+        # Check if any error is returned
+        errors = response.element.xpath('//ns:error',
+                namespaces={'ns': XHTML_NAMESPACE})
+        if len(errors) > 0 and hasattr(errors[0], 'text'):
+            raise FnapyPricingError(errors[0].text)
+        return response
 
     def query_batch(self):
         """Return information about your currently processing import batches
