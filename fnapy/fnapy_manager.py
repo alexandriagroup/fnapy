@@ -309,19 +309,18 @@ class FnapyManager(object):
     def query_orders(self, results_count='', **elements):
         return self._query('orders', results_count, **elements)
 
-    def query_pricing(self, ean, sellers="all"):
-        """Compare price between all marketplace shop and fnac for a specific
-        product (designated by its ean)
+    def query_pricing(self, ean):
+        """Retrieve the best prices applied to a given product within all Fnac
+        marketplace sellers (Fnac included)
 
         Usage::
 
-            response = manager.query_pricing(ean, sellers=sellers)
+            response = manager.query_pricing(ean)
 
         :returns: response
 
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
-        pricing_query.attrib['sellers'] = sellers
         product_reference = etree.Element("product_reference", type="Ean")
         product_reference.text = str(ean)
         pricing_query.append(product_reference)
