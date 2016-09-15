@@ -10,3 +10,4 @@ test_client.py
 .eggs
 build/
 dist/
+.python-version
