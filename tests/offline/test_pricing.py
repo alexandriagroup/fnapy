@@ -20,3 +20,9 @@ def test_query_pricing(monkeypatch, fake_manager):
         fake_manager.query_pricing(ean='0886971942323')
 
 
+def test_query_pricing_with_invalid_ean(monkeypatch, fake_manager):
+    context = ContextualTest(monkeypatch, fake_manager, 'query_pricing_with_invalid_ean', 'pricing_query')
+    with context:
+        fake_manager.query_pricing(ean='007')
+
+

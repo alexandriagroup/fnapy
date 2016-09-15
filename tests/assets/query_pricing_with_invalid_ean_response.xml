@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+    
+              
+      
+      
+        <pricing_product>
+            <product_reference type="Ean">007</product_reference>
+                                            <error severity="ERROR" code="ERR_120">Service Pricing : No prices found.</error>                            
+      </pricing_product>
+    
+    
+
+  </pricing_query_response>

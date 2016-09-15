@@ -1,0 +1,3 @@
+<pricing_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" shop_id="XXX" partner_id="XXX" token="XXX">
+  <product_reference type="Ean">007</product_reference>
+</pricing_query>
