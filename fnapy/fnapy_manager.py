@@ -24,6 +24,7 @@ import requests
 from .utils import *
 from .config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from .compat import is_py3
+from .connection import FnapyConnection
 
 
 def _create_docstring(query_type):
@@ -44,6 +45,9 @@ class FnapyManager(object):
 
     def __init__(self, connection):
         """Initialize the manager"""
+        if not isinstance(connection, FnapyConnection):
+            raise TypeError('You must provide a valid FnapyConnection instance.')
+
         self.connection = connection
         self.auth_request = None
         self.offers_query_request = None
