@@ -86,13 +86,6 @@ def make_requests_get_mock(filename):
     return mockreturn
 
 
-def make_simple_text_mock(filename):
-    def mockreturn(*args, **kwargs):
-        with open(os.path.join(os.path.dirname(__file__), 'assets', filename), 'r', 'utf-8') as fd:
-            return fd.read()
-    return mockreturn
-
-
 @contextmanager
 def assert_raises(exception_class, msg=None):
     """Check that an exception is raised and its message contains `msg`."""
@@ -105,8 +98,11 @@ def assert_raises(exception_class, msg=None):
 
 def sorted_elements(root):
     new_root = etree.Element(root.tag, attrib=root.attrib)
+    new_root.text = root.text
     for e in sorted(root.getchildren(), key=lambda x: x.tag):
-        new_root.append(etree.Element(e.tag, attrib=e.attrib))
+        element = etree.Element(e.tag, attrib=e.attrib)
+        element.text = e.text
+        new_root.append(element)
     return new_root
 
 
