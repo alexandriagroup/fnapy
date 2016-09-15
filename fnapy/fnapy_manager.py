@@ -85,7 +85,7 @@ class FnapyManager(object):
         """
         service = element.tag
         response = requests.post(URL + service, xml, headers=HEADERS)
-        response = Response(response.text)
+        response = Response(response.content)
         if response.dict.get(service + '_response', {}).get('error'):
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
@@ -95,7 +95,7 @@ class FnapyManager(object):
             response = requests.post(URL + service,
                                      getattr(self, service + '_request').xml,
                                      headers=HEADERS)
-            response = Response(response.text)
+            response = Response(response.content)
         return response
 
     def authenticate(self):

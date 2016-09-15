@@ -97,11 +97,12 @@ class Query(object):
 
 
 class HttpMessage(object):
-    def __init__(self, text):
-        self.dict = xml2dict(text)
+    def __init__(self, content):
+        # content is a string
+        self.dict = xml2dict(content)
 
         # Raw XML
-        self.xml = text
+        self.xml = content
 
         # etree._Element
         self.element = etree.fromstring(self.xml)
@@ -117,14 +118,14 @@ class HttpMessage(object):
 
 class Request(HttpMessage):
     """A handy class to handle the request"""
-    def __init__(self, text):
-        super(Request, self).__init__(text)
+    def __init__(self, content):
+        super(Request, self).__init__(content)
 
 
 class Response(HttpMessage):
     """A handy class to handle the response"""
-    def __init__(self, text):
-        super(Response, self).__init__(text)
+    def __init__(self, content):
+        super(Response, self).__init__(content)
 
 
 # TODO Implement a check for the attributes
