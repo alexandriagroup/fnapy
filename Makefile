@@ -8,10 +8,10 @@ tests: offline_tests
 	pytest -v tests/test_*.py
 
 clean:
-	rm -f fnapy/*.pyc
-	rm -f tests/*.pyc
-	rm -f tests/online/*.pyc
-	rm -f tests/offline/*.pyc
+	rm -rf fnapy/{*.pyc,__pycache__}
+	rm -rf tests/{*.pyc,__pycache__}
+	rm -rf tests/online/{*.pyc,__pycache__}
+	rm -rf tests/offline/{*.pyc,__pycache__}
 
 tags:
 	ctags -R **/*.py
