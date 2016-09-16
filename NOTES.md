@@ -199,3 +199,58 @@ Here is the corresponding procedure:
 - run the function of our library generating the request we want
 - then we test the request generated has the same information as <action>_request.xml
 
+
+## Product states
+
+Here is an example of what we are supposed to get with the
+`pricing_query_response`:
+
+```xml
+    <pricing_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+        <pricing_product>
+            <product_reference type="Ean">0886971942323</product_reference>
+            <ean>0886971942323</ean>
+            <product_url><![CDATA[http://www4.rec1.fnac.dev/Shelf/Article4.aspx?prid=2066124]]></product_url>
+            <seller_price>14</seller_price>
+            <seller_shipping>2.39</seller_shipping>
+            <seller_offer_sku>4F1A-28E-8BE</seller_offer_sku>
+            <seller_offer_state>2</seller_offer_state>
+            <seller_adherent_price>10</seller_adherent_price>
+            <seller_adherent_shipping>2.39</seller_adherent_shipping>
+            <seller_adherent_offer_state>2</seller_adherent_offer_state>
+            <seller_adherent_offer_sku>4F1A-28E-8BE</seller_adherent_offer_sku>
+            <new_price>0.90</new_price>
+            <new_shipping>2.39</new_shipping>
+            <refurbished_price/>
+            <refurbished_shipping/>
+            <used_price>2.90</used_price>
+            <used_shipping>2.39</used_shipping>
+            <new_adherent_price/>
+            <new_adherent_shipping/>
+            <refurbished_adherent_price/>
+            <refurbished_adherent_shipping/>
+            <used_adherent_price>1.50</used_adherent_price>
+            <used_adherent_shipping>2.39</used_adherent_shipping>
+        </pricing_product>
+    </pricing_query_response>
+```
+
+The tags starting with `seller_` designate the seller's offer. The product
+state of the seller is given by `<seller_offer_state>`. Its value is 2 which means 
+"used product in very good state". There's a total of 11 product states:
+
+* 1: This product is a **used** product like as new
+* 2: This product is a **used** product in very good state
+* 3: This product is a **used** in good state
+* 4: This product is a **used** product in correct state
+* 5: This product is a collection product like as **new**
+* 6: This product is a collection product in very **good** state
+* 7: This product is a collection product in **good** state
+* 8: This product is a collection product in *correct* state
+* 10: This product is a **refurbished** product
+* 11: This product is a **new** product
+
+However only information about the product state we have from this response is
+the summed up within 3 generic states: **new**, **refurbished** and **used** 
+(cf the corresponding nodes).
+This means we lose some information when we query the pricing.
