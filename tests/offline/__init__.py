@@ -23,19 +23,15 @@ def make_requests_get_mock(filename):
     return mockreturn
 
 
-class ContextualTest(object):
-    def __init__(self, monkeypatch, manager, action, service):
-        self.manager = manager
-        self.action = action
-        self.service = service
-        monkeypatch.setattr('requests.post', make_requests_get_mock(self.action + '_response.xml'))
+@contextmanager
+def create_context_for_requests(monkeypatch, manager, action, service, test_request=True):
+    monkeypatch.setattr('requests.post', make_requests_get_mock(action + '_response.xml'))
+    try:
+        yield manager
+    except Exception as e:
+        pytest.fail(e.message)
+    request = getattr(manager, service + '_request')
+    assert request_is_valid(request, action, service)
+    
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        request = getattr(self.manager, self.service + '_request')
-        print('%s, %s, %s' % (exc_type, exc_val, exc_tb))
-        assert request_is_valid(request, self.action, self.service)
-        return True
 

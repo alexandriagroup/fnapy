@@ -11,11 +11,13 @@ from __future__ import unicode_literals
 
 # Project modules
 from tests import make_requests_get_mock, fake_manager
-from tests.offline import ContextualTest
+from tests.offline import create_context_for_requests
 
 
 def test_query_shop_invoices(monkeypatch, fake_manager):
-    context = ContextualTest(monkeypatch, fake_manager, 'query_shop_invoices', 'shop_invoices_query')
+    context = create_context_for_requests(monkeypatch, fake_manager,
+                                          'query_shop_invoices',
+                                          'shop_invoices_query')
     with context:
         fake_manager.query_shop_invoices(paging=1, results_count=100)
 

@@ -9,20 +9,28 @@
 # Python modules
 from __future__ import unicode_literals
 
+# Third-party modules
+import pytest
+
 # Project modules
+from fnapy.exceptions import FnapyPricingError
 from tests import make_requests_get_mock, fake_manager
-from tests.offline import ContextualTest
+from tests.offline import create_context_for_requests
 
 
 def test_query_pricing(monkeypatch, fake_manager):
-    context = ContextualTest(monkeypatch, fake_manager, 'query_pricing', 'pricing_query')
+    context = create_context_for_requests(monkeypatch, fake_manager,
+            'query_pricing', 'pricing_query')
     with context:
         fake_manager.query_pricing(ean='0886971942323')
 
 
+# This time, we must also test the response because it may contain an error we
+# want to catch and raise a FnapyPricingError
 def test_query_pricing_with_invalid_ean(monkeypatch, fake_manager):
-    context = ContextualTest(monkeypatch, fake_manager, 'query_pricing_with_invalid_ean', 'pricing_query')
+    context = create_context_for_requests(monkeypatch, fake_manager,
+            'query_pricing_with_invalid_ean',
+            'pricing_query')
     with context:
-        fake_manager.query_pricing(ean='007')
-
-
+        with pytest.raises(FnapyPricingError):
+            fake_manager.query_pricing(ean='007')

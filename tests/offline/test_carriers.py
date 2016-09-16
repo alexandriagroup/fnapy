@@ -11,11 +11,12 @@ from __future__ import unicode_literals
 
 # Project modules
 from tests import make_requests_get_mock, fake_manager
-from tests.offline import ContextualTest
+from tests.offline import create_context_for_requests
 
 
 def test_query_carriers(monkeypatch, fake_manager):
-    context = ContextualTest(monkeypatch, fake_manager, 'query_carriers', 'carriers_query')
+    context = create_context_for_requests(monkeypatch, fake_manager,
+                                          'query_carriers', 'carriers_query')
     with context:
         fake_manager.query_carriers()
 
