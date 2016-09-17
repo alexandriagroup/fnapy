@@ -11,3 +11,4 @@ test_client.py
 build/
 dist/
 .python-version
+.coverage
