@@ -4,11 +4,13 @@
 from __future__ import unicode_literals, print_function
 import os
 import re
+from copy import copy
 from codecs import open
 from contextlib import contextmanager
 
 # Third-party
 import requests
+from lxml import etree
 import pytest
 
 # Project
@@ -47,6 +49,11 @@ offer_data3 = {'product_reference': '5051889022091',
 #         'description': 'New product - 2-3 days shipping, from France'}
 
 offers_data = [offer_data1, offer_data2, offer_data3]
+
+# invalid offer_data is offer_data1 without offer_reference
+invalid_offer_data = copy(offer_data1)
+del invalid_offer_data['offer_reference']
+invalid_offers_data = [offer_data1, invalid_offer_data]
 
 
 # FUNCTIONS
@@ -134,6 +141,10 @@ def elements_are_equal(e1, e2, excluded_attrs=[]):
     return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
 
 
+def xml_contains_error(xml_dict):
+    """Return True if one key is 'error'"""
+    return 'error' in xml_dict
+
 
 def xml_is_valid(xml_dict, xml_valid_keys):
     """Return True if all the keys in the XML dictionary are valid"""
@@ -164,6 +175,20 @@ def response_is_valid(action, service):
         save_xml_response(response, action)
     elif result is False:
         pytest.fail(error)
+    return result
+
+
+def response_is_not_valid(action, service):
+    """The request is not valid if an 'error' node is in the response"""
+    request = load_xml_request(action)
+    request = set_credentials(request)
+    response = post(service, request).text
+    xml_dict = xml2dict(response).get(service + '_response', {})
+    result = xml_contains_error(xml_dict)
+    if result:
+        save_xml_response(response, action)
+    elif result is False:
+        pytest.fail("The XML doesn't contain the error node")
     return result
 
 

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<offers_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <offer>
+    <product_reference type="Ean">0711719247159</product_reference>
+    <price>15</price>
+    <product_state>11</product_state>
+    <quantity>10</quantity>
+    <description><![CDATA[A description of the product or some information about delivery]]></description>
+  </offer>
+</offers_update>
+

@@ -12,11 +12,15 @@ Online tests for fnapy
 
 # Project modules
 from fnapy.config import *
-from tests import response_is_valid
+from tests import response_is_valid, response_is_not_valid
 
 
 def test_update_offers():
     assert response_is_valid('update_offers', 'offers_update')
+
+
+def test_update_offers_without_offer_reference():
+    assert response_is_not_valid('update_offers_without_offer_reference', 'offers_update')
 
 
 def test_query_offers():

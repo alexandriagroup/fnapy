@@ -134,19 +134,23 @@ class FnapyManager(object):
                             where data is dictionary with the keys:
 
         * offer_reference  : the SKU (mandatory) 
-        * product_reference: the EAN
-        * price            : the price of the offer
+        * product_reference: the EAN (optional)
+        * price            : the price of the offer (optional)
         * product_state    : an integer representing the state of the product
-                             (documentation needed)
-        * quantity         : the quantity
-        * description      : (optional) a description of the offer
+                             (documentation needed) (optional)
+        * quantity         : the quantity (optional)
+        * description      : a description of the offer (optional)
+
+        Note that at least one of the optional parameters (except
+        product_reference) must be provided.
 
         :returns: :class:`Response <Response>` object
 
         """
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
         for offer_data in offers_data:
-            offer = create_offer_element(**offer_data)
+            check_offer_data(offer_data)
+            offer = create_offer_element(offer_data)
             offers_update.append(offer)
         self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
 

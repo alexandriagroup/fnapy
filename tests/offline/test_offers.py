@@ -9,10 +9,11 @@ import pytz
 
 # Project modules
 from fnapy.fnapy_manager import FnapyManager
-from tests import make_requests_get_mock, fake_manager, offers_data,\
-request_is_valid
+from tests import make_requests_get_mock, fake_manager,\
+    offers_data, invalid_offers_data, request_is_valid
 from tests.offline import create_context_for_requests
 from fnapy.utils import Query
+from fnapy.exceptions import FnapyUpdateOfferError
 
 dmin = datetime(2016, 8, 23, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
 dmax = datetime(2016, 8, 31, 0, 0, 0).replace(tzinfo=pytz.utc).isoformat()
@@ -28,6 +29,11 @@ def test_update_offers(monkeypatch, fake_manager):
     context = create_context_for_requests(monkeypatch, fake_manager, 'update_offers', 'offers_update')
     with context:
         fake_manager.update_offers(offers_data)
+
+
+def test_update_offers_without_offer_reference(monkeypatch, fake_manager):
+    with pytest.raises(FnapyUpdateOfferError):
+        fake_manager.update_offers(invalid_offers_data)
 
 
 def test_get_batch_status(monkeypatch, fake_manager):

@@ -25,6 +25,7 @@ import requests
 # Project modules
 from fnapy.config import *
 from fnapy.compat import to_unicode
+from fnapy.exceptions import FnapyUpdateOfferError
 
 
 # CLASSES
@@ -284,31 +285,62 @@ def parse_xml(response, tag_name):
     return BeautifulSoup(response.content, 'lxml').find(tag_name).text
 
 
+def check_offer_data(offer_data):
+    """Check the offer_data passed to update_offers is valid
+    
+    :type offer_data: dict
+    :param offer_data: the parameters used to update an offer
+
+    :returns: None
+
+    offer_data must be a dictionary with at least 2 keys:
+    - offer_reference (the sku)
+    - any other parameter allowed by the service (price, quantity,
+    product_state, ...)
+    """
+    if not isinstance(offer_data, dict):
+        msg = 'The argument must be a dictionary.'
+        raise FnapyUpdateOfferError(msg)
+
+    if 'offer_reference' not in offer_data:
+        msg = 'The dictionary must contain the key "offer_reference" (the sku)'
+        raise FnapyUpdateOfferError(msg)
+
+    valid_keys = [x.name for x in REQUEST_ELEMENTS['offers_update']]
+    for key in offer_data:
+        if key not in valid_keys:
+            msg = '{0} is not a valid parameter for updating an offer. '
+            msg += ' Choose amongst {1}'
+            msg = msg.format(key, valid_keys)
+            raise FnapyUpdateOfferError(msg)
+
 # TODO Reimplement create_offer_element with kwargs
-def create_offer_element(product_reference, offer_reference, price, product_state, quantity, description=None):
+def create_offer_element(offer_data):
     """Create an offer element
 
-    An offer needs 5 mandatory parameters:
-    :param product_reference: a product reference (such as EAN)
+    An offer needs at least one offer_reference (SKU) and any other parameter
+    accepted by the service (cf documentation)
     :param offer_reference: a seller offer reference (such as SKU)
+    :param product_reference: a product reference (such as EAN)
     :param product_state: a product state
     :param price: a price
     :param quantity: a quantity
-
-    You may add an optional parameter:
     :param description: a description of the product
 
     :returns: offer (etree.Element)
 
     """
     offer = etree.Element('offer')
-    etree.SubElement(offer, "product_reference" ,type="Ean").text = str(product_reference)
+    offer_reference = offer_data.pop('offer_reference')
     etree.SubElement(offer, "offer_reference", type="SellerSku").text = etree.CDATA(offer_reference)
-    etree.SubElement(offer, "price").text = str(price)
-    etree.SubElement(offer, "product_state").text = str(product_state)
-    etree.SubElement(offer, "quantity").text = str(quantity)
-    if description:
-        etree.SubElement(offer, "description").text = etree.CDATA(description)
+
+    for key, value in offer_data.items():
+        if key == 'product_reference':
+            etree.SubElement(offer, 'product_reference', type="Ean").text = str(value)
+        elif key == 'description':
+            etree.SubElement(offer, 'description').text = etree.CDATA(value)
+        else:
+            etree.SubElement(offer, key).text = str(value)
     return offer
 
 

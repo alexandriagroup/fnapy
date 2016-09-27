@@ -15,6 +15,10 @@ class FnapyException(Exception):
     pass
 
 
+class FnapyUpdateOfferError(FnapyException):
+    """Raised when the update of an offer is not valid"""
+    pass 
+
 class FnapyPricingError(FnapyException):
     """Raised when no prices is found when using pricing_query"""
     pass 

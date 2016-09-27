@@ -97,11 +97,27 @@ client_order_comment = Parameter('client_order_comment', 'Client order comments'
 client_order_comment_id = Parameter('client_order_comment_id',
                                     'Order unique identifier filter from fnac')
 
+product_reference = Parameter('product_reference', 'Product referenc')
+offer_reference = Parameter('offer_reference', 'Offer reference')
+price = Parameter('price', 'Offer price')
+product_state = Parameter('product_state', 'Product state of offer')
+description = Parameter('description', 'Product description')
+internal_comment = Parameter('internal_comment',
+                             'Offer internal comment for personal use')
+showcase = Parameter('showcase', 'Offer position in shop’s showcase')
+treatment = Parameter('treatment', 'Treatment to do on offer')
+pictures = Parameter('pictures', 'Add pictures to offer')
+
 # The elements for the requests
 REQUEST_ELEMENTS = {}
 REQUEST_ELEMENTS['offers_query'] = (
     paging, date, quantity, product_fnac_id, offer_fnac_id,
     offer_seller_id
+)
+REQUEST_ELEMENTS['offers_update'] = (
+    product_reference, offer_reference, price, product_state,
+    quantity.change_desc('Offer quantity'), description,
+    internal_comment, showcase, treatment, pictures
 )
 REQUEST_ELEMENTS['orders_query'] = (
     paging, date, sort_by, product_fnac_id, offer_fnac_id,

@@ -30,6 +30,8 @@ def create_context_for_requests(monkeypatch, manager, action, service, test_requ
         yield manager
     except Exception as e:
         pytest.fail(e.message)
+    # if request is None, this means something went wrong.
+    # This may be an exception raised in the call of a method
     request = getattr(manager, service + '_request')
     assert request_is_valid(request, action, service)
     
