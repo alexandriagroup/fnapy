@@ -12,3 +12,4 @@ build/
 dist/
 .python-version
 .coverage
+send_requests.py
