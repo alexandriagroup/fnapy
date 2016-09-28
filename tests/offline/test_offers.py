@@ -50,3 +50,15 @@ def test_query_offers_with_multiple_parameters(monkeypatch, fake_manager):
         quantity = Query('quantity').eq(10)
         fake_manager.query_offers(results_count=100, date=date,
                                   quantity=quantity)
+
+
+def test_delete_offers(monkeypatch, fake_manager):
+    context = create_context_for_requests(monkeypatch, fake_manager,
+                                          'delete_offers', 'offers_update')
+    with context:
+        fake_manager.update_offers(offers_data)
+        # Then we delete 2
+        offer_references = [x['offer_reference'] for x in offers_data[:2]]
+        fake_manager.delete_offers(offer_references)
+
+

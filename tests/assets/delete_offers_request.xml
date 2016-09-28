@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<offers_update xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <offer>
+    <offer_reference type="SellerSku"><![CDATA[B76A-CD5-153]]></offer_reference>
+    <treatment>delete</treatment>
+  </offer>
+  <offer>
+    <offer_reference type="SellerSku"><![CDATA[561C-385-9BE]]></offer_reference>
+    <treatment>delete</treatment>
+  </offer>
+</offers_update>
