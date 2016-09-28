@@ -169,7 +169,8 @@ class FnapyManager(object):
         * description      : a description of the offer (optional)
 
         Note that at least one of the optional parameters (except
-        product_reference) must be provided.
+        product_reference) must be provided otherwise a FnapyUpdateOfferError
+        is raised
 
         :returns: :class:`Response <Response>` object
 

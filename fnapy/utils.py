@@ -297,6 +297,9 @@ def check_offer_data(offer_data):
     - offer_reference (the sku)
     - any other parameter allowed by the service (price, quantity,
     product_state, ...)
+
+    Raises a FnapyUpdateOfferError if the offer_data is not valid.
+
     """
     if not isinstance(offer_data, dict):
         msg = 'The argument must be a dictionary.'
