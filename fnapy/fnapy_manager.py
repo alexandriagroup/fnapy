@@ -120,7 +120,31 @@ class FnapyManager(object):
         self.token = parse_xml(response, 'token')
         return self.token
 
-    # TODO Allow update_offers to delete an offer
+    def delete_offers(self, offer_references):
+        """Delete the offers with the given offer_references (sku)
+
+        Usage::
+
+            response = manager.delete_offers(offer_references)
+
+        :param offer_references: the list of SKUs corresponding to the offers
+        you want to delete from your catalog
+
+        :returns: :class:`Response <Response>` object
+
+        """
+        offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+        for offer_reference in offer_references:
+            etree.SubElement(offers_update, "offer_reference",
+                             type="SellerSku").text = etree.CDATA(offer_reference)
+            etree.SubElement(offers_update, 'treatment').text = 'delete'
+        self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
+
+        # the response contains the element batch_id
+        response = self._get_response(offers_update, self.offers_update_request.xml)
+        self.batch_id = response.dict['offers_update_response']['batch_id']
+        return response
+
     # TODO Create a dictionary for the product_state
     def update_offers(self, offers_data):
         """Post the update offers and return the response
