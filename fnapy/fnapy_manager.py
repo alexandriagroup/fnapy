@@ -135,9 +135,12 @@ class FnapyManager(object):
         """
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
         for offer_reference in offer_references:
-            etree.SubElement(offers_update, "offer_reference",
+            offer = etree.Element('offer')
+            etree.SubElement(offer, "offer_reference",
                              type="SellerSku").text = etree.CDATA(offer_reference)
-            etree.SubElement(offers_update, 'treatment').text = 'delete'
+            etree.SubElement(offer, 'treatment').text = 'delete'
+            offers_update.append(offer)
+
         self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
 
         # the response contains the element batch_id
