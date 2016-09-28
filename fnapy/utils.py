@@ -331,10 +331,11 @@ def create_offer_element(offer_data):
 
     """
     offer = etree.Element('offer')
-    offer_reference = offer_data.pop('offer_reference')
+    offer_reference = offer_data['offer_reference']
     etree.SubElement(offer, "offer_reference", type="SellerSku").text = etree.CDATA(offer_reference)
+    offer_data_items = [(k, v) for k, v in offer_data.items() if k != 'offer_reference']
 
-    for key, value in offer_data.items():
+    for key, value in offer_data_items:
         if key == 'product_reference':
             etree.SubElement(offer, 'product_reference', type="Ean").text = str(value)
         elif key == 'description':
