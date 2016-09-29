@@ -168,14 +168,20 @@ class FnapyManager(object):
         * quantity         : the quantity (optional)
         * description      : a description of the offer (optional)
 
-        Note that at least one of the optional parameters (except
-        product_reference) must be provided otherwise a FnapyUpdateOfferError
-        is raised
+        The exception FnapyUpdateOfferError is raised if:
+        - offer_reference and at least one of the optional parameters (except
+        product_reference) are not provided
+        - offers_data is empty
 
         :returns: :class:`Response <Response>` object
 
         """
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+
+        if len(offers_data) == 0:
+            msg = 'You must provide at least one offer_data.'
+            raise FnapyUpdateOfferError(msg)
+
         for offer_data in offers_data:
             check_offer_data(offer_data)
             offer = create_offer_element(offer_data)
