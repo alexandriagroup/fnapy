@@ -1,3 +1,14 @@
+install:
+	@echo "Install from Pypi"
+	pip install -U fnapy
+
+dev_install:
+	@echo "Install local package"
+	pip install -e .
+
+uninstall:
+	pip uninstall fnapy
+	
 online_tests:
 	pytest -v tests/online/test_*.py
 
@@ -8,6 +19,7 @@ tests: offline_tests
 	pytest -v tests/test_*.py
 
 clean:
+	rm -rf dist build fnapy.egg-info
 	rm -rf fnapy/{*.pyc,__pycache__}
 	rm -rf tests/{*.pyc,__pycache__}
 	rm -rf tests/online/{*.pyc,__pycache__}
