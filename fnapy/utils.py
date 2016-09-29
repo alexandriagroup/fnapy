@@ -259,6 +259,16 @@ def remove_namespace(xml):
     return xmlepured
 
 
+def xpath(element, node_name):
+    """A convenient function to look for nodes in the XML
+    
+    >>> nodes = xpath(response.element)
+
+    """
+    return element.xpath('//ns:{0}'.format(node_name),
+                         namespaces={'ns': XHTML_NAMESPACE})
+
+
 # TODO Use process_namespaces
 def xml2dict(xml):
     """Returns a dictionary from the input XML
