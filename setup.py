@@ -29,7 +29,6 @@ install_requirements = [
     'requests',
     'xmltodict',
     'lxml',
-    'bs4'
 ]
 
 version = ''
