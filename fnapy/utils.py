@@ -265,11 +265,29 @@ def xpath(element, node_name):
     >>> nodes = xpath(response.element)
 
     """
+    if '/' in node_name:
+        node_name = '//ns:'.join(node_name.split('/'))
     return element.xpath('//ns:{0}'.format(node_name),
                          namespaces={'ns': XHTML_NAMESPACE})
 
 
-# TODO Use process_namespaces
+def extract_text(element, node_name, index=0):
+    """Extract the text from the selected node
+
+    If many nodes are found, by default, the first one is chosen.
+    You can change this by specifying the index=i where i is the nth
+    element you want.
+    If no text is found, the empty string is returned.
+
+    """
+    elements = xpath(element, node_name)
+    if len(elements) > 0:
+        text = elements[index].text
+    else:
+        text = ''
+    return text
+
+
 def xml2dict(xml):
     """Returns a dictionary from the input XML
     
