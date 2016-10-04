@@ -1,7 +1,6 @@
 alabaster==0.7.9
 args==0.1.0
 backports.shutil-get-terminal-size==1.0.0
-beautifulsoup4==4.5.1
 clint==0.5.1
 decorator==4.0.10
 docutils==0.12

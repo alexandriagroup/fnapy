@@ -17,7 +17,6 @@ from codecs import open
 from collections import OrderedDict
 
 # Third-party modules
-from bs4 import BeautifulSoup
 from lxml import etree
 import xmltodict
 import requests
@@ -301,7 +300,6 @@ def xml2dict(xml):
     return xmltodict.parse(xmlepured)
 
 
-# TODO Parse the token with lxml instead of BeautifulSoup
 def parse_xml(response, tag_name):
     """Get the text contained in the tag of the response
 
@@ -310,7 +308,8 @@ def parse_xml(response, tag_name):
     :returns: the text enclosed in the tag
     
     """
-    return BeautifulSoup(response.content, 'lxml').find(tag_name).text
+    xml = etree.XML(response.content)
+    return xml.xpath('//ns:token', namespaces={'ns':XHTML_NAMESPACE})[0].text
 
 
 def check_offer_data(offer_data):
