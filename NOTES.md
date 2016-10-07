@@ -100,6 +100,28 @@ thrown in the response.
 
 ### orders_query
 
+An order can have the following states:
+
+
+* **Created**: The order is waiting for approval from the seller
+* **Accepted**: The order has been approved (even partially) by the seller and is
+  waiting for billing and payment
+* **Refused**: The order has been completely refused by the seller (terminal state)
+* **ToShip**: The order has been approved by the seller and billed, and is waiting
+  for shipment by the seller
+* **Shipped**: The order has been approved by the seller, billed and shipped, and
+  is waiting for aknowledgement by the customer
+* **NotReceived**: The customer claimed that some or all products have not been
+  received. This case will be managed by the customer service
+* **Received**: The order is finished, the customer received all the products and
+  acknowledged reception (terminal state)
+* **Cancelled**: The order has been cancelled by the customer (terminal state) or
+  by the fnac service
+* **Refunded**: The order has been refunded by the seller (terminal state) or by
+  the fnac service
+* **Error**: The order status is in a non authorized or illogic state
+
+
 ### orders_update
 
 * Description
@@ -126,6 +148,8 @@ Orders statuses follow this workflow:
 3. ToShip
 4. Shipped
 5. Received
+
+
 
 
 ### order_update_action

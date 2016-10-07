@@ -50,6 +50,19 @@ class Query(object):
                 new_dict[k] = v
         return new_dict
 
+    def was(self, state):
+        """Perform a query on the states
+
+        :state: the name of a state
+
+        Example
+        >>> states = Query('state').was('Created')
+
+        """
+        new_dict = self._create_new_dict()
+        new_dict['state'] = {'#text': state}
+        return Query(self.name, tags=new_dict)
+
     def between(self, min, max):
         new_dict = self._create_new_dict()
         new_dict['min'] = {'#text': min}
@@ -261,12 +274,24 @@ def remove_namespace(xml):
 def xpath(element, node_name):
     """A convenient function to look for nodes in the XML
     
-    >>> nodes = xpath(response.element)
+    >>> nodes = xpath(response.element, node_name)
 
     """
     if '/' in node_name:
         node_name = '//ns:'.join(node_name.split('/'))
     return element.xpath('//ns:{0}'.format(node_name),
+                         namespaces={'ns': XHTML_NAMESPACE})
+
+
+def findall(element, node_name):
+    """A convenient function to look for nodes in the XML
+    
+    >>> nodes = findall(response.element, node_name)
+
+    """
+    if '/' in node_name:
+        node_name = '//ns:'.join(node_name.split('/'))
+    return element.findall('.//ns:{0}'.format(node_name),
                          namespaces={'ns': XHTML_NAMESPACE})
 
 

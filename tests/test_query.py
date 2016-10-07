@@ -38,3 +38,14 @@ def test_query_between():
 
     # Assert the order of the keys is preserverd
     assert list(_dict) == ['@type', 'min', 'max']
+
+def test_query_was():
+    """Query('state').was(state) should generate a valid request"""
+    states = Query('state').was('Created')
+    _dict = states.dict
+
+    # Assert the number of keys is correct
+    assert len(_dict) == 1
+
+    # Assert the keys are correct
+    assert _dict.get('state', {}).get('#text') == 'Created'
