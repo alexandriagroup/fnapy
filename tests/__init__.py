@@ -16,7 +16,6 @@ import pytest
 # Project
 from fnapy.fnapy_manager import FnapyManager
 from fnapy.connection import FnapyConnection
-from fnapy.config import URL, HEADERS
 from fnapy.utils import *
 
 
@@ -60,9 +59,10 @@ invalid_offers_data = [offer_data1, invalid_offer_data]
 # TODO Use mock instead of sending request to the server
 @pytest.fixture
 def setup():
-    partner_id = os.environ.get('FNAC_PARTNER_ID')
-    shop_id    = os.environ.get('FNAC_SHOP_ID')
-    key        = os.environ.get('FNAC_KEY')
+    credentials = get_credentials(sandbox=True)
+    partner_id = credentials['partner_id']
+    shop_id = credentials['shop_id']
+    key = credentials['key']
     from fnapy.connection import FnapyConnection
     connection = FnapyConnection(partner_id, shop_id, key)
     manager = FnapyManager(connection)
@@ -75,9 +75,9 @@ def setup():
 @pytest.fixture
 def fake_manager(monkeypatch):
     monkeypatch.setattr('requests.post', make_requests_get_mock('auth_response.xml'))
-    partner_id = 'FNAC_PARTNER_ID'
-    shop_id    = 'FNAC_SHOP_ID'
-    key        = 'FNAC_KEY'
+    partner_id = 'FNAC_SANDBOX_PARTNER_ID'
+    shop_id = 'FNAC_SANDBOX_SHOP_ID'
+    key = 'FNAC_SANDBOX_KEY'
     connection = FnapyConnection(partner_id, shop_id, key)
     manager = FnapyManager(connection)
     manager.authenticate()

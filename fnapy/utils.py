@@ -257,6 +257,33 @@ type       : {self.type}
 
 
 # FUNCTIONS
+def get_credentials(sandbox=True):
+    """Return the credentials for the sandbox or real account
+
+    Usage::
+        credentials = get_credentials(sandbox=sandbox)
+
+    :type sandbox: bool
+    :param sandbox: determines whether you get the credentials for the sandbox
+    account (True) or the real account (False).
+
+    :rtype: dict
+    :returns: the credentials for the selected account type
+    
+    """
+    credentials = {
+        'sandbox': {'partner_id': os.getenv('FNAC_SANDBOX_PARTNER_ID'),
+                    'shop_id': os.getenv('FNAC_SANDBOX_SHOP_ID'),
+                    'key': os.getenv('FNAC_SANDBOX_KEY')},
+        'real': {'partner_id': os.getenv('FNAC_PARTNER_ID'),
+                 'shop_id': os.getenv('FNAC_SHOP_ID'),
+                 'key': os.getenv('FNAC_KEY')},
+    }
+    use_sandbox = {True: 'sandbox', False: 'real'}
+    account_type = use_sandbox[sandbox]
+    return credentials[account_type]
+
+
 def dict2xml(_dict):
     """Returns a XML string from the input dictionary"""
     xml = xmltodict.unparse(_dict, pretty=True)
@@ -425,10 +452,13 @@ def get_order_ids(orders_query_response):
     return order_ids
 
 
-def get_token():
-    partner_id = os.getenv('FNAC_PARTNER_ID')
-    shop_id = os.getenv('FNAC_SHOP_ID')
-    key = os.getenv('FNAC_KEY')
+def get_token(sandbox=True):
+    # We use the real seller account
+    credentials = get_credentials(sandbox)
+    partner_id = credentials['partner_id']
+    shop_id = credentials['shop_id']
+    key = credentials['key']
+
     xml = """<?xml version="1.0" encoding="utf-8"?>
 <auth xmlns='http://www.fnac.com/schemas/mp-dialog.xsd'>
   <partner_id>{partner_id}</partner_id>
@@ -440,14 +470,16 @@ def get_token():
     return parse_xml(response, 'token')
 
 
-def set_credentials(xml):
+def set_credentials(xml, sandbox=True):
     """Set the credentials in the given raw XML """
-    credentials = {'shop_id': os.getenv('FNAC_SHOP_ID'),
-                   'partner_id': os.getenv('FNAC_PARTNER_ID'),
-                   'token': get_token()}
-    for credential, value in credentials.items():
-        xml = re.sub(pattern='{0}="[^"]+"'.format(credential),
-                     repl='{0}="{1}"'.format(credential, value), string=xml, flags=0)
+    credentials = get_credentials(sandbox)
+    creds = {'shop_id': credentials['shop_id'],
+             'partner_id': credentials['partner_id'],
+             'token': get_token(sandbox)}
+
+    for cred, value in creds.items():
+        xml = re.sub(pattern='{0}="[^"]+"'.format(cred),
+                     repl='{0}="{1}"'.format(cred, value), string=xml, flags=0)
     return xml
 
 
