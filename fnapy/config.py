@@ -10,10 +10,6 @@
 Useful constants and configs.
 """
 
-from collections import namedtuple
-
-
-URL        = "https://marketplace.ws.fd-recette.net/api.php/"
 XHTML_NAMESPACE = "http://www.fnac.com/schemas/mp-dialog.xsd"
 HEADERS = {'Content-Type': 'text/xml'}
 XML_OPTIONS = {'pretty_print': True, 'xml_declaration': True, 'encoding': 'utf-8'}

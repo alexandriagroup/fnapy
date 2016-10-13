@@ -22,7 +22,7 @@ import requests
 
 # Project modules
 from .utils import *
-from .config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from .config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from .compat import is_py3
 from .connection import FnapyConnection
 from .exceptions import FnapyPricingError
@@ -70,6 +70,9 @@ class FnapyManager(object):
         # The batch_id updated every time an offer is updated
         self.batch_id = None
 
+        # the url of the entrypoint
+        self.url = get_url(self.connection.sandbox)
+
         # Authenticate when the manager is instanciated
         self.authenticate()
 
@@ -85,7 +88,7 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
         """
         service = element.tag
-        response = requests.post(URL + service, xml, headers=HEADERS)
+        response = requests.post(self.url + service, xml, headers=HEADERS)
         response = Response(response.content)
         if response.dict.get(service + '_response', {}).get('error'):
             # Reauthenticate and update the element
@@ -93,7 +96,7 @@ class FnapyManager(object):
             setattr(self, service + '_request',
                     Request(etree.tostring(element, **XML_OPTIONS))) 
             # Resend the updated request
-            response = requests.post(URL + service,
+            response = requests.post(self.url + service,
                                      getattr(self, service + '_request').xml,
                                      headers=HEADERS)
             response = Response(response.content)
@@ -115,7 +118,7 @@ class FnapyManager(object):
         etree.SubElement(auth, 'shop_id').text = self.connection.shop_id
         etree.SubElement(auth, 'key').text = self.connection.key
         self.auth_request = Request(etree.tostring(auth, **XML_OPTIONS))
-        response = requests.post(URL + 'auth', self.auth_request.xml,
+        response = requests.post(self.url + 'auth', self.auth_request.xml,
                                  headers=HEADERS)
         self.token = parse_xml(response, 'token')
         return self.token

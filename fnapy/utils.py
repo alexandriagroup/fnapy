@@ -257,8 +257,27 @@ type       : {self.type}
 
 
 # FUNCTIONS
+def get_url(sandbox=True):
+    """Return the url for the sandbox or the real account
+
+    Usage::
+        url = get_url(sandbox=sandbox)
+
+    :type sandbox: bool
+    :param sandbox: determines whether you get the url for the sandbox
+    account (True) or the real account (False).
+
+    :rtype: str
+    :returns: the entrypoint url to access the FNAC WebServices
+
+    """
+    use_sandbox = {True: "https://marketplace.ws.fd-recette.net/api.php/",
+                   False: "https://vendeur.fnac.com/api.php/"}
+    return use_sandbox[sandbox]
+
+
 def get_credentials(sandbox=True):
-    """Return the credentials for the sandbox or real account
+    """Return the credentials for the sandbox or the real account
 
     Usage::
         credentials = get_credentials(sandbox=sandbox)
@@ -466,7 +485,8 @@ def get_token(sandbox=True):
   <key>{key}</key>
 </auth>
     """.format(partner_id=partner_id, shop_id=shop_id, key=key)
-    response = post('auth', xml)
+    url = get_url(sandbox)
+    response = post(url, 'auth', xml)
     return parse_xml(response, 'token')
 
 
@@ -483,9 +503,9 @@ def set_credentials(xml, sandbox=True):
     return xml
 
 
-def post(service, request):
+def post(url, service, request):
     request = to_unicode(request).encode('utf-8')
-    return requests.post(URL + service, request, headers=HEADERS)
+    return requests.post(url + service, request, headers=HEADERS)
 
 
 def save_xml_response(response, action):

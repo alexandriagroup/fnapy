@@ -59,12 +59,8 @@ invalid_offers_data = [offer_data1, invalid_offer_data]
 # TODO Use mock instead of sending request to the server
 @pytest.fixture
 def setup():
-    credentials = get_credentials(sandbox=True)
-    partner_id = credentials['partner_id']
-    shop_id = credentials['shop_id']
-    key = credentials['key']
     from fnapy.connection import FnapyConnection
-    connection = FnapyConnection(partner_id, shop_id, key)
+    connection = FnapyConnection(sandbox=True)
     manager = FnapyManager(connection)
     manager.authenticate()
     # We make sure we always have the offers with the right values
@@ -75,10 +71,7 @@ def setup():
 @pytest.fixture
 def fake_manager(monkeypatch):
     monkeypatch.setattr('requests.post', make_requests_get_mock('auth_response.xml'))
-    partner_id = 'FNAC_SANDBOX_PARTNER_ID'
-    shop_id = 'FNAC_SANDBOX_SHOP_ID'
-    key = 'FNAC_SANDBOX_KEY'
-    connection = FnapyConnection(partner_id, shop_id, key)
+    connection = FnapyConnection(sandbox=True)
     manager = FnapyManager(connection)
     manager.authenticate()
     return manager
@@ -168,7 +161,8 @@ def response_is_valid(action, service):
     """The response is valid if it contains the elements defined in the API"""
     request = load_xml_request(action) 
     request = set_credentials(request)
-    response = post(service, request).text
+    url = get_url(sandbox=True)
+    response = post(url, service, request).text
     xml_dict = xml2dict(response).get(service + '_response', {})
     result, error = xml_is_valid(xml_dict, RESPONSE_ELEMENTS[service])
     if result:
@@ -182,7 +176,8 @@ def response_is_not_valid(action, service):
     """The request is not valid if an 'error' node is in the response"""
     request = load_xml_request(action)
     request = set_credentials(request)
-    response = post(service, request).text
+    url = get_url(sandbox=True)
+    response = post(url, service, request).text
     xml_dict = xml2dict(response).get(service + '_response', {})
     result = xml_contains_error(xml_dict)
     if result:
