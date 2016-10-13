@@ -22,7 +22,8 @@ def test_query_pricing(monkeypatch, fake_manager):
     context = create_context_for_requests(monkeypatch, fake_manager,
             'query_pricing', 'pricing_query')
     with context:
-        fake_manager.query_pricing(ean='0886971942323')
+        eans = [7321900286480, 9780262510875, 5060314991222]
+        fake_manager.query_pricing(eans=eans)
 
 
 # This time, we must also test the response because it may contain an error we
@@ -33,4 +34,4 @@ def test_query_pricing_with_invalid_ean(monkeypatch, fake_manager):
             'pricing_query')
     with context:
         with pytest.raises(FnapyPricingError):
-            fake_manager.query_pricing(ean='007')
+            fake_manager.query_pricing(eans=['007'])
