@@ -72,7 +72,14 @@ def setup():
 
 @pytest.fixture
 def fake_manager(monkeypatch):
-    monkeypatch.setattr('requests.post', make_requests_get_mock('auth_response.xml'))
+    """Create a manager that doesn't need to connect to the server to get a token"""
+    # We mock the request to the authentication web service in FnapyManager
+    monkeypatch.setattr('requests.post',
+                        make_requests_get_mock('auth_response.xml'))
+    # We mock the check of the credentials in FnapyConnection
+    # so that we can initiate the connection with any credentials
+    monkeypatch.setattr('fnapy.connection.check_credentials_validity',
+                        lambda x: None)
     connection = FnapyConnection(sandbox=True)
     manager = FnapyManager(connection)
     manager.authenticate()
