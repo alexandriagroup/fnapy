@@ -22,8 +22,7 @@ def read(fname):
         return fd.read()
 
 readme = read('README.rst')
-changelog = read('CHANGELOG.rst').replace('.. :changelog:', '')
-
+changelog = read('docs/CHANGELOG.rst').replace('.. _changelog:', '')
 
 install_requirements = [
     'requests',
@@ -46,6 +45,7 @@ setup(
     author_email='taurusolson@gmail.com',
     version=version,
     description='A Python API for FNAC WebServices',
+    long_description=readme + '\n\n' + changelog,
     keywords=['api', 'fnac', 'python', 'webservices'],
     packages=find_packages(),
     install_requires=install_requirements,
@@ -56,6 +56,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
