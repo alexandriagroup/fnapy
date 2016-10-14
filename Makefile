@@ -19,11 +19,11 @@ tests: offline_tests
 	pytest -v tests/test_*.py
 
 clean:
-	rm -rf dist build fnapy.egg-info
-	rm -rf fnapy/{*.pyc,__pycache__}
-	rm -rf tests/{*.pyc,__pycache__}
-	rm -rf tests/online/{*.pyc,__pycache__}
-	rm -rf tests/offline/{*.pyc,__pycache__}
+	rm -rf dist build fnapy.egg-info __pycache__
+	rm -rf fnapy/*.pyc fnapy/__pycache__
+	rm -rf tests/*.pyc tests/__pycache__
+	rm -rf tests/online/*.pyc tests/online/__pycache__
+	rm -rf tests/offline/*.pyc tests/offline/__pycache__
 
 tags:
 	ctags -R **/*.py
