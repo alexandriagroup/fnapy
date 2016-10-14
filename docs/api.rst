@@ -38,8 +38,8 @@ Request
    :inherited-members:
 
 
-Reponse
--------
+Response
+--------
 
 .. autoclass:: Response
    :members:

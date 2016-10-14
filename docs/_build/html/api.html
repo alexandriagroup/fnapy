@@ -23,7 +23,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
+    <link rel="next" title="Change log" href="CHANGELOG.html" />
     <link rel="prev" title="Quickstart" href="quickstart.html" />
    
   
@@ -41,6 +44,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="CHANGELOG.html" title="Change log"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quickstart.html" title="Quickstart"
              accesskey="P">previous</a> |</li>
@@ -78,6 +84,27 @@
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">token</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fnapy_manager.FnapyManager.delete_offers">
+<code class="descname">delete_offers</code><span class="sig-paren">(</span><em>offer_references</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.delete_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.delete_offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the offers with the given offer_references (sku)</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">delete_offers</span><span class="p">(</span><span class="n">offer_references</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offer_references</strong> &#8211; the list of SKUs corresponding to the offers
+you want to delete from your catalog</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -178,7 +205,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the client_order_comments created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -231,7 +259,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the incidents created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -279,7 +308,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the messages created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -322,7 +352,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the offers created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -369,7 +400,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the orders created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -378,18 +410,20 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_pricing">
-<code class="descname">query_pricing</code><span class="sig-paren">(</span><em>ean</em>, <em>sellers='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_pricing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compare price between all marketplace shop and fnac for a specific
-product (designated by its ean)</p>
+<code class="descname">query_pricing</code><span class="sig-paren">(</span><em>eans</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_pricing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the best prices applied to a given product within all Fnac
+marketplace sellers (Fnac included)</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">ean</span><span class="p">,</span> <span class="n">sellers</span><span class="o">=</span><span class="n">sellers</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">eans</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">response</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>eans</strong> (<em>list or tuple</em>) &#8211; a list of EANs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">response</td>
 </tr>
 </tbody>
 </table>
@@ -427,7 +461,8 @@ Find the 2 first items  of the catalog:</p>
 </div>
 <p>Find the shop_invoices created between 2 dates:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="s2">&quot;2016-08-23T17:00:00+00:00&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
+<span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
 </pre></div>
@@ -548,21 +583,25 @@ where data is dictionary with the keys:</td>
 <ul>
 <li><p class="first">offer_reference  : the SKU (mandatory)</p>
 </li>
-<li><p class="first">product_reference: the EAN</p>
+<li><p class="first">product_reference: the EAN (optional)</p>
 </li>
-<li><p class="first">price            : the price of the offer</p>
+<li><p class="first">price            : the price of the offer (optional)</p>
 </li>
 <li><dl class="first docutils">
 <dt>product_state</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">an integer representing the state of the product</span><dd><p class="first last">(documentation needed)</p>
+ <span class="classifier-delimiter">:</span> <span class="classifier">an integer representing the state of the product</span><dd><p class="first last">(documentation needed) (optional)</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">quantity         : the quantity</p>
+<li><p class="first">quantity         : the quantity (optional)</p>
 </li>
-<li><p class="first">description      : (optional) a description of the offer</p>
+<li><p class="first">description      : a description of the offer (optional)</p>
 </li>
 </ul>
+<p>The exception FnapyUpdateOfferError is raised if:
+- offer_reference and at least one of the optional parameters (except
+product_reference) are not provided
+- offers_data is empty</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -585,21 +624,16 @@ where data is dictionary with the keys:</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>order_id</strong> (<em>str</em>) &#8211; Order unique identifier from FNAC</li>
 <li><strong>order_update_action</strong> (<em>str</em>) &#8211; Group action type for order detail action</li>
-<li><strong>actions</strong> (<em>list</em>) &#8211; a list of dictionaries with 2 keys:</li>
+<li><strong>actions</strong> (<em>list</em>) &#8211; a list of dictionaries with 2 keys:
+<cite>&#8216;order_detail_id&#8217;</cite> and <cite>&#8216;action&#8217;</cite></li>
 </ul>
 </td>
 </tr>
-</tbody>
-</table>
-<p><cite>&#8216;order_detail_id&#8217;</cite> and <cite>&#8216;action&#8217;</cite></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -654,24 +688,60 @@ items. We decide to accept the first item and refuse the second:</p>
 <h2>FnapyConnection<a class="headerlink" href="#fnapyconnection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="connection.FnapyConnection">
-<em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>partner_id</em>, <em>shop_id</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connection.html#FnapyConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>credentials={}</em>, <em>sandbox=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connection.html#FnapyConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>The connection class of fnapy</p>
+<dl class="docutils">
+<dt>Usage::</dt>
+<dd>connection = FnapyConnection(credentials=credentials, sandbox=sandbox)</dd>
+</dl>
+<p>Example:</p>
+<ul>
+<li><p class="first">Create a connection with a credentials dictionary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">credentials</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;partner_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_partner_id&#39;</span><span class="p">,</span> <span class="s1">&#39;shop_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_shop_id&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;my_key&#39;</span><span class="p">,</span> <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a connection using the environment variables for a given account
+type (the sandbox account is used if sandbox True. If sandbox is False, the
+real account is used):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">sandbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must have previously defined the following environment
+variables:</p>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>for the sandbox: FNAC_SANDBOX_PARTNER_ID, FNAC_SANDBOX_SHOP_ID,</dt>
+<dd><p class="first last">FNAC_SANDBOX_KEY</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">for the real account: FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY</p>
+</li>
+</ul>
+</dd></dl>
 
 <span class="target" id="module-utils"></span></div>
 <div class="section" id="request">
 <h2>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="utils.Request">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Request" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Request" title="Permalink to this definition">¶</a></dt>
 <dd><p>A handy class to handle the request</p>
 </dd></dl>
 
 </div>
-<div class="section" id="reponse">
-<h2>Reponse<a class="headerlink" href="#reponse" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="response">
+<h2>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="utils.Response">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Response" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Response" title="Permalink to this definition">¶</a></dt>
 <dd><p>A handy class to handle the response</p>
 </dd></dl>
 
@@ -704,7 +774,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <li><a class="reference internal" href="#fnapymanager">FnapyManager</a></li>
 <li><a class="reference internal" href="#fnapyconnection">FnapyConnection</a></li>
 <li><a class="reference internal" href="#request">Request</a></li>
-<li><a class="reference internal" href="#reponse">Reponse</a></li>
+<li><a class="reference internal" href="#response">Response</a></li>
 <li><a class="reference internal" href="#message">Message</a></li>
 </ul>
 </li>
@@ -713,6 +783,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="quickstart.html" title="previous chapter">Quickstart</a></li>
+      <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">
