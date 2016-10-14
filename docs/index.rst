@@ -13,6 +13,7 @@ Welcome to fnapy's documentation!
 
    quickstart
    api
+   CHANGELOG
 
 
 Indices and tables
