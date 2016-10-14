@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+SOURCE="docs fnapy"
+
+git co gh-pages && echo "Deploying the doc to gh-pages..."
+
+rm -rf _sources _static _modules _themes
+git co master $SOURCE
+cd docs
+make html
+mv -fv _build/html/* ../
+cd .. && rm -rf $SOURCE
+git add .
+git commit -m 'Deploy the documentation on gh-pages'
+git push origin gh-pages
+
+git co master && echo "Done."
