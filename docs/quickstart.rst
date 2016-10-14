@@ -1,6 +1,5 @@
 .. _quickstart:
 
-
 Quickstart
 ==========
 
@@ -13,7 +12,7 @@ API.
 * Create a connection to the FNAC Marketplace API with your credentials::
 
     >>> from fnapy.fnapy_manager import FnapyManager
-    >>> connection = FnapyConnection(pattern_id, shop_id, key)
+    >>> connection = FnapyConnection(credentials)
 
 * Create the manager::
 
@@ -39,8 +38,8 @@ Let's create some offers in our catalog::
 
     response = manager.update_offers([offers_data1, offer_data2])
 
-Behind the scene, the manager sent an XML request to the `offers_update` service. We can
-have a look at this request with the attribute `offers_update_request`::
+Behind the scene, the manager sent an XML request to the `offers_update`
+service. We can have a look at this request with the attribute `offers_update_request`::
 
     >>> request = manager.offers_update_request
     >>> print request.xml
@@ -87,7 +86,8 @@ Get the batch status
     batch_id = response.dict['offers_update_response']['batch_id']
     response = manager.get_batch_status(batch_id)
 
-Note that :class:`FnapyManager <FnapyManager>` stores the last `batch_id` so if you want the latest `batch_status` you can do::
+Note that :class:`FnapyManager <FnapyManager>` stores the last `batch_id` so if
+you want the latest `batch_status` you can do::
 
     response = manager.get_batch_status()
 
@@ -107,13 +107,34 @@ Let's say you want to know the offers created between 2016-08-25 and 2016-08-31:
     response = manager.query_offers(date=date)
 
 
+Query the pricing
+-----------------
+
+In order to stay competitive, you have to know the offers created by the
+other sellers for a list of EANs or at least the current best offer these
+products. You can get these information with `query_pricing`::
+
+    response = manager.query_pricing(eans=eans)
+
+
+Delete offers
+-------------
+
+You can delete the offers you created with `delete_offers`::
+
+    response = manager.delete_offers(offer_references)
+
+where `offer_references` is a list of SKUs.
+
+
 Query the orders
 ----------------
 
 Once customers placed an order on your items in your catalog, you can query
 these orders.
 
-If you want to retrieve the first 10 created orders, you'll have to sent this request with::
+If you want to retrieve the first 10 created orders, you'll have to sent this
+request with::
 
     response = manager.query_orders(results_count=10, paging=1)
 
@@ -127,7 +148,8 @@ Created > Accepted > ToShip > Shipped > Received
 
 The seller acts only at acceptation and shipping steps.
 
-This is the how we accept the first and refuse the second order for the order_id 003ECCA1YVFBW::
+This is the how we accept the first and refuse the second order for the
+order_id 003ECCA1YVFBW::
 
     action1 = {"order_detail_id": 1, "action": "Accepted"}
     action2 = {"order_detail_id": 2, "action": "Refused"}

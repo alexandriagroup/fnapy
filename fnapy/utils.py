@@ -17,13 +17,14 @@ from codecs import open
 from collections import OrderedDict
 
 # Third-party modules
-from bs4 import BeautifulSoup
 from lxml import etree
 import xmltodict
 import requests
 
 # Project modules
-from config import *
+from fnapy.config import *
+from fnapy.compat import to_unicode
+from fnapy.exceptions import FnapyUpdateOfferError
 
 
 # CLASSES
@@ -48,6 +49,19 @@ class Query(object):
             if k.startswith('@'):
                 new_dict[k] = v
         return new_dict
+
+    def was(self, state):
+        """Perform a query on the states
+
+        :state: the name of a state
+
+        Example
+        >>> states = Query('state').was('Created')
+
+        """
+        new_dict = self._create_new_dict()
+        new_dict['state'] = {'#text': state}
+        return Query(self.name, tags=new_dict)
 
     def between(self, min, max):
         new_dict = self._create_new_dict()
@@ -96,11 +110,12 @@ class Query(object):
 
 
 class HttpMessage(object):
-    def __init__(self, text):
-        self.dict = xml2dict(text)
+    def __init__(self, content):
+        # content is a string
+        self.dict = xml2dict(content)
 
         # Raw XML
-        self.xml = text.encode('utf-8')
+        self.xml = content
 
         # etree._Element
         self.element = etree.fromstring(self.xml)
@@ -116,14 +131,14 @@ class HttpMessage(object):
 
 class Request(HttpMessage):
     """A handy class to handle the request"""
-    def __init__(self, text):
-        super(Request, self).__init__(text)
+    def __init__(self, content):
+        super(Request, self).__init__(content)
 
 
 class Response(HttpMessage):
     """A handy class to handle the response"""
-    def __init__(self, text):
-        super(Response, self).__init__(text)
+    def __init__(self, content):
+        super(Response, self).__init__(content)
 
 
 # TODO Implement a check for the attributes
@@ -242,6 +257,52 @@ type       : {self.type}
 
 
 # FUNCTIONS
+def get_url(sandbox=True):
+    """Return the url for the sandbox or the real account
+
+    Usage::
+        url = get_url(sandbox=sandbox)
+
+    :type sandbox: bool
+    :param sandbox: determines whether you get the url for the sandbox
+    account (True) or the real account (False).
+
+    :rtype: str
+    :returns: the entrypoint url to access the FNAC WebServices
+
+    """
+    use_sandbox = {True: "https://marketplace.ws.fd-recette.net/api.php/",
+                   False: "https://vendeur.fnac.com/api.php/"}
+    return use_sandbox[sandbox]
+
+
+def get_credentials(sandbox=True):
+    """Return the credentials for the sandbox or the real account
+
+    Usage::
+        credentials = get_credentials(sandbox=sandbox)
+
+    :type sandbox: bool
+    :param sandbox: determines whether you get the credentials for the sandbox
+    account (True) or the real account (False).
+
+    :rtype: dict
+    :returns: the credentials for the selected account type
+    
+    """
+    credentials = {
+        'sandbox': {'partner_id': os.getenv('FNAC_SANDBOX_PARTNER_ID'),
+                    'shop_id': os.getenv('FNAC_SANDBOX_SHOP_ID'),
+                    'key': os.getenv('FNAC_SANDBOX_KEY')},
+        'real': {'partner_id': os.getenv('FNAC_PARTNER_ID'),
+                 'shop_id': os.getenv('FNAC_SHOP_ID'),
+                 'key': os.getenv('FNAC_KEY')},
+    }
+    use_sandbox = {True: 'sandbox', False: 'real'}
+    account_type = use_sandbox[sandbox]
+    return credentials[account_type]
+
+
 def dict2xml(_dict):
     """Returns a XML string from the input dictionary"""
     xml = xmltodict.unparse(_dict, pretty=True)
@@ -256,7 +317,47 @@ def remove_namespace(xml):
     return xmlepured
 
 
-# TODO Use process_namespaces
+def xpath(element, node_name):
+    """A convenient function to look for nodes in the XML
+    
+    >>> nodes = xpath(response.element, node_name)
+
+    """
+    if '/' in node_name:
+        node_name = '//ns:'.join(node_name.split('/'))
+    return element.xpath('//ns:{0}'.format(node_name),
+                         namespaces={'ns': XHTML_NAMESPACE})
+
+
+def findall(element, node_name):
+    """A convenient function to look for nodes in the XML
+    
+    >>> nodes = findall(response.element, node_name)
+
+    """
+    if '/' in node_name:
+        node_name = '//ns:'.join(node_name.split('/'))
+    return element.findall('.//ns:{0}'.format(node_name),
+                         namespaces={'ns': XHTML_NAMESPACE})
+
+
+def extract_text(element, node_name, index=0):
+    """Extract the text from the selected node
+
+    If many nodes are found, by default, the first one is chosen.
+    You can change this by specifying the index=i where i is the nth
+    element you want.
+    If no text is found, the empty string is returned.
+
+    """
+    elements = xpath(element, node_name)
+    if len(elements) > 0:
+        text = elements[index].text
+    else:
+        text = ''
+    return text
+
+
 def xml2dict(xml):
     """Returns a dictionary from the input XML
     
@@ -266,11 +367,10 @@ def xml2dict(xml):
     :rtype: dict
     :returns: the dictionary correspoding to the input XML
     """
-    xmlepured = remove_namespace(xml)
+    xmlepured = remove_namespace(to_unicode(xml))
     return xmltodict.parse(xmlepured)
 
 
-# TODO Parse the token with lxml instead of BeautifulSoup
 def parse_xml(response, tag_name):
     """Get the text contained in the tag of the response
 
@@ -279,34 +379,70 @@ def parse_xml(response, tag_name):
     :returns: the text enclosed in the tag
     
     """
-    return BeautifulSoup(response.content, 'lxml').find(tag_name).text
+    xml = etree.XML(response.content)
+    return xml.xpath('//ns:token', namespaces={'ns':XHTML_NAMESPACE})[0].text
 
+
+def check_offer_data(offer_data):
+    """Check the offer_data passed to update_offers is valid
+    
+    :type offer_data: dict
+    :param offer_data: the parameters used to update an offer
+
+    :returns: None
+
+    offer_data must be a dictionary with at least 2 keys:
+    - offer_reference (the sku)
+    - any other parameter allowed by the service (price, quantity,
+    product_state, ...)
+
+    Raises a FnapyUpdateOfferError if the offer_data is not valid.
+
+    """
+    if not isinstance(offer_data, dict):
+        msg = 'The argument must be a dictionary.'
+        raise FnapyUpdateOfferError(msg)
+
+    if 'offer_reference' not in offer_data:
+        msg = 'The dictionary must contain the key "offer_reference" (the sku)'
+        raise FnapyUpdateOfferError(msg)
+
+    valid_keys = [x.name for x in REQUEST_ELEMENTS['offers_update']]
+    for key in offer_data:
+        if key not in valid_keys:
+            msg = '{0} is not a valid parameter for updating an offer. '
+            msg += ' Choose amongst {1}'
+            msg = msg.format(key, valid_keys)
+            raise FnapyUpdateOfferError(msg)
 
 # TODO Reimplement create_offer_element with kwargs
-def create_offer_element(product_reference, offer_reference, price, product_state, quantity, description=None):
+def create_offer_element(offer_data):
     """Create an offer element
 
-    An offer needs 5 mandatory parameters:
-    :param product_reference: a product reference (such as EAN)
+    An offer needs at least one offer_reference (SKU) and any other parameter
+    accepted by the service (cf documentation)
     :param offer_reference: a seller offer reference (such as SKU)
+    :param product_reference: a product reference (such as EAN)
     :param product_state: a product state
     :param price: a price
     :param quantity: a quantity
-
-    You may add an optional parameter:
     :param description: a description of the product
 
     :returns: offer (etree.Element)
 
     """
     offer = etree.Element('offer')
-    etree.SubElement(offer, "product_reference" ,type="Ean").text = str(product_reference)
+    offer_reference = offer_data['offer_reference']
     etree.SubElement(offer, "offer_reference", type="SellerSku").text = etree.CDATA(offer_reference)
-    etree.SubElement(offer, "price").text = str(price)
-    etree.SubElement(offer, "product_state").text = str(product_state)
-    etree.SubElement(offer, "quantity").text = str(quantity)
-    if description:
-        etree.SubElement(offer, "description").text = etree.CDATA(description)
+    offer_data_items = [(k, v) for k, v in offer_data.items() if k != 'offer_reference']
+
+    for key, value in offer_data_items:
+        if key == 'product_reference':
+            etree.SubElement(offer, 'product_reference', type="Ean").text = str(value)
+        elif key == 'description':
+            etree.SubElement(offer, 'description').text = etree.CDATA(value)
+        else:
+            etree.SubElement(offer, key).text = str(value)
     return offer
 
 
@@ -335,10 +471,13 @@ def get_order_ids(orders_query_response):
     return order_ids
 
 
-def get_token():
-    partner_id = os.getenv('FNAC_PARTNER_ID')
-    shop_id = os.getenv('FNAC_SHOP_ID')
-    key = os.getenv('FNAC_KEY')
+def get_token(sandbox=True):
+    # We use the real seller account
+    credentials = get_credentials(sandbox)
+    partner_id = credentials['partner_id']
+    shop_id = credentials['shop_id']
+    key = credentials['key']
+
     xml = """<?xml version="1.0" encoding="utf-8"?>
 <auth xmlns='http://www.fnac.com/schemas/mp-dialog.xsd'>
   <partner_id>{partner_id}</partner_id>
@@ -346,23 +485,27 @@ def get_token():
   <key>{key}</key>
 </auth>
     """.format(partner_id=partner_id, shop_id=shop_id, key=key)
-    response = post('auth', xml)
+    url = get_url(sandbox)
+    response = post(url, 'auth', xml)
     return parse_xml(response, 'token')
 
 
-def set_credentials(xml):
+def set_credentials(xml, sandbox=True):
     """Set the credentials in the given raw XML """
-    credentials = {'shop_id': os.getenv('FNAC_SHOP_ID'),
-                   'partner_id': os.getenv('FNAC_PARTNER_ID'),
-                   'token': get_token()}
-    for credential, value in credentials.items():
-        xml = re.sub(pattern='{0}="[^"]+"'.format(credential),
-                     repl='{0}="{1}"'.format(credential, value), string=xml, flags=0)
+    credentials = get_credentials(sandbox)
+    creds = {'shop_id': credentials['shop_id'],
+             'partner_id': credentials['partner_id'],
+             'token': get_token(sandbox)}
+
+    for cred, value in creds.items():
+        xml = re.sub(pattern='{0}="[^"]+"'.format(cred),
+                     repl='{0}="{1}"'.format(cred, value), string=xml, flags=0)
     return xml
 
 
-def post(service, request):
-    return requests.post(URL + service, request, headers=HEADERS)
+def post(url, service, request):
+    request = to_unicode(request).encode('utf-8')
+    return requests.post(url + service, request, headers=HEADERS)
 
 
 def save_xml_response(response, action):

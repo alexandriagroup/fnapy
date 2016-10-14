@@ -21,8 +21,11 @@ from string import Template
 import requests
 
 # Project modules
-from utils import *
-from config import REQUEST_ELEMENTS, URL, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from fnapy.utils import *
+from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from fnapy.compat import is_py3
+from fnapy.connection import FnapyConnection
+from fnapy.exceptions import FnapyPricingError
 
 
 def _create_docstring(query_type):
@@ -43,6 +46,9 @@ class FnapyManager(object):
 
     def __init__(self, connection):
         """Initialize the manager"""
+        if not isinstance(connection, FnapyConnection):
+            raise TypeError('You must provide a valid FnapyConnection instance.')
+
         self.connection = connection
         self.auth_request = None
         self.offers_query_request = None
@@ -64,6 +70,9 @@ class FnapyManager(object):
         # The batch_id updated every time an offer is updated
         self.batch_id = None
 
+        # the url of the entrypoint
+        self.url = get_url(self.connection.sandbox)
+
         # Authenticate when the manager is instanciated
         self.authenticate()
 
@@ -79,19 +88,18 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
         """
         service = element.tag
-        response = requests.post(URL + service, xml, headers=HEADERS)
-        response = Response(response.text)
+        response = requests.post(self.url + service, xml, headers=HEADERS)
+        response = Response(response.content)
         if response.dict.get(service + '_response', {}).get('error'):
-            print 'The token expired. Reauthenticating...'
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
             setattr(self, service + '_request',
                     Request(etree.tostring(element, **XML_OPTIONS))) 
             # Resend the updated request
-            response = requests.post(URL + service,
+            response = requests.post(self.url + service,
                                      getattr(self, service + '_request').xml,
                                      headers=HEADERS)
-            response = Response(response.text)
+            response = Response(response.content)
         return response
 
     def authenticate(self):
@@ -110,12 +118,39 @@ class FnapyManager(object):
         etree.SubElement(auth, 'shop_id').text = self.connection.shop_id
         etree.SubElement(auth, 'key').text = self.connection.key
         self.auth_request = Request(etree.tostring(auth, **XML_OPTIONS))
-        response = requests.post(URL + 'auth', self.auth_request.xml,
+        response = requests.post(self.url + 'auth', self.auth_request.xml,
                                  headers=HEADERS)
         self.token = parse_xml(response, 'token')
         return self.token
 
-    # TODO Allow update_offers to delete an offer
+    def delete_offers(self, offer_references):
+        """Delete the offers with the given offer_references (sku)
+
+        Usage::
+
+            response = manager.delete_offers(offer_references)
+
+        :param offer_references: the list of SKUs corresponding to the offers
+            you want to delete from your catalog
+
+        :returns: :class:`Response <Response>` object
+
+        """
+        offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+        for offer_reference in offer_references:
+            offer = etree.Element('offer')
+            etree.SubElement(offer, "offer_reference",
+                             type="SellerSku").text = etree.CDATA(offer_reference)
+            etree.SubElement(offer, 'treatment').text = 'delete'
+            offers_update.append(offer)
+
+        self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
+
+        # the response contains the element batch_id
+        response = self._get_response(offers_update, self.offers_update_request.xml)
+        self.batch_id = response.dict['offers_update_response']['batch_id']
+        return response
+
     # TODO Create a dictionary for the product_state
     def update_offers(self, offers_data):
         """Post the update offers and return the response
@@ -129,19 +164,30 @@ class FnapyManager(object):
                             where data is dictionary with the keys:
 
         * offer_reference  : the SKU (mandatory) 
-        * product_reference: the EAN
-        * price            : the price of the offer
+        * product_reference: the EAN (optional)
+        * price            : the price of the offer (optional)
         * product_state    : an integer representing the state of the product
-                             (documentation needed)
-        * quantity         : the quantity
-        * description      : (optional) a description of the offer
+                             (documentation needed) (optional)
+        * quantity         : the quantity (optional)
+        * description      : a description of the offer (optional)
+
+        The exception FnapyUpdateOfferError is raised if:
+        - offer_reference and at least one of the optional parameters (except
+        product_reference) are not provided
+        - offers_data is empty
 
         :returns: :class:`Response <Response>` object
 
         """
         offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+
+        if len(offers_data) == 0:
+            msg = 'You must provide at least one offer_data.'
+            raise FnapyUpdateOfferError(msg)
+
         for offer_data in offers_data:
-            offer = create_offer_element(**offer_data)
+            check_offer_data(offer_data)
+            offer = create_offer_element(offer_data)
             offers_update.append(offer)
         self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
 
@@ -166,7 +212,7 @@ class FnapyManager(object):
 
         :type actions: list
         :param actions: a list of dictionaries with 2 keys:
-        `'order_detail_id'` and `'action'`
+            `'order_detail_id'` and `'action'`
 
         :returns: :class:`Response <Response>` object
 
@@ -259,13 +305,12 @@ class FnapyManager(object):
         Find the ${query_type} created between 2 dates::
 
             >>> from fnapy.utils import Query
-            >>> date = Query('date', type='Modified')\
+            >>> date = Query('date', type='Modified')
                 .between(min="2016-08-23T17:00:00+00:00",
                          max="2016-08-26T17:00:00+00:00")
             >>> response = manager.query_${query_type}(date=date)
 
         """
-        print 'Querying {}...'.format(query_type)
         if query_type in FnapyManager.VALID_QUERY_TYPES:
             query_type += "_query"
         else:
@@ -277,7 +322,7 @@ class FnapyManager(object):
 
         # Make sure we have unicode
         # paging = str(paging).decode('utf-8')
-        results_count = str(results_count).decode('utf-8')
+        results_count = str(results_count)#.decode('utf-8')
 
         # Create the XML element
         query = create_xml_element(self.connection, self.token, query_type)
@@ -286,7 +331,7 @@ class FnapyManager(object):
 
         # Create the XML from the queried elements 
         if len(elements):
-            for key, value in elements.iteritems():
+            for key, value in elements.items():
                 # Handle cases where Query is used
                 if isinstance(value, Query):
                     value = value.dict
@@ -306,24 +351,39 @@ class FnapyManager(object):
     def query_orders(self, results_count='', **elements):
         return self._query('orders', results_count, **elements)
 
-    def query_pricing(self, ean, sellers="all"):
-        """Compare price between all marketplace shop and fnac for a specific
-        product (designated by its ean)
+    def query_pricing(self, eans):
+        """Retrieve the best prices applied to a given product within all Fnac
+        marketplace sellers (Fnac included)
 
         Usage::
 
-            response = manager.query_pricing(ean, sellers=sellers)
+            response = manager.query_pricing(eans)
+
+        :type eans: list or tuple
+        :param eans: a list of EANs
 
         :returns: response
 
+        .. note: If no price is found for a product, a :class:`FnapyPricingError <FnapyPricingError>`
+            is raised.
+
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
-        pricing_query.attrib['sellers'] = sellers
-        product_reference = etree.Element("product_reference", type="Ean")
-        product_reference.text = str(ean)
-        pricing_query.append(product_reference)
+
+        for ean in eans:
+            product_reference = etree.Element("product_reference", type="Ean")
+            product_reference.text = str(ean)
+            pricing_query.append(product_reference)
+
         self.pricing_query_request = Request(etree.tostring(pricing_query, **XML_OPTIONS))
-        return self._get_response(pricing_query, self.pricing_query_request.xml)
+        response = self._get_response(pricing_query, self.pricing_query_request.xml)
+
+        # Check if any error is returned
+        errors = response.element.xpath('//ns:error',
+                namespaces={'ns': XHTML_NAMESPACE})
+        if len(errors) > 0 and hasattr(errors[0], 'text'):
+            raise FnapyPricingError(errors[0].text)
+        return response
 
     def query_batch(self):
         """Return information about your currently processing import batches
@@ -470,4 +530,8 @@ class FnapyManager(object):
 # Dynamically set the docstrings for some query methods
 for query_type in FnapyManager.VALID_QUERY_TYPES:
     method = getattr(FnapyManager, 'query_' + query_type)
-    method.__func__.__doc__ = _create_docstring(query_type)
+    if is_py3:
+        method.__doc__ = _create_docstring(query_type)
+    else:
+        method.__func__.__doc__ = _create_docstring(query_type)
+
