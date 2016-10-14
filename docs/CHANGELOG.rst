@@ -7,21 +7,21 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
-Unreleased
-----------
+[1.0.0] - 2016-10-14
+--------------------
 Added
 *****
-* Work with sandbox and real account
+* Working with sandbox or real account is now possible
 
 Changed
 *******
-* Changed the API for FnapyConnection
+* ``FnapyConnection`` now accepts credentials dictionary or sandbox boolean
 * ``query_pricing`` now accepts a list of EANs
 
 [0.6.0] - 2016-10-07
 --------------------
 Added
-*******
+*****
 * In the ``Query`` class, added the ``was`` method to handle the states (especially
   the states of orders)
 
