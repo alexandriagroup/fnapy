@@ -19,6 +19,9 @@ from fnapy.connection import FnapyConnection
 from fnapy.utils import *
 
 
+# sandbox is False means real account.
+SANDBOX = True
+
 # DATA
 offer_data1 = {'product_reference':'0711719247159',
         'offer_reference':'B76A-CD5-153',
@@ -56,11 +59,10 @@ invalid_offers_data = [offer_data1, invalid_offer_data]
 
 
 # FUNCTIONS
-# TODO Use mock instead of sending request to the server
 @pytest.fixture
 def setup():
     from fnapy.connection import FnapyConnection
-    connection = FnapyConnection(sandbox=True)
+    connection = FnapyConnection(sandbox=SANDBOX)
     manager = FnapyManager(connection)
     manager.authenticate()
     # We make sure we always have the offers with the right values
@@ -160,8 +162,8 @@ def xml_is_valid(xml_dict, xml_valid_keys):
 def response_is_valid(action, service):
     """The response is valid if it contains the elements defined in the API"""
     request = load_xml_request(action) 
-    request = set_credentials(request)
-    url = get_url(sandbox=True)
+    request = set_credentials(request, sandbox=SANDBOX)
+    url = get_url(sandbox=SANDBOX)
     response = post(url, service, request).text
     xml_dict = xml2dict(response).get(service + '_response', {})
     result, error = xml_is_valid(xml_dict, RESPONSE_ELEMENTS[service])
@@ -175,8 +177,8 @@ def response_is_valid(action, service):
 def response_is_not_valid(action, service):
     """The request is not valid if an 'error' node is in the response"""
     request = load_xml_request(action)
-    request = set_credentials(request)
-    url = get_url(sandbox=True)
+    request = set_credentials(request, sandbox=SANDBOX)
+    url = get_url(sandbox=SANDBOX)
     response = post(url, service, request).text
     xml_dict = xml2dict(response).get(service + '_response', {})
     result = xml_contains_error(xml_dict)
