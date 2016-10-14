@@ -7,7 +7,7 @@
   <message state="READ" archived="FALSE">
     <message_id><![CDATA[6F9EF013-6387-F433-C3F5-4AAEF32AA317]]></message_id>
     <message_referer type="ORDER"><![CDATA[57BEAFDA828A8]]></message_referer>
-    <message_from type="CLIENT"><![CDATA[test T.]]></message_from>
+    <message_from type="CLIENT"><![CDATA[testfnac]]></message_from>
     <message_subject><![CDATA[Nouvelle réclamation]]></message_subject>
     <message_description><![CDATA[Une réclamation a été ouverte sur cette commande concernant le(s) article(s) suivant(s) :
 Motif de la réclamation :  - 

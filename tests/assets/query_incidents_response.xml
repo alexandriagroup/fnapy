@@ -34,9 +34,17 @@ Description du problèmeIncident test message]]></message>
             <order_detail_incident>
             <order_detail_id>1</order_detail_id>
             <type>8</type>
-            <status>OPENED</status>
+            <status>CLOSED</status>
             <created_at>2016-08-29T17:53:51+02:00</created_at>
-            <updated_at>2016-08-29T17:53:51+02:00</updated_at>
+            <updated_at>2016-10-12T12:41:44+02:00</updated_at>
+                        <refunds>
+                                <refund>
+                    <product_amount>260</product_amount>
+                    <shipping_amount>16</shipping_amount>
+                    <fee_ht_amount>33.12</fee_ht_amount>
+                    <created_at>2016-10-12T12:41:44+02:00</created_at>
+		</refund>
+                	    </refunds>
             	</order_detail_incident>
         </order_details_incident>
 </incident>

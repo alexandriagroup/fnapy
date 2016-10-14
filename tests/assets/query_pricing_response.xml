@@ -1,28 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<pricing_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
-    <pricing_product>
-        <product_reference type="Ean">0886971942323</product_reference>
-        <ean>0886971942323</ean>
-        <product_url><![CDATA[http://www4.rec1.fnac.dev/Shelf/Article4.aspx?prid=2066124]]></product_url>
-        <seller_price>14</seller_price>
-        <seller_shipping>2.39</seller_shipping>
-        <seller_offer_sku>4F1A-28E-8BE</seller_offer_sku>
-        <seller_offer_state>2</seller_offer_state>
-        <seller_adherent_price>10</seller_adherent_price>
-        <seller_adherent_shipping>2.39</seller_adherent_shipping>
-        <seller_adherent_offer_state>2</seller_adherent_offer_state>
-        <seller_adherent_offer_sku>4F1A-28E-8BE</seller_adherent_offer_sku>
-        <new_price>0.90</new_price>
-        <new_shipping>2.39</new_shipping>
-        <refurbished_price/>
-        <refurbished_shipping/>
-        <used_price>2.90</used_price>
-        <used_shipping>2.39</used_shipping>
-        <new_adherent_price/>
-        <new_adherent_shipping/>
-        <refurbished_adherent_price/>
-        <refurbished_adherent_shipping/>
-        <used_adherent_price>1.50</used_adherent_price>
-        <used_adherent_shipping>2.39</used_adherent_shipping>
-    </pricing_product>
-</pricing_query_response>
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+    
+            
+    
+        <pricing_product>
+      <product_reference type="Ean">7321900286480</product_reference>
+              <product_name><![CDATA[The Matrix Reloaded ( DVD / Blu-Ray ) - Neo, Trinity and Morpheus lead a revolt against the Machine Army as it attacks Zion. Their aim is to fight against the forces of repression and exploitation in an attempt to save the human race. Zion is the last human city on Earth and in their qu]]></product_name>
+        <image_url>http://static.fnac-static.com/multimedia/Images/FR/MC/80/9c/2e/3054720/1501-1.jpg</image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>4.19</price>
+              <shipping_price>0.00</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                      
+                                            
+            <pricing type="professional">
+                            <price>0.9</price>
+              <shipping_price>2.80000</shipping_price>
+              <offer_status>3</offer_status>
+            </pricing>
+
+                            </pricing_product>
+        <pricing_product>
+      <product_reference type="Ean">9780262510875</product_reference>
+              <product_name><![CDATA[Structure and Interpretation of Computer Programs, Mit Electrical Engineering and Computer Science Series. ( Livres en VO ) - ]]></product_name>
+        <image_url>http://static.fnac-static.com/multimedia/Images/FR/MC/42/04/46/4588610/1501-1.jpg</image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>41.48</price>
+              <shipping_price>4.99000</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                      
+                                            
+            <pricing type="professional">
+                            <price>29.54</price>
+              <shipping_price>4.99000</shipping_price>
+              <offer_status>2</offer_status>
+            </pricing>
+
+                            </pricing_product>
+        <pricing_product>
+      <product_reference type="Ean">5060314991222</product_reference>
+              <product_name><![CDATA[Ghost in the Shell The movie Edition Collector Combo Blu-ray + DVD ( DVD / Blu-Ray ) - ]]></product_name>
+        <image_url></image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>41.8</price>
+              <shipping_price>3.89000</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                            </pricing_product>
+    
+      </pricing_query_response>
