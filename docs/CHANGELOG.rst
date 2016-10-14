@@ -1,3 +1,5 @@
+.. :changelog:
+
 ==========
 Change log
 ==========
