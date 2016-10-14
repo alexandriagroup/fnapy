@@ -70,12 +70,19 @@ def setup():
     return {'manager': manager, 'response': offers_update_response}
 
 
+def get_fake_credentials(*args, **kwargs):
+    return {'partner_id': 'XXX', 'shop_id': 'XXX', 'key': 'XXX', 'sandbox': 0}
+
 @pytest.fixture
 def fake_manager(monkeypatch):
     """Create a manager that doesn't need to connect to the server to get a token"""
     # We mock the request to the authentication web service in FnapyManager
     monkeypatch.setattr('requests.post',
                         make_requests_get_mock('auth_response.xml'))
+    # We mock get_crendentials so that we don't have to provide environment
+    # variables
+    monkeypatch.setattr('fnapy.connection.get_credentials', get_fake_credentials)
+
     # We mock the check of the credentials in FnapyConnection
     # so that we can initiate the connection with any credentials
     monkeypatch.setattr('fnapy.connection.check_credentials_validity',
