@@ -23,6 +23,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
     <link rel="next" title="API" href="api.html" />
     <link rel="prev" title="Welcome to fnapy’s documentation!" href="index.html" />
@@ -65,7 +67,7 @@ API.</p>
 <ul>
 <li><p class="first">Create a connection to the FNAC Marketplace API with your credentials:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.fnapy_manager</span> <span class="k">import</span> <span class="n">FnapyManager</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">pattern_id</span><span class="p">,</span> <span class="n">shop_id</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -92,8 +94,8 @@ API.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">([</span><span class="n">offers_data1</span><span class="p">,</span> <span class="n">offer_data2</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Behind the scene, the manager sent an XML request to the <cite>offers_update</cite> service. We can
-have a look at this request with the attribute <cite>offers_update_request</cite>:</p>
+<p>Behind the scene, the manager sent an XML request to the <cite>offers_update</cite>
+service. We can have a look at this request with the attribute <cite>offers_update_request</cite>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">offers_update_request</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">request</span><span class="o">.</span><span class="n">xml</span>
 <span class="go">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;</span>
@@ -136,7 +138,8 @@ you&#8217;ll have to use to get information about the status of your offers.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that <code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code> stores the last <cite>batch_id</cite> so if you want the latest <cite>batch_status</cite> you can do:</p>
+<p>Note that <code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code> stores the last <cite>batch_id</cite> so if
+you want the latest <cite>batch_status</cite> you can do:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -154,11 +157,29 @@ actually created and retrieve information about them.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="query-the-pricing">
+<h2>Query the pricing<a class="headerlink" href="#query-the-pricing" title="Permalink to this headline">¶</a></h2>
+<p>In order to stay competitive, you have to know the offers created by the
+other sellers for a list of EANs or at least the current best offer these
+products. You can get these information with <cite>query_pricing</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">eans</span><span class="o">=</span><span class="n">eans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-offers">
+<h2>Delete offers<a class="headerlink" href="#delete-offers" title="Permalink to this headline">¶</a></h2>
+<p>You can delete the offers you created with <cite>delete_offers</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">delete_offers</span><span class="p">(</span><span class="n">offer_references</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>offer_references</cite> is a list of SKUs.</p>
+</div>
 <div class="section" id="query-the-orders">
 <h2>Query the orders<a class="headerlink" href="#query-the-orders" title="Permalink to this headline">¶</a></h2>
 <p>Once customers placed an order on your items in your catalog, you can query
 these orders.</p>
-<p>If you want to retrieve the first 10 created orders, you&#8217;ll have to sent this request with:</p>
+<p>If you want to retrieve the first 10 created orders, you&#8217;ll have to sent this
+request with:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -168,7 +189,8 @@ these orders.</p>
 <p>Orders statuses are following this workflow:</p>
 <p>Created &gt; Accepted &gt; ToShip &gt; Shipped &gt; Received</p>
 <p>The seller acts only at acceptation and shipping steps.</p>
-<p>This is the how we accept the first and refuse the second order for the order_id 003ECCA1YVFBW:</p>
+<p>This is the how we accept the first and refuse the second order for the
+order_id 003ECCA1YVFBW:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
 <span class="n">action2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Refused&quot;</span><span class="p">}</span>
 <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">action1</span><span class="p">,</span> <span class="n">action2</span><span class="p">]</span>
@@ -195,6 +217,8 @@ interface.</p>
 <li><a class="reference internal" href="#update-your-offers">Update your offers</a></li>
 <li><a class="reference internal" href="#get-the-batch-status">Get the batch status</a></li>
 <li><a class="reference internal" href="#query-the-offers">Query the offers</a></li>
+<li><a class="reference internal" href="#query-the-pricing">Query the pricing</a></li>
+<li><a class="reference internal" href="#delete-offers">Delete offers</a></li>
 <li><a class="reference internal" href="#query-the-orders">Query the orders</a></li>
 <li><a class="reference internal" href="#update-the-orders">Update the orders</a></li>
 <li><a class="reference internal" href="#request-and-response">Request and Response</a></li>
