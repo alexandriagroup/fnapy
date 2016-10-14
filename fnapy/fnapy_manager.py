@@ -21,11 +21,11 @@ from string import Template
 import requests
 
 # Project modules
-from .utils import *
-from .config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
-from .compat import is_py3
-from .connection import FnapyConnection
-from .exceptions import FnapyPricingError
+from fnapy.utils import *
+from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from fnapy.compat import is_py3
+from fnapy.connection import FnapyConnection
+from fnapy.exceptions import FnapyPricingError
 
 
 def _create_docstring(query_type):
@@ -131,7 +131,7 @@ class FnapyManager(object):
             response = manager.delete_offers(offer_references)
 
         :param offer_references: the list of SKUs corresponding to the offers
-        you want to delete from your catalog
+            you want to delete from your catalog
 
         :returns: :class:`Response <Response>` object
 
@@ -212,7 +212,7 @@ class FnapyManager(object):
 
         :type actions: list
         :param actions: a list of dictionaries with 2 keys:
-        `'order_detail_id'` and `'action'`
+            `'order_detail_id'` and `'action'`
 
         :returns: :class:`Response <Response>` object
 
@@ -365,7 +365,7 @@ class FnapyManager(object):
         :returns: response
 
         .. note: If no price is found for a product, a :class:`FnapyPricingError <FnapyPricingError>`
-        is raised.
+            is raised.
 
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')

@@ -40,18 +40,18 @@ class FnapyConnection(object):
                        'key': 'my_key', 'sandbox': False}
 
     * Create a connection using the environment variables for a given account
-    type (the sandbox account is used if sandbox True. If sandbox is False, the
-    real account is used)::
+      type (the sandbox account is used if sandbox True. If sandbox is False, the
+      real account is used)::
 
         connection = FnapyConnection(sandbox=True)
 
     .. note:: You must have previously defined the following environment
-    variables:
-    * for the sandbox:
-    FNAC_SANDBOX_PARTNER_ID, FNAC_SANDBOX_SHOP_ID, FNAC_SANDBOX_KEY
+        variables:
 
-    * for the real account:
-    FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY
+    * for the sandbox: FNAC_SANDBOX_PARTNER_ID, FNAC_SANDBOX_SHOP_ID,
+        FNAC_SANDBOX_KEY
+
+    * for the real account: FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY
 
     """
     def __init__(self, credentials={}, sandbox=None):
