@@ -8,6 +8,13 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.0] - 2016-10-17
+--------------------
+Changed
+*******
+* Display a log rather than raise a ``FnapyPricingError`` when a list of EANs is
+  provided
+
 [1.0.1] - 2016-10-17
 --------------------
 Fixed
