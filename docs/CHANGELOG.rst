@@ -7,6 +7,14 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
+
+[1.0.1] - 2016-10-17
+--------------------
+Fixed
+*****
+* Fixed bug in ``FnapyConnection``: when ``credentials`` is provided and if
+  sandbox is False, a ``FnapyConnectionError`` is raised.
+
 [1.0.0] - 2016-10-14
 --------------------
 Added
