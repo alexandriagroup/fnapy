@@ -16,6 +16,7 @@ WebService protocol to exchange data.
 
 # Python modules
 from string import Template
+import logging
 
 # Third-party modules
 import requests
@@ -26,6 +27,14 @@ from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from fnapy.compat import is_py3
 from fnapy.connection import FnapyConnection
 from fnapy.exceptions import FnapyPricingError
+
+
+logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(handler)
 
 
 def _create_docstring(query_type):
@@ -382,7 +391,10 @@ class FnapyManager(object):
         errors = response.element.xpath('//ns:error',
                 namespaces={'ns': XHTML_NAMESPACE})
         if len(errors) > 0 and hasattr(errors[0], 'text'):
-            raise FnapyPricingError(errors[0].text)
+            for error in errors:
+                product_reference = error.getprevious()
+                logger.warning("EAN: {0}. {1}".format(product_reference.text,
+                                                      error.text))
         return response
 
     def query_batch(self):

@@ -16,6 +16,7 @@ import pytest
 from fnapy.exceptions import FnapyPricingError
 from tests import make_requests_get_mock, fake_manager
 from tests.offline import create_context_for_requests
+from fnapy.config import XHTML_NAMESPACE
 
 
 def test_query_pricing(monkeypatch, fake_manager):
@@ -27,11 +28,12 @@ def test_query_pricing(monkeypatch, fake_manager):
 
 
 # This time, we must also test the response because it may contain an error we
-# want to catch and raise a FnapyPricingError
 def test_query_pricing_with_invalid_ean(monkeypatch, fake_manager):
     context = create_context_for_requests(monkeypatch, fake_manager,
             'query_pricing_with_invalid_ean',
             'pricing_query')
     with context:
-        with pytest.raises(FnapyPricingError):
-            fake_manager.query_pricing(eans=['007'])
+        response = fake_manager.query_pricing(eans=['007'])
+        errors = response.element.xpath('//ns:error',
+                namespaces={'ns': XHTML_NAMESPACE})
+        assert len(errors) != 0
