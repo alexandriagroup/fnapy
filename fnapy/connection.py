@@ -59,9 +59,9 @@ class FnapyConnection(object):
         if len(credentials) > 0:
             expecteds = ('partner_id', 'shop_id', 'key', 'sandbox')
             for expected in expecteds:
-                if not credentials.get(expected):
-                    msg = "You didn't provide the {}"
-                    msg = 'You must provide the following keys in credentials: '
+                if credentials.get(expected) is None:
+                    msg = "You didn't provide the {}."
+                    msg += 'You must provide the following keys in credentials: '
                     msg += ', '.join(expecteds)
                     raise FnapyConnectionError(msg.format(expected))
 

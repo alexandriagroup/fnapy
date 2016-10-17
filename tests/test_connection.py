@@ -62,7 +62,7 @@ def test_connection_with_unavailable_env_vars_for_real_account(monkeypatch):
 def test_connection_with_valid_keys_for_credentials():
     """FnapyConnection should be able to accept a dict with valid keys for the credentials"""
     credentials = {'partner_id': 'abc', 'shop_id': 'thebestshop',
-                   'key': 'goldenkey', 'sandbox': True}
+                   'key': 'goldenkey', 'sandbox': False}
     connection = FnapyConnection(credentials=credentials)
 
 
