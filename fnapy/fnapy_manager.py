@@ -20,13 +20,14 @@ import logging
 
 # Third-party modules
 import requests
+from lxml import etree
 
 # Project modules
 from fnapy.utils import *
 from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from fnapy.compat import is_py3
 from fnapy.connection import FnapyConnection
-from fnapy.exceptions import FnapyPricingError
+from fnapy.exceptions import FnapyUpdateOfferError
 
 
 logger = logging.getLogger(__name__)
@@ -79,7 +80,7 @@ class FnapyManager(object):
         # The batch_id updated every time an offer is updated
         self.batch_id = None
 
-        # the url of the entrypoint
+        # The url of the entrypoint
         self.url = get_url(self.connection.sandbox)
 
         # Authenticate when the manager is instanciated
@@ -90,7 +91,7 @@ class FnapyManager(object):
 
         :type element: lxml.etree.Element
         :param element: the XML element
-        
+
         :type xml: str
         :param xml: the XML string sent in the request
 
@@ -103,7 +104,7 @@ class FnapyManager(object):
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
             setattr(self, service + '_request',
-                    Request(etree.tostring(element, **XML_OPTIONS))) 
+                    Request(etree.tostring(element, **XML_OPTIONS)))
             # Resend the updated request
             response = requests.post(self.url + service,
                                      getattr(self, service + '_request').xml,
@@ -113,14 +114,14 @@ class FnapyManager(object):
 
     def authenticate(self):
         """Authenticate to the FNAC API and return a token
-        
+
         Usage::
-        
+
             token = manager.authenticate()
 
         :returns: token
         :rtype: str
-        
+
         """
         auth = etree.Element('auth', nsmap={None: XHTML_NAMESPACE})
         etree.SubElement(auth, 'partner_id').text = self.connection.partner_id
@@ -145,7 +146,8 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
 
         """
-        offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+        offers_update = create_xml_element(self.connection, self.token,
+                                           'offers_update')
         for offer_reference in offer_references:
             offer = etree.Element('offer')
             etree.SubElement(offer, "offer_reference",
@@ -153,10 +155,12 @@ class FnapyManager(object):
             etree.SubElement(offer, 'treatment').text = 'delete'
             offers_update.append(offer)
 
-        self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
+        self.offers_update_request = Request(etree.tostring(offers_update,
+                                                            **XML_OPTIONS))
 
         # the response contains the element batch_id
-        response = self._get_response(offers_update, self.offers_update_request.xml)
+        response = self._get_response(offers_update,
+                                      self.offers_update_request.xml)
         self.batch_id = response.dict['offers_update_response']['batch_id']
         return response
 
@@ -167,12 +171,12 @@ class FnapyManager(object):
         Usage::
 
             response = manager.update_offers(offers_data)
-        
+
         :type offers_data: list
         :param offers_data: the list of data to create the offers
                             where data is dictionary with the keys:
 
-        * offer_reference  : the SKU (mandatory) 
+        * offer_reference  : the SKU (mandatory)
         * product_reference: the EAN (optional)
         * price            : the price of the offer (optional)
         * product_state    : an integer representing the state of the product
@@ -188,7 +192,8 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
 
         """
-        offers_update = create_xml_element(self.connection, self.token, 'offers_update')
+        offers_update = create_xml_element(self.connection, self.token,
+                                           'offers_update')
 
         if len(offers_data) == 0:
             msg = 'You must provide at least one offer_data.'
@@ -248,9 +253,10 @@ class FnapyManager(object):
 
         """
         order_id = str(order_id)
-        orders_update = create_xml_element(self.connection, self.token, 'orders_update')
+        orders_update = create_xml_element(self.connection, self.token,
+                                           'orders_update')
         order = etree.Element('order', order_id=order_id,
-                action=order_update_action)
+                              action=order_update_action)
 
         for action in actions:
             order_detail = etree.Element("order_detail")
@@ -378,6 +384,7 @@ class FnapyManager(object):
 
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
+        pricing_query.attrib['sellers'] = 'all'
 
         for ean in eans:
             product_reference = etree.Element("product_reference", type="Ean")
@@ -454,7 +461,7 @@ class FnapyManager(object):
         self.client_order_comments_update_request = \
             Request(etree.tostring(client_order_comments_update, **XML_OPTIONS))
         return self._get_response(client_order_comments_update,
-                self.client_order_comments_update_request.xml)
+                                  self.client_order_comments_update_request.xml)
 
     def query_messages(self, results_count='', **elements):
         return self._query('messages', results_count, **elements)
@@ -497,7 +504,7 @@ class FnapyManager(object):
 
         Usage::
 
-            response = manager.update_incidents(order_id, 
+            response = manager.update_incidents(order_id,
                                                 incident_update_action,
                                                 reasons)
 
@@ -506,7 +513,7 @@ class FnapyManager(object):
 
         :type incident_update_action: str
         :param incident_update_action: the action to perform (`'refund'` is the
-                                       only available action for the moment) 
+                                       only available action for the moment)
 
         :type reasons: list
         :param reasons: the reasons of the incident for this order
@@ -519,7 +526,8 @@ class FnapyManager(object):
         :returns: :class:`Response <Response>` object
 
         """
-        incidents_update = create_xml_element(self.connection, self.token, 'incidents_update')
+        incidents_update = create_xml_element(self.connection, self.token,
+                                              'incidents_update')
         order = etree.Element('order', order_id=order_id,
                               action=incident_update_action)
 
@@ -533,7 +541,7 @@ class FnapyManager(object):
         self.incidents_update_request = \
             Request(etree.tostring(incidents_update, **XML_OPTIONS))
         return self._get_response(incidents_update,
-                self.incidents_update_request.xml)
+                                  self.incidents_update_request.xml)
 
     def query_shop_invoices(self, results_count='', **elements):
         return self._query('shop_invoices', results_count, **elements)
@@ -546,4 +554,3 @@ for query_type in FnapyManager.VALID_QUERY_TYPES:
         method.__doc__ = _create_docstring(query_type)
     else:
         method.__func__.__doc__ = _create_docstring(query_type)
-
