@@ -10,13 +10,13 @@ uninstall:
 	pip uninstall fnapy
 	
 online_tests:
-	pytest -v tests/online/test_*.py
+	pytest -vs tests/online/test_*.py
 
 offline_tests:
-	pytest -v tests/offline/test_*.py
+	pytest -vs tests/offline/test_*.py
 
 tests: offline_tests
-	pytest -v tests/test_*.py
+	pytest -vs tests/test_*.py
 
 clean:
 	rm -rf dist build fnapy.egg-info __pycache__
@@ -26,7 +26,8 @@ clean:
 	rm -rf tests/offline/*.pyc tests/offline/__pycache__
 
 tags:
-	ctags -R **/*.py
+	@ctags --exclude=docs --exclude=build --exclude=build -R .
+	@echo 'Updated the tags file.'
 
 release:
 	rm -rf dist
