@@ -384,7 +384,6 @@ class FnapyManager(object):
 
         """
         pricing_query = create_xml_element(self.connection, self.token, 'pricing_query')
-        pricing_query.attrib['sellers'] = 'all'
 
         for ean in eans:
             product_reference = etree.Element("product_reference", type="Ean")
