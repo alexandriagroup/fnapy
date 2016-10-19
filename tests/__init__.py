@@ -3,7 +3,6 @@
 # Python
 from __future__ import unicode_literals, print_function
 import os
-import re
 from copy import copy
 from codecs import open
 from contextlib import contextmanager
@@ -23,16 +22,19 @@ from fnapy.utils import *
 SANDBOX = True
 
 # DATA
-offer_data1 = {'product_reference':'0711719247159',
-        'offer_reference':'B76A-CD5-153',
-        'price':15, 'product_state':11, 'quantity':10, 
-        'description': 'New product - 2-3 days shipping, from France'}
+# Motor Storm
+offer_data1 = {'product_reference': '0711719247159',
+               'offer_reference': 'B76A-CD5-153',
+               'price': 15, 'product_state': 11, 'quantity': 10,
+               'description': 'New product - 2-3 days shipping, from France'}
 
-offer_data2 = {'product_reference':'5030917077418',
-        'offer_reference':'B067-F0D-75E',
-        'price':20, 'product_state':11, 'quantity':16, 
-        'description': 'New product - 2-3 days shipping, from France'}
+# Mordern Warfare 2
+offer_data2 = {'product_reference': '5030917077418',
+               'offer_reference': 'B067-F0D-75E',
+               'price': 20, 'product_state': 11, 'quantity': 16,
+               'description': 'New product - 2-3 days shipping, from France'}
 
+# The Dark Knight 
 offer_data3 = {'product_reference': '5051889022091',
                'offer_reference': '561C-385-9BE',
                'price': 10.55, 'product_state': 11, 'quantity': 16,
@@ -41,13 +43,13 @@ offer_data3 = {'product_reference': '5051889022091',
 # # SICP
 # offer_data3 = {'product_reference':'9780262510875',
 #         'offer_reference':'B76A-CD5-444',
-#         'price':80, 'product_state':11, 'quantity':10, 
+#         'price':80, 'product_state':11, 'quantity':10,
 #         'description': 'New product - 2-3 days shipping, from France'}
 
-# # Batman V Superman L'aube de la justice 
+# # Batman V Superman L'aube de la justice
 # offer_data4 = {'product_reference':'5051889562672',
 #         'offer_reference':'B067-F0D-444',
-#         'price':20, 'product_state':11, 'quantity':16, 
+#         'price':20, 'product_state':11, 'quantity':16,
 #         'description': 'New product - 2-3 days shipping, from France'}
 
 offers_data = [offer_data1, offer_data2, offer_data3]
@@ -72,6 +74,7 @@ def setup():
 
 def get_fake_credentials(*args, **kwargs):
     return {'partner_id': 'XXX', 'shop_id': 'XXX', 'key': 'XXX', 'sandbox': 0}
+
 
 @pytest.fixture
 def fake_manager(monkeypatch):

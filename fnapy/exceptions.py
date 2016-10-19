@@ -10,6 +10,7 @@
 Exceptions in fnapy
 """
 
+
 class FnapyException(Exception):
     """Main exception class"""
     pass
@@ -17,14 +18,14 @@ class FnapyException(Exception):
 
 class FnapyUpdateOfferError(FnapyException):
     """Raised when the update of an offer is not valid"""
-    pass 
+    pass
 
 
 class FnapyPricingError(FnapyException):
     """Raised when no prices is found when using pricing_query"""
-    pass 
+    pass
 
 
 class FnapyConnectionError(FnapyException):
     """Raised when the connection is incorrect"""
-    pass 
+    pass

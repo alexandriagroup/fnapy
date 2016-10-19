@@ -72,7 +72,7 @@ class Query(object):
     def _operator(self, op, value):
         op_to_mode = {'eq': 'Equals',
                       'ge': 'GreaterThanOrEquals', 'gt': 'GreaterThan',
-                      'le': 'LessThanOrEquals', 'lt': 'LessThan'} 
+                      'le': 'LessThanOrEquals', 'lt': 'LessThan'}
         new_dict = self._create_new_dict()
         new_dict['@mode'] = op_to_mode[op]
         new_dict['@value'] = value
@@ -119,8 +119,9 @@ class HttpMessage(object):
 
         # etree._Element
         self.element = etree.fromstring(self.xml)
-        
-        self.tag = re.sub(pattern='{[^}]+}', repl='', string=self.element.tag, flags=0)
+
+        self.tag = re.sub(pattern='{[^}]+}', repl='', string=self.element.tag,
+                          flags=0)
 
     def __repr__(self):
         return '<{0}: {1}>'.format(self.__class__.__name__, self.tag)
@@ -153,7 +154,7 @@ class Message(object):
     )
 
     SUBJECTS = (
-        'product_information', 'shipping_information', 'order_information', 
+        'product_information', 'shipping_information', 'order_information',
         'offer_problem', 'offer_not_received', 'other_question'
     )
 
@@ -288,7 +289,7 @@ def get_credentials(sandbox=True):
 
     :rtype: dict
     :returns: the credentials for the selected account type
-    
+
     """
     credentials = {
         'sandbox': {'partner_id': os.getenv('FNAC_SANDBOX_PARTNER_ID'),
@@ -319,7 +320,7 @@ def remove_namespace(xml):
 
 def xpath(element, node_name):
     """A convenient function to look for nodes in the XML
-    
+
     >>> nodes = xpath(response.element, node_name)
 
     """
@@ -331,7 +332,7 @@ def xpath(element, node_name):
 
 def findall(element, node_name):
     """A convenient function to look for nodes in the XML
-    
+
     >>> nodes = findall(response.element, node_name)
 
     """
@@ -360,7 +361,7 @@ def extract_text(element, node_name, index=0):
 
 def xml2dict(xml):
     """Returns a dictionary from the input XML
-    
+
     :type xml: unicode
     :param xml: The XML
 
@@ -377,7 +378,7 @@ def parse_xml(response, tag_name):
     :param response: the Response
     :param tag_name: the name of the tag
     :returns: the text enclosed in the tag
-    
+
     """
     xml = etree.XML(response.content)
     return xml.xpath('//ns:token', namespaces={'ns':XHTML_NAMESPACE})[0].text
@@ -385,7 +386,7 @@ def parse_xml(response, tag_name):
 
 def check_offer_data(offer_data):
     """Check the offer_data passed to update_offers is valid
-    
+
     :type offer_data: dict
     :param offer_data: the parameters used to update an offer
 
@@ -414,6 +415,7 @@ def check_offer_data(offer_data):
             msg += ' Choose amongst {1}'
             msg = msg.format(key, valid_keys)
             raise FnapyUpdateOfferError(msg)
+
 
 # TODO Reimplement create_offer_element with kwargs
 def create_offer_element(offer_data):
@@ -455,7 +457,8 @@ def create_xml_element(connection, token, name):
 
     """
     return etree.Element(name, nsmap={None: XHTML_NAMESPACE},
-            shop_id=connection.shop_id, partner_id=connection.partner_id, token=token)
+                         shop_id=connection.shop_id,
+                         partner_id=connection.partner_id, token=token)
 
 
 def get_order_ids(orders_query_response):
@@ -514,7 +517,7 @@ def save_xml_response(response, action):
     filename = action + '_response.xml'
     with open(os.path.join(output_dir, '../tests/assets', filename), 'w') as f:
         f.write(response.encode('utf-8'))
-        print('Saved the response in {}'.format(filename))    
+        print('Saved the response in {}'.format(filename))
 
 
 def load_xml_request(action):

@@ -73,7 +73,7 @@ class FnapyConnection(object):
             else:
                 msg = 'You must either specify credentials or sandbox as arguments.'
                 raise FnapyConnectionError(msg)
-                
+
         check_credentials_validity(credentials)
         self.partner_id = credentials['partner_id']
         self.shop_id = credentials['shop_id']

@@ -23,6 +23,7 @@ ORDER_ELEMENTS = (
     'shipping_address', 'billing_address', 'order_detail'
 )
 
+
 class Parameter(object):
     def __init__(self, name, desc):
         self.name = name
@@ -40,7 +41,6 @@ class Parameter(object):
 
         """
         return Parameter(self.name, new_desc)
-        
 
 
 paging               = Parameter('paging', 'Page number to fetch')
@@ -131,7 +131,7 @@ REQUEST_ELEMENTS['incidents_query'] = (
     paging, date, status, type, types, incident_id, incidents_id,
     closed_statuses, closed_status, waiting_for_seller_answer,
     opened_by, closed_by, sort_by,
-    order.change_desc('A unique order id'), 
+    order.change_desc('A unique order id'),
     orders.change_desc('Can contains multiple order node (up to 50 max)')
 )
 REQUEST_ELEMENTS['shop_invoices_query'] = (
@@ -141,13 +141,13 @@ REQUEST_ELEMENTS['shop_invoices_query'] = (
 # The elements for the responses
 RESPONSE_ELEMENTS = {}
 RESPONSE_ELEMENTS['offers_update'] = (
-    batch_id, 
+    batch_id,
 )
 RESPONSE_ELEMENTS['offers_query'] = (
     page, total_paging, nb_total_per_page, nb_total_result, offer
 )
 RESPONSE_ELEMENTS['orders_update'] = (
-    order, 
+    order,
 )
 RESPONSE_ELEMENTS['orders_query'] = (
     page, total_paging, nb_total_per_page, nb_total_result,

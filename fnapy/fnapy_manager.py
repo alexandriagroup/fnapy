@@ -395,7 +395,7 @@ class FnapyManager(object):
 
         # Check if any error is returned
         errors = response.element.xpath('//ns:error',
-                namespaces={'ns': XHTML_NAMESPACE})
+                                        namespaces={'ns': XHTML_NAMESPACE})
         if len(errors) > 0 and hasattr(errors[0], 'text'):
             for error in errors:
                 product_reference = error.getprevious()
@@ -419,7 +419,7 @@ class FnapyManager(object):
 
     def query_carriers(self):
         """Return the available carriers managed on FNAC Marketplace platform
-        
+
         Usage::
 
             response = manager.query_carriers()
