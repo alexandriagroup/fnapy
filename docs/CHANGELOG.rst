@@ -8,11 +8,16 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
-Unreleased
-----------
+[1.1.1] - 2016-10-21
+--------------------
 Changed
 *******
 * Display a message when the limit of EANs is reached in ``query_pricing``.
+
+Fixed
+*****
+* Fix ``parse_xml``
+
 
 [1.1.0] - 2016-10-17
 --------------------
@@ -21,12 +26,14 @@ Changed
 * Display a log rather than raise a ``FnapyPricingError`` when a list of EANs is
   provided
 
+
 [1.0.1] - 2016-10-17
 --------------------
 Fixed
 *****
 * Fixed bug in ``FnapyConnection``: when ``credentials`` is provided and if
   sandbox is False, a ``FnapyConnectionError`` is raised.
+
 
 [1.0.0] - 2016-10-14
 --------------------
@@ -39,6 +46,7 @@ Changed
 * ``FnapyConnection`` now accepts credentials dictionary or sandbox boolean
 * ``query_pricing`` now accepts a list of EANs
 
+
 [0.6.0] - 2016-10-07
 --------------------
 Added
@@ -46,11 +54,13 @@ Added
 * In the ``Query`` class, added the ``was`` method to handle the states (especially
   the states of orders)
 
+
 [0.5.1] - 2016-10-04
 --------------------
 Removed
 *******
 * Really remove ``BeautifulSoup`` (bs4) from the dependencies
+
 
 [0.5.0] - 2016-10-04
 --------------------
@@ -62,6 +72,7 @@ Changed
 *******
 * Improve the text extraction from XML
 
+
 [0.4.3] - 2016-09-29
 --------------------
 Changed
@@ -71,17 +82,20 @@ Changed
       ``product_reference``) are not provided
     - ``offers_data`` is empty
 
+
 [0.4.2] - 2016-09-28
 --------------------
 Changed
 *******
 * Update documentation
 
+
 [0.4.1] - 2016-09-28
 --------------------
 Added
 *****
 * Implement ``delete_offers``
+
 
 [0.4.0] - 2016-09-27
 --------------------
@@ -95,6 +109,7 @@ Changed
 Fixed
 *****
 * Fix Unicode/string confusion bug in ``Response``
+
 
 [0.2.0] - 2016-09-13
 --------------------
@@ -116,6 +131,7 @@ Fixed
 *****
 * Fixed the packaging
 * Fix minor things in the constructor of ``FnapyManager``
+
 
 [0.1.0] - 2016-08-31
 --------------------
