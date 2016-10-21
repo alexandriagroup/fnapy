@@ -4,7 +4,7 @@ include LICENSE.txt
 include AUTHORS.rst
 include CHANGELOG.rst
 
-recursive-include tests *
+recursive-exclude tests *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
