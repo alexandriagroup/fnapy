@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<pricing_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" partner_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" shop_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" token="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+  <product_reference type="Ean">007</product_reference>
+</pricing_query>

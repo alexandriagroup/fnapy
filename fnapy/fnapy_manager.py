@@ -399,8 +399,16 @@ class FnapyManager(object):
         if len(errors) > 0 and hasattr(errors[0], 'text'):
             for error in errors:
                 product_reference = error.getprevious()
-                logger.warning("EAN: {0}. {1}".format(product_reference.text,
-                                                      error.text))
+                # code="ERR_120"
+                # Service Pricing : Product not found.
+                if product_reference:
+                    logger.warning("EAN: {0}. {1}".format(product_reference.text,
+                                                          error.text))
+                # code="ERR_105"
+                # The limit of requested elements is reached by the service.
+                else:
+                    logger.warning("{0}".format(error.text))
+
         return response
 
     def query_batch(self):

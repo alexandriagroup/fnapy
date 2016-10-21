@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="ERROR" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+    
+            <error severity="ERROR" code="ERR_105">The limit of requested elements is reached by the service. Try with less elements.</error>
+      </pricing_query_response>

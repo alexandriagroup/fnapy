@@ -381,7 +381,9 @@ def parse_xml(response, tag_name):
 
     """
     xml = etree.XML(response.content)
-    return xml.xpath('//ns:token', namespaces={'ns':XHTML_NAMESPACE})[0].text
+    elements = xml.xpath('//ns:{}'.format(tag_name),
+                         namespaces={'ns': XHTML_NAMESPACE})
+    return elements[0].text if len(elements) else ''
 
 
 def check_offer_data(offer_data):

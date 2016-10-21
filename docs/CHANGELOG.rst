@@ -8,6 +8,12 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+Unreleased
+----------
+Changed
+*******
+* Display a message when the limit of EANs is reached in ``query_pricing``.
+
 [1.1.0] - 2016-10-17
 --------------------
 Changed
