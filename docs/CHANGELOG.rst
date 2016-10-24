@@ -8,6 +8,14 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.2] - 2016-10-24
+--------------------
+Changed
+*******
+* No more tests in the package
+* Display a message when no EAN is passed to ``query_pricing``.
+
+
 [1.1.1] - 2016-10-21
 --------------------
 Changed
