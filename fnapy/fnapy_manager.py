@@ -405,7 +405,7 @@ class FnapyManager(object):
                 product_reference = error.getprevious()
                 # code="ERR_120"
                 # Service Pricing : Product not found.
-                if product_reference:
+                if product_reference is not None:
                     logger.warning("EAN: {0}. {1}".format(product_reference.text,
                                                           error.text))
                 # code="ERR_105"
