@@ -389,6 +389,10 @@ class FnapyManager(object):
             product_reference = etree.Element("product_reference", type="Ean")
             product_reference.text = str(ean)
             pricing_query.append(product_reference)
+        else:
+            if len(eans) == 0:
+                product_reference = etree.Element("product_reference", type="Ean")
+                pricing_query.append(product_reference)
 
         self.pricing_query_request = Request(etree.tostring(pricing_query, **XML_OPTIONS))
         response = self._get_response(pricing_query, self.pricing_query_request.xml)

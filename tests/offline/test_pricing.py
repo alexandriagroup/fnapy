@@ -46,3 +46,16 @@ def test_query_pricing_with_more_than_ten_eans(monkeypatch, fake_manager):
         errors = response.element.xpath('//ns:error',
                                         namespaces={'ns': XHTML_NAMESPACE})
         assert len(errors) == 1
+
+
+def test_query_pricing_with_no_ean(monkeypatch, fake_manager):
+    """query_pricing should display an error message and return the error
+    response when more there no EANs are passed"""
+    context = create_context_for_requests(monkeypatch, fake_manager,
+                                          'query_pricing_with_no_ean',
+                                          'pricing_query')
+    with context:
+        response = fake_manager.query_pricing(eans=[])
+        errors = response.element.xpath('//ns:error',
+                                        namespaces={'ns': XHTML_NAMESPACE})
+        assert len(errors) == 1
