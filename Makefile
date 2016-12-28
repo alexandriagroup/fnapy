@@ -20,6 +20,7 @@ tests: offline_tests
 
 clean:
 	rm -rf dist build fnapy.egg-info __pycache__
+	rm -rf .cache
 	rm -rf fnapy/*.pyc fnapy/__pycache__
 	rm -rf tests/*.pyc tests/__pycache__
 	rm -rf tests/online/*.pyc tests/online/__pycache__
