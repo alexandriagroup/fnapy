@@ -341,22 +341,26 @@ def findall(element, node_name):
     return element.findall('.//ns:{0}'.format(node_name),
                          namespaces={'ns': XHTML_NAMESPACE})
 
+def find(element, node_name):
+    """Look for a node in the XML
 
-def extract_text(element, node_name, index=0):
+    >>> node = find(response.element, node_name)
+
+    """
+    if '/' in node_name:
+        node_name = '//ns:'.join(node_name.split('/'))
+    return element.find('.//ns:{0}'.format(node_name),
+                        namespaces={'ns': XHTML_NAMESPACE})
+
+
+def extract_text(element, node_name):
     """Extract the text from the selected node
 
-    If many nodes are found, by default, the first one is chosen.
-    You can change this by specifying the index=i where i is the nth
-    element you want.
     If no text is found, the empty string is returned.
 
     """
-    elements = xpath(element, node_name)
-    if len(elements) > 0:
-        text = elements[index].text
-    else:
-        text = ''
-    return text
+    inner_element = find(element, node_name)
+    return inner_element.text if inner_element is not None else ''
 
 
 def xml2dict(xml):

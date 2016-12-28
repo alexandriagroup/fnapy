@@ -1,0 +1,29 @@
+<messages_query_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+    <message state="READ" archived="FALSE">
+        <message_id>DZD12C88-3F1F-61D8-0F17-63BD8935C585</message_id>
+        <message_referer type="ORDER">EHMORBPRRCGO5</message_referer>
+        <message_from type="CLIENT">John D.</message_from>
+        <message_subject>D&#233;lai plus long qu'annonc&#233;</message_subject>
+        <message_description>Ma commande n'est toujours pas arrivee.</message_description>
+        <created_at>2016-10-28T9:50:04+01:00</created_at>
+        <updated_at>2016-10-28T9:52:49+01:00</updated_at>
+    </message>
+    <message state="READ" archived="FALSE">
+        <message_id>ACCS9888-0912-987S-DEDZ-012987129831</message_id>
+        <message_referer type="ORDER">DEDEDKHJARRXC</message_referer>
+        <message_from type="CLIENT">Jane D.</message_from>
+        <message_subject>Question</message_subject>
+        <message_description>Quand pourrai-je recevoir mon article?</message_description>
+        <created_at>2016-08-21T1:50:04+01:00</created_at>
+        <updated_at>2016-08-21T1:51:19+01:00</updated_at>
+    </message>
+    <message state="READ" archived="FALSE">
+        <message_id>310983ZE-8971-XSN1-9821-LJZDDEDAAJKX</message_id>
+        <message_referer type="ORDER">BYUEDDLJ09812</message_referer>
+        <message_from type="CLIENT">Jim D.</message_from>
+        <message_subject>Question</message_subject>
+        <message_description>Quelles sont les pistes de ce CD?</message_description>
+        <created_at>2016-11-11T3:40:04+01:00</created_at>
+        <updated_at>2016-11-11T3:41:39+01:00</updated_at>
+    </message>
+</messages_query_response>
