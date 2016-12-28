@@ -8,6 +8,13 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.3] - 2016-12-28
+--------------------
+Fixed
+*****
+* Fix ``extract_text``.
+
+
 [1.1.2] - 2016-10-24
 --------------------
 Changed
