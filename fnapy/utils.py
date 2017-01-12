@@ -112,7 +112,7 @@ class Query(object):
 class HttpMessage(object):
     def __init__(self, content):
         # we need to turn content into valid utf8
-        content = to_unicode(content).encode('utf-8')
+        content = to_unicode(content, encoding='iso-8859-1').encode('utf-8')
 
         # content is a string
         self.dict = xml2dict(content)
