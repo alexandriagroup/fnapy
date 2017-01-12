@@ -111,6 +111,9 @@ class Query(object):
 
 class HttpMessage(object):
     def __init__(self, content):
+        # we need to turn content into valid utf8
+        content = to_unicode(content).encode('utf-8')
+
         # content is a string
         self.dict = xml2dict(content)
 
@@ -160,7 +163,7 @@ class Message(object):
 
     TYPES = ('ORDER', 'OFFER')
 
-    def __init__(self, action, id, to='ALL', description='', subject='', type='ORDER'): 
+    def __init__(self, action, id, to='ALL', description='', subject='', type='ORDER'):
         self._action = action
         self._id = id
         self._to = to
