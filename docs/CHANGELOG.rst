@@ -8,6 +8,12 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.4] - 2017-01-12
+--------------------
+Fixed
+*****
+* Fix ``to_unicode``.
+
 [1.1.3] - 2016-12-28
 --------------------
 Fixed
