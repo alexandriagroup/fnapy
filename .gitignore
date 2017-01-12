@@ -14,3 +14,13 @@ dist/
 .coverage
 send_requests.py
 .env
+bin/
+lib/
+lib64/
+__pycache__/
+include/
+local/
+pip.log
+man/
+pip-selfcheck.json
+*.pyc
