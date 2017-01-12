@@ -103,7 +103,9 @@ def to_unicode(obj, encoding='utf-8'):
     # string support
     if isinstance(obj, basestring):
         if hasattr(obj, 'decode'):
-            return obj.decode(encoding)
+            # ignoring utf8 errors, as fnac send us malformed
+            # utf8 xml sometimes ...
+            return obj.decode(encoding, errors='ignore')
         else:
             return str(obj, encoding)
 

@@ -10,3 +10,5 @@ Development Lead
 
 Contributors
 ------------
+
+* chocobn69 (Nicolas Baccelli)
