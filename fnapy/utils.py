@@ -115,13 +115,16 @@ class HttpMessage(object):
         content = to_unicode(content, encoding='iso-8859-1').encode('utf-8')
 
         # content is a string
-        self.dict = xml2dict(content)
+        if len(content) != 0:
+            self.dict = xml2dict(content)
+            # etree._Element
+            self.element = etree.fromstring(self.xml)
+        else:
+            self.dict = OrderedDict()
+            self.element = etree.Element('empty_content')
 
         # Raw XML
         self.xml = content
-
-        # etree._Element
-        self.element = etree.fromstring(self.xml)
 
         self.tag = re.sub(pattern='{[^}]+}', repl='', string=self.element.tag,
                           flags=0)

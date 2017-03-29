@@ -13,15 +13,26 @@ Tests for fnappy.utils module
 import os
 from lxml import etree
 
-from fnapy.utils import extract_text, findall, find
+from fnapy.utils import extract_text, findall, find, Response
 from fnapy.config import XHTML_NAMESPACE
 
 NAMESPACES = {'ns': XHTML_NAMESPACE}
 
 
+def test_response_with_empty_content():
+    """Response should not crash when its content is an empty string"""
+    response = Response('')
+
+    # The dict should be empty
+    assert len(response.dict) == 0
+
+    # The tag should be empty_content
+    assert response.tag == 'empty_content'
+
+
 def parse_xml_file(filename):
-     return etree.parse(os.path.join(os.path.dirname(__file__), 'assets', 
-                                     filename))
+    return etree.parse(os.path.join(os.path.dirname(__file__), 'assets',
+                                    filename))
 
 
 def test_extract_text():
