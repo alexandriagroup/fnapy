@@ -118,7 +118,7 @@ class HttpMessage(object):
         if len(content) != 0:
             self.dict = xml2dict(content)
             # etree._Element
-            self.element = etree.fromstring(self.xml)
+            self.element = etree.fromstring(content)
         else:
             self.dict = OrderedDict()
             self.element = etree.Element('empty_content')
