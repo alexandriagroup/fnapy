@@ -31,6 +31,15 @@ def test_update_offers(monkeypatch, fake_manager):
         fake_manager.update_offers(offers_data)
 
 
+def test_update_offers_with_empty_response(monkeypatch, fake_manager):
+    """
+    update_offers should handle the cases where the response is empty.
+    """
+    monkeypatch.setattr('requests.post',
+                        make_requests_get_mock('empty_response.xml'))
+    response = fake_manager.update_offers(offers_data)
+
+
 def test_update_offers_without_offer_reference(monkeypatch, fake_manager):
     with pytest.raises(FnapyUpdateOfferError):
         fake_manager.update_offers(invalid_offers_data)

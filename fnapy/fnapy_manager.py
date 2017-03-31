@@ -209,7 +209,7 @@ class FnapyManager(object):
         response = self._get_response(offers_update, self.offers_update_request.xml)
         try:
             self.batch_id = response.dict['offers_update_response']['batch_id']
-        except KeyErorr:
+        except KeyError:
             self.batch_id = ''
         return response
 
