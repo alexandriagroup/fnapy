@@ -114,6 +114,7 @@ class HttpMessage(object):
         # we need to turn content into valid utf8
         content = to_unicode(content, encoding='iso-8859-1').encode('utf-8')
 
+
         # content is a string
         if len(content) != 0:
             self.dict = xml2dict(content)

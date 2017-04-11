@@ -35,6 +35,11 @@ def parse_xml_file(filename):
                                     filename))
 
 
+def test_response():
+    """Response should not crash with an empty string"""
+    response = Response(b'')
+
+
 def test_extract_text():
     """findall should return a list unique elements"""
     messages = parse_xml_file('messages_sample.xml')
