@@ -18,8 +18,3 @@ def test_manager_raises_TypeError_with_invalid_connection():
     with pytest.raises(TypeError):
         connection = {'partner_id': 'XXX', 'shop_id': 'XXX', 'key': 'XXX'}
         manager = FnapyManager(connection)
-
-
-
-
-

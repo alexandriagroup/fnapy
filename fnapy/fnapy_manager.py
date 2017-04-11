@@ -207,7 +207,10 @@ class FnapyManager(object):
 
         # the response contains the element batch_id
         response = self._get_response(offers_update, self.offers_update_request.xml)
-        self.batch_id = response.dict['offers_update_response']['batch_id']
+        try:
+            self.batch_id = response.dict['offers_update_response']['batch_id']
+        except KeyError:
+            self.batch_id = ''
         return response
 
     # TODO Improve the documentation
