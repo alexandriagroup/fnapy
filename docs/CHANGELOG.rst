@@ -8,6 +8,12 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.6] - 2017-04-26
+--------------------
+Fixed
+*****
+* Fix error when the content of a response is an empty string
+
 [1.1.5] - 2017-01-12
 --------------------
 Fixed
