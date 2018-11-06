@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fnapy = {editable = true, path = "."}
+
+[dev-packages]
+tox = "*"
+pytest = "*"
+alabaster = "*"
+twine = "*"
+pytz = "*"
+
+[requires]
+python_version = "3.7"
