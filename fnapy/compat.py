@@ -53,7 +53,7 @@ if is_py3:
     def is_bytes(x):
         return isinstance(x, (bytes, memoryview, bytearray))
 
-    from collections import Callable
+    from collections.abc import Callable
 
     def callable(obj):
         return isinstance(obj, Callable)
