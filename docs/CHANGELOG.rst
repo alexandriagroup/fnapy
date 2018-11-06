@@ -8,6 +8,17 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.7] - 2018-11-06
+--------------------
+Fixed
+*****
+* Prevent possible vulnerabilities due to requests<=2.19.1 (CVE-2018-18074)
+
+Changed
+*******
+* Use pipenv for development
+* FnapyResponseError is raised for invalid responses
+
 [1.1.6] - 2017-04-26
 --------------------
 Fixed
