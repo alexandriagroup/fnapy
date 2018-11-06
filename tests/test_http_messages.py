@@ -11,9 +11,11 @@ Test the Request and Response classes
 """
 
 from fnapy.utils import Response, Request
+from fnapy.exceptions import FnapyResponseError
 from lxml import etree
 from fnapy.utils import xml2dict, remove_namespace
 from tests import elements_are_equal
+import pytest
 
 
 BATCH_ID = "BFACA5F5-67FD-C037-6209-F287800FBB17"
@@ -51,3 +53,10 @@ def test_response():
     assert elements_are_equal(response.element, element)
 
 
+def test_invalid_response():
+    """
+    The exception FnapyResponseError should be raised when the response is
+    invalid
+    """
+    with pytest.raises(FnapyResponseError):
+        response = Response("Invalid response content")

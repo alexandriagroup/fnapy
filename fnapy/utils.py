@@ -15,6 +15,7 @@ import os
 import re
 from codecs import open
 from collections import OrderedDict
+from xml.parsers.expat import ExpatError
 
 # Third-party modules
 from lxml import etree
@@ -24,7 +25,7 @@ import requests
 # Project modules
 from fnapy.config import *
 from fnapy.compat import to_unicode
-from fnapy.exceptions import FnapyUpdateOfferError
+from fnapy.exceptions import FnapyUpdateOfferError, FnapyResponseError
 
 
 # CLASSES
@@ -380,7 +381,10 @@ def xml2dict(xml):
     :returns: the dictionary correspoding to the input XML
     """
     xmlepured = remove_namespace(to_unicode(xml))
-    return xmltodict.parse(xmlepured)
+    try:
+        return xmltodict.parse(xmlepured)
+    except ExpatError as e:
+        raise FnapyResponseError(e)
 
 
 def parse_xml(response, tag_name):

@@ -27,7 +27,7 @@ from fnapy.utils import *
 from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from fnapy.compat import is_py3
 from fnapy.connection import FnapyConnection
-from fnapy.exceptions import FnapyUpdateOfferError
+from fnapy.exceptions import FnapyUpdateOfferError, FnapyResponseError
 
 
 logger = logging.getLogger(__name__)
@@ -96,6 +96,7 @@ class FnapyManager(object):
         :param xml: the XML string sent in the request
 
         :returns: :class:`Response <Response>` object
+        :raises: FnapyResponseError when the response is incorrect
         """
         service = element.tag
         response = requests.post(self.url + service, xml, headers=HEADERS)
