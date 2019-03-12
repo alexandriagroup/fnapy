@@ -7,7 +7,7 @@
     </order_detail>
     <order_detail>
       <order_detail_id>2</order_detail_id>
-      <action>Refused</action>
+      <action>Accepted</action>
     </order_detail>
   </order>
 </orders_update>
