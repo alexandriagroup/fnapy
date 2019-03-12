@@ -27,7 +27,9 @@ from fnapy.utils import *
 from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
 from fnapy.compat import is_py3
 from fnapy.connection import FnapyConnection
-from fnapy.exceptions import FnapyUpdateOfferError, FnapyResponseError
+from fnapy.exceptions import (
+    FnapyUpdateOrderError, FnapyUpdateOfferError, FnapyResponseError
+)
 
 
 logger = logging.getLogger(__name__)
@@ -263,9 +265,15 @@ class FnapyManager(object):
                               action=order_update_action)
 
         for action in actions:
+            if 'order_detail_id' not in action or 'action' not in action:
+                msg = 'You must provide order_detail_id and action'
+                raise FnapyUpdateOrderError(msg)
+
             order_detail = etree.Element("order_detail")
-            etree.SubElement(order_detail, 'order_detail_id').text = str(action['order_detail_id'])
-            etree.SubElement(order_detail, 'action').text = str(action['action'])
+            for action_key, action_value in action.items():
+                etree.SubElement(order_detail, action_key).text = str(
+                    action_value
+                )
             order.append(order_detail)
 
         orders_update.append(order)

@@ -19,6 +19,10 @@ class FnapyUpdateOfferError(FnapyException):
     """Raised when the update of an offer is not valid"""
 
 
+class FnapyUpdateOrderError(FnapyException):
+    """Raised when the update of an order is not valid"""
+
+
 class FnapyPricingError(FnapyException):
     """Raised when no prices is found when using pricing_query"""
 
