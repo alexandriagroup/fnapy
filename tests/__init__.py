@@ -115,42 +115,39 @@ def assert_raises(exception_class, msg=None):
         assert msg.lower() in message.lower()
 
 
-def sorted_elements(root):
-    new_root = etree.Element(root.tag, attrib=root.attrib)
-    new_root.text = root.text
-    for e in sorted(root.getchildren(), key=lambda x: x.tag):
-        element = etree.Element(e.tag, attrib=e.attrib)
-        element.text = e.text
-        new_root.append(element)
-    return new_root
+def gettext(node):
+    text = node.text.strip() if node.text else None
+    return True if text else False
+
+
+def nodes_are_equal(n1, n2, excluded_attrs=[]):
+    # Attributes
+    if excluded_attrs:
+        attribs1 = {(k, v) for k, v in n1.items() if k not in excluded_attrs}
+        attribs2 = {(k, v) for k, v in n2.items() if k not in excluded_attrs}
+        if len(attribs1.symmetric_difference(attribs2)) > 0:
+            return False
+    # Text
+    if gettext(n1) != gettext(n2):
+        return False
+
+    return True
 
 
 def elements_are_equal(e1, e2, excluded_attrs=[]):
-    e1 = sorted_elements(e1)
-    e2 = sorted_elements(e2)
+    nodes1 = sorted(e1.getiterator(), key=lambda e: e.tag)
+    nodes2 = sorted(e2.getiterator(), key=lambda e: e.tag)
+    tags1 = {x.tag for x in nodes1}
+    tags2 = {x.tag for x in nodes2}
 
-    if e1.tag != e2.tag:
+    if len(tags1.symmetric_difference(tags2)) > 0:
         return False
 
-    if e1.text is not None and e2.text is not None and\
-       e1.text.strip() != e2.text.strip():
-        return False
-
-    if e1.tail != e2.tail:
-        return False
-
-    if excluded_attrs:
-        if {v for k, v in e1.attrib.items() if k not in excluded_attrs} !=\
-           {v for k, v in e2.attrib.items() if k not in excluded_attrs}:
+    for node1, node2 in zip(nodes1, nodes2):
+        result = nodes_are_equal(node1, node2)
+        if result is False:
             return False
-    else:
-        if e1.attrib != e2.attrib:
-            return False
-
-    if len(e1) != len(e2):
-        return False
-
-    return all(elements_are_equal(c1, c2) for c1, c2 in zip(e1, e2))
+    return True
 
 
 def xml_contains_error(xml_dict):
