@@ -48,6 +48,7 @@ setup(
     long_description=readme + '\n\n' + changelog,
     keywords=['api', 'fnac', 'python', 'webservices'],
     packages=find_packages(),
+    url='https://github.com/alexandriagroup/fnapy',
     install_requires=install_requirements,
     zip_safe=True,
     license='MIT',
