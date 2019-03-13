@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orders_update_response xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" status="OK">
+    <order>
+        <status>OK</status>
+        <order_id>57BEAFDA828A8</order_id>
+        <state>Shipped</state>
+        <order_detail>
+            <order_detail_id>1</order_detail_id>
+            <status>OK</status>
+            <state>Shipped</state>
+        </order_detail>
+        <order_detail>
+            <order_detail_id>2</order_detail_id>
+            <status>OK</status>
+            <state>Shipped</state>
+        </order_detail>
+    </order>
+</orders_update_response>
+
