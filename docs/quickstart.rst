@@ -161,11 +161,19 @@ order_id 003ECCA1YVFBW::
 .. todo:: Add the section using query_orders to check the order was created
           successfully
 
+--------------------
+Tracking information
+--------------------
+
+It is also possible to include the tracking information in the order
+(`tracking_number` and `tracking_company`)::
+
+    action = {"order_detail_id": 1, "action": "Shipped",
+              "tracking_number": "1234", "tracking_company": "Track Inc."}
+    response = manager.update_orders('003ECCA1YVFBW', "update", [action])
+
 Request and Response
 --------------------
 
 Both :class:`Request <Request>` and :class:`Response <Response>` share the same
 interface.
-
-
-

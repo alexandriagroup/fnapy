@@ -8,6 +8,16 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.8] - 2019-03-13
+--------------------
+Fixed
+*****
+* Fix some tests and fixtures
+
+Changed
+*******
+* Allow to send tracking information in orders_update (by rafaurl)
+
 [1.1.7] - 2018-11-06
 --------------------
 Fixed

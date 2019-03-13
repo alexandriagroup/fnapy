@@ -1,62 +1,37 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>API &#8212; fnapy 0.1 documentation</title>
-    
-    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <title>API &#8212; fnapy 1.1.8 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="fnapy 0.1 documentation" href="index.html" />
     <link rel="next" title="Change log" href="CHANGELOG.html" />
     <link rel="prev" title="Quickstart" href="quickstart.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
-  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="CHANGELOG.html" title="Change log"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="quickstart.html" title="Quickstart"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">fnapy 0.1 documentation</a> &#187;</li> 
-      </ul>
-    </div>  
+  </head><body>
+  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="api">
@@ -67,14 +42,14 @@
 <h2>FnapyManager<a class="headerlink" href="#fnapymanager" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fnapy_manager.FnapyManager">
-<em class="property">class </em><code class="descclassname">fnapy_manager.</code><code class="descname">FnapyManager</code><span class="sig-paren">(</span><em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fnapy_manager.</code><code class="descname">FnapyManager</code><span class="sig-paren">(</span><em>connection</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to manage the different services provided by the FNAC API</p>
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.authenticate">
-<code class="descname">authenticate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.authenticate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">authenticate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.authenticate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Authenticate to the FNAC API and return a token</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">authenticate</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">authenticate</span><span class="p">()</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -91,20 +66,20 @@
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.delete_offers">
-<code class="descname">delete_offers</code><span class="sig-paren">(</span><em>offer_references</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.delete_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.delete_offers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete_offers</code><span class="sig-paren">(</span><em>offer_references</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.delete_offers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete the offers with the given offer_references (sku)</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">delete_offers</span><span class="p">(</span><span class="n">offer_references</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">delete_offers</span><span class="p">(</span><span class="n">offer_references</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offer_references</strong> &#8211; the list of SKUs corresponding to the offers
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offer_references</strong> – the list of SKUs corresponding to the offers
 you want to delete from your catalog</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -112,23 +87,23 @@ you want to delete from your catalog</td>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.get_batch_status">
-<code class="descname">get_batch_status</code><span class="sig-paren">(</span><em>batch_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.get_batch_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.get_batch_status" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_batch_status</code><span class="sig-paren">(</span><em>batch_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.get_batch_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the status for the given batch id</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="o">=</span><span class="n">batch_id</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_batch_status</span><span class="p">(</span><span class="n">batch_id</span><span class="o">=</span><span class="n">batch_id</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>..note:: <a class="reference internal" href="#fnapy_manager.FnapyManager" title="fnapy_manager.FnapyManager"><code class="xref py py-class docutils literal"><span class="pre">FnapyManager</span></code></a> stores the last <cite>batch_id</cite></dt>
+<dt>..note:: <a class="reference internal" href="#fnapy_manager.FnapyManager" title="fnapy_manager.FnapyManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">FnapyManager</span></code></a> stores the last <cite>batch_id</cite></dt>
 <dd>but you can provide a new one if needed.</dd>
 </dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>batch_id</strong> &#8211; the batch id (optional)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>batch_id</strong> – the batch id (optional)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -136,17 +111,17 @@ you want to delete from your catalog</td>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_batch">
-<code class="descname">query_batch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_batch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_batch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about your currently processing import batches</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_batch</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_batch</span><span class="p">()</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -154,17 +129,17 @@ you want to delete from your catalog</td>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_carriers">
-<code class="descname">query_carriers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_carriers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_carriers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_carriers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_carriers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the available carriers managed on FNAC Marketplace platform</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_carriers</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_carriers</span><span class="p">()</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -172,10 +147,10 @@ you want to delete from your catalog</td>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_client_order_comments">
-<code class="descname">query_client_order_comments</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_client_order_comments" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_client_order_comments</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_client_order_comments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the client_order_comments response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -185,26 +160,26 @@ you want to delete from your catalog</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
-<li><strong>rate</strong> &#8211; Order rate filter</li>
-<li><strong>client_order_comment_id</strong> &#8211; Order unique identifier filter from fnac</li>
-<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
+<li><strong>rate</strong> – Order rate filter</li>
+<li><strong>client_order_comment_id</strong> – Order unique identifier filter from fnac</li>
+<li><strong>order_fnac_id</strong> – Order unique identifier filter</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_client_order_comments</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the client_order_comments created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -215,10 +190,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_incidents">
-<code class="descname">query_incidents</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_incidents" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_incidents</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_incidents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the incidents response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -228,37 +203,37 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
-<li><strong>status</strong> &#8211; Status of the incident</li>
-<li><strong>type</strong> &#8211; Incident order detail opening reason</li>
-<li><strong>types</strong> &#8211; Define the opening reasons of the incidents to be retrieved.</li>
-<li><strong>incident_id</strong> &#8211; A unique incident id</li>
-<li><strong>incidents_id</strong> &#8211; Can contain multiple incident_id node (up to 50 max)</li>
-<li><strong>closed_statuses</strong> &#8211; Can contain multiple closed_status node (up to 50 max)</li>
-<li><strong>closed_status</strong> &#8211; Incident closing reason</li>
-<li><strong>waiting_for_seller_answer</strong> &#8211; Fnac customer service can ask the seller
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
+<li><strong>status</strong> – Status of the incident</li>
+<li><strong>type</strong> – Incident order detail opening reason</li>
+<li><strong>types</strong> – Define the opening reasons of the incidents to be retrieved.</li>
+<li><strong>incident_id</strong> – A unique incident id</li>
+<li><strong>incidents_id</strong> – Can contain multiple incident_id node (up to 50 max)</li>
+<li><strong>closed_statuses</strong> – Can contain multiple closed_status node (up to 50 max)</li>
+<li><strong>closed_status</strong> – Incident closing reason</li>
+<li><strong>waiting_for_seller_answer</strong> – Fnac customer service can ask the seller
 to deal specifically with an incident.</li>
-<li><strong>opened_by</strong> &#8211; Who opened the incident</li>
-<li><strong>closed_by</strong> &#8211; Who closed the incident</li>
-<li><strong>sort_by</strong> &#8211; Quantity filter</li>
-<li><strong>order</strong> &#8211; A unique order id</li>
-<li><strong>orders</strong> &#8211; Can contains multiple order node (up to 50 max)</li>
+<li><strong>opened_by</strong> – Who opened the incident</li>
+<li><strong>closed_by</strong> – Who closed the incident</li>
+<li><strong>sort_by</strong> – Quantity filter</li>
+<li><strong>order</strong> – A unique order id</li>
+<li><strong>orders</strong> – Can contains multiple order node (up to 50 max)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_incidents</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the incidents created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -269,10 +244,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_messages">
-<code class="descname">query_messages</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_messages" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_messages</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_messages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the messages response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -282,32 +257,32 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
-<li><strong>message_type</strong> &#8211; Message type filter</li>
-<li><strong>message_archived</strong> &#8211; Message is archived or not filter</li>
-<li><strong>message_state</strong> &#8211; Message state</li>
-<li><strong>message_id</strong> &#8211; Message unique identifier from fnac filter</li>
-<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
-<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
-<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
-<li><strong>sort_by</strong> &#8211; Quantity filter</li>
-<li><strong>message_from_types</strong> &#8211; Messages author filter</li>
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
+<li><strong>message_type</strong> – Message type filter</li>
+<li><strong>message_archived</strong> – Message is archived or not filter</li>
+<li><strong>message_state</strong> – Message state</li>
+<li><strong>message_id</strong> – Message unique identifier from fnac filter</li>
+<li><strong>order_fnac_id</strong> – Order unique identifier filter</li>
+<li><strong>offer_fnac_id</strong> – Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> – Offer unique identifier from seller (SKU)</li>
+<li><strong>sort_by</strong> – Quantity filter</li>
+<li><strong>message_from_types</strong> – Messages author filter</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_messages</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the messages created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -318,10 +293,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_offers">
-<code class="descname">query_offers</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_offers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_offers</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_offers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the offers response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -331,27 +306,27 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
-<li><strong>quantity</strong> &#8211; Quantity filter</li>
-<li><strong>product_fnac_id</strong> &#8211; Product&#8217;s unique identifier from fnac</li>
-<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
-<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
+<li><strong>quantity</strong> – Quantity filter</li>
+<li><strong>product_fnac_id</strong> – Product’s unique identifier from fnac</li>
+<li><strong>offer_fnac_id</strong> – Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> – Offer unique identifier from seller (SKU)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_offers</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the offers created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -362,10 +337,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_orders">
-<code class="descname">query_orders</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_orders" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_orders</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the orders response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -375,31 +350,31 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
-<li><strong>sort_by</strong> &#8211; Quantity filter</li>
-<li><strong>product_fnac_id</strong> &#8211; Product&#8217;s unique identifier from fnac</li>
-<li><strong>offer_fnac_id</strong> &#8211; Offer unique identifier from fnac</li>
-<li><strong>offer_seller_id</strong> &#8211; Offer unique identifier from seller (SKU)</li>
-<li><strong>state</strong> &#8211; Order state filter</li>
-<li><strong>states</strong> &#8211; Multiple order state filter</li>
-<li><strong>order_fnac_id</strong> &#8211; Order unique identifier filter</li>
-<li><strong>orders_fnac_id</strong> &#8211; Multiple order unique identifier filter</li>
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
+<li><strong>sort_by</strong> – Quantity filter</li>
+<li><strong>product_fnac_id</strong> – Product’s unique identifier from fnac</li>
+<li><strong>offer_fnac_id</strong> – Offer unique identifier from fnac</li>
+<li><strong>offer_seller_id</strong> – Offer unique identifier from seller (SKU)</li>
+<li><strong>state</strong> – Order state filter</li>
+<li><strong>states</strong> – Multiple order state filter</li>
+<li><strong>order_fnac_id</strong> – Order unique identifier filter</li>
+<li><strong>orders_fnac_id</strong> – Multiple order unique identifier filter</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_orders</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the orders created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -410,18 +385,18 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_pricing">
-<code class="descname">query_pricing</code><span class="sig-paren">(</span><em>eans</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_pricing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_pricing</code><span class="sig-paren">(</span><em>eans</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the best prices applied to a given product within all Fnac
 marketplace sellers (Fnac included)</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">eans</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">eans</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>eans</strong> (<em>list or tuple</em>) &#8211; a list of EANs</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>eans</strong> (<em>list</em><em> or </em><em>tuple</em>) – a list of EANs</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">response</td>
 </tr>
@@ -431,10 +406,10 @@ marketplace sellers (Fnac included)</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.query_shop_invoices">
-<code class="descname">query_shop_invoices</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.query_shop_invoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.query_shop_invoices" title="Permalink to this definition">¶</a></dt>
+<code class="descname">query_shop_invoices</code><span class="sig-paren">(</span><em>results_count=''</em>, <em>**elements</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_shop_invoices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query your catalog and return the shop_invoices response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="n">results_count</span><span class="p">,</span>
                                 <span class="o">**</span><span class="n">elements</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -444,23 +419,23 @@ marketplace sellers (Fnac included)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>paging</strong> &#8211; Page number to fetch</li>
-<li><strong>date</strong> &#8211; Date filter</li>
+<li><strong>paging</strong> – Page number to fetch</li>
+<li><strong>date</strong> – Date filter</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Examples: 
 Find the 2 first items  of the catalog:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_shop_invoices</span><span class="p">(</span><span class="n">results_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">paging</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Find the shop_invoices created between 2 dates:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="go">    .between(min=&quot;2016-08-23T17:00:00+00:00&quot;,</span>
 <span class="go">             max=&quot;2016-08-26T17:00:00+00:00&quot;)</span>
@@ -471,10 +446,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.update_client_order_comments">
-<code class="descname">update_client_order_comments</code><span class="sig-paren">(</span><em>seller_comment</em>, <em>order_fnac_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_client_order_comments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_client_order_comments" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update_client_order_comments</code><span class="sig-paren">(</span><em>seller_comment</em>, <em>order_fnac_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.update_client_order_comments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reply to client order comments</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_client_order_comments</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_client_order_comments</span><span class="p">(</span><span class="n">seller_comment</span><span class="p">,</span>
                                                 <span class="n">order_fnac_id</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -483,12 +458,12 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>seller_comment</strong> (<em>str</em>) &#8211; The seller comment</li>
-<li><strong>order_fnac_id</strong> (<em>str</em>) &#8211; Order unique identifier filter from FNAC</li>
+<li><strong>seller_comment</strong> (<em>str</em>) – The seller comment</li>
+<li><strong>order_fnac_id</strong> (<em>str</em>) – Order unique identifier filter from FNAC</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
@@ -497,10 +472,10 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.update_incidents">
-<code class="descname">update_incidents</code><span class="sig-paren">(</span><em>order_id</em>, <em>incident_update_action</em>, <em>reasons</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_incidents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_incidents" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update_incidents</code><span class="sig-paren">(</span><em>order_id</em>, <em>incident_update_action</em>, <em>reasons</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.update_incidents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle incidents created on orders</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span>
                                     <span class="n">incident_update_action</span><span class="p">,</span>
                                     <span class="n">reasons</span><span class="p">)</span>
 </pre></div>
@@ -510,17 +485,17 @@ Find the 2 first items  of the catalog:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>order_id</strong> (<em>str</em>) &#8211; the unique FNAC identified for an order</li>
-<li><strong>incident_update_action</strong> (<em>str</em>) &#8211; the action to perform (<cite>&#8216;refund&#8217;</cite> is the
+<li><strong>order_id</strong> (<em>str</em>) – the unique FNAC identified for an order</li>
+<li><strong>incident_update_action</strong> (<em>str</em>) – the action to perform (<cite>‘refund’</cite> is the
 only available action for the moment)</li>
-<li><strong>reasons</strong> (<em>list</em>) &#8211; the reasons of the incident for this order</li>
+<li><strong>reasons</strong> (<em>list</em>) – the reasons of the incident for this order</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">reason</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;refund_reason&quot;</span><span class="p">:</span> <span class="s1">&#39;no_stock&#39;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reason</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;refund_reason&quot;</span><span class="p">:</span> <span class="s1">&#39;no_stock&#39;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_incidents</span><span class="p">(</span><span class="s1">&#39;07LWQ6278YJUI&#39;</span><span class="p">,</span> <span class="s1">&#39;refund&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">reason</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -528,7 +503,7 @@ only available action for the moment)</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -536,24 +511,24 @@ only available action for the moment)</li>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.update_messages">
-<code class="descname">update_messages</code><span class="sig-paren">(</span><em>messages</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_messages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update message sent on your offers or orders : reply, set as read, ...</p>
+<code class="descname">update_messages</code><span class="sig-paren">(</span><em>messages</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.update_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update message sent on your offers or orders : reply, set as read, …</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>messages</strong> (<a class="reference internal" href="#utils.Message" title="utils.Message"><em>Message</em></a>) &#8211; the specified messages we want to update</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>messages</strong> (<a class="reference internal" href="#utils.Message" title="utils.Message"><em>Message</em></a>) – the specified messages we want to update</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;mark_as_read&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;mark_as_read&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;reply&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Your order has been shipped&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;order_information&#39;</span>
@@ -565,38 +540,32 @@ only available action for the moment)</li>
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.update_offers">
-<code class="descname">update_offers</code><span class="sig-paren">(</span><em>offers_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_offers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_offers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update_offers</code><span class="sig-paren">(</span><em>offers_data</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.update_offers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post the update offers and return the response</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">(</span><span class="n">offers_data</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_offers</span><span class="p">(</span><span class="n">offers_data</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offers_data</strong> (<em>list</em>) &#8211; the list of data to create the offers
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offers_data</strong> (<em>list</em>) – the list of data to create the offers
 where data is dictionary with the keys:</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><p class="first">offer_reference  : the SKU (mandatory)</p>
-</li>
-<li><p class="first">product_reference: the EAN (optional)</p>
-</li>
-<li><p class="first">price            : the price of the offer (optional)</p>
-</li>
+<ul class="simple">
+<li>offer_reference  : the SKU (mandatory)</li>
+<li>product_reference: the EAN (optional)</li>
+<li>price            : the price of the offer (optional)</li>
 <li><dl class="first docutils">
-<dt>product_state</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">an integer representing the state of the product</span><dd><p class="first last">(documentation needed) (optional)</p>
-</dd>
+<dt>product_state <span class="classifier-delimiter">:</span> <span class="classifier">an integer representing the state of the product</span></dt>
+<dd>(documentation needed) (optional)</dd>
 </dl>
 </li>
-<li><p class="first">quantity         : the quantity (optional)</p>
-</li>
-<li><p class="first">description      : a description of the offer (optional)</p>
-</li>
+<li>quantity         : the quantity (optional)</li>
+<li>description      : a description of the offer (optional)</li>
 </ul>
 <p>The exception FnapyUpdateOfferError is raised if:
 - offer_reference and at least one of the optional parameters (except
@@ -606,7 +575,7 @@ product_reference) are not provided
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</td>
 </tr>
 </tbody>
 </table>
@@ -614,10 +583,10 @@ product_reference) are not provided
 
 <dl class="method">
 <dt id="fnapy_manager.FnapyManager.update_orders">
-<code class="descname">update_orders</code><span class="sig-paren">(</span><em>order_id</em>, <em>order_update_action</em>, <em>actions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fnapy_manager.html#FnapyManager.update_orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fnapy_manager.FnapyManager.update_orders" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update_orders</code><span class="sig-paren">(</span><em>order_id</em>, <em>order_update_action</em>, <em>actions</em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.update_orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the selected order with an order_update_action</p>
 <p>Usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">order_update_action</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">order_update_action</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -625,56 +594,50 @@ product_reference) are not provided
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>order_id</strong> (<em>str</em>) &#8211; Order unique identifier from FNAC</li>
-<li><strong>order_update_action</strong> (<em>str</em>) &#8211; Group action type for order detail action</li>
-<li><strong>actions</strong> (<em>list</em>) &#8211; a list of dictionaries with 2 keys:
-<cite>&#8216;order_detail_id&#8217;</cite> and <cite>&#8216;action&#8217;</cite></li>
+<li><strong>order_id</strong> (<em>str</em>) – Order unique identifier from FNAC</li>
+<li><strong>order_update_action</strong> (<em>str</em>) – Group action type for order detail action</li>
+<li><strong>actions</strong> (<em>list</em>) – a list of dictionaries with 2 keys:
+<cite>‘order_detail_id’</cite> and <cite>‘action’</cite></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">Response</span></code> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>Available order_update_action:</p>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
-<dt>accept_order</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting orders by the</span><dd><p class="first last">seller</p>
-</dd>
+<dt>accept_order <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting orders by the</span></dt>
+<dd>seller</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>confirm_to_send</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is confirming sending</span><dd><p class="first last">orders by the seller</p>
-</dd>
+<dt>confirm_to_send <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is confirming sending</span></dt>
+<dd>orders by the seller</dd>
 </dl>
 </li>
-<li><p class="first">update             : The action for the order is updating orders by the seller</p>
-</li>
+<li>update             : The action for the order is updating orders by the seller</li>
 <li><dl class="first docutils">
-<dt>accept_all_orders</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting or refusing</span><dd><p class="first last">all order_details of the order by the seller</p>
-</dd>
+<dt>accept_all_orders <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is accepting or refusing</span></dt>
+<dd>all order_details of the order by the seller</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>confirm_all_to_send: The action for the order is confirming sending</dt>
-<dd><p class="first last">all order_details by the seller</p>
-</dd>
+<dd>all order_details by the seller</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>update_all</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is to update tracking</span><dd><p class="first last">information for all order_details</p>
-</dd>
+<dt>update_all <span class="classifier-delimiter">:</span> <span class="classifier">The action for the order is to update tracking</span></dt>
+<dd>information for all order_details</dd>
 </dl>
 </li>
 </ul>
-<p>Example: For this order (whose <cite>order_id</cite> is <cite>&#8216;LDJEDEAS123&#8217;</cite>), we have 2
+<p>Example: For this order (whose <cite>order_id</cite> is <cite>‘LDJEDEAS123’</cite>), we have 2
 items. We decide to accept the first item and refuse the second:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span><span class="p">}</span>
 <span class="n">action2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;order_detail_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Refused&quot;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">update_orders</span><span class="p">(</span><span class="s1">&#39;LDJEDEAS123&#39;</span><span class="p">,</span> <span class="s1">&#39;accept_order&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">action1</span><span class="p">,</span> <span class="n">action2</span><span class="p">])</span>
 </pre></div>
@@ -688,7 +651,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <h2>FnapyConnection<a class="headerlink" href="#fnapyconnection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="connection.FnapyConnection">
-<em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>credentials={}</em>, <em>sandbox=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connection.html#FnapyConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connection.</code><code class="descname">FnapyConnection</code><span class="sig-paren">(</span><em>credentials={}</em>, <em>sandbox=None</em><span class="sig-paren">)</span><a class="headerlink" href="#connection.FnapyConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>The connection class of fnapy</p>
 <dl class="docutils">
 <dt>Usage::</dt>
@@ -697,7 +660,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <p>Example:</p>
 <ul>
 <li><p class="first">Create a connection with a credentials dictionary:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">credentials</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;partner_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_partner_id&#39;</span><span class="p">,</span> <span class="s1">&#39;shop_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_shop_id&#39;</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">credentials</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;partner_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_partner_id&#39;</span><span class="p">,</span> <span class="s1">&#39;shop_id&#39;</span><span class="p">:</span> <span class="s1">&#39;my_shop_id&#39;</span><span class="p">,</span>
                <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;my_key&#39;</span><span class="p">,</span> <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -705,7 +668,7 @@ items. We decide to accept the first item and refuse the second:</p>
 <li><p class="first">Create a connection using the environment variables for a given account
 type (the sandbox account is used if sandbox True. If sandbox is False, the
 real account is used):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">sandbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">sandbox</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -715,15 +678,13 @@ real account is used):</p>
 <p class="last">You must have previously defined the following environment
 variables:</p>
 </div>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>for the sandbox: FNAC_SANDBOX_PARTNER_ID, FNAC_SANDBOX_SHOP_ID,</dt>
-<dd><p class="first last">FNAC_SANDBOX_KEY</p>
-</dd>
+<dd>FNAC_SANDBOX_KEY</dd>
 </dl>
 </li>
-<li><p class="first">for the real account: FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY</p>
-</li>
+<li>for the real account: FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY</li>
 </ul>
 </dd></dl>
 
@@ -732,7 +693,7 @@ variables:</p>
 <h2>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="utils.Request">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Request" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Request</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.Request" title="Permalink to this definition">¶</a></dt>
 <dd><p>A handy class to handle the request</p>
 </dd></dl>
 
@@ -741,7 +702,7 @@ variables:</p>
 <h2>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="utils.Response">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Response" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Response</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.Response" title="Permalink to this definition">¶</a></dt>
 <dd><p>A handy class to handle the response</p>
 </dd></dl>
 
@@ -750,10 +711,10 @@ variables:</p>
 <h2>Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="utils.Message">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>action</em>, <em>id</em>, <em>to='ALL'</em>, <em>description=''</em>, <em>subject=''</em>, <em>type='ORDER'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Message" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>action</em>, <em>id</em>, <em>to='ALL'</em>, <em>description=''</em>, <em>subject=''</em>, <em>type='ORDER'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.Message" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="utils.Message.to_dict">
-<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Message.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.Message.to_dict" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utils.Message.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the a dictionary in the xmltodict format</p>
 </dd></dl>
 
@@ -764,21 +725,35 @@ variables:</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">API</a><ul>
-<li><a class="reference internal" href="#fnapymanager">FnapyManager</a></li>
-<li><a class="reference internal" href="#fnapyconnection">FnapyConnection</a></li>
-<li><a class="reference internal" href="#request">Request</a></li>
-<li><a class="reference internal" href="#response">Response</a></li>
-<li><a class="reference internal" href="#message">Message</a></li>
+<h1 class="logo"><a href="index.html">fnapy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fnapymanager">FnapyManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fnapyconnection">FnapyConnection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#request">Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message">Message</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change log</a></li>
 </ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
@@ -786,29 +761,45 @@ variables:</p>
       <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
   </ul></li>
 </ul>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/api.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy; Copyright 2016, Alexandria.
+      &copy;2019, Taurus Olson.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
+
+    
+
+    
   </body>
 </html>
