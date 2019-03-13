@@ -21,7 +21,7 @@ def test_update_orders(monkeypatch, fake_manager):
                                           'update_orders', 'orders_update')
     with context:
         action1 = {"order_detail_id": 1, "action": "Accepted"}
-        action2 = {"order_detail_id": 2, "action": "Refused"}
+        action2 = {"order_detail_id": 2, "action": "Accepted"}
         fake_manager.update_orders(order_id="57BEAFDA828A8",
                                    order_update_action='accept_order',
                                    actions=[action1, action2])

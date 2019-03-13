@@ -117,7 +117,18 @@ def assert_raises(exception_class, msg=None):
 
 def gettext(node):
     text = node.text.strip() if node.text else None
-    return True if text else False
+    return text if text else None
+
+
+def error_msg(name, n1, n2, x1, x2):
+    """
+    Generate an error message notifying the different values x1 and x2
+    in the nodes n1 and n2.
+    """
+    return 'Different {name} in\n{n1}\nand\n{n2}:\n> {x1} != {x2}'.format(
+        name=name, n1=etree.tostring(n1).decode('utf8'),
+        n2=etree.tostring(n2).decode('utf8'), x1=x1, x2=x2
+    )
 
 
 def nodes_are_equal(n1, n2, excluded_attrs=[]):
@@ -126,28 +137,28 @@ def nodes_are_equal(n1, n2, excluded_attrs=[]):
         attribs1 = {(k, v) for k, v in n1.items() if k not in excluded_attrs}
         attribs2 = {(k, v) for k, v in n2.items() if k not in excluded_attrs}
         if len(attribs1.symmetric_difference(attribs2)) > 0:
-            return False
+            return False, error_msg('attributes', n1, n2, attribs1, attribs2)
     # Text
     if gettext(n1) != gettext(n2):
-        return False
+        return False, error_msg('text', n1, n2, gettext(n1), gettext(n2))
 
-    return True
+    return True, None
 
 
 def elements_are_equal(e1, e2, excluded_attrs=[]):
     nodes1 = sorted(e1.getiterator(), key=lambda e: e.tag)
     nodes2 = sorted(e2.getiterator(), key=lambda e: e.tag)
-    tags1 = {x.tag for x in nodes1}
-    tags2 = {x.tag for x in nodes2}
+    tags1 = [x.tag for x in nodes1]
+    tags2 = [x.tag for x in nodes2]
 
-    if len(tags1.symmetric_difference(tags2)) > 0:
-        return False
+    if tags1 != tags2:
+        return False, error_msg('tags', e1, e2, tags1, tags2)
 
     for node1, node2 in zip(nodes1, nodes2):
-        result = nodes_are_equal(node1, node2)
+        result, error = nodes_are_equal(node1, node2)
         if result is False:
-            return False
-    return True
+            return False, error
+    return True, None
 
 
 def xml_contains_error(xml_dict):
@@ -209,7 +220,8 @@ def request_is_valid(request, action, service):
     expected_element = etree.XML(expected.encode('utf-8'))
     request_element = request.element
     credentials = ('partner_id', 'shop_id', 'token')
-    result = elements_are_equal(request_element, expected_element, credentials)
-    if not result:
-        pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))
+    result, error = elements_are_equal(request_element, expected_element, credentials)
+    if error:
+        # pytest.fail('Invalid request:\n{0}\nshould be:\n{1}'.format(request.xml, expected))
+        pytest.fail(error)
     return result
