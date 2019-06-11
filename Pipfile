@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fnapy = {editable = true, path = "."}
+fnapy = {editable = true,path = "."}
 
 [dev-packages]
 tox = "*"
@@ -12,6 +12,11 @@ pytest = "*"
 alabaster = "*"
 twine = "*"
 pytz = "*"
+konch = "*"
+fntools = "*"
+python-dateutil = "*"
+ipython = "*"
+pdbpp = "*"
 
 [requires]
 python_version = "3.7"
