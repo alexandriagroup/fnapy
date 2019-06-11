@@ -10,7 +10,11 @@ from fnapy.utils import Message
 from fnapy.fnapy_manager import FnapyManager
 from fnapy.connection import FnapyConnection
 from tests import make_requests_get_mock, fake_manager
-from unittest import mock
+
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 
 def do_nothing(*args, **kwargs):
