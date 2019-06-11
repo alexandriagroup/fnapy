@@ -33,5 +33,3 @@ def test_update_messages(monkeypatch, fake_manager):
                            id=u'6F9EF013-6387-F433-C3F5-4AAEF32AA317')
         message1.subject = 'order_information'
         fake_manager.update_messages([message1])
-
-

@@ -8,6 +8,12 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.9] - 2019-06-11
+--------------------
+Fixed
+*****
+* Fix the encoding
+
 [1.1.8] - 2019-03-13
 --------------------
 Fixed
