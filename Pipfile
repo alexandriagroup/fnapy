@@ -17,6 +17,7 @@ fntools = "*"
 python-dateutil = "*"
 ipython = "*"
 pdbpp = "*"
+mock = "*"
 
 [requires]
 python_version = "3.7"
