@@ -18,6 +18,6 @@ matrix:
 
 install:
   - pip install pipenv --upgrade
-  - pip install --dev
+  - pipenv install --dev
 
 script: tox -e $TOX_ENV
