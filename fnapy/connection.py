@@ -21,8 +21,8 @@ def check_credentials_validity(credentials):
             invalid_credentials.append(k)
 
     if len(invalid_credentials):
-        msg = 'These credentials are invalid: '
-        msg += ', '.join(invalid_credentials)
+        msg = "These credentials are invalid: "
+        msg += ", ".join(invalid_credentials)
         raise FnapyConnectionError(msg)
 
 
@@ -54,28 +54,29 @@ class FnapyConnection(object):
     * for the real account: FNAC_PARTNER_ID, FNAC_SHOP_ID, FNAC_KEY
 
     """
+
     def __init__(self, credentials={}, sandbox=None):
-        # credentials
+        # credentials
         if len(credentials) > 0:
-            expecteds = ('partner_id', 'shop_id', 'key', 'sandbox')
+            expecteds = ("partner_id", "shop_id", "key", "sandbox")
             for expected in expecteds:
                 if credentials.get(expected) is None:
                     msg = "You didn't provide the {}."
-                    msg += 'You must provide the following keys in credentials: '
-                    msg += ', '.join(expecteds)
+                    msg += "You must provide the following keys in credentials: "
+                    msg += ", ".join(expecteds)
                     raise FnapyConnectionError(msg.format(expected))
 
         # sandbox
         else:
             if sandbox is not None:
                 credentials = get_credentials(sandbox)
-                credentials.update({'sandbox': sandbox})
+                credentials.update({"sandbox": sandbox})
             else:
-                msg = 'You must either specify credentials or sandbox as arguments.'
+                msg = "You must either specify credentials or sandbox as arguments."
                 raise FnapyConnectionError(msg)
 
         check_credentials_validity(credentials)
-        self.partner_id = credentials['partner_id']
-        self.shop_id = credentials['shop_id']
-        self.key = credentials['key']
-        self.sandbox = credentials['sandbox']
+        self.partner_id = credentials["partner_id"]
+        self.shop_id = credentials["shop_id"]
+        self.key = credentials["key"]
+        self.sandbox = credentials["sandbox"]
