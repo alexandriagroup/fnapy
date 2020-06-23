@@ -23,12 +23,24 @@ import requests
 from lxml import etree
 
 # Project modules
-from fnapy.utils import *
-from fnapy.config import REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+from fnapy.utils import (
+    Query,
+    Response,
+    Request,
+    check_offer_data,
+    create_offer_element,
+    get_url,
+    create_xml_element,
+    dict2xml,
+    parse_xml
+)
+from fnapy.config import (
+    REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
+)
 from fnapy.compat import is_py3
 from fnapy.connection import FnapyConnection
 from fnapy.exceptions import (
-    FnapyUpdateOrderError, FnapyUpdateOfferError, FnapyResponseError
+    FnapyUpdateOrderError, FnapyUpdateOfferError
 )
 
 
@@ -206,10 +218,14 @@ class FnapyManager(object):
             check_offer_data(offer_data)
             offer = create_offer_element(offer_data)
             offers_update.append(offer)
-        self.offers_update_request = Request(etree.tostring(offers_update, **XML_OPTIONS))
+        self.offers_update_request = Request(
+            etree.tostring(offers_update, **XML_OPTIONS)
+        )
 
         # the response contains the element batch_id
-        response = self._get_response(offers_update, self.offers_update_request.xml)
+        response = self._get_response(
+            offers_update, self.offers_update_request.xml
+        )
         try:
             self.batch_id = response.dict['offers_update_response']['batch_id']
         except KeyError:
@@ -238,24 +254,28 @@ class FnapyManager(object):
 
         Available order_update_action:
 
-        * accept_order       : The action for the order is accepting orders by the
-                               seller
+        * accept_order       : The action for the order is accepting orders by
+                               the seller
         * confirm_to_send    : The action for the order is confirming sending
                                orders by the seller
-        * update             : The action for the order is updating orders by the seller
-        * accept_all_orders  : The action for the order is accepting or refusing
-                               all order_details of the order by the seller
+        * update             : The action for the order is updating orders by
+                               the seller
+        * accept_all_orders  : The action for the order is accepting or
+                               refusing all order_details of the order by the
+                               seller
         * confirm_all_to_send: The action for the order is confirming sending
                                all order_details by the seller
         * update_all         : The action for the order is to update tracking
                                information for all order_details
 
-        Example: For this order (whose `order_id` is `'LDJEDEAS123'`), we have 2
-        items. We decide to accept the first item and refuse the second::
+        Example: For this order (whose `order_id` is `'LDJEDEAS123'`), we have
+        2 items. We decide to accept the first item and refuse the second::
 
             action1 = {"order_detail_id": 1, "action": "Accepted"}
             action2 = {"order_detail_id": 2, "action": "Refused"}
-            response = manager.update_orders('LDJEDEAS123', 'accept_order', [action1, action2])
+            response = manager.update_orders('LDJEDEAS123', 'accept_order',
+                                             [action1, action2]
+                       )
 
         """
         order_id = str(order_id)
@@ -415,12 +435,12 @@ class FnapyManager(object):
         if len(errors) > 0 and hasattr(errors[0], 'text'):
             for error in errors:
                 product_reference = error.getprevious()
-                # code="ERR_120"
-                # Service Pricing : Product not found.
+                # code="ERR_120"
+                # Service Pricing : Product not found.
                 if product_reference is not None:
                     logger.warning("EAN: {0}. {1}".format(product_reference.text,
                                                           error.text))
-                # code="ERR_105"
+                # code="ERR_105"
                 # The limit of requested elements is reached by the service.
                 else:
                     logger.warning("{0}".format(error.text))
