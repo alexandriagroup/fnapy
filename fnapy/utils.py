@@ -383,6 +383,20 @@ def xml2dict(xml):
         raise FnapyResponseError(e)
 
 
+def handle_content_response(response: requests.Response, encoding="utf-8"):
+    """
+    This function allows to have the raw bytes in the right encoding
+    before passing it to `fnapy.utils.Response`
+    """
+    try:
+        content = response.content
+        _ = content.decode(encoding)
+        raw = content
+    except UnicodeDecodeError:
+        raw = response.text.encode(encoding)
+    return raw
+
+
 def parse_xml(response, tag_name):
     """Get the text contained in the tag of the response
 

@@ -32,7 +32,8 @@ from fnapy.utils import (
     get_url,
     create_xml_element,
     dict2xml,
-    parse_xml
+    parse_xml,
+    handle_content_response
 )
 from fnapy.config import (
     REQUEST_ELEMENTS, XHTML_NAMESPACE, HEADERS, XML_OPTIONS
@@ -114,7 +115,7 @@ class FnapyManager(object):
         """
         service = element.tag
         response = requests.post(self.url + service, xml, headers=HEADERS)
-        response = Response(response.content)
+        response = Response(handle_content_response(response))
         if response.dict.get(service + '_response', {}).get('error'):
             # Reauthenticate and update the element
             element.attrib['token'] = self.authenticate()
@@ -124,7 +125,7 @@ class FnapyManager(object):
             response = requests.post(self.url + service,
                                      getattr(self, service + '_request').xml,
                                      headers=HEADERS)
-            response = Response(response.content)
+            response = Response(handle_content_response(response))
         return response
 
     def authenticate(self):
