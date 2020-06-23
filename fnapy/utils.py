@@ -411,10 +411,13 @@ def xml2dict(xml):
         raise FnapyResponseError(e)
 
 
-def handle_content_response(response: requests.Response, encoding="utf-8"):
+def handle_content_response(response, encoding="utf-8"):
     """
     This function allows to have the raw bytes in the right encoding
     before passing it to `fnapy.utils.Response`
+
+    :type response: `requests.Response`
+    :param response: : The response returned by FNAC
     """
     try:
         content = response.content
