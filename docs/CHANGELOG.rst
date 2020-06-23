@@ -8,6 +8,12 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.1.10] - 2020-06-23
+---------------------
+Fixed
+*****
+* Fix the encoding (raw bytes returned in FNAC responses not encoded in UTF8?)
+
 [1.1.9] - 2019-06-11
 --------------------
 Fixed
