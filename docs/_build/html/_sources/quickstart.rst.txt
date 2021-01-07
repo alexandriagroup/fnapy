@@ -111,10 +111,23 @@ Query the pricing
 -----------------
 
 In order to stay competitive, you have to know the offers created by the
-other sellers for a list of EANs or at least the current best offer these
+other sellers for a list of codes or at least the current best offer these
 products. You can get these information with `query_pricing`::
 
-    response = manager.query_pricing(eans=eans)
+    response = manager.query_pricing(codes, code_type=code_type)
+
+The available code types are:
+
+    - **FnacId**: The code given is the Fnac product identifier
+    - **PartnerId**: The code given is the id from a partner, if this
+                 value is set, a partner id will be mandatory
+    - **Ean**: The code given is the global Ean of this product
+    - **Isbn**: The code given is the global Isbn of this product
+    - **PartNumber**: The code given is the global partNumber of this product
+    - **CnetId**: The code given is the global Cnet reference of this product
+
+
+Note that by default `code_type` is `"Ean"`.
 
 
 Delete offers

@@ -1,19 +1,17 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quickstart &#8212; fnapy 1.1.8 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
@@ -40,14 +38,14 @@
 <p>Before starting, make sure you have your credentials to connect to the FNAC
 API.</p>
 <ul>
-<li><p class="first">Create a connection to the FNAC Marketplace API with your credentials:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.fnapy_manager</span> <span class="k">import</span> <span class="n">FnapyManager</span>
+<li><p>Create a connection to the FNAC Marketplace API with your credentials:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.fnapy_manager</span> <span class="kn">import</span> <span class="n">FnapyManager</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">FnapyConnection</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Create the manager:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.connection</span> <span class="k">import</span> <span class="n">FnapyConnection</span>
+<li><p>Create the manager:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fnapy.connection</span> <span class="kn">import</span> <span class="n">FnapyConnection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">FnapyManager</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -124,7 +122,7 @@ you want the latest <cite>batch_status</cite> you can do:</p>
 <p>When you’re satisfised with your offers you may want to know if they were
 actually created and retrieve information about them.</p>
 <p>Let’s say you want to know the offers created between 2016-08-25 and 2016-08-31:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="k">import</span> <span class="n">Query</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fnapy.utils</span> <span class="kn">import</span> <span class="n">Query</span>
 <span class="n">dmin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 <span class="n">dmax</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 <span class="n">date</span> <span class="n">Query</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Created&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="n">dmin</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">dmax</span><span class="p">)</span>
@@ -135,11 +133,27 @@ actually created and retrieve information about them.</p>
 <div class="section" id="query-the-pricing">
 <h2>Query the pricing<a class="headerlink" href="#query-the-pricing" title="Permalink to this headline">¶</a></h2>
 <p>In order to stay competitive, you have to know the offers created by the
-other sellers for a list of EANs or at least the current best offer these
+other sellers for a list of codes or at least the current best offer these
 products. You can get these information with <cite>query_pricing</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">eans</span><span class="o">=</span><span class="n">eans</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">code_type</span><span class="o">=</span><span class="n">code_type</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The available code types are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>FnacId</strong>: The code given is the Fnac product identifier</p></li>
+<li><dl class="simple">
+<dt><strong>PartnerId</strong>: The code given is the id from a partner, if this</dt><dd><p>value is set, a partner id will be mandatory</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>Ean</strong>: The code given is the global Ean of this product</p></li>
+<li><p><strong>Isbn</strong>: The code given is the global Isbn of this product</p></li>
+<li><p><strong>PartNumber</strong>: The code given is the global partNumber of this product</p></li>
+<li><p><strong>CnetId</strong>: The code given is the global Cnet reference of this product</p></li>
+</ul>
+</div></blockquote>
+<p>Note that by default <cite>code_type</cite> is <cite>“Ean”</cite>.</p>
 </div>
 <div class="section" id="delete-offers">
 <h2>Delete offers<a class="headerlink" href="#delete-offers" title="Permalink to this headline">¶</a></h2>
@@ -233,17 +247,15 @@ interface.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -260,7 +272,7 @@ interface.</p>
       &copy;2019, Taurus Olson.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

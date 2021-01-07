@@ -8,6 +8,16 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.2.0] - 2021-01-07
+--------------------
+Changed
+*******
+* Allow more code types in `query_pricing` (not only Ean)
+
+Fixed
+*****
+* Update the sandbox URL
+
 [1.1.10] - 2020-06-23
 ---------------------
 Fixed

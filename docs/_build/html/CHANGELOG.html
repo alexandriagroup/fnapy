@@ -1,19 +1,17 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Change log &#8212; fnapy 1.1.8 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="API" href="api.html" />
@@ -39,178 +37,210 @@
 The format is based on <a class="reference external" href="http://keepachangelog.com/">Keep a Changelog</a> and this project adheres to
 <a class="reference external" href="http://semver.org/">Semantic Versioning</a>.</p>
 <div class="section" id="id1">
-<h2>[1.1.8] - 2019-03-13<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="fixed">
-<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Fix some tests and fixtures</li>
-</ul>
-</div>
+<h2>[1.2.0] - 2021-01-07<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Allow to send tracking information in orders_update (by rafaurl)</li>
+<li><p>Allow more code types in <cite>query_pricing</cite> (not only Ean)</p></li>
+</ul>
+</div>
+<div class="section" id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Update the sandbox URL</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id2">
-<h2>[1.1.7] - 2018-11-06<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>[1.1.10] - 2020-06-23<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>Fixed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Prevent possible vulnerabilities due to requests&lt;=2.19.1 (CVE-2018-18074)</li>
+<li><p>Fix the encoding (raw bytes returned in FNAC responses not encoded in UTF8?)</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="id4">
-<h3>Changed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Use pipenv for development</li>
-<li>FnapyResponseError is raised for invalid responses</li>
-</ul>
-</div>
-</div>
+<h2>[1.1.9] - 2019-06-11<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id5">
-<h2>[1.1.6] - 2017-04-26<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id6">
-<h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fix error when the content of a response is an empty string</li>
+<li><p>Fix the encoding</p></li>
 </ul>
 </div>
 </div>
+<div class="section" id="id6">
+<h2>[1.1.8] - 2019-03-13<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id7">
-<h2>[1.1.5] - 2017-01-12<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id8">
-<h3>Fixed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fix another utf-8 problem (from miss encoding xml)</li>
+<li><p>Fix some tests and fixtures</p></li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Allow to send tracking information in orders_update (by rafaurl)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id9">
-<h2>[1.1.4] - 2017-01-12<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h2>[1.1.7] - 2018-11-06<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id10">
 <h3>Fixed<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fix <code class="docutils literal notranslate"><span class="pre">to_unicode</span></code>.</li>
+<li><p>Prevent possible vulnerabilities due to requests&lt;=2.19.1 (CVE-2018-18074)</p></li>
 </ul>
-</div>
 </div>
 <div class="section" id="id11">
-<h2>[1.1.3] - 2016-12-28<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<h3>Changed<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Use pipenv for development</p></li>
+<li><p>FnapyResponseError is raised for invalid responses</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="id12">
-<h3>Fixed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Fix <code class="docutils literal notranslate"><span class="pre">extract_text</span></code>.</li>
-</ul>
-</div>
-</div>
+<h2>[1.1.6] - 2017-04-26<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id13">
-<h2>[1.1.2] - 2016-10-24<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<h3>Fixed<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix error when the content of a response is an empty string</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="id14">
-<h3>Changed<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>No more tests in the package</li>
-<li>Display a message when no EAN is passed to <code class="docutils literal notranslate"><span class="pre">query_pricing</span></code>.</li>
-</ul>
-</div>
-</div>
+<h2>[1.1.5] - 2017-01-12<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id15">
-<h2>[1.1.1] - 2016-10-21<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id16">
-<h3>Changed<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Display a message when the limit of EANs is reached in <code class="docutils literal notranslate"><span class="pre">query_pricing</span></code>.</li>
+<li><p>Fix another utf-8 problem (from miss encoding xml)</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="id16">
+<h2>[1.1.4] - 2017-01-12<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id17">
 <h3>Fixed<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fix <code class="docutils literal notranslate"><span class="pre">parse_xml</span></code></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">to_unicode</span></code>.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id18">
-<h2>[1.1.0] - 2016-10-17<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<h2>[1.1.3] - 2016-12-28<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id19">
-<h3>Changed<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Display a log rather than raise a <code class="docutils literal notranslate"><span class="pre">FnapyPricingError</span></code> when a list of EANs is
-provided</li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">extract_text</span></code>.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id20">
-<h2>[1.0.1] - 2016-10-17<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<h2>[1.1.2] - 2016-10-24<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id21">
-<h3>Fixed<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<h3>Changed<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fixed bug in <code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code>: when <code class="docutils literal notranslate"><span class="pre">credentials</span></code> is provided and if
-sandbox is False, a <code class="docutils literal notranslate"><span class="pre">FnapyConnectionError</span></code> is raised.</li>
+<li><p>No more tests in the package</p></li>
+<li><p>Display a message when no EAN is passed to <code class="docutils literal notranslate"><span class="pre">query_pricing</span></code>.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id22">
-<h2>[1.0.0] - 2016-10-14<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="added">
-<h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Working with sandbox or real account is now possible</li>
-</ul>
-</div>
+<h2>[1.1.1] - 2016-10-21<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id23">
 <h3>Changed<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code> now accepts credentials dictionary or sandbox boolean</li>
-<li><code class="docutils literal notranslate"><span class="pre">query_pricing</span></code> now accepts a list of EANs</li>
+<li><p>Display a message when the limit of EANs is reached in <code class="docutils literal notranslate"><span class="pre">query_pricing</span></code>.</p></li>
 </ul>
-</div>
 </div>
 <div class="section" id="id24">
-<h2>[0.6.0] - 2016-10-07<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id25">
-<h3>Added<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>In the <code class="docutils literal notranslate"><span class="pre">Query</span></code> class, added the <code class="docutils literal notranslate"><span class="pre">was</span></code> method to handle the states (especially
-the states of orders)</li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">parse_xml</span></code></p></li>
 </ul>
 </div>
 </div>
+<div class="section" id="id25">
+<h2>[1.1.0] - 2016-10-17<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id26">
-<h2>[0.5.1] - 2016-10-04<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="removed">
-<h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<h3>Changed<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Really remove <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> (bs4) from the dependencies</li>
+<li><p>Display a log rather than raise a <code class="docutils literal notranslate"><span class="pre">FnapyPricingError</span></code> when a list of EANs is
+provided</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id27">
-<h2>[0.5.0] - 2016-10-04<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+<h2>[1.0.1] - 2016-10-17<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id28">
-<h3>Removed<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<h3>Fixed<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Remove <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> dependency</li>
+<li><p>Fixed bug in <code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code>: when <code class="docutils literal notranslate"><span class="pre">credentials</span></code> is provided and if
+sandbox is False, a <code class="docutils literal notranslate"><span class="pre">FnapyConnectionError</span></code> is raised.</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="id29">
-<h3>Changed<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<h2>[1.0.0] - 2016-10-14<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="added">
+<h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Improve the text extraction from XML</li>
+<li><p>Working with sandbox or real account is now possible</p></li>
+</ul>
+</div>
+<div class="section" id="id30">
+<h3>Changed<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code> now accepts credentials dictionary or sandbox boolean</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query_pricing</span></code> now accepts a list of EANs</p></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id30">
-<h2>[0.4.3] - 2016-09-29<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id31">
-<h3>Changed<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<h2>[0.6.0] - 2016-10-07<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id32">
+<h3>Added<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt>In <code class="docutils literal notranslate"><span class="pre">update_offers</span></code>, <code class="docutils literal notranslate"><span class="pre">FnapyUpdateOfferError</span></code> is raised if:</dt>
-<dd><ul class="first last">
-<li><code class="docutils literal notranslate"><span class="pre">offer_reference</span></code> and at least one of the optional parameters (except
-<code class="docutils literal notranslate"><span class="pre">product_reference</span></code>) are not provided</li>
-<li><code class="docutils literal notranslate"><span class="pre">offers_data</span></code> is empty</li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Query</span></code> class, added the <code class="docutils literal notranslate"><span class="pre">was</span></code> method to handle the states (especially
+the states of orders)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id33">
+<h2>[0.5.1] - 2016-10-04<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Really remove <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> (bs4) from the dependencies</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id34">
+<h2>[0.5.0] - 2016-10-04<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id35">
+<h3>Removed<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> dependency</p></li>
+</ul>
+</div>
+<div class="section" id="id36">
+<h3>Changed<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Improve the text extraction from XML</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id37">
+<h2>[0.4.3] - 2016-09-29<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id38">
+<h3>Changed<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>In <code class="docutils literal notranslate"><span class="pre">update_offers</span></code>, <code class="docutils literal notranslate"><span class="pre">FnapyUpdateOfferError</span></code> is raised if:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">offer_reference</span></code> and at least one of the optional parameters (except
+<code class="docutils literal notranslate"><span class="pre">product_reference</span></code>) are not provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offers_data</span></code> is empty</p></li>
 </ul>
 </dd>
 </dl>
@@ -218,76 +248,76 @@ the states of orders)</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id32">
-<h2>[0.4.2] - 2016-09-28<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id33">
-<h3>Changed<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Update documentation</li>
-</ul>
-</div>
-</div>
-<div class="section" id="id34">
-<h2>[0.4.1] - 2016-09-28<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id35">
-<h3>Added<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Implement <code class="docutils literal notranslate"><span class="pre">delete_offers</span></code></li>
-</ul>
-</div>
-</div>
-<div class="section" id="id36">
-<h2>[0.4.0] - 2016-09-27<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id37">
-<h3>Changed<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Use pricing_query (V2)</li>
-<li>Check the connection passed to <code class="docutils literal notranslate"><span class="pre">FnapyManager</span></code> is a <code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code></li>
-<li>Add a caveat in the README for the requests sent to the sandbox.</li>
-<li>Improve <code class="docutils literal notranslate"><span class="pre">update_offers</span></code></li>
-</ul>
-</div>
-<div class="section" id="id38">
-<h3>Fixed<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Fix Unicode/string confusion bug in <code class="docutils literal notranslate"><span class="pre">Response</span></code></li>
-</ul>
-</div>
-</div>
 <div class="section" id="id39">
-<h2>[0.2.0] - 2016-09-13<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h2>
+<h2>[0.4.2] - 2016-09-28<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id40">
-<h3>Added<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h3>
+<h3>Changed<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Support Python 3</li>
-<li>Implement the <code class="docutils literal notranslate"><span class="pre">Query</span></code> class to allow complex queries</li>
-<li>Added new classes for requests and responses
-(respectively <code class="docutils literal notranslate"><span class="pre">Request</span></code> and <code class="docutils literal notranslate"><span class="pre">Response</span></code>)</li>
+<li><p>Update documentation</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="id41">
-<h3>Changed<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Update the documentation</li>
-<li>Make the manager authenticate when it is created.</li>
-<li>All the methods return a <code class="docutils literal notranslate"><span class="pre">Response</span></code> instance</li>
-<li>Store the XML requests as <code class="docutils literal notranslate"><span class="pre">Request</span></code> instances</li>
-</ul>
-</div>
+<h2>[0.4.1] - 2016-09-28<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id42">
-<h3>Fixed<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
+<h3>Added<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Fixed the packaging</li>
-<li>Fix minor things in the constructor of <code class="docutils literal notranslate"><span class="pre">FnapyManager</span></code></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">delete_offers</span></code></p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id43">
-<h2>[0.1.0] - 2016-08-31<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h2>
+<h2>[0.4.0] - 2016-09-27<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id44">
-<h3>Added<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h3>
+<h3>Changed<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Create the <code class="docutils literal notranslate"><span class="pre">fnapy</span></code> package</li>
+<li><p>Use pricing_query (V2)</p></li>
+<li><p>Check the connection passed to <code class="docutils literal notranslate"><span class="pre">FnapyManager</span></code> is a <code class="docutils literal notranslate"><span class="pre">FnapyConnection</span></code></p></li>
+<li><p>Add a caveat in the README for the requests sent to the sandbox.</p></li>
+<li><p>Improve <code class="docutils literal notranslate"><span class="pre">update_offers</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="id45">
+<h3>Fixed<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix Unicode/string confusion bug in <code class="docutils literal notranslate"><span class="pre">Response</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id46">
+<h2>[0.2.0] - 2016-09-13<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id47">
+<h3>Added<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Support Python 3</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">Query</span></code> class to allow complex queries</p></li>
+<li><p>Added new classes for requests and responses
+(respectively <code class="docutils literal notranslate"><span class="pre">Request</span></code> and <code class="docutils literal notranslate"><span class="pre">Response</span></code>)</p></li>
+</ul>
+</div>
+<div class="section" id="id48">
+<h3>Changed<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Update the documentation</p></li>
+<li><p>Make the manager authenticate when it is created.</p></li>
+<li><p>All the methods return a <code class="docutils literal notranslate"><span class="pre">Response</span></code> instance</p></li>
+<li><p>Store the XML requests as <code class="docutils literal notranslate"><span class="pre">Request</span></code> instances</p></li>
+</ul>
+</div>
+<div class="section" id="id49">
+<h3>Fixed<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed the packaging</p></li>
+<li><p>Fix minor things in the constructor of <code class="docutils literal notranslate"><span class="pre">FnapyManager</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id50">
+<h2>[0.1.0] - 2016-08-31<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id51">
+<h3>Added<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">fnapy</span></code> package</p></li>
 </ul>
 </div>
 </div>
@@ -314,26 +344,29 @@ the states of orders)</li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[1.1.8] - 2019-03-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">[1.1.7] - 2018-11-06</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">[1.1.6] - 2017-04-26</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">[1.1.5] - 2017-01-12</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">[1.1.4] - 2017-01-12</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">[1.1.3] - 2016-12-28</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">[1.1.2] - 2016-10-24</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id15">[1.1.1] - 2016-10-21</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id18">[1.1.0] - 2016-10-17</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id20">[1.0.1] - 2016-10-17</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id22">[1.0.0] - 2016-10-14</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id24">[0.6.0] - 2016-10-07</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id26">[0.5.1] - 2016-10-04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id27">[0.5.0] - 2016-10-04</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id30">[0.4.3] - 2016-09-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id32">[0.4.2] - 2016-09-28</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id34">[0.4.1] - 2016-09-28</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id36">[0.4.0] - 2016-09-27</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id39">[0.2.0] - 2016-09-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id43">[0.1.0] - 2016-08-31</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[1.2.0] - 2021-01-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">[1.1.10] - 2020-06-23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">[1.1.9] - 2019-06-11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">[1.1.8] - 2019-03-13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">[1.1.7] - 2018-11-06</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">[1.1.6] - 2017-04-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">[1.1.5] - 2017-01-12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">[1.1.4] - 2017-01-12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">[1.1.3] - 2016-12-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">[1.1.2] - 2016-10-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">[1.1.1] - 2016-10-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id25">[1.1.0] - 2016-10-17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">[1.0.1] - 2016-10-17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id29">[1.0.0] - 2016-10-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id31">[0.6.0] - 2016-10-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id33">[0.5.1] - 2016-10-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id34">[0.5.0] - 2016-10-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id37">[0.4.3] - 2016-09-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id39">[0.4.2] - 2016-09-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id41">[0.4.1] - 2016-09-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id43">[0.4.0] - 2016-09-27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id46">[0.2.0] - 2016-09-13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id50">[0.1.0] - 2016-08-31</a></li>
 </ul>
 </li>
 </ul>
@@ -347,17 +380,15 @@ the states of orders)</li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -374,7 +405,7 @@ the states of orders)</li>
       &copy;2019, Taurus Olson.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
