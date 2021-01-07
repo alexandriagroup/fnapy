@@ -114,7 +114,25 @@ In order to stay competitive, you have to know the offers created by the
 other sellers for a list of codes or at least the current best offer these
 products. You can get these information with `query_pricing`::
 
-    response = manager.query_pricing(codes, code_type=code_type)
+    response = manager.query_pricing(codes)
+
+where `codes` can be:
+
+    1. A list of EANs.
+
+    Example::
+
+        codes = ["7321900286480", "9780262510875", "5060314991222"]
+
+    2. A list of any code type.
+
+    Example::
+
+        codes = [
+            {"value": 9780262510875, "type": "Ean"},
+            {"value": 2359109693, "type": "Isbn"},
+            {"value": 8172119, "type": "FnacId"},
+        ]
 
 The available code types are:
 
@@ -125,9 +143,6 @@ The available code types are:
     - **Isbn**: The code given is the global Isbn of this product
     - **PartNumber**: The code given is the global partNumber of this product
     - **CnetId**: The code given is the global Cnet reference of this product
-
-
-Note that by default `code_type` is `"Ean"`.
 
 
 Delete offers

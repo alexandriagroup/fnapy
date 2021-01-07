@@ -135,9 +135,30 @@ actually created and retrieve information about them.</p>
 <p>In order to stay competitive, you have to know the offers created by the
 other sellers for a list of codes or at least the current best offer these
 products. You can get these information with <cite>query_pricing</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">code_type</span><span class="o">=</span><span class="n">code_type</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>where <cite>codes</cite> can be:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>A list of EANs.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7321900286480&quot;</span><span class="p">,</span> <span class="s2">&quot;9780262510875&quot;</span><span class="p">,</span> <span class="s2">&quot;5060314991222&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>A list of any code type.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">codes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">9780262510875</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Ean&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2359109693</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Isbn&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">8172119</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;FnacId&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>The available code types are:</p>
 <blockquote>
 <div><ul class="simple">
@@ -153,7 +174,6 @@ products. You can get these information with <cite>query_pricing</cite>:</p>
 <li><p><strong>CnetId</strong>: The code given is the global Cnet reference of this product</p></li>
 </ul>
 </div></blockquote>
-<p>Note that by default <cite>code_type</cite> is <cite>“Ean”</cite>.</p>
 </div>
 <div class="section" id="delete-offers">
 <h2>Delete offers<a class="headerlink" href="#delete-offers" title="Permalink to this headline">¶</a></h2>

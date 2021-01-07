@@ -8,6 +8,13 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[1.3.0] - 2021-01-07
+--------------------
+Changed
+*******
+* Change the argument for `query_pricing` to allow to specify any combination of code types
+  and keep compatibility with the old version (a list of EANs when the code type is not specified)
+
 [1.2.0] - 2021-01-07
 --------------------
 Changed

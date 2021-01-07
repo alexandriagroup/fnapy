@@ -351,18 +351,26 @@ Find the 2 first items  of the catalog:</p>
 
 <dl class="py method">
 <dt id="fnapy_manager.FnapyManager.query_pricing">
-<code class="sig-name descname">query_pricing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codes</span></em>, <em class="sig-param"><span class="n">code_type</span><span class="o">=</span><span class="default_value">'Ean'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">query_pricing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">codes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#fnapy_manager.FnapyManager.query_pricing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the best prices applied to a given product within all Fnac
 marketplace sellers (Fnac included)</p>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">code_type</span><span class="o">=</span><span class="n">code_type</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_pricing</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>codes</strong> (<em>list</em><em> or </em><em>tuple</em>) – a list of codes</p></li>
-<li><p><strong>code_type</strong> (<em>str</em>) – <ul>
+<dd class="field-odd"><p><strong>codes</strong> (<em>list</em><em> or </em><em>tuple</em>) – a list of EANs or a list of dicts with the keys <cite>value</cite> and <cite>type</cite>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ean1</span><span class="p">,</span> <span class="n">ean2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">codes</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">code1</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Ean&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">code2</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Isbn&quot;</span><span class="p">},</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>The availble code types are:</dt><dd><ul class="simple">
 <li><p>FnacId: The code given is the Fnac product identifier</p></li>
 <li><dl class="simple">
 <dt>PartnerId: The code given is the id from a partner, if this</dt><dd><p>value is set, a partner id will be mandatory</p>
@@ -374,11 +382,11 @@ marketplace sellers (Fnac included)</p>
 <li><p>PartNumber: The code given is the global partNumber of this product</p></li>
 <li><p>CnetId: The code given is the global Cnet reference of this product</p></li>
 </ul>
-</p></li>
-</ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>response</p>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>response</p>
 </dd>
 </dl>
 </dd></dl>
