@@ -407,16 +407,26 @@ class FnapyManager(object):
     def query_orders(self, results_count="", **elements):
         return self._query("orders", results_count, **elements)
 
-    def query_pricing(self, eans):
+    def query_pricing(self, codes, code_type="Ean"):
         """Retrieve the best prices applied to a given product within all Fnac
         marketplace sellers (Fnac included)
 
         Usage::
 
-            response = manager.query_pricing(eans)
+            response = manager.query_pricing(codes, code_type=code_type)
 
-        :type eans: list or tuple
-        :param eans: a list of EANs
+        :type codes: list or tuple
+        :param codes: a list of codes
+
+        :type code_type: str
+        :param code_type:
+            - FnacId: The code given is the Fnac product identifier
+            - PartnerId: The code given is the id from a partner, if this
+                         value is set, a partner id will be mandatory
+            - Ean: The code given is the global Ean of this product
+            - Isbn: The code given is the global Isbn of this product
+            - PartNumber: The code given is the global partNumber of this product
+            - CnetId: The code given is the global Cnet reference of this product
 
         :returns: response
 
@@ -426,13 +436,13 @@ class FnapyManager(object):
         """
         pricing_query = create_xml_element(self.connection, self.token, "pricing_query")
 
-        for ean in eans:
-            product_reference = etree.Element("product_reference", type="Ean")
-            product_reference.text = str(ean)
+        for code in codes:
+            product_reference = etree.Element("product_reference", type=code_type)
+            product_reference.text = str(code)
             pricing_query.append(product_reference)
         else:
-            if len(eans) == 0:
-                product_reference = etree.Element("product_reference", type="Ean")
+            if len(codes) == 0:
+                product_reference = etree.Element("product_reference", type=code_type)
                 pricing_query.append(product_reference)
 
         self.pricing_query_request = Request(

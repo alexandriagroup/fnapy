@@ -1,0 +1,5 @@
+<pricing_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" shop_id="XXX" partner_id="XXX" token="XXX">
+  <product_reference type="Ean">7321900286480</product_reference>
+  <product_reference type="Ean">9780262510875</product_reference>
+  <product_reference type="Ean">5060314991222</product_reference>
+</pricing_query>

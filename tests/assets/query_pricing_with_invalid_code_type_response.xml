@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="ERROR" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+
+            <error severity="ERROR" code="ERR_096">XML Validation failed: Element '{http://www.fnac.com/schemas/mp-dialog.xsd}product_reference', attribute 'type': [facet 'enumeration'] The value 'X' is not an element of the set {'FnacId', 'PartnerId', 'Ean', 'Isbn', 'PartNumber', 'CnetId'}. line: 3</error>
+      </pricing_query_response>

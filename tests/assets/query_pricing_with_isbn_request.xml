@@ -1,0 +1,5 @@
+<pricing_query xmlns="http://www.fnac.com/schemas/mp-dialog.xsd" shop_id="XXX" partner_id="XXX" token="XXX">
+  <product_reference type="Isbn">2359109693</product_reference>
+  <product_reference type="Isbn">103351196X</product_reference>
+  <product_reference type="Isbn">2359109871</product_reference>
+</pricing_query>

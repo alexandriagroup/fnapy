@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><pricing_query_response status="OK" xmlns="http://www.fnac.com/schemas/mp-dialog.xsd">
+    
+            
+    
+        <pricing_product>
+      <product_reference type="Ean">7321900286480</product_reference>
+              <product_name><![CDATA[The Matrix Reloaded ( DVD / Blu-Ray ) - Neo, Trinity and Morpheus lead a revolt against the Machine Army as it attacks Zion. Their aim is to fight against the forces of repression and exploitation in an attempt to save the human race. Zion is the last human city on Earth and in their qu]]></product_name>
+        <image_url>http://static.fnac-static.com/multimedia/Images/FR/MC/80/9c/2e/3054720/1501-1.jpg</image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>4.19</price>
+              <shipping_price>0.00</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                      
+                                            
+            <pricing type="professional">
+                            <price>0.9</price>
+              <shipping_price>2.80000</shipping_price>
+              <offer_status>3</offer_status>
+            </pricing>
+
+                            </pricing_product>
+        <pricing_product>
+      <product_reference type="Ean">9780262510875</product_reference>
+              <product_name><![CDATA[Structure and Interpretation of Computer Programs, Mit Electrical Engineering and Computer Science Series. ( Livres en VO ) - ]]></product_name>
+        <image_url>http://static.fnac-static.com/multimedia/Images/FR/MC/42/04/46/4588610/1501-1.jpg</image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>41.48</price>
+              <shipping_price>4.99000</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                      
+                                            
+            <pricing type="professional">
+                            <price>29.54</price>
+              <shipping_price>4.99000</shipping_price>
+              <offer_status>2</offer_status>
+            </pricing>
+
+                            </pricing_product>
+        <pricing_product>
+      <product_reference type="Ean">5060314991222</product_reference>
+              <product_name><![CDATA[Ghost in the Shell The movie Edition Collector Combo Blu-ray + DVD ( DVD / Blu-Ray ) - ]]></product_name>
+        <image_url></image_url>
+
+                              
+                                            
+            <pricing type="professional">
+                            <price>41.8</price>
+              <shipping_price>3.89000</shipping_price>
+              <offer_status>11</offer_status>
+            </pricing>
+
+                            </pricing_product>
+    
+      </pricing_query_response>
