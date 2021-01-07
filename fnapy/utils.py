@@ -295,7 +295,7 @@ def get_url(sandbox=True):
 
     """
     use_sandbox = {
-        True: "https://marketplace.ws.fd-recette.net/api.php/",
+        True: "https://partners-test.mp.fnacdarty.com/api.php/",
         False: "https://vendeur.fnac.com/api.php/",
     }
     return use_sandbox[sandbox]
