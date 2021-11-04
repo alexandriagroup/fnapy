@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "fnapy"
+version = "1.3.0"
+description = "Python library for FNAC WebServices"
+authors = ["Taurus Olson <taurusolson@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9.7"
+
+
+[tool.poetry.group.dev.dependencies]
+tox = "*"
+pytest = "*"
+alabaster = "*"
+twine = "*"
+pytz = "*"
+konch = "*"
+python-dateutil = "*"
+ipython = "*"
+pdbpp = "*"
+pynvim = "^0.4.3"
+jedi = "^0.18.0"
+fntools = "^1.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
