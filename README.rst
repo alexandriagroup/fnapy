@@ -17,11 +17,11 @@ WebService protocol to exchange data.
 Development
 ===========
 
-We use pipenv_ to manage the dependencies in a virtual environment.
+We use poetry (1.2.0a2) to manage the dependencies in a virtual environment.
 
 * To run a shell in the virtual environment:
 
-  pipenv shell
+  poetry shell
 
 
-.. _pipenv: https://pipenv.readthedocs.io/en/latest/
+.. _poetry: https://python-poetry.org/

@@ -1,22 +1,22 @@
 install:
 	@echo "Install from Pypi"
-	@pipenv install
+	@poetry install --without dev
 
 dev_install:
 	@echo "Install local package"
-	@pipenv run pip install -e .
+	@poetry install --with dev
 
 uninstall:
-	@pipenv run pip uninstall fnapy
+	@poetry run pip uninstall fnapy
 	
 online_tests:
-	@pipenv run pytest -vs tests/online/test_*.py
+	@poetry run pytest -vs tests/online/test_*.py
 
 offline_tests:
-	@pipenv run pytest -vs tests/offline/test_*.py
+	@poetry run pytest -vs tests/offline/test_*.py
 
 tests: offline_tests
-	@pipenv run pytest -vs tests/test_*.py
+	@poetry run pytest -vs tests/test_*.py
 
 clean:
 	rm -rf dist build fnapy.egg-info __pycache__
