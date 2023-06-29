@@ -24,4 +24,20 @@
     <quantity>16</quantity>
     <description><![CDATA[New product - Blu-ray disc - 2-3 days shipping, from France]]></description>
   </offer>
+  <offer>
+    <product_reference type="Ean">9780262510875</product_reference>
+    <offer_reference type="SellerSku"><![CDATA[B76A-CD5-444]]></offer_reference>
+    <price>80.0</price>
+    <product_state>11</product_state>
+    <quantity>10</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+  </offer>
+  <offer>
+    <product_reference type="Isbn">1593275919</product_reference>
+    <offer_reference type="SellerSku"><![CDATA[A31F-B6C-95F]]></offer_reference>
+    <price>30.0</price>
+    <product_state>11</product_state>
+    <quantity>1</quantity>
+    <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+  </offer>
 </offers_update>

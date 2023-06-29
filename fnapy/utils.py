@@ -499,7 +499,14 @@ def create_offer_element(offer_data):
 
     for key, value in offer_data_items:
         if key == "product_reference":
-            etree.SubElement(offer, "product_reference", type="Ean").text = str(value)
+            # Form: {"value": code_value, "type": code_type}
+            # Example: {"value": "9781462055517", "type": "Ean"}
+            if isinstance(value, dict):
+                etree.SubElement(offer, "product_reference", type=value["type"]).text = str(value["value"])
+            # Form: code_value
+            # Example: "9781462055517"
+            else:
+                etree.SubElement(offer, "product_reference", type="Ean").text = str(value)
         elif key == "description":
             etree.SubElement(offer, "description").text = etree.CDATA(value)
         else:

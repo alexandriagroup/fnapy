@@ -40,11 +40,19 @@ offer_data3 = {'product_reference': '5051889022091',
                'price': 10.55, 'product_state': 11, 'quantity': 16,
                'description': 'New product - Blu-ray disc - 2-3 days shipping, from France'}
 
-# # SICP
-# offer_data3 = {'product_reference':'9780262510875',
-#         'offer_reference':'B76A-CD5-444',
-#         'price':80, 'product_state':11, 'quantity':10,
-#         'description': 'New product - 2-3 days shipping, from France'}
+# SICP
+offer_data4 = {'product_reference':{'value': '9780262510875', 'type': 'Ean'},
+        'offer_reference':'B76A-CD5-444',
+        'price':80.0, 'product_state':11, 'quantity':10,
+        'description': 'New product - 2-3 days shipping, from France'}
+
+
+# Clojure For the Brave and True
+offer_data5 = {'product_reference': {'value': '1593275919', 'type': 'Isbn'},
+    'offer_reference': 'A31F-B6C-95F',
+    'price': 30.0, 'product_state': 11, 'quantity': 1,
+    'description': 'New product - 2-3 days shipping, from France'
+}
 
 # # Batman V Superman L'aube de la justice
 # offer_data4 = {'product_reference':'5051889562672',
@@ -52,7 +60,7 @@ offer_data3 = {'product_reference': '5051889022091',
 #         'price':20, 'product_state':11, 'quantity':16,
 #         'description': 'New product - 2-3 days shipping, from France'}
 
-offers_data = [offer_data1, offer_data2, offer_data3]
+offers_data = [offer_data1, offer_data2, offer_data3, offer_data4, offer_data5]
 
 # invalid offer_data is offer_data1 without offer_reference
 invalid_offer_data = copy(offer_data1)
