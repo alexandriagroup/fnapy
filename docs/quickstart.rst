@@ -35,8 +35,24 @@ Let's create some offers in our catalog::
             'offer_reference':'B067-F0D-75E',
             'price':20, 'product_state':11, 'quantity':16, 
             'description': 'New product - 2-3 days shipping, from France'}
+    offer_data3 = {'product_reference':{'value': '9780262510875', 'type': 'Ean'},
+            'offer_reference':'B76A-CD5-444',
+            'price':80.0, 'product_state':11, 'quantity':10,
+            'description': 'New product - 2-3 days shipping, from France'}
+    offer_data4 = {'product_reference': {'value': '1593275919', 'type': 'Isbn'},
+        'offer_reference': 'A31F-B6C-95F',
+        'price': 30.0, 'product_state': 11, 'quantity': 1,
+        'description': 'New product - 2-3 days shipping, from France'
+    }
 
-    response = manager.update_offers([offers_data1, offer_data2])
+    response = manager.update_offers([offers_data1, offer_data2, offer_data3, offer_data4])
+
+
+.. note::
+   Note that the `product_reference` key can be a string (by default an EAN) or 
+   a dictionary which allows you to specify the code value and its type.
+   (cf https://partners-test.mp.fnacdarty.com/docs/api/2.6/services/type/state.html#product-reference-type
+   for a detailed list)
 
 Behind the scene, the manager sent an XML request to the `offers_update`
 service. We can have a look at this request with the attribute `offers_update_request`::
@@ -59,6 +75,22 @@ service. We can have a look at this request with the attribute `offers_update_re
         <price>20</price>
         <product_state>11</product_state>
         <quantity>16</quantity>
+        <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      </offer>
+      <offer>
+        <product_reference type="Ean">9780262510875</product_reference>
+        <offer_reference type="SellerSku"><![CDATA[B76A-CD5-444]]></offer_reference>
+        <price>80.0</price>
+        <product_state>11</product_state>
+        <quantity>10</quantity>
+        <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
+      </offer>
+      <offer>
+        <product_reference type="Isbn">1593275919</product_reference>
+        <offer_reference type="SellerSku"><![CDATA[A31F-B6C-95F]]></offer_reference>
+        <price>30.0</price>
+        <product_state>11</product_state>
+        <quantity>1</quantity>
         <description><![CDATA[New product - 2-3 days shipping, from France]]></description>
       </offer>
     </offers_update>

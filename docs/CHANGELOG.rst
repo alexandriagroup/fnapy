@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
+[1.4.0] - 2023-06-29
+--------------------
+Changed
+*******
+* Allow `update_offers` to accept more code types when passing a dictionary
 
 [1.3.0] - 2021-01-07
 --------------------
